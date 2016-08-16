@@ -1,6 +1,22 @@
-<h1>Editing Answer</h1>
+<div class="col-md-8">
+    <h3>编辑回答</h3>
+
+    <hr>
+
+    <%= render "form" %>
+
+    <div class="total clearfix">
+        <span class="pull-right">
+          <%= link_to '详情', @answer %> |
+          <%= link_to '返回', answers_path %>
+        </span>
+      </div>
+</div>
+
+
+<!-- <h1>Editing Answer</h1>
 
 <%= render 'form', answer: @answer %>
 
 <%= link_to 'Show', @answer %> |
-<%= link_to 'Back', answers_path %>
+<%= link_to 'Back', answers_path %> -->

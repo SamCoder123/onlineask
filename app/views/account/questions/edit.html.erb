@@ -1,0 +1,23 @@
+<div class="col-md-8">
+    <h3>编辑我的问题</h3>
+
+    <hr>
+
+    <%= render "form" %>
+
+    <div class="total clearfix">
+        <span class="pull-right">
+          <%= link_to '详情', account_question_path(@question) %> |
+          <%= link_to '返回', account_questions_path %>
+        </span>
+      </div>
+</div>
+
+
+
+<!-- <h1>Editing Question</h1>
+
+<!%= render 'form', question: @question %>
+
+<!%= link_to 'Show', @question %> |
+<!%= link_to 'Back', questions_path %> -->

@@ -11,4 +11,8 @@ class User < ApplicationRecord
 
   has_many :questions
   has_many :answers
+
+  def admin?
+    is_admin
+  end
 end

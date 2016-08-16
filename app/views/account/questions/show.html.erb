@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <div class="panel panel-default ">
+    <div class="panel-heading">
+      <h3 class="panel-title">主题：<%= @question.title %></h3>
+    </div>
+
+    <div class="panel-body">
+      <p>
+        主题：<%= @question.title %>
+      </p>
+      <p>描述：<%= @question.description %></p>
+
+      <div>
+        <!-- <%= link_to("查看回答", "#{}",method: :post ,class: "btn btn-sm btn-danger pull-right") %> -->
+
+      </div>
+    </div>
+
+    <div class="total clearfix">
+        <span class="pull-right">
+          <%= link_to '详情', account_question_path(@question) %> |
+          <%= link_to '返回', account_questions_path %>
+        </span>
+      </div>
+    <!-- <div class="panel-footer" style="height:50px;">
+      <%= link_to 'Edit', edit_question_path(@question) %> |
+      <%= link_to 'Back', questions_path %>
+    </div> -->
+  </div>
+</div>
