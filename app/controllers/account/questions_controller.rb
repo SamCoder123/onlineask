@@ -1,11 +1,11 @@
-class QuestionsController < ApplicationController
+class Account::QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!,only:[:create]
 
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = current_user.questions
   end
 
   # GET /questions/1
@@ -27,6 +27,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user = current_user
+
     if @question.save
       redirect_to account_questions_path, notice: '提问成功！'
     else
@@ -48,7 +49,7 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1.json
   def update
     if @question.update(question_params)
-      redirect_to questions_path, notice: '提问修改成功！'
+      redirect_to account_questions_path, notice: '提问修改成功！'
     else
       render :edit
     end
@@ -69,7 +70,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
 
-    redirect_to questions_url, notice: '提问成功删除！'
+    redirect_to account_questions_path, notice: '提问成功删除！'
     # respond_to do |format|
     #   format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
     #   format.json { head :no_content }
@@ -84,6 +85,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:title, :description, :vote, :is_hidden, :user_id)
+      params.require(:question).permit(:title, :description)
     end
 end

@@ -1,8 +1,35 @@
 Rails.application.routes.draw do
-  resources :answers
-  resources :questions
+
+  resources :questions do
+    resources :answers
+  end
+
   devise_for :users
+
+  namespace :account do
+    resources :answers
+    resources :questions
+  end
+
+  root 'welcome#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # root "registrations#new"
+
+  namespace :account do
+
+    resources :answers
+    resources :questions
+
+    resources :users do
+      member do
+        get :new_profile
+        get :edit_profile
+        put :update_profile
+        get :show_profile
+      end
+    end
+  end
 
   namespace :admin do
     resources :users do
@@ -11,17 +38,18 @@ Rails.application.routes.draw do
         post :change_to_user
       end
     end
-  end
 
-  # root "registrations#new"
-
-  namespace :account do
-    resources :users do
+    resources :questions do
       member do
-        get :new_profile
-        get :edit_profile
-        put :update_profile
-        get :show_profile
+        post :hide
+        post :publish
+      end
+    end
+
+    resources :answers do
+      member do
+        post :hide
+        post :publish
       end
     end
   end

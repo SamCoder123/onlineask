@@ -18,9 +18,13 @@
 
     <div class="total clearfix">
         <span class="pull-right">
-          <%= link_to '详情', @question %> |
-          <%= link_to '返回', questions_path %>
+          <%= link_to '详情', account_question_path(@question) %> |
+          <%= link_to '返回', account_questions_path %>
         </span>
       </div>
+    <!-- <div class="panel-footer" style="height:50px;">
+      <%= link_to 'Edit', edit_question_path(@question) %> |
+      <%= link_to 'Back', questions_path %>
+    </div> -->
   </div>
 </div>
