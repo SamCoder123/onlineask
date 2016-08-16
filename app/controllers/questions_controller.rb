@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     if @question.save
-      redirect_to questions_path, notice: '提问成功！'
+      redirect_to account_questions_path, notice: '提问成功！'
     else
       render :new
     end
