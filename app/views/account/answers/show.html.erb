@@ -1,0 +1,48 @@
+<div class="col-md-12">
+  <div class="panel panel-default ">
+    <div class="panel-heading">
+      <h3 class="panel-title">我的回答</h3>
+    </div>
+
+    <div class="panel-body">
+      <p>
+        回答内容：<%= @answer.content %>
+      </p>
+
+    </div>
+
+    <div class="total clearfix">
+        <span class="pull-right">
+          <%= link_to '编辑', edit_account_answer_path(@answer) %> |
+          <%= link_to '返回', account_answers_path %>
+        </span>
+      </div>
+  </div>
+</div>
+<!--
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @answer.content %>
+</p>
+
+<p>
+  <strong>Is hidden:</strong>
+  <%= @answer.is_hidden %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @answer.user_id %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @answer.question_id %>
+</p>
+
+<%= link_to 'Edit', edit_answer_path(@answer) %> |
+<%= link_to 'Back', answers_path %> -->
