@@ -20,9 +20,9 @@
         <!-- <td><%= answer.is_hidden %></td> -->
         <!-- <td><%= answer.user_id %></td> -->
         <!-- <td><%= answer.question_id %></td> -->
-        <td colspan="3"><%= link_to 'Show', answer %>
-        <%= link_to 'Edit', edit_answer_path(answer) %>
-        <%= link_to 'Destroy', answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td colspan="3"><%= link_to '详情', answer %>
+        <%= link_to '编辑', edit_answer_path(answer) %>
+        <%= link_to '删除', answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
