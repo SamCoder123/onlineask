@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>回答列表（管理员版）</h2>
+    <%= link_to("查看问题列表", admin_questions_path, class:"btn btn-primary pull-right") %>
+    <table class="table table-stripped">
+      <thead>
+        <th>
+          内容
+        </th>
+        <th>
+          所属问题
+        </th>
+        <th>
+          状态
+        </th>
+        <th>
+          处理方法
+        </th>
+      </thead>
+      <tbody>
+        <% @answers.each do |answer| %>
+          <tr>
+            <td>
+              <%= link_to(answer.content, admin_answer_path(answer)) %>
+            </td>
+            <td>
+              <%= answer.question %>
+            </td>
+            <td>
+              <% if answer.is_hidden %>
+                <p>
+                  管理员删除
+                </p>
+              <% else %>
+                <p>
+                  正在发表
+                </p>
+              <% end %>
+            </td>
+            <td>
+              <% if answer.is_hidden %>
+                <%= link_to("公开", publish_admin_answer_path(answer), method: :post, class: "btn btn-primary btn-sm") %>
+              <% else %>
+                <%= link_to("隐藏", hide_admin_answer_path(answer), method: :post, class: "btn btn-danger btn-sm") %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
