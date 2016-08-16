@@ -32,6 +32,13 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :users do
+      member do
+        post :change_to_admin
+        post :change_to_user
+      end
+    end
+
     resources :questions do
       member do
         post :hide

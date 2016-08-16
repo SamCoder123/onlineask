@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -35,6 +35,8 @@ gem "bootstrap-sass"
 gem "simple_form"
 
 gem "devise"
+gem "font-awesome-rails"
+
 gem "font-awesome-rails"
 
 
