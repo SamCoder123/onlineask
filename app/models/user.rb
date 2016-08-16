@@ -20,5 +20,11 @@ class User < ApplicationRecord
 
   end
 
+  # validates :name, presence: true
+  # validates :role, presence: true
+  # validates :gender, presence: true
+  # validates :school, presence: true
 
+  has_many :questions
+  has_many :answers
 end
