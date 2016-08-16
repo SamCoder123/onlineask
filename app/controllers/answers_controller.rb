@@ -32,7 +32,7 @@ class AnswersController < ApplicationController
     @answer.question = @question
 
     if @answer.save
-      redirect_to answers_path, notice: '回答已发送！'
+      redirect_to question_answers_path, notice: '回答已发送！'
     else
       render :new
     end
