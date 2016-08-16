@@ -2,7 +2,7 @@ class Account::AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @answers = Answer.all
+    @answers = current_user.answers
   end
 
   def show
