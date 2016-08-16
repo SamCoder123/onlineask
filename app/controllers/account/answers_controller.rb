@@ -10,6 +10,7 @@ class Account::AnswersController < ApplicationController
 
   def new
     @answer = Answer.new
+    @question = Question.find(params[:question_id])
   end
 
   def edit
@@ -17,6 +18,9 @@ class Account::AnswersController < ApplicationController
 
   def create
     @answer = Answer.new(answer_params)
+    @question = Question.find(params[:question_id])
+    @answer.user = current_user
+    @answer.question = @question
 
     if @answer.save
       redirect_to account_answers_path, notice: '回答已发送！'
@@ -47,6 +51,6 @@ class Account::AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:content, :is_hidden, :user_id, :question_id)
+      params.require(:answer).permit(:content)
     end
 end
