@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h2>问题展示（管理员版）</h2>
+      <form>
+        <fieldset disabled>
+          <div class="form-group">
+            <label for="disabledTextInput">标题</label>
+            <input type="text" class="form-control" placeholder="<%= @question.title %>">
+          </div>
+          <div class="form-group">
+            <label for="disabledTextInput">描述</label>
+            <input type="text" class="form-control" placeholder="<%= @question.description %>">
+          </div>
+          <br>
+        </fieldset>
+        <% if @question.is_hidden %>
+          <%= link_to("公开", publish_admin_question_path(@question), method: :post,class: "btn btn-primary btn-sm") %>
+        <% else %>
+          <%= link_to("隐藏", hide_admin_question_path(@question), method: :post,class: "btn btn-danger btn-sm") %>
+        <% end %>
+      </form>
+  </div>
+</div>
