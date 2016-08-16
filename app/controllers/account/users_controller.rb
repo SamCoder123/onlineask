@@ -13,7 +13,7 @@ class Account::UsersController < ApplicationController
   def update_profile
     @user = current_user
     if @user.update(params_user)
-      redirect_to show_profile_path(@user)
+      redirect_to show_profile_account_user_path(@user)
     else
       render :edit_profile
     end
