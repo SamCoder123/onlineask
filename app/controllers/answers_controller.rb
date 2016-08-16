@@ -15,16 +15,21 @@ class AnswersController < ApplicationController
   # GET /answers/new
   def new
     @answer = Answer.new
+    @question = Question.find(params[:question_id])
   end
 
   # GET /answers/1/edit
   def edit
+    @question = Question.find(params[:question_id])
   end
 
   # POST /answers
   # POST /answers.json
   def create
     @answer = Answer.new(answer_params)
+    @question = Question.find(params[:question_id])
+    @answer.user = current_user
+    @answer.question = @question
 
     if @answer.save
       redirect_to @answer, notice: '回答已发送！'
@@ -82,6 +87,6 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:content, :is_hidden, :user_id, :question_id)
+      params.require(:answer).permit(:content)
     end
 end
