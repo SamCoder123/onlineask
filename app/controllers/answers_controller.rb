@@ -32,7 +32,7 @@ class AnswersController < ApplicationController
     @answer.question = @question
 
     if @answer.save
-      redirect_to @answer, notice: '回答已发送！'
+      redirect_to answers_path, notice: '回答已发送！'
     else
       render :new
     end
@@ -52,7 +52,7 @@ class AnswersController < ApplicationController
   # PATCH/PUT /answers/1.json
   def update
     if @answer.update(answer_params)
-      redirect_to @answer, notice: '回答已更新！'
+      redirect_to answers_path, notice: '回答已更新！'
     else
       render :edit
     end

@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     if @question.save
-      redirect_to @question, notice: '提问成功！'
+      redirect_to questions_path, notice: '提问成功！'
     else
       render :new
     end
@@ -48,7 +48,7 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1.json
   def update
     if @question.update(question_params)
-      redirect_to @question, notice: '提问修改成功！'
+      redirect_to questions_path, notice: '提问修改成功！'
     else
       render :edit
     end
