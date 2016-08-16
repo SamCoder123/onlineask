@@ -23,6 +23,7 @@
 
                    <% if current_user.admin? %>
                      <li><%= link_to("用户管理",admin_users_path)%></li>
+                     <li><%= link_to("问答管理",admin_questions_path)%></li> 
                    <% else %>
                      <li> <%= link_to("个人中心", show_profile_account_user_path(current_user)) %></li>
                      <li> <%= link_to("我的问题", account_questions_path) %></li>
