@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html id="eles" dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>onlineask</title>
+
+<link href="http://www.gophpbb.com/eles/styles/eles/theme/stylesheet.css?assets_version=10" rel="stylesheet">
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/eles/theme/ie.css?assets_version=10" rel="stylesheet">
+	<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700,800" rel="stylesheet" type="text/css">
+<link href="http://www.gophpbb.com/eles/styles/eles/theme/images/favicon.png?assets_version=10" rel="shortcut icon">
+<link href="http://www.gophpbb.com/eles/ext/bb3mobi/lastpostavatar/styles/all/theme/lastpostavatar.css?assets_version=10" rel="stylesheet" type="text/css" media="screen" />
+<link href="http://www.gophpbb.com/eles/ext/phpbb/boardannouncements/styles/all/theme/boardannouncements.css?assets_version=10" rel="stylesheet" type="text/css" media="screen" />
+<link href="http://www.gophpbb.com/eles/ext/phpbb/boardrules/styles/prosilver/theme/boardrules_common.css?assets_version=10" rel="stylesheet" type="text/css" media="screen" />
+<link href="http://www.gophpbb.com/eles/ext/vse/abbc3/styles/all/theme/abbc3.min.css?assets_version=10" rel="stylesheet" type="text/css" media="screen" />
+<style id="c-dyncss" type="text/css" media="screen">
+
+  body { padding: 0; }
+  #wrap {
+    max-width: none;
+    margin: 0;
+  }
+
+  .search-box .inputbox {
+    box-shadow: none;
+  }
+  .search-header, .search-box .inputbox, .search-box a.button {
+    border-radius: 0;
+  }
+  .forabg, .forumbg, .stat-block, div.rules, .stat-block.auth-box form {
+    border-radius: 0;
+  }
+  .button, a.button, a.button1, input.button1, a.button2, input.button2, a.input.button3, input.button3, .right-box a {
+    border-radius: 0;
+  }
+  .pagination li a, .pagination li span {
+    border-radius: 0;
+  }
+  .post-buttons a.icon-button, .hastouch .post-buttons a.icon-button {
+    border-radius: 0;
+  }
+  select, .inputbox, #eles input#text_shoutbox {
+    border-radius: 0;
+  }
+  #tabs .tab > a {
+    border-radius: 0;
+  }
+  input[type="checkbox"]:before {
+    border-radius: 0;
+  }
+  #navigation ul:first-child li:first-child a, #navigation ul:last-child li:last-child a {
+    border-radius: 0;
+  }
+  #cp-main li.header, ul.cplist, li.header, .collapsed li.header {
+    border-radius: 0;
+  }
+  .navbar.top .inner {
+    border-radius: 0;
+  }
+  #page-sidebar .widget {
+    border-radius: 0;
+  }
+  .widget-infotabs .nav > li > a {
+    border-radius: 0;
+  }
+  .pagination > ul > li:first-child a, .pagination > ul > li:first-child span,
+  .pagination > ul > li:last-child a, .pagination > ul > li:last-child span {
+      border-radius: 0;
+  }
+  .tooltip-inner {
+    border-radius: 0;
+  }
+  input[type="checkbox"]:before, .input-view.type-checkbox:before {
+    border-radius: 0;
+  }
+  .postbody .content::-webkit-scrollbar, #topicreview::-webkit-scrollbar,
+  #post_details::-webkit-scrollbar, .codebox code::-webkit-scrollbar,
+  .attachbox dd::-webkit-scrollbar, .attach-image::-webkit-scrollbar,
+  .dropdown ul::-webkit-scrollbar, #mchat-messages::-webkit-scrollbar {
+    border-radius: 0;
+  }
+  .postbody .content::-webkit-scrollbar-thumb,
+  #topicreview::-webkit-scrollbar-thumb, #post_details::-webkit-scrollbar-thumb,
+  .dropdown ul::-webkit-scrollbar-thumb, .codebox code::-webkit-scrollbar-thumb,
+  .attachbox dd::-webkit-scrollbar-thumb,.attach-image::-webkit-scrollbar-thumb,
+  #mchat-messages::-webkit-scrollbar-thumb {
+    border-radius: 0;
+  }
+  #eles #abbc3_buttons select, #eles #abbc3_buttons .abbc3_button,
+  #eles #phpbb_announcement {
+    border-radius: 0;
+  }
+  #topicreview {
+    border-radius: 0;
+  }
+  #eles #quick-login-panel {
+    border-radius: 0;
+  }
+  .postprofile .avatar img,
+  .postprofile .avatar .img {
+    border-radius: 0;
+  }
+  #eles .postlove {
+    border-radius: 0;
+  }
+  #confirm > .panel, #message.panel {
+    border-radius: 0;
+  }
+  #eles #mchat-main .mchat-avatar {
+    border-radius: 0;
+  }
+
+
+  #page-header .header-bg {
+    background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/412cbb41085117.579864dcd8242.jpg');
+    opacity: 0.6;
+  }
+
+#site-description h1 { letter-spacing: 5px; }
+body.dark .username-coloured { color: inherit !important; }
+.widget-custom2 .ripple-wrapper, .theme-toggler { width: 100%; }
+
+/* AD TOP */
+.large-ad {
+    height: 100px;
+    background: #fff;
+    border: solid 2px #4F9AFF;
+    display: table !important;
+    width: 100%;
+    color: #444;
+}
+
+.large-ad .ad-inner {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    font-weight: 300;
+}
+
+.large-ad .header {
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.large-ad .header strong {
+    font-weight: 900;
+    color: #5D5AFF;
+}
+
+.large-ad .header:after {
+    content: ' ';
+    width: 50%;
+    height: 1px;
+    position: absolute;
+    Left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.15) 50%,rgba(0,0,0,0) 100%);
+}
+
+.large-ad .small {
+    line-height: 1.2;
+}
+
+/* AD BOTTOM */
+.large-ad-bottom {
+    background: #fff;
+    border: solid 2px #4F9AFF;
+    display: table !important;
+    width: 100%;
+    padding: 30px;
+    color: #444;
+}
+
+.large-ad-bottom .ad-inner,
+.small-ad-sidebar .ad-inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.large-ad-bottom .header,
+.small-ad-sidebar .header {
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.large-ad-bottom .button {
+    height: 42px;
+    line-height: 42px;
+    font-weight: 700;
+    background-color: #4DC352;
+}
+
+/* AD SIDEBAR */
+.small-ad-sidebar {
+    background: #4DC352;
+    color: #FFF;
+    display: table !important;
+    width: 100%;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.small-ad-sidebar .button {
+    background-color: #FFFFFF;
+    margin-top: 10px;
+    color: #444;
+}
+
+</style>
+
+<script type="text/javascript">
+  document.documentElement.className = 'js';
+</script>
+
+</head>
+
+<body id="phpbb" class="nojs notouch section-index ltr  corners-flat light contained">
+<div id="preloader"><div class="preloader"></div></div>
+<div id="wrap">
+	<a id="top" class="anchor" accesskey="t"></a>
+	<header id="page-header">
+
+					<div id="navbar-main" class="topbar" data-scroll-header>
+  <div class="inner container">
+    <ul id="nav-main" class="linklist bulletin" role="menubar">
+
+  <li id="quick-links" class="small-icon responsive-menu dropdown-container" data-skip-responsive="true">
+    <a href="#" class="responsive-menu-link dropdown-trigger">下拉菜单一</a>
+    <div class="dropdown hidden">
+      <div class="pointer"><div class="pointer-inner"></div></div>
+      <ul class="dropdown-contents" role="menu">
+
+
+                  <li class="separator"></li>
+                                        <li class="small-icon icon-search-unanswered"><a href="/" role="menuitem">子菜单一</a></li>
+          <li class="small-icon icon-search-active"><a href="/" role="menuitem">子菜单二</a></li>
+          <li class="separator"></li>
+          <li class="small-icon icon-search"><a href="/" role="menuitem">子菜单三</a></li>
+
+                  <li class="separator"></li>
+                    <li class="small-icon icon-team"><a href="/" role="menuitem">加入我们</a></li>
+                    <li class="separator"></li>
+                    <li class="small-icon icon-faq"><a href="./" rel="help" title="Frequently Asked Questions" role="menuitem">FAQ</a></li>
+
+              </ul>
+    </div>
+  </li>
+
+
+          <li class="small-icon menu-item mi-author-website" data-last-responsive="true">
+        <a href="/" title="Author Website" role="menuitem">下拉菜单二</a>
+      </li>
+          <li class="small-icon menu-item mi-get-theme" data-last-responsive="true">
+        <a href="/" title="Get Theme" role="menuitem">下拉菜单三</a>
+      </li>
+
+
+    <li class="small-icon icon-logout rightside"  data-skip-responsive="true"><a href="/" title="Login" accesskey="x" role="menuitem">登陆</a></li>
+          <li class="small-icon icon-register rightside" data-skip-responsive="true"><a href="/" role="menuitem">注册</a></li>
+          </ul>
+  </div>
+</div>
+
+<div class="masthead" role="banner">
+  <div class="inner container   header-offset-size">
+    <div id="site-description">
+      <a id="logo" class="logo" href="/" title="GoPhpBB">
+      <span class="imageset site_logo"></span>
+        <h1>ONLINEASK</h1>
+        <p>我有特别好的功能</p>
+      </a>
+      <p class="skiplink"><a href="#start_here">直达内容</a></p>
+    </div>
+      </div>
+
+    <div class="navbar top" role="navigation">
+    <div class="inner container  header-offset-nav">
+      <ul id="nav-breadcrumbs" class="linklist navlinks has-social-links" role="menubar">
+      <li class="small-icon icon-home breadcrumbs">
+    <span ><a href="/" data-navbar-reference="home" itemprop="url"><span itemprop="title">不知道放啥</span></a></span> <span class="crumb" itemtype="/" itemscope=""><a href="./index.php" accesskey="h" data-navbar-reference="index" itemprop="url"><span itemprop="title">想想放啥</span></a></span>
+          </li>
+
+  </ul>
+
+  <ul class="social-links col-xs-4">
+            <li id="social-link-facebook">
+        <a href="#" title="Facebook">
+                      <i class="fa fa-facebook-official"></i>
+                  </a>
+    </li>
+                <li id="social-link-twitter">
+        <a href="#" title="Twitter">
+                      <i class="fa fa-twitter"></i>
+                  </a>
+    </li>
+                <li id="social-link-google-plus">
+        <a href="#" title="Google Plus">
+                      <i class="fa fa-google-plus"></i>
+                  </a>
+    </li>
+                                      </ul>
+    </div>
+  </div>
+
+  <div class="header-bg"></div>
+  </div>
+
+
+	</header>
+
+
+<section class="main  container sided">
+<div class="inner header-offset">
+
+<div id="page-body-wrapper" role="main" class="col-sm-9 leftside">
+
+	<a id="start_here" class="anchor"></a>
+
+	<div id="page-body" role="main">
+
+		<div class="top-block">
+	<div class="inner"><div class="large-ad">
+  <div class="ad-inner">
+    <p class="header">ONLINEASK</p>
+    <span class="header"><strong>点我开始提问</strong> </span>
+  </div>
+</div></div>
+</div>
+		<div id="phpbb_announcement">
+		<a href="/" data-ajax="close_announcement" data-overlay="false" class="close clearfix" title="Close announcement"></a>		<div><strong>这里是一个公告栏，祝大家天天好心情。</strong></div>
+</div>
+
+<p class="right responsive-center time hidden-xs">今天是星期二</p>
+
+
+
+
+				<div id="forumCat1" class="forabg">
+			<div class="inner">
+			<ul class="topiclist">
+				<li class="header">
+										<dl class="icon">
+						<dt><div class="list-inner"><a href="./viewforum.php?f=1">热门话题</a></div></dt>
+						<dd class="topics">抢答</dd>
+						<dd class="posts">偷听</dd>
+						<dd class="lastpost"><span>发文同学</span></dd>
+					</dl>
+									</li>
+			</ul>
+			<ul class="topiclist forums">
+
+
+
+
+
+					<li class="row">
+						<dl class="icon forum_read noicon">
+				<dt>
+										<div class="list-inner">
+						<a class="feed-icon-forum" title="Feed - Your First Forum" href="/"><dfn>我要去美国上学，谁能帮帮我？</dfn></a>
+						<span class="forum-image"><img src="http://www.gophpbb.com/eles/images/forumimage.jpg" alt="No unread posts" /></span>						<a href="./viewforum.php?f=2" class="forumtitle" title="No unread posts">我要去美国上学，谁能帮帮我？</a>
+						<br />美国人民是怎么生活的？
+												<div class="responsive-show" style="display: none;">
+															抢答<strong>我要抢答</strong>
+													</div>
+											</div>
+				</dt>
+									<dd class="topics">抢答 <dfn>抢答</dfn></dd>
+					<dd class="posts">偷听 <dfn>Posts</dfn></dd>
+					<dd class="lastpost"><span>
+												<dfn>Last post</dfn>
+													<span class="lastpostavatar"><img class="avatar" src="http://www.gophpbb.com/eles/images/avatars/gallery/default.jpg" width="30" height="30" alt="User avatar" /></span>							<a href="./viewtopic.php?f=2&amp;p=127#p127" title="Tested" class="lastsubject">我是老谭酸菜</a> <br />
+																		<span class="author"><a href="./memberlist.php?mode=viewprofile&amp;u=2" style="color: #AA0000;" class="username-coloured">一年级新生</a></span>
+												<span class="time">昨天, 21:16</span></span>
+					</dd>
+							</dl>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+
+
+<div class="stats-blocks">
+      <div class="col-block statistics">
+      <h3>
+        <i class="fa fa-fw fa-signal"></i>
+        这里有最热门的答案
+      </h3>
+      <ul>
+                <li>金牌回答<strong>84个</strong></li>
+        <li>本月最热回答<strong>22</strong></li>
+        <li>上月最热回答<strong>105</strong></li>
+              </ul>
+      <p>当前最热回答<strong><a href="/" class="username">55</a></strong></p>
+    </div>
+
+			<div class="col-block birthday-list">
+			<h3>
+				<i class="fa fa-fw fa-birthday-cake"></i>
+				今日限免偷听
+			</h3>
+			<p>我是如何成为宅男的？</p>
+		</div>
+
+      <div class="col-block online-list">
+      <h3>
+        <i class="fa fa-fw fa-users"></i>
+        在线大神
+      </h3>
+      <p>
+        目前在线大神: <strong>500</strong> 小神: 100 美女学姐: 1<br/>
+
+    </div>
+  </div>
+
+
+			</div>
+	<!-- page-body -->
+
+</div>
+<!-- #page-body-wrapper -->
+
+<div id="page-sidebar" class="col-sm-3 rightside">
+<div class="widget widget-auth">
+  <h3 class="widget-title">
+    <a href="./ucp.php?mode=login">登陆</a> &middot;
+    <a href="./ucp.php?mode=register">注册</a>  </h3>
+  <div class="widget-body">
+    <form method="post" action="./ucp.php?mode=login">
+      <fieldset class="clearfix">
+        <label for="username" class="formline">
+          <span>用户姓名：</span>
+          <input type="text" name="username" id="username" size="10" class="inputbox" title="Username" />
+        </label>
+        <label for="password" class="formline">
+          <span>用户密码：</span>
+          <input type="password" name="password" id="password" size="10" class="inputbox" title="Password" autocomplete="off" />
+        </label>
+
+        <div class="left">
+                      <a href="./ucp.php?mode=sendpassword">惨了，密码不记得了。</a>
+                                <label for="autologin">
+              <input type="checkbox" name="autologin" id="autologin" />
+              记录登陆状态
+            </label>
+                  </div>
+        <input type="submit" name="login" value="登陆" class="button2" />
+        <input type="hidden" name="redirect" value="./index.php?" />
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+  <!-- Nav tabs -->
+  <!-- Tab panes -->
+</div>
+</div>
+
+
+    </div>
+  </div>
+  </div>
+
+</div><!-- .inner -->
+<div class="header-offset-shadow"></div>
+</section>
+<!-- .main -->
+
+<footer id="page-footer">
+<div class="footer-inner container">
+  <div class="row">
+    <div class="widget footer-widget widget-about col-sm-4">
+        <h3 class="widget-title">关于我们</h3>
+          <div class="widget-body">
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      </div>
+    </div>
+
+
+    <div class="widget footer-widget widget-custom1 col-sm-5">
+        <h3 class="widget-title">Our Photos</h3>
+          <div class="widget-body">
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/95d24328131795.563701fb9a15b.jpg" alt="ad in custom widgets" style="max-width: 60%">
+          </div>
+    </div>
+
+</div>
+
+</div>
+
+	</footer>
+
+</div>
+<!-- #wrap -->
+
+<a href="#top" id="back2topMain" data-scroll><i class="fa fa-angle-up"></i></a>
+
+<div class="modal-alert">
+	<div id="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close"></a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close"></a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+<div class="hidden">
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="http://www.gophpbb.com/eles/styles/eles/template/js/main.min.js?assets_version=10"></script>
+
+
+<script type="text/javascript" src="http://www.gophpbb.com/eles/ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=10"></script>
+
+<script type="text/javascript" src="http://www.gophpbb.com/eles/ext/vse/abbc3/styles/all/template/js/abbc3.min.js?assets_version=10"></script>
+
+
+
+<script id="c-dynjs" type="text/javascript">
+  Eles.props.headerVfx.configFile = 'http://www.gophpbb.com/eles/styles/eles/template/js/vfxconfig.json';
+  Eles.header_vfx = false;
+</script>
+
+
+</body>
+</html>
