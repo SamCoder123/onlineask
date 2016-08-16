@@ -5,7 +5,7 @@ class Account::QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = current_user.questions
   end
 
   # GET /questions/1
@@ -26,6 +26,7 @@ class Account::QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
+    @question.user = current_user
 
     if @question.save
       redirect_to account_questions_path, notice: '提问成功！'
