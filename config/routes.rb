@@ -19,7 +19,12 @@ Rails.application.routes.draw do
   namespace :account do
 
     resources :answers
-    resources :questions
+
+    resources :questions do
+      member do
+        post :to_downpayment
+      end
+    end
 
     resources :users do
       member do
