@@ -35,6 +35,15 @@ class User < ApplicationRecord
   def admin?
     is_admin
   end
+
+  def deposit_money!(amount)
+    self.balance = amount
+    save
+
+    super_admin = User.super_admin
+    super_admin.balance += amount
+    super_admin.save
+  end
 end
 
 # == Schema Information

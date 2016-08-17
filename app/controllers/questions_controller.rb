@@ -49,6 +49,4 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:title, :description, :downpayment)
   end
-
-
 end
