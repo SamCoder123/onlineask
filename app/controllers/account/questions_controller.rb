@@ -1,6 +1,6 @@
 class Account::QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!,only:[:create]
+  before_action :authenticate_user!,only:[:create,:new,:edit,:update,:destory]
 
   # GET /questions
   # GET /questions.json
