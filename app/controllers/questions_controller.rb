@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     if @question.save
-      redirect_to questions_path, notice: '提问成功！'
+      redirect_to root_path, notice: '提问成功！'
     else
       render :new
     end
@@ -84,6 +84,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:title, :description, :vote, :is_hidden, :user_id)
+      params.require(:question).permit(:title, :description, :downpayment)
     end
 end
