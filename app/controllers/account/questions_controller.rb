@@ -1,11 +1,11 @@
 class Account::QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!,only:[:create,:new,:edit,:update,:destory]
+  before_action :authenticate_user!
 
   # GET /questions
   # GET /questions.json
   def index
-    @questions = current_user.questions
+    @questions = current_user.questions.published
   end
 
   # GET
@@ -54,10 +54,29 @@ class Account::QuestionsController < ApplicationController
     end
   end
 
-  def destroy
-    @question.destroy
+  # def destroy
+  #   @question.destroy
+  #
+  #   redirect_to account_questions_path, notice: '提问成功删除！'
+  # end
 
-    redirect_to account_questions_path, notice: '提问成功删除！'
+  def publish_hidden
+    @question = Question.find(params[:id])
+    is_hidden = params[:is_hidden]
+
+    if is_hidden=="publish"
+      @question.is_hidden = false
+    else
+      @question.is_hidden = true
+    end
+
+    if @question.save
+      flash[:notice] = "操作成功！"
+    else
+      flash[:alert] = "操作失败！"
+    end
+
+    redirect_to :back
   end
 
   #赏他  分钱给平台和回答者

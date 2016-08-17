@@ -1,9 +1,9 @@
 class Account::AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!,only:[:create,:new,:edit,:update,:destroy]
+  before_action :authenticate_user!
 
   def index
-    @answers = current_user.answers
+    @answers = current_user.answers.published
   end
 
   def show
@@ -39,9 +39,27 @@ class Account::AnswersController < ApplicationController
     end
   end
 
-  def destroy
-    @answer.destroy
-    redirect_to account_answers_path, notice: '回答已删除！'
+  # def destroy
+  #   @answer.destroy
+  #   redirect_to account_answers_path, notice: '回答已删除！'
+  # end
+  def publish_hidden
+    @answer = Answer.find(params[:id])
+    is_hidden = params[:is_hidden]
+
+    if is_hidden=="publish"
+      @answer.is_hidden = false
+    else
+      @answer.is_hidden = true
+    end
+
+    if @answer.save
+      flash[:notice] = "操作成功！"
+    else
+      flash[:alert] = "操作失败！"
+    end
+
+    redirect_to :back
   end
 
   private

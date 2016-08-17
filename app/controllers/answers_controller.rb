@@ -71,14 +71,14 @@ class AnswersController < ApplicationController
 
   # DELETE /answers/1
   # DELETE /answers/1.json
-  def destroy
-    @answer.destroy
-    redirect_to account_answers_path, notice: '回答已删除！'
-    # respond_to do |format|
-    #   format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
-  end
+  # def destroy
+  #   @answer.destroy
+  #   redirect_to account_answers_path, notice: '回答已删除！'
+  #   # respond_to do |format|
+  #   #   format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
+  #   #   format.json { head :no_content }
+  #   # end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
