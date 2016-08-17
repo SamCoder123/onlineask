@@ -31,7 +31,7 @@ class Account::UsersController < ApplicationController
   def withdraw_change
     @user = User.find(params[:id])
     cost = params[:user][:balance]
-
+    
     if @user.balance >= cost.to_f
       @user.balance = @user.balance - cost.to_f
       @user.save
