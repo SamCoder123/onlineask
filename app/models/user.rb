@@ -39,6 +39,7 @@ class User < ApplicationRecord
   end
 
 
+
 end
 
 # == Schema Information
@@ -66,6 +67,7 @@ end
 #  major                  :string
 #  image                  :string
 #  name                   :string
+#  balance                :float            default(0.0)
 #
 # Indexes
 #
