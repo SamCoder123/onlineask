@@ -42,6 +42,9 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'rmagick'
 gem "pry"
+gem 'fog'
+gem "figaro"
+gem 'awesome_rails_console'
 
 group :production do
   gem 'pg'

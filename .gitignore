@@ -23,3 +23,8 @@
 # Ignore public/uploads
 public/uploads
 /db/schema.rb
+
+/config/database.yml
+
+# Ignore application configuration
+/config/application.yml

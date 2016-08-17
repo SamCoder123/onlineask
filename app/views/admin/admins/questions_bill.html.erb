@@ -21,7 +21,8 @@
             <%= render_admin_questions_bill_total(@open_questions) %>
           </td>
           <td>
-            <%= render_admin_questions_income_total(@closed_questions) %>
+            <%#= render_admin_questions_income_total(@closed_questions) %>
+            <%= current_user.balance %>
           </td>
         </tr>
       </tbody>
