@@ -20,18 +20,12 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     @question.status = 'open'
-
-    Question.transaction do
-      User.transaction do
-        if @question.save
-          # 保存用户 从平台扣钱150转给回答者
-          save_user
-          flash[:notice] = '提问成功！'
-          redirect_to root_path
-        else
-          render :new
-        end
-      end
+    if @question.save
+      flash[:notice] = '提问成功！'
+      RewardDepositService.new(current_user).perform!
+      redirect_to root_path
+    else
+      render :new
     end
   end
 
@@ -56,14 +50,5 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :description, :downpayment)
   end
 
-  def save_user
-    # 问题保存成功后 扣除用户钱到超级管理员
-    current_user.balance -= 200
-    current_user.save
 
-    super_admin = User.super_admin
-    # binding.pry
-    super_admin.balance += 200
-    super_admin.save
-  end
 end
