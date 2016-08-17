@@ -1,6 +1,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  after_create :add_original_balance
+
+  def add_original_balance
+    self.balance += 1000
+    self.save
+  end
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :image, ImageUploader
@@ -30,4 +37,6 @@ class User < ApplicationRecord
   def admin?
     is_admin
   end
+
+
 end

@@ -41,7 +41,9 @@ gem "font-awesome-rails"
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'rmagick'
-
+gem 'fog'
+gem "figaro"
+gem 'awesome_rails_console'
 
 group :production do
   gem 'pg'
