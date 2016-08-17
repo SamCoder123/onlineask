@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!,only:[:create]
+  before_action :authenticate_user!,only:[:create,:new,:edit,:update,:destroy]
 
   # GET /questions
   # GET /questions.json
@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     if @question.save
-      redirect_to account_questions_path, notice: '提问成功！'
+      redirect_to questions_path, notice: '提问成功！'
     else
       render :new
     end

@@ -21,10 +21,10 @@ class Account::UsersController < ApplicationController
 
   def show_profile
     @user = current_user
-
   end
 
   private
+
 
   def params_user
     params.require(:user).permit(:role,:description,:gender,:school,:major,:image,:name)
