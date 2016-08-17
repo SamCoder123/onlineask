@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!,only:[:create,:new,:edit,:update,:destroy]
 
   # GET /answers
   # GET /answers.json
@@ -32,7 +33,7 @@ class AnswersController < ApplicationController
     @answer.question = @question
 
     if @answer.save
-      redirect_to answers_path, notice: '回答已发送！'
+      redirect_to questions_path, notice: '回答已发送！'
     else
       render :new
     end
@@ -52,7 +53,7 @@ class AnswersController < ApplicationController
   # PATCH/PUT /answers/1.json
   def update
     if @answer.update(answer_params)
-      redirect_to answers_path, notice: '回答已更新！'
+      redirect_to account_answers_path, notice: '回答已更新！'
     else
       render :edit
     end
@@ -72,7 +73,7 @@ class AnswersController < ApplicationController
   # DELETE /answers/1.json
   def destroy
     @answer.destroy
-    redirect_to answers_url, notice: '回答已删除！'
+    redirect_to account_answers_path, notice: '回答已删除！'
     # respond_to do |format|
     #   format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
     #   format.json { head :no_content }

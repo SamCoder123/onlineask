@@ -1,5 +1,6 @@
 class Account::AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!,only:[:create,:new,:edit,:update,:destroy]
 
   def index
     @answers = current_user.answers
