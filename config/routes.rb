@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
     resources :users do
       member do
+        get :new_image
+        get :create_image
         get :new_profile
         get :edit_profile
         put :update_profile

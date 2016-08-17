@@ -38,6 +38,9 @@ gem "devise"
 
 gem "font-awesome-rails"
 
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'rmagick'
 gem "pry"
 
 gem "figaro"
@@ -45,6 +48,7 @@ gem "figaro"
 group :production do
   gem 'pg'
 end
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
