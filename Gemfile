@@ -1,6 +1,5 @@
 source 'https://ruby.taobao.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
 # Use sqlite3 as the database for Active Record
@@ -30,30 +29,30 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "bootstrap-sass"
+gem 'bootstrap-sass'
 
-gem "simple_form"
+gem 'simple_form'
 
-gem "devise"
+gem 'devise'
 
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'rmagick'
 gem 'fog'
-gem "figaro"
+gem 'figaro'
 gem 'awesome_rails_console'
+gem 'annotate'
 
 group :production do
   gem 'pg'
 end
 
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem "pry"
+  gem 'pry'
   gem 'sqlite3'
 end
 

@@ -39,6 +39,9 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    annotate (2.7.1)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 12.0)
     arel (7.1.1)
     autoprefixer-rails (6.3.7)
       execjs
@@ -342,6 +345,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   awesome_rails_console
   bootstrap-sass
   byebug
