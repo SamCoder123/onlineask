@@ -57,5 +57,11 @@ Rails.application.routes.draw do
         post :publish
       end
     end
+
+    resources :admins do
+      collection do
+        get :questions_bill
+      end
+    end
   end
 end
