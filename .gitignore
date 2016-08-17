@@ -21,3 +21,5 @@
 .byebug_history
 
 /db/schema.rb
+
+/config/database.yml
