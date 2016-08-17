@@ -28,6 +28,15 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     if @question.save
+      #问题保存成功后 扣除用户钱到超级管理员
+      current_user.balance = current_user.balance - 200
+      current_user.save
+
+      super_admin = User.super_admin
+      #binding.pry
+      super_admin.balance += 200
+      super_admin.save
+
       redirect_to root_path, notice: '提问成功！'
     else
       render :new

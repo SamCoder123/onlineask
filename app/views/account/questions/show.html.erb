@@ -24,7 +24,7 @@
         </div>
         <div class="total clearfix">
           <span class="pull-right">
-            <%= link_to '赏他', account_questions_path,class:"btn btn-xs btn-danger" %>
+            <%= link_to '赏他', to_downpayment_account_question_path(@question,answer_id:answer.id),method: :post,class:"btn btn-xs btn-danger" %>
           </span>
         </div>
      </div>

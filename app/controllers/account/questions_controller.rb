@@ -30,6 +30,14 @@ class Account::QuestionsController < ApplicationController
     @question.user = current_user
 
     if @question.save
+      #问题保存成功后 扣除用户钱到超级管理员
+      current_user.balance = current_user.balance - 200
+      current_user.save
+
+      super_admin = User.super_admin
+      super_admin.balance += 200
+      super_admin.save
+
       redirect_to account_questions_path, notice: '提问成功！'
     else
       render :new
@@ -58,11 +66,25 @@ class Account::QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = Answer.find(params[:answer_id])
 
-    #关闭问题
-    @question.status = "closed"
+    if @question.status != "closed"
+      #关闭问题
+      @question.status = "closed"
+      @question.save
 
-    #分钱
+      #分钱
+      user = @answer.user
+      user.balance += 150
+      user.save
 
+      @admin = User.super_admin
+      @admin.balance = @admin.balance - 150
+      @admin.save
+      flash[:notice] = "悬赏成功！"
+    else
+      flash[:alert] = "此问题已经关闭！"
+    end
+
+    redirect_to :back
   end
 
   private
