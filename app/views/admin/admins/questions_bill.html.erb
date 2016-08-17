@@ -15,13 +15,13 @@
       <tbody>
         <tr>
           <td>
-            <%= @questions.count %>
+            <%= @open_questions.count %>
           </td>
           <td>
-            <%= render_admin_questions_bill_total(@questions) %>
+            <%= render_admin_questions_bill_total(@open_questions) %>
           </td>
           <td>
-            <%= render_admin_questions_income_total(@questions) %>
+            <%= render_admin_questions_income_total(@closed_questions) %>
           </td>
         </tr>
       </tbody>

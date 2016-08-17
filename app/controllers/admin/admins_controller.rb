@@ -3,6 +3,7 @@ class Admin::AdminsController < ApplicationController
   before_action :require_is_admin
 
   def questions_bill
-    @questions = Question.all
+    @open_questions = Question.where(status: "open")
+    @closed_questions = Question.where(status: "closed")
   end
 end
