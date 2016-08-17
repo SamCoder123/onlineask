@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :questions
 
     resources :users do
+      resources :images
       member do
         get :new_profile
         get :edit_profile

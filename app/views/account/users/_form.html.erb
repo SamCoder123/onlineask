@@ -6,7 +6,8 @@
      <%= f.input :description, label:"个人介绍"%>
      <%= f.input :school, label:"留学学校" %>
      <%= f.input :major, label:"专业",input_html: { class: "form-control"} %>
-     <%= f.input :image, label:"上传头像",input_html: { class: "form-control"} %>
+     上传头像
+     <%= f.file_field :image, label:"上传头像",input_html: { class: "form-control"} %>
    </div>
    <div class="form-actions">
      <%= f.submit "Submit", disable_with: "Submiting...", class: "btn btn-primary"%>
