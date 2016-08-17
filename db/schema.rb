@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817052551) do
+ActiveRecord::Schema.define(version: 20160817103634) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content"
-    t.boolean  "is_hidden"
+    t.boolean  "is_hidden",   default: false
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "images", force: :cascade do |t|
@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(version: 20160817052551) do
     t.string   "title"
     t.text     "description"
     t.integer  "vote"
-    t.boolean  "is_hidden"
+    t.boolean  "is_hidden",   default: false
     t.integer  "user_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.float    "downpayment", default: 0.0
     t.string   "status"
   end
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20160817052551) do
     t.string   "major"
     t.string   "image"
     t.string   "name"
-    t.float    "balance",                default: 0.0
+    t.float    "balance"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
