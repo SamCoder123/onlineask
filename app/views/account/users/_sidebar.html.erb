@@ -2,5 +2,5 @@
   <%= link_to("返回首页",root_path,class:"btn btn-danger") %>
   <%= link_to("修改用户信息",edit_profile_account_user_path(@user),class:"btn btn-default") %>
   <%= link_to("账户充值","#",class:"btn btn-default") %>
-  <%= link_to("账户提现","#",class:"btn btn-default") %>
+  <%= link_to("账户提现",withdraw_edit_account_user_path(@user),class:"btn btn-default") %>
 </div>

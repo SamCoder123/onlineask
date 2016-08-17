@@ -24,6 +24,26 @@ class Account::UsersController < ApplicationController
 
   end
 
+  def withdraw_edit
+    @user = current_user
+  end
+
+  # withdraw_change显示取现后余额
+  def withdraw_change
+    @user = User.find(params[:id])
+    cost = params[:user][:balance]
+
+    if @user.balance >= cost.to_f
+      @user.balance = @user.balance - cost.to_f
+      @user.save
+      redirect_to show_profile_account_user_path(@user)
+    else
+      flash[:alert] = "余额不足！"
+      redirect_to :back
+    end
+
+  end
+
   private
 
   def params_user
