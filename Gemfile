@@ -38,6 +38,8 @@ gem "devise"
 
 gem "font-awesome-rails"
 
+gem "pry"
+
 group :production do
   gem 'pg'
 end
