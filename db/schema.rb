@@ -27,8 +27,9 @@ ActiveRecord::Schema.define(version: 20160817034527) do
     t.integer  "vote"
     t.boolean  "is_hidden"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.float    "downpayment", default: 0.0
   end
 
   create_table "users", force: :cascade do |t|
