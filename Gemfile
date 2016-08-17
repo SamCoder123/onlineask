@@ -40,6 +40,8 @@ gem "font-awesome-rails"
 
 gem "pry"
 
+gem "figaro"
+
 group :production do
   gem 'pg'
 end
