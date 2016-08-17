@@ -12,15 +12,13 @@ class Admin::QuestionsController < ApplicationController
 
   def hide
     @question = Question.find(params[:id])
-    @question.is_hidden = true
-    @question.save
+    @question.hide!
     redirect_to :back, alert: "你隐藏了问题#{@question.title}"
   end
 
   def publish
     @question = Question.find(params[:id])
-    @question.is_hidden = false
-    @question.save
+    @question.publish!
     redirect_to :back, alert: "你公开了问题#{@question.title}"
   end
 end
