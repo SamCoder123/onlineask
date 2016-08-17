@@ -45,13 +45,6 @@
 * 为自己的作品自豪
 
 ##备注
-测试账号：
-1. create_account = User.create([email: '123@123', password: '123123', password_confirmation: '123123', is_admin: 'true',balance:0])
-puts "Admin account created."
-
-2. create_replyer = User.create([email: '1@1', password: '123123', password_confirmation: '123123', is_admin: 'false',role:"replyer",description:"I am studing in Havard currently",gender:"male",school:"Havard",major:"IT",name:"Havard boy",balance:0])
-
-3. create_asker = User.create([email: '2@2', password: '123123', password_confirmation: '123123', is_admin: 'false',role:"asker",description:"I want to study in Havard",gender:"female",major:"IT",name:"Shoot",balance:0])
 
 项目tower：
 [留学咨询 QA](https://hk.tower.im/projects/8638384ec9c144698600858768280d9f/)
