@@ -54,7 +54,9 @@ Rails.application.routes.draw do
     end
 
     resources :admins do
-      get :questions_bill
+      collection do
+        get :questions_bill
+      end
     end
   end
 end
