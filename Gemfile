@@ -42,7 +42,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'rmagick'
 gem "pry"
-
+gem 'fog'
 gem "figaro"
 
 group :production do
