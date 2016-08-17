@@ -8,22 +8,23 @@ class Account::QuestionsController < ApplicationController
     @questions = current_user.questions
   end
 
-  # GET /questions/1
-  # GET /questions/1.json
+  # GET
+  # GET
   def show
+    @answers = @question.answers
   end
 
-  # GET /questions/new
+  # GET
   def new
     @question = Question.new
   end
 
-  # GET /questions/1/edit
+  # GET
   def edit
   end
 
-  # POST /questions
-  # POST /questions.json
+  # POST
+  # POST
   def create
     @question = Question.new(question_params)
     @question.user = current_user
@@ -33,48 +34,35 @@ class Account::QuestionsController < ApplicationController
     else
       render :new
     end
-
-    # respond_to do |format|
-    #   if @question.save
-    #     format.html { redirect_to @question, notice: 'Question was successfully created.' }
-    #     format.json { render :show, status: :created, location: @question }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @question.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
-  # PATCH/PUT /questions/1
-  # PATCH/PUT /questions/1.json
+  # PATCH/PUT
+  # PATCH/PUT
   def update
     if @question.update(question_params)
       redirect_to account_questions_path, notice: '提问修改成功！'
     else
       render :edit
     end
-
-    # respond_to do |format|
-    #   if @question.update(question_params)
-    #     format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-    #     format.json { render :show, status: :ok, location: @question }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @question.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
-  # DELETE /questions/1
-  # DELETE /questions/1.json
   def destroy
     @question.destroy
 
     redirect_to account_questions_path, notice: '提问成功删除！'
-    # respond_to do |format|
-    #   format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
+  end
+
+  #赏他  分钱给平台和回答者
+  def to_downpayment
+    #接收参数并查询
+    @question = Question.find(params[:id])
+    @answer = Answer.find(params[:answer_id])
+
+    #关闭问题
+    @question.status = "closed"
+
+    #分钱
+
   end
 
   private
