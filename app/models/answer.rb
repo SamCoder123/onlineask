@@ -2,8 +2,7 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
 
-  scope :published,-> {where(is_hidden:false)}
-
+  scope :published, -> { where(is_hidden: false) }
 end
 
 # == Schema Information
@@ -12,7 +11,7 @@ end
 #
 #  id          :integer          not null, primary key
 #  content     :text
-#  is_hidden   :boolean
+#  is_hidden   :boolean          default(FALSE)
 #  user_id     :integer
 #  question_id :integer
 #  created_at  :datetime         not null

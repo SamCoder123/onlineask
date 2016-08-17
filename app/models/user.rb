@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   def add_original_balance
     self.balance += 1000
-    self.save
+    save
   end
 
   devise :database_authenticatable, :registerable,
@@ -20,25 +20,21 @@ class User < ApplicationRecord
   # validates :gender, presence: true
   # validates :school, presence: true
 
-  scope :super_admin,->{find(1)}
+  scope :super_admin, -> { find(1) }
 
   def change_to_admin!
     self.is_admin = true
-    self.save
-
+    save
   end
 
   def change_to_user!
     self.is_admin = false
-    self.save
-
+    save
   end
 
   def admin?
     is_admin
   end
-
-
 end
 
 # == Schema Information
@@ -66,6 +62,7 @@ end
 #  major                  :string
 #  image                  :string
 #  name                   :string
+#  balance                :float            default(0.0)
 #
 # Indexes
 #
