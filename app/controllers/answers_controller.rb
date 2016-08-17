@@ -4,14 +4,14 @@ class AnswersController < ApplicationController
 
   # GET /answers
   # GET /answers.json
-  def index
-    @answers = Answer.all
-  end
+  # def index
+  #   @answers = Answer.all
+  # end
 
   # GET /answers/1
   # GET /answers/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /answers/new
   def new
@@ -33,7 +33,7 @@ class AnswersController < ApplicationController
     @answer.question = @question
 
     if @answer.save
-      redirect_to questions_path, notice: '回答已发送！'
+      redirect_to root_path, notice: '回答已发送！'
     else
       render :new
     end

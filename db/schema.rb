@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160816151444) do
+=======
+ActiveRecord::Schema.define(version: 20160817052551) do
+>>>>>>> 23e7c25a0b072d7c51b0c08142cd629ecf537b96
 
   create_table "answers", force: :cascade do |t|
     t.text     "content"
@@ -34,8 +38,10 @@ ActiveRecord::Schema.define(version: 20160816151444) do
     t.integer  "vote"
     t.boolean  "is_hidden"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.float    "downpayment", default: 0.0
+    t.string   "status"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160816151444) do
     t.string   "major"
     t.string   "image"
     t.string   "name"
+    t.float    "balance"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

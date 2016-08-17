@@ -1,30 +1,33 @@
 <div class="col-md-12">
+  <div class="total clearfix">
+    <span class="pull-right">
+      <%= link_to '返回', account_questions_path %>
+    </span>
+  </div>
   <div class="panel panel-default ">
+
     <div class="panel-heading">
-      <h3 class="panel-title">主题：<%= @question.title %></h3>
+      <h3 class="panel-title">问题主题：<%= @question.title %></h3>
     </div>
 
     <div class="panel-body">
-      <p>
-        主题：<%= @question.title %>
-      </p>
-      <p>描述：<%= @question.description %></p>
-
-      <div>
-        <!-- <%= link_to("查看回答", "#{}",method: :post ,class: "btn btn-sm btn-danger pull-right") %> -->
-
-      </div>
+      <p>问题描述：<%= @question.description %></p>
     </div>
 
-    <div class="total clearfix">
-        <span class="pull-right">
-          <%= link_to '详情', account_question_path(@question) %> |
-          <%= link_to '返回', account_questions_path %>
-        </span>
-      </div>
-    <!-- <div class="panel-footer" style="height:50px;">
-      <%= link_to 'Edit', edit_question_path(@question) %> |
-      <%= link_to 'Back', questions_path %>
-    </div> -->
+    <% @answers.each do |answer| %>
+      <div class="panel panel-info ">
+        <div class="panel-heading">
+          <h3 class="panel-title">@email：<%= answer.user.email %></h3>
+        </div>
+        <div class="panel-body">
+          <%= answer.content %>
+        </div>
+        <div class="total clearfix">
+          <span class="pull-right">
+            <%= link_to '赏他', to_downpayment_account_question_path(@question,answer_id:answer.id),method: :post,class:"btn btn-xs btn-danger" %>
+          </span>
+        </div>
+     </div>
+    <% end %>
   </div>
 </div>

@@ -19,7 +19,12 @@ Rails.application.routes.draw do
   namespace :account do
 
     resources :answers
-    resources :questions
+
+    resources :questions do
+      member do
+        post :to_downpayment
+      end
+    end
 
     resources :users do
       member do
@@ -52,6 +57,12 @@ Rails.application.routes.draw do
       member do
         post :hide
         post :publish
+      end
+    end
+
+    resources :admins do
+      collection do
+        get :questions_bill
       end
     end
   end
