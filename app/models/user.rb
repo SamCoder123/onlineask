@@ -10,10 +10,17 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  mount_uploader :image, ImageUploader
 
-  def admin?
-    true
-  end
+  has_many :questions
+  has_many :answers
+
+  # validates :name, presence: true
+  # validates :role, presence: true
+  # validates :gender, presence: true
+  # validates :school, presence: true
+
+  scope :super_admin,->{find(1)}
 
   def change_to_admin!
     self.is_admin = true
@@ -26,9 +33,6 @@ class User < ApplicationRecord
     self.save
 
   end
-
-  has_many :questions
-  has_many :answers
 
   def admin?
     is_admin

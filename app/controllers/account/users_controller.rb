@@ -21,7 +21,6 @@ class Account::UsersController < ApplicationController
 
   def show_profile
     @user = current_user
-
   end
 
   def withdraw_edit
@@ -45,6 +44,7 @@ class Account::UsersController < ApplicationController
   end
 
   private
+
 
   def params_user
     params.require(:user).permit(:role,:description,:gender,:school,:major,:image,:name)

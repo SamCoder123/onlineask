@@ -19,10 +19,17 @@ Rails.application.routes.draw do
   namespace :account do
 
     resources :answers
-    resources :questions
+
+    resources :questions do
+      member do
+        post :to_downpayment
+      end
+    end
 
     resources :users do
       member do
+        get :new_image
+        get :create_image
         get :new_profile
         get :edit_profile
         put :update_profile
@@ -55,6 +62,12 @@ Rails.application.routes.draw do
       member do
         post :hide
         post :publish
+      end
+    end
+
+    resources :admins do
+      collection do
+        get :questions_bill
       end
     end
   end
