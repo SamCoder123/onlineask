@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <thead>
+        <th>
+          正在进行中的问题
+        </th>
+        <th>
+          开放问题的流水
+        </th>
+        <th>
+          以收入金额
+        </th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= @questions.count %>
+          </td>
+          <td>
+            <%= render_admin_questions_bill_total(@questions) %>
+          </td>
+          <td>
+            <%= render_admin_questions_income_total(@questions) %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
