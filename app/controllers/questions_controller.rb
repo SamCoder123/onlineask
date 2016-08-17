@@ -27,22 +27,19 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user = current_user
-
     @question.status = "open"
 
-    if @question.save
-      #问题保存成功后 扣除用户钱到超级管理员
-      current_user.balance -= 200
-      current_user.save
+    Question.transaction do
+      User.transaction do
+        if @question.save
+          #保存用户 从平台扣钱150转给回答者
+          save_user
 
-      super_admin = User.super_admin
-      #binding.pry
-      super_admin.balance += 200
-      super_admin.save
-
-      redirect_to root_path, notice: '提问成功！'
-    else
-      render :new
+          redirect_to root_path, notice: '提问成功！'
+        else
+          render :new
+        end
+      end
     end
 
     # respond_to do |format|
@@ -97,5 +94,16 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:title, :description, :downpayment)
+    end
+
+    def save_user
+      #问题保存成功后 扣除用户钱到超级管理员
+      current_user.balance -= 200
+      current_user.save
+
+      super_admin = User.super_admin
+      #binding.pry
+      super_admin.balance += 200
+      super_admin.save
     end
 end
