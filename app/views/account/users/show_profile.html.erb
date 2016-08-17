@@ -1,7 +1,14 @@
 <h1>用户信息</h1>
-<%= render "profile" %>
+
+<div class="col-md-2">
+    <%= render "sidebar" %>
+</div>
+
+<div class="col-md-8">
+  <%= render "profile" %>
 
 <div class="">
   <%= link_to("修改用户信息",edit_profile_account_user_path(@user),class:"btn btn-primary") %>
   <%= link_to("返回首页",root_path,class:"btn btn-danger") %>
+
 </div>

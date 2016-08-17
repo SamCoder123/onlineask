@@ -40,6 +40,11 @@ Rails.application.routes.draw do
         put :update_profile
         get :show_profile
       end
+      # add withdraw actions
+      member do
+        get :withdraw_edit
+        post :withdraw_change
+      end
     end
   end
 
