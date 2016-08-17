@@ -38,13 +38,10 @@ gem "devise"
 
 gem "font-awesome-rails"
 
-<<<<<<< HEAD
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'rmagick'
-=======
 gem "pry"
->>>>>>> 23e7c25a0b072d7c51b0c08142cd629ecf537b96
 
 group :production do
   gem 'pg'
