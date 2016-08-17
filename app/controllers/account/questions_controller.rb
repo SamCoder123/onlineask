@@ -33,12 +33,7 @@ class Account::QuestionsController < ApplicationController
       User.transaction do
         if @question.save
           #问题保存成功后 扣除用户钱到超级管理员
-          current_user.balance = current_user.balance - 200
-          current_user.save
-
-          super_admin = User.super_admin
-          super_admin.balance += 200
-          super_admin.save
+          save_user
 
           redirect_to account_questions_path, notice: '提问成功！'
         else
@@ -123,5 +118,14 @@ class Account::QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:title, :description)
+    end
+
+    def save_user
+      current_user.balance -= 200
+      current_user.save
+
+      super_admin = User.super_admin
+      super_admin.balance += 200
+      super_admin.save
     end
 end
