@@ -27,6 +27,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user = current_user
+
     @question.status = "open"
 
     if @question.save
@@ -77,15 +78,15 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1
   # DELETE /questions/1.json
-  def destroy
-    @question.destroy
-
-    redirect_to questions_url, notice: '提问成功删除！'
-    # respond_to do |format|
-    #   format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
-  end
+  # def destroy
+  #   @question.destroy
+  #
+  #   redirect_to questions_url, notice: '提问成功删除！'
+  #   # respond_to do |format|
+  #   #   format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+  #   #   format.json { head :no_content }
+  #   # end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

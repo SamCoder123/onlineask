@@ -26,7 +26,7 @@
             <!-- <!%= link_to '我要回答', new_account_question_answer_path(question) %> -->
             <%= link_to '详情', account_question_path(question) %> |
             <%= link_to '编辑', edit_account_question_path(question) %> |
-            <%= link_to '删除', account_question_path(question), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to '删除', publish_hidden_account_question_path(question), method: :post, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

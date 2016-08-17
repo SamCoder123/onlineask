@@ -18,11 +18,16 @@ Rails.application.routes.draw do
 
   namespace :account do
 
-    resources :answers
+    resources :answers do
+      member do
+        post :publish_hidden
+      end
+    end
 
     resources :questions do
       member do
         post :to_downpayment
+        post :publish_hidden
       end
     end
 
