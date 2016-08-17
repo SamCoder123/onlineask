@@ -77,7 +77,7 @@ class Account::QuestionsController < ApplicationController
       user.save
 
       @admin = User.super_admin
-      @admin.balance = @admin.balance - 150
+      @admin.balance -= 150
       @admin.save
       flash[:notice] = "悬赏成功！"
     else
