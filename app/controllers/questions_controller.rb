@@ -45,10 +45,13 @@ class QuestionsController < ApplicationController
 
   def search
     if @query_string.present?
-      # binding.pry
-      search_result = Question.ransack(@search_criteria).result(distinct: true)
-      @questions = search_result.paginate(page: params[:page], per_page: 20)
-      # set_page_title "搜寻 #{@query_string}"
+      #binding.pry
+      search_result = Question.ransack(@search_criteria).result(distinct: true).includes(:answers)
+      @questions = search_result.paginate(page: params[:page], per_page:2)
+
+      user_search_result = User.ransack(@user_search_criteria).result(distinct: true)
+      @users = user_search_result.paginate(page: params[:page], per_page:2)
+      #set_page_title "搜寻 #{@query_string}"
     end
   end
 
@@ -57,10 +60,15 @@ class QuestionsController < ApplicationController
   def validate_search_key
     @query_string = params[:query_string].gsub(/\\|\'|\/|\?/, '') if params[:query_string].present?
     @search_criteria = search_criteria(@query_string)
+    @user_search_criteria = user_search_criteria(@query_string)
   end
 
   def search_criteria(query_string)
-    { title_or_description_cont: query_string }
+    { title_or_description_or_answers_content_cont: query_string }
+  end
+
+  def user_search_criteria(query_string)
+    { email_or_name_cont: query_string }
   end
 
   private
