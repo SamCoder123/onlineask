@@ -20,7 +20,7 @@ class User < ApplicationRecord
   # validates :gender, presence: true
   # validates :school, presence: true
 
-  scope :super_admin,->{find(1)}
+  scope :super_admin, -> { find(1) }
 
   def change_to_admin!
     self.is_admin = true
@@ -36,8 +36,14 @@ class User < ApplicationRecord
     is_admin
   end
 
+  def deposit_money!(amount)
+    self.balance = amount
+    save
 
-
+    super_admin = User.super_admin
+    super_admin.balance += amount
+    super_admin.save
+  end
 end
 
 # == Schema Information
