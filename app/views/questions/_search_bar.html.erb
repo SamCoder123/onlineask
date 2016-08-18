@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-9 col-lg-8 col-lg-offset-2">
-    <%= form_tag search_questions_path , method: :get,html: { class: 'questions-search-form' } do %>
+    <%= form_tag search_questions_path , method: :get,class: 'questions-search-form'  do %>
       <div class="input-group">
         <input type="text" class="form-control" name="query_string" value="<%= params[:query_string] %>" placeholder="搜索问题、提问者或回答者关键字...">
 
