@@ -58,8 +58,7 @@ class Account::UsersController < ApplicationController
 
   # 链接到user展示页
   def exhibition_profile
-    # @user = User.find(params[:id])
-    @user = current_user
+    @user = User.find(params[:id])
     @answers = @user.answers
   end
 
