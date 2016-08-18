@@ -56,6 +56,13 @@ class Account::UsersController < ApplicationController
     flash[:notice] = "充值成功啦！"
   end
 
+  # 链接到user展示页
+  def exhibition_profile
+    # @user = User.find(params[:id])
+    @user = current_user
+    @answers = @user.answers
+  end
+
   private
 
 

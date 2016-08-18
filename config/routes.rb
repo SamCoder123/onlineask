@@ -46,6 +46,7 @@ Rails.application.routes.draw do
         post :withdraw_change
         get :deposit_edit
         post :deposit_change
+        get :exhibition_profile
       end
     end
   end

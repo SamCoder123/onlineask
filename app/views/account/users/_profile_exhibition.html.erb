@@ -1,18 +1,10 @@
 <table class="table table-boldered">
   <tr>
     <td>
-      Email
+      头像
     </td>
     <td>
-      <%= @user.email %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      角色
-    </td>
-    <td>
-      <%= @user.role %>
+      <img src="<%=@user.image.thumb%>">
     </td>
   </tr>
   <tr>
@@ -49,18 +41,10 @@
   </tr>
   <tr>
     <td>
-      头像
+      个人介绍
     </td>
     <td>
-      <img src="<%=@user.image.thumb%>">
-    </td>
-  </tr>
-  <tr>
-    <td>
-      余额
-    </td>
-    <td>
-      <%= @user.balance %>
+      <%= @user.description %>
     </td>
   </tr>
 
