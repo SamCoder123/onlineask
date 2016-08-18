@@ -44,6 +44,7 @@ gem 'fog'
 gem 'figaro'
 gem 'awesome_rails_console'
 gem 'annotate'
+gem 'gravatarify'
 
 group :production do
   gem 'pg'

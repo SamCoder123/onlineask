@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
   after_create :add_original_balance
 
   def add_original_balance
@@ -71,7 +72,7 @@ end
 #  major                  :string
 #  image                  :string
 #  name                   :string
-#  balance                :float
+#  balance                :float            default(0.0)
 #
 # Indexes
 #
