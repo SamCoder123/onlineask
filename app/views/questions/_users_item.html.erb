@@ -1,0 +1,8 @@
+<div class="users_item_div">
+  <div class="">
+    <%= gravatar_tag user.email, :size => 50, :default => "https://en.gravatar.com/userimage/108935282/73e80187e488d35c459472b0fbd720f4.png" %>
+  </div>
+  <div class="">
+    <%= link_to(user.name, exhibition_profile_account_user_path(user)  )%>
+  </div>
+</div>

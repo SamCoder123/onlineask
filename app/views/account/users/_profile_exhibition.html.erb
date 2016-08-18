@@ -4,23 +4,7 @@
       头像
     </td>
     <td>
-      <%= gravatar_tag @user.email, :size => 100, :default => "https://en.gravatar.com/userimage/108935282/73e80187e488d35c459472b0fbd720f4.png" %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Email
-    </td>
-    <td>
-      <%= @user.email %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      角色
-    </td>
-    <td>
-      <%= @user.role %>
+      <img src="<%=@user.image.thumb%>">
     </td>
   </tr>
   <tr>
@@ -55,13 +39,12 @@
       <%= @user.major %>
     </td>
   </tr>
-
   <tr>
     <td>
-      余额
+      个人介绍
     </td>
     <td>
-      <%= @user.balance %>
+      <%= @user.description %>
     </td>
   </tr>
 

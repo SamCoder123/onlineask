@@ -12,7 +12,11 @@
  *
  *= require_self
  *= require font-awesome
+ *= require questions
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+
+
+mark{ background:yellow  }

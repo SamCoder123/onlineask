@@ -6,22 +6,32 @@
           提问人：<%= @question.user.email %>
         </span>
       </h3>
-
-
     </div>
 
     <div class="panel-body">
-
       <p>描述：<%= @question.description %></p>
-
-
     </div>
-
-    <div class="total clearfix">
+      <div class="total clearfix">
         <span class="pull-right">
           <%= link_to '详情', @question %> |
           <%= link_to '返回', questions_path %>
         </span>
       </div>
+    </div>
+
+    <div class="panel panel-default ">
+      <div class="panel-heading">
+        <h3 class="panel-title">回答者列表</h3>
+      </div>
+
+      <div class="panel-body">
+        <% @question.answers.each do |answer| %>
+          <%= answer.user.image %>
+          <%= link_to(answer.user.name, exhibition_profile_account_user_path(id: answer.user.id)) %>
+          <%= answer.updated_at %>
+        <% end %>
+      </div>
+
+
   </div>
 </div>
