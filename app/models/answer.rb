@@ -2,7 +2,7 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
 
-  scope :published,-> {where(is_hidden:false)}
+  scope :published, -> { where(is_hidden: false) }
 
   def hide!
     self.is_hidden = true
