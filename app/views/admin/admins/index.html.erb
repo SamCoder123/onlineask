@@ -1,6 +1,63 @@
 <!-- 以后在这里做一个question和answer的集合 -->
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
-</ul>
+<h2>管理员后台首页</h2>
+<hr>
+<h3>问答管理</h3>
+<table class="table table-stripped">
+  <thead>
+    <th>
+      模块
+    </th>
+    <th>
+      描述
+    </th>
+    <th>
+      操作
+    </th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        问题管理
+      </td>
+      <td>
+        目前有<%= @questions.where(status: 'open').count %>个开放问题
+      </td>
+      <td>
+        <%= link_to("去管理", admin_questions_path, class: "btn btn-danger") %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        答案管理
+      </td>
+      <td>
+        目前有<%= @answers.count %>个回答
+      </td>
+      <td>
+        <%= link_to("去管理", admin_answers_path, class: "btn btn-danger") %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        用户管理
+      </td>
+      <td>
+        目前有<%= @users.count %>个用户注册
+      </td>
+      <td>
+        <%= link_to("去管理", admin_users_path, class: "btn btn-primary") %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        账目管理
+      </td>
+      <td>
+        流水金额： <%= render_admin_questions_bill_total(@questions.where(status: 'open')) %>
+      </td>
+      <td>
+        <%= link_to("去查看", questions_bill_admin_admins_path, class: "btn btn-primary") %>
+      </td>
+    </tr>
+  </tbody>
+</table>
