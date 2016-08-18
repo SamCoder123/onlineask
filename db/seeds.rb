@@ -22,13 +22,13 @@ create_asker = User.create([email: '2@2', password: '123123', password_confirmat
 # "created_at",  null: false
 # "updated_at"
 
-create_question = Question.create([title:'问题一',description:'问题一的描述',user_id:1,downpayment:200,is_hidden:false,status:'open'])
-create_question = Question.create([title:'问题二',description:'问题二的描述',user_id:1,downpayment:200,is_hidden:false,status:'open'])
-create_question = Question.create([title:'问题三',description:'问题三的描述',user_id:1,downpayment:200,is_hidden:false,status:'open'])
+create_question = Question.create([title: '问题一', description: '问题一的描述', user_id: 1, downpayment: 200, is_hidden: false, status: 'open'])
+create_question = Question.create([title: '问题二', description: '问题二的描述', user_id: 1, downpayment: 200, is_hidden: false, status: 'open'])
+create_question = Question.create([title: '问题三', description: '问题三的描述', user_id: 1, downpayment: 200, is_hidden: false, status: 'open'])
 
-create_question = Question.create([title:'问题四',description:'问题四的描述',user_id:2,downpayment:200,is_hidden:false,status:'open'])
-create_question = Question.create([title:'问题五',description:'问题五的描述',user_id:2,downpayment:200,is_hidden:false,status:'open'])
-create_question = Question.create([title:'问题六',description:'问题六的描述',user_id:2,downpayment:200,is_hidden:false,status:'open'])
+create_question = Question.create([title: '问题四', description: '问题四的描述', user_id: 2, downpayment: 200, is_hidden: false, status: 'open'])
+create_question = Question.create([title: '问题五', description: '问题五的描述', user_id: 2, downpayment: 200, is_hidden: false, status: 'open'])
+create_question = Question.create([title: '问题六', description: '问题六的描述', user_id: 2, downpayment: 200, is_hidden: false, status: 'open'])
 
 
 # t.text     "content"
@@ -37,6 +37,6 @@ create_question = Question.create([title:'问题六',description:'问题六的�
 # t.integer  "question_id"
 # t.datetime "created_at",  null: false
 # t.datetime "updated_at",  null: false
-create_answer = Answer.create([content:'问题一的回答',question_id:1,user_id:2,is_hidden:false])
-create_answer = Answer.create([content:'问题一的回答',question_id:1,user_id:3,is_hidden:false])
-create_answer = Answer.create([content:'问题四的回答',question_id:4,user_id:3,is_hidden:false])
+create_answer = Answer.create([content: '问题一的回答', question_id: 1, user_id: 2, is_hidden: false])
+create_answer = Answer.create([content: '问题一的回答', question_id: 1, user_id: 3, is_hidden: false])
+create_answer = Answer.create([content: '问题四的回答', question_id: 4, user_id: 3, is_hidden: false])
