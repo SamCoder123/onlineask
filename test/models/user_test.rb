@@ -31,7 +31,7 @@ end
 #  major                  :string
 #  image                  :string
 #  name                   :string
-#  balance                :float            default(0.0)
+#  balance                :float
 #
 # Indexes
 #
