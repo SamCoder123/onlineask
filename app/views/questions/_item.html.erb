@@ -1,0 +1,8 @@
+<tr>
+
+  <td width="80%">
+    <%= link_to(question.title,question_path(question)) %> -
+    <%= question.description %>
+  </td>
+  <td> <%= question.created_at.to_s(:short) %> </td>
+</tr>

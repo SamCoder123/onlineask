@@ -1,0 +1,11 @@
+
+<%= render "questions/search_bar" %>
+
+<br>
+<div>
+
+  <table class="table table-borderd">
+   <%= render :partial => "questions/item", :collection => @questions, :as => :question %>
+ </table>
+
+</div>
