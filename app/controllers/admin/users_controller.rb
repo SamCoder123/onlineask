@@ -4,6 +4,7 @@ class Admin::UsersController < ApplicationController
 
   def index
     @users = User.all
+    render layout: 'admin'
   end
 
   def change_to_admin

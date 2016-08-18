@@ -4,6 +4,7 @@ class Admin::AnswersController < ApplicationController
 
   def index
     @answers = Answer.all
+    render layout: 'admin'
   end
 
   def show
