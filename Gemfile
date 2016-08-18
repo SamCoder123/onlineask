@@ -46,6 +46,7 @@ gem 'awesome_rails_console'
 gem 'annotate'
 gem 'ransack'
 gem 'will_paginate'
+gem 'gravatarify'
 
 group :production do
   gem 'pg'

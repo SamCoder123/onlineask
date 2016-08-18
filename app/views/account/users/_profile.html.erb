@@ -1,6 +1,14 @@
 <table class="table table-boldered">
   <tr>
     <td>
+      头像
+    </td>
+    <td>
+      <%= gravatar_tag @user.email, :size => 100, :default => "https://en.gravatar.com/userimage/108935282/2acf7224bacfeeeb72ffd885a4b47a34.png" %>
+    </td>
+  </tr>
+  <tr>
+    <td>
       Email
     </td>
     <td>
@@ -47,14 +55,7 @@
       <%= @user.major %>
     </td>
   </tr>
-  <tr>
-    <td>
-      头像
-    </td>
-    <td>
-      <img src="<%=@user.image.thumb%>">
-    </td>
-  </tr>
+
   <tr>
     <td>
       余额
