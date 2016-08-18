@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  # root "registrations#new"
+  resources :welcome_test
 
   namespace :account do
 
@@ -44,6 +44,9 @@ Rails.application.routes.draw do
       member do
         get :withdraw_edit
         post :withdraw_change
+        get :deposit_edit
+        post :deposit_change
+        get :exhibition_profile
       end
     end
   end
