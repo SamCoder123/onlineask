@@ -20,7 +20,7 @@ class Admin::AnswersController < ApplicationController
   def publish
     @answer = Answer.find(params[:id])
     @answer.publish!
-    flash[:alert] "你公开了回答#{@answer.content}"
+    flash[:alert] = "你公开了回答#{@answer.content}"
     redirect_to :back
   end
 end
