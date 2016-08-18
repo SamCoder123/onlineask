@@ -9,7 +9,7 @@
           开放问题的流水
         </th>
         <th>
-          以收入金额
+          已收入金额
         </th>
       </thead>
       <tbody>
@@ -21,7 +21,6 @@
             <%= render_admin_questions_bill_total(@open_questions) %>
           </td>
           <td>
-            <%#= render_admin_questions_income_total(@closed_questions) %>
             <%= current_user.balance %>
           </td>
         </tr>

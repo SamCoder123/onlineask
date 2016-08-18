@@ -4,6 +4,7 @@ class Admin::AnswersController < ApplicationController
 
   def index
     @answers = Answer.all
+    render layout: 'admin'
   end
 
   def show
@@ -12,15 +13,15 @@ class Admin::AnswersController < ApplicationController
 
   def hide
     @answer = Answer.find(params[:id])
-    @answer.is_hidden = true
-    @answer.save
-    redirect_to :back, alert: "你隐藏了回答#{@answer.content}"
+    @answer.hide!
+    flash[:alert] = "你隐藏了回答#{@answer.content}"
+    redirect_to :back
   end
 
   def publish
     @answer = Answer.find(params[:id])
-    @answer.is_hidden = false
-    @answer.save
-    redirect_to :back, alert: "你公开了回答#{@answer.content}"
+    @answer.publish!
+    flash[:alert] = "你公开了回答#{@answer.content}"
+    redirect_to :back
   end
 end

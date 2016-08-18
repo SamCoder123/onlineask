@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
   after_create :add_original_balance
 
   def add_original_balance
@@ -20,26 +21,30 @@ class User < ApplicationRecord
   # validates :gender, presence: true
   # validates :school, presence: true
 
-  scope :super_admin,->{find(1)}
+  scope :super_admin, -> { find(1) }
 
   def change_to_admin!
     self.is_admin = true
     self.save
-
   end
 
   def change_to_user!
     self.is_admin = false
     self.save
-
   end
 
   def admin?
     is_admin
   end
 
+  def deposit_money!(amount)
+    self.balance = amount
+    save
 
-
+    super_admin = User.super_admin
+    super_admin.balance += amount
+    super_admin.save
+  end
 end
 
 # == Schema Information

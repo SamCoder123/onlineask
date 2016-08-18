@@ -4,12 +4,20 @@ module Admin::AdminsHelper
     questions.each do |question|
       sum += question.downpayment
     end
-    return sum
+    sum
   end
 
   def render_admin_questions_income_total(questions)
     each_question_income = 50
     sum = questions.count * each_question_income
-    return sum
+    sum
+  end
+
+  def controller?(controller)
+    controller.include?(params[:controller])
+  end
+
+  def action?(action)
+    action.include?(params[:action])
   end
 end

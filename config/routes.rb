@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   resources :questions do
     resources :answers
+
+    collection do
+      get :search
+    end
   end
 
   devise_for :users

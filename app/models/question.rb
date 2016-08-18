@@ -2,9 +2,19 @@ class Question < ApplicationRecord
   belongs_to :user
   has_many :answers
 
-  #status 字段 有两种状态 open closed
+  # status 字段 有两种状态 open closed
 
-  scope :published,-> {where(is_hidden:false)}
+  scope :published, -> { where(is_hidden:false) }
+
+  def hide!
+    self.is_hidden = true
+    self.save
+  end
+
+  def publish!
+    self.is_hidden = false
+    self.save
+  end
 end
 
 # == Schema Information

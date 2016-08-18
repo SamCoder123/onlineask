@@ -19,12 +19,12 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+/public/uploads
 
-# Ignore public/uploads
-public/uploads
 /db/schema.rb
 
 /config/database.yml
 
-# Ignore application configuration
 /config/application.yml
+
+erd.pdf

@@ -1,0 +1,9 @@
+<div class="col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li class="<%= 'active' if controller?('admin/admins') && action?('index') %>"><%= link_to("后台首页", admin_admins_path) %></li>
+    <li class="<%= 'active' if controller?('admin/questions') %>"><%= link_to("问题管理", admin_questions_path) %></li>
+    <li class="<%= 'active' if controller?('admin/answers') %>"><%= link_to("答案管理", admin_answers_path) %></li>
+    <li class="<%= 'active' if controller?('admin/users') %>"><%= link_to("用户管理", admin_users_path) %></li>
+    <li class="<%= 'active' if controller?('admin/admins') && action?('questions_bill') %>"><%= link_to("用户管理", questions_bill_admin_admins_path) %></li>
+  </ul>
+</div>

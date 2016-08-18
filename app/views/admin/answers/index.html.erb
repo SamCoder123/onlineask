@@ -24,7 +24,7 @@
               <%= link_to(answer.content, admin_answer_path(answer)) %>
             </td>
             <td>
-              <%= answer.question %>
+              <%= answer.question.title %>
             </td>
             <td>
               <% if answer.is_hidden %>
