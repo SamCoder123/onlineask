@@ -31,7 +31,7 @@ class Account::UsersController < ApplicationController
   def withdraw_change
     @user = User.find(params[:id])
     cost = params[:user][:balance]
-    
+
     if @user.balance >= cost.to_f
       @user.balance = @user.balance - cost.to_f
       @user.save
@@ -40,7 +40,20 @@ class Account::UsersController < ApplicationController
       flash[:alert] = "余额不足！"
       redirect_to :back
     end
+  end
 
+  # deposit_edit用户账户充值表单页面
+  def deposit_edit
+    @user = current_user
+  end
+  # deposit_change用户账户充值功能
+  def deposit_change
+    @user = User.find(params[:id])
+    cost = params[:user][:balance]
+    @user.balance = @user.balance + cost.to_f
+    @user.save
+    redirect_to show_profile_account_user_path(@user)
+    flash[:notice] = "充值成功啦！"
   end
 
   private
