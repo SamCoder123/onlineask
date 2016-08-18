@@ -1,5 +1,8 @@
 class WelcomeTestController < ApplicationController
-  def index
 
+  layout "welcome_test"
+
+  def index
+      @questions = Question.all
   end
 end
