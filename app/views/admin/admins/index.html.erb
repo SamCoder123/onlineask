@@ -1,7 +1,6 @@
 <!-- 以后在这里做一个question和answer的集合 -->
 <h2>管理员后台首页</h2>
 <hr>
-<h3>问答管理</h3>
 <table class="table table-stripped">
   <thead>
     <th>
@@ -53,7 +52,8 @@
         账目管理
       </td>
       <td>
-        流水金额： <%= render_admin_questions_bill_total(@questions.where(status: 'open')) %>
+        流水金额：
+        <%= render_admin_questions_bill_total(@questions.where(status: 'open')) %>
       </td>
       <td>
         <%= link_to("去查看", questions_bill_admin_admins_path, class: "btn btn-primary") %>
