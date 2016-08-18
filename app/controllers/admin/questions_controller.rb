@@ -4,6 +4,7 @@ class Admin::QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    render layout: 'admin'
   end
 
   def show
@@ -13,12 +14,14 @@ class Admin::QuestionsController < ApplicationController
   def hide
     @question = Question.find(params[:id])
     @question.hide!
-    redirect_to :back, alert: "你隐藏了问题#{@question.title}"
+    flash[:alert] = "你隐藏了问题#{@question.title}"
+    redirect_to :back
   end
 
   def publish
     @question = Question.find(params[:id])
     @question.publish!
-    redirect_to :back, alert: "你公开了问题#{@question.title}"
+    flash[:alert] = "你公开了问题#{@question.title}"
+    redirect_to :back
   end
 end

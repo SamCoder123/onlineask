@@ -16,15 +16,18 @@
            <% else %>
              <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+<<<<<<< HEAD
                     <%= gravatar_tag current_user.email, :size => 30, :default => avatar_url %>
+=======
+                    <%= gravatar_tag current_user.email, :size => 30, :default => "https://en.gravatar.com/userimage/108935282/73e80187e488d35c459472b0fbd720f4.png" %>
+>>>>>>> 1d8bf6d3f0ceff1bdd49f4dce5b7159ee07244c2
                    Hi!, <%= current_user.email %>
                    <b class="caret"></b>
                </a>
                <ul class="dropdown-menu">
 
                    <% if current_user.admin? %>
-                     <li><%= link_to("用户管理",admin_users_path)%></li>
-                     <li><%= link_to("问答管理",admin_questions_path)%></li>
+                     <li><%= link_to("管理者后台",admin_admins_path)%></li>
                    <% else %>
                      <li> <%= link_to("个人中心", show_profile_account_user_path(current_user)) %></li>
                      <li> <%= link_to("我的问题", account_questions_path) %></li>
