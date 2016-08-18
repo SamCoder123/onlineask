@@ -16,13 +16,9 @@
            <% else %>
              <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-<<<<<<< HEAD
-                    <%= gravatar_tag current_user.email, :size => 30, :default => avatar_url %>
-=======
-                    <%= gravatar_tag current_user.email, :size => 30, :default => "https://en.gravatar.com/userimage/108935282/73e80187e488d35c459472b0fbd720f4.png" %>
->>>>>>> 1d8bf6d3f0ceff1bdd49f4dce5b7159ee07244c2
-                   Hi!, <%= current_user.email %>
-                   <b class="caret"></b>
+                 <%= gravatar_tag current_user.email, :size => 30, :default => avatar_url %>
+                 Hi!, <%= current_user.email %>
+                 <b class="caret"></b>
                </a>
                <ul class="dropdown-menu">
 
