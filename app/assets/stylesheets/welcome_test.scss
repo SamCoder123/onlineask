@@ -1,9 +1,65 @@
 // Place all the styles related to the welcome_test controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#lp-pom-block-8-color-overlay {
-    position: absolute;
-    background: rgba(4,28,58,0.7);
-    height: 397px;
+
+
+.line{
+
+    display: block;
+    background: rgba(255,255,255,0);
+    border-style: solid none none none;
+    border-width: 1px;
+    border-color: #aa8e49;
+    border-radius: 0px;
+    left: 0px;
+    top: -14px;
     width: 100%;
+    height: 17px;
+    position: absolute;
+}
+
+
+
+.banner{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 440px;
+
+    // background-image: url(http://www.shangyutang.com.cn/images/banner2.jpg);
+
+}
+
+.container{
+  position: absolute;
+  top: 186px;
+  right: 0;
+  top: 200px;
+  bottom: 0;
+  left: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container-font {
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.dark-bg{
+  background: rgba(4,28,58,1.0);
+}
+
+.image-container{
+  // top: 440px;
+  position: relative;
+  // margin-bottom: 20px;
+}
+
+.advantage{
+  // position: absolute;
+  // top:10px;
+  margin: 20px 40px 20px 20px;
+  width: 200px;
+
 }
