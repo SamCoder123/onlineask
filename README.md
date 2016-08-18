@@ -13,5 +13,8 @@
 * user_1 : 1@1 / 123123
 * user_2 : 2@2 / 123123
 
-# 项目tower：
+# 项目tower
 * [留学咨询 QA](https://hk.tower.im/projects/8638384ec9c144698600858768280d9f/)
+
+# HTML / CSS 规范
+* [HTML / CSS 规范](https://github.com/xingrowth/fullstack-course/wiki/HTML---CSS-%E6%8E%92%E7%89%88%E8%A6%8F%E5%89%87)
