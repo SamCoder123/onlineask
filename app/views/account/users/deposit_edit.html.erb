@@ -1,4 +1,4 @@
-<h1>账户提现</h1>
+<h1>账户充值</h1>
 <div class="" style="margin:30px">
   <table class="table">
     <tr>
@@ -19,12 +19,12 @@
     </tr>
     <tr>
       <td>
-        提取金额
+        充值金额
       </td>
       <td>
-        <%= form_for [:account, @user], url: withdraw_change_account_user_path, method: :post do |f| %>
+        <%= form_for [:account, @user], url: deposit_change_account_user_path, method: :post do |f| %>
         <%= f.text_field :balance %>
-        <%= f.submit "马上提现", disable_with: "提现中...", class: "btn btn-primary"%>
+        <%= f.submit "马上充值", disable_with: "充值中...", class: "btn btn-primary"%>
         <% end %>
       </td>
     </tr>

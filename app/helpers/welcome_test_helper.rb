@@ -1,0 +1,2 @@
+module WelcomeTestHelper
+end
