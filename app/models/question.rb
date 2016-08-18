@@ -2,8 +2,9 @@ class Question < ApplicationRecord
   belongs_to :user
   has_many :answers
 
-  #status 字段 有两种状态 open closed
+  # status 字段 有两种状态 open closed
 
+<<<<<<< HEAD
   scope :published,-> {where(is_hidden:false)}
 
   def hide!
@@ -15,6 +16,9 @@ class Question < ApplicationRecord
     self.is_hidden = false
     self.save
   end
+=======
+  scope :published, -> { where(is_hidden: false) }
+>>>>>>> xdite-refactor-0817
 end
 
 # == Schema Information

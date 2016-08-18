@@ -2,6 +2,7 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
 
+<<<<<<< HEAD
   scope :published,-> {where(is_hidden:false)}
 
   def hide!
@@ -13,6 +14,9 @@ class Answer < ApplicationRecord
     self.is_hidden = false
     self.save
   end
+=======
+  scope :published, -> { where(is_hidden: false) }
+>>>>>>> xdite-refactor-0817
 end
 
 # == Schema Information

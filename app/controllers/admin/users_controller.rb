@@ -21,11 +21,9 @@ class Admin::UsersController < ApplicationController
   private
 
   def require_is_admin
-    if !current_user.admin?
-      flash[:alert] = "对不起，你没有管理员权限。"
+    unless current_user.admin?
+      flash[:alert] = '对不起，你没有管理员权限。'
       redirect_to root_path
     end
   end
-
-
 end
