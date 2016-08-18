@@ -26,9 +26,10 @@
 
       <div class="panel-body">
         <% @question.answers.each do |answer| %>
-          <%= answer.user.image %>
+          <%= image_tag(answer.user.image.thumb, class: "thumbnail") %>
           <%= link_to(answer.user.name, exhibition_profile_account_user_path(id: answer.user.id)) %>
           <%= answer.updated_at %>
+          <hr>
         <% end %>
       </div>
 
