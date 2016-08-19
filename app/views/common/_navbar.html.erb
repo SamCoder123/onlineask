@@ -4,7 +4,6 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="/">onlineask</a>
     </div>
-
     <!-- Collect the nav links,forms,and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
@@ -21,7 +20,6 @@
                  <b class="caret"></b>
                </a>
                <ul class="dropdown-menu">
-
                    <% if current_user.admin? %>
                      <li><%= link_to("管理者后台",admin_admins_path)%></li>
                    <% else %>
@@ -29,7 +27,6 @@
                      <li> <%= link_to("我的问题", account_questions_path) %></li>
                      <li> <%= link_to("我的回答", account_answers_path) %></li>
                    <%end %>
-
                    <li class="divider"> </li>
                    <li> <%= link_to("登出", destroy_user_session_path, method: :delete) %> </li>
                </ul>
