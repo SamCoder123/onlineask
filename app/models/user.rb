@@ -38,7 +38,7 @@ class User < ApplicationRecord
   end
 
   def deposit_money!(amount)
-    self.balance = amount
+    self.balance -= amount
     save
 
     super_admin = User.super_admin
