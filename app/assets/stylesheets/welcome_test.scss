@@ -75,15 +75,37 @@
   position: relative;
 }
 
-.about-us-font{
+.about-us-title{
   font-size: 16px;
 }
 
-.picture-list{
-  position: relative;
+.about-us-text{
+  font-size: 14px;
+
+
+}
+.about-us{
+  text-align: center;
+}
+
+.about-us-icon{
+  margin-right: 20px;
+}
+
+.picture-center{
+  text-align: center;
 
 }
 
 .footer-color{
   background: rgba(243,241,236,1);
+}
+
+.bottom-gap{
+  margin-bottom: 30px;
+}
+
+.section-title{
+  padding-top: 30px;
+  margin-bottom: 30px;
 }
