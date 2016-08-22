@@ -10,11 +10,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  namespace :account do
-    resources :answers
-    resources :questions
-  end
-
   root 'welcome_test#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -32,6 +27,10 @@ Rails.application.routes.draw do
       member do
         post :to_downpayment
         post :publish_hidden
+      end
+
+      collection do
+        get :invitated_questions
       end
     end
 

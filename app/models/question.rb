@@ -1,19 +1,21 @@
 class Question < ApplicationRecord
   belongs_to :user
   has_many :answers
+  has_many :question_invitations
+  has_many :invitated_users, through: :question_invitations, source: :user
 
   # status 字段 有两种状态 open closed
 
-  scope :published, -> { where(is_hidden:false) }
+  scope :published, -> { where(is_hidden: false) }
 
   def hide!
     self.is_hidden = true
-    self.save
+    save
   end
 
   def publish!
     self.is_hidden = false
-    self.save
+    save
   end
 end
 
