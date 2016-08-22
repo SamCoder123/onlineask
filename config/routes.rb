@@ -10,13 +10,24 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+
+  namespace :account do
+    resources :answers
+    resources :questions
+    resources :follows, only:[:like, :unlike] do
+      member do
+        post :like
+        post :unlike
+      end
+    end
+  end
+
   root 'welcome_test#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :welcome_test
 
   namespace :account do
-
     resources :answers do
       member do
         post :publish_hidden
@@ -84,4 +95,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
+
+
 end
