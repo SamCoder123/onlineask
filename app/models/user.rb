@@ -44,13 +44,16 @@ class User < ApplicationRecord
   end
 
   def already_follower?(followee)
-    follow_relationships.include?(followee)
+    followees.include?(followee)
   end
 
   def follow!(followee)
     followees << followee
   end
 
+  def stop_follow!(followee)
+    followees.delete(followee)
+  end
 end
 
 # == Schema Information

@@ -6,7 +6,7 @@ class Account::FollowsController < ApplicationController
     if !current_user.already_follower?(@followee)
       current_user.follow!(@followee)
     else
-      flash[:warning] = "You have already followed him/her!"
+      current_user.stop_follow!(@followee)
     end
     redirect_to :back
   end
