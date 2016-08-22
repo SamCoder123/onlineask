@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_many :questions
   has_many :answers
 
+  has_many :answer_subscriptions
+  has_many :subscribed_answers, through: :answer_subscription, source: :answer
+
   # validates :name, presence: true
   # validates :role, presence: true
   # validates :gender, presence: true

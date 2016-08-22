@@ -1,6 +1,9 @@
 class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
+  
+  has_many :answer_subscription
+  has_many :subscribed_users, through: :answer_subscriptions, source: :user
 
   scope :published, -> { where(is_hidden: false) }
 
