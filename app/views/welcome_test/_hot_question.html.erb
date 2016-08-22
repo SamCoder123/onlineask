@@ -12,7 +12,7 @@
             <%= gravatar_tag question.user.email, :size => 40, :default => avatar_url %>
             </div>
             <br>
-            <br>
+            <p>回答人数：<%= question.answers.count %></p>
             <hr>
             <div>
               <div class="pull-right">
