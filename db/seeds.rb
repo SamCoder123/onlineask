@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-create_account = User.create([email: '123@123', password: '123123', password_confirmation: '123123', is_admin: 'true',balance:0])
+create_account = User.create([email: '123@123', password: '123123', password_confirmation: '123123', is_admin: 'true',balance:0,name: 'admin'])
 puts "Admin account created."
 
-create_account = User.create([email: 'liumiao2023@gmail.com', password: '123456', password_confirmation: '123456', is_admin: 'true',balance:0])
+create_account = User.create([email: 'liumiao2023@gmail.com', password: '123456', password_confirmation: '123456', is_admin: 'true',balance:0,name: '玛丽'])
 puts "Admin account created."
 
 create_replyer = User.create([email: '1@1', password: '123123', password_confirmation: '123123', is_admin: 'false',role:"replyer",description:"I am studing in Havard currently",gender:"male",school:"Havard",major:"IT",name:"Havard boy",balance:0])

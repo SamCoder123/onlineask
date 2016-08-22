@@ -14,20 +14,40 @@
       <p>问题描述：<%= @question.description %></p>
     </div>
 
-    <% @answers.each do |answer| %>
+    <% @invitated_users.each do |user| %>
       <div class="panel panel-info ">
         <div class="panel-heading">
-          <h3 class="panel-title">@email：<%= answer.user.email %></h3>
+          <h3 class="panel-title">邀请人：<%= user.name %> & 他的回答</ h3>
         </div>
-        <div class="panel-body">
-          <%= answer.content %>
-        </div>
-        <div class="total clearfix">
-          <span class="pull-right">
-            <%= show_button_base_status(@question,answer) %>
-          </span>
-        </div>
+          <% answers = user.answers.where(question_id:@question.id) %>
+          <% answers.each do |answer| %>
+          <div class="panel-body invitated_users_answer">
+            <%= answer.content %>
+          </div>
+          <% end %>
      </div>
     <% end %>
+
+    <% @answers.each do |answer| %>
+      <% if !@question.invitated_users.include?(answer.user)  %>
+        <div class="panel panel-info ">
+          <div class="panel-heading">
+            <h3 class="panel-title">回答人：<%= answer.user.name %></h3>
+          </div>
+
+          <div class="panel-body">
+            <%= answer.content %>
+          </div>
+          <div class="total clearfix">
+            <span class="pull-right">
+              <%= show_button_base_status(@question,answer) %>
+            </span>
+          </div>
+       </div>
+      <% end %>
+
+    <% end %>
+
+
   </div>
 </div>

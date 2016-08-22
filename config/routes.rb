@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+
   namespace :account do
     resources :answers
     resources :questions
@@ -27,7 +28,6 @@ Rails.application.routes.draw do
   resources :welcome_test
 
   namespace :account do
-
     resources :answers do
       member do
         post :publish_hidden
@@ -40,6 +40,10 @@ Rails.application.routes.draw do
         post :publish_hidden
         post :cancel
         post :reopen
+      end
+
+      collection do
+        get :invitated_questions
       end
     end
 
@@ -91,8 +95,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-
 
 
 
