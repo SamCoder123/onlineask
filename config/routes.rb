@@ -10,21 +10,20 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  namespace :account do
-    resources :answers
-    resources :questions
-  end
-
   root 'welcome_test#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :welcome_test
 
   namespace :account do
-
     resources :answers do
       member do
         post :publish_hidden
+      end
+
+      member do
+        post :pay_subscription
+        post :subscribe_answers
       end
     end
 
@@ -52,6 +51,7 @@ Rails.application.routes.draw do
         post :deposit_change
         get :exhibition_profile
       end
+
     end
   end
 

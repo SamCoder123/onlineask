@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :answers
 
   has_many :answer_subscriptions
-  has_many :subscribed_answers, through: :answer_subscription, source: :answer
+  has_many :subscribed_answers, through: :answer_subscriptions, source: :answer
 
   # validates :name, presence: true
   # validates :role, presence: true
@@ -44,9 +44,27 @@ class User < ApplicationRecord
     self.balance -= amount
     save
 
+    # super_admin = User.super_admin
+    # super_admin.balance += amount
+    # super_admin.save
+  end
+
+  def super_admin_bill!(amount)
     super_admin = User.super_admin
     super_admin.balance += amount
     super_admin.save
+  end
+
+  def has_subscribed_answer?(answer)
+    subscribed_answers.include?(answer)
+  end
+
+  def subscribe!(answer)
+    subscribed_answers << answer
+  end
+
+  def pay_subscription!(answer)
+
   end
 end
 
