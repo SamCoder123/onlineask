@@ -3,6 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   after_create :add_original_balance
+  has_many :questions
+  has_many :answers
+  has_many :follow_relationships
+  has_many :followees, through: :follow_relationships, source: :follow_relationship
+
+  scope :super_admin, -> { find(1) }
 
   def add_original_balance
     self.balance += 1000
@@ -13,15 +19,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :image, ImageUploader
 
-  has_many :questions
-  has_many :answers
-
-  # validates :name, presence: true
-  # validates :role, presence: true
-  # validates :gender, presence: true
-  # validates :school, presence: true
-
-  scope :super_admin, -> { find(1) }
 
   def change_to_admin!
     self.is_admin = true
@@ -45,6 +42,15 @@ class User < ApplicationRecord
     super_admin.balance += amount
     super_admin.save
   end
+
+  def already_follower?(followee)
+    follow_relationships.include?(followee)
+  end
+
+  def follow!(followee)
+    followees << followee
+  end
+
 end
 
 # == Schema Information

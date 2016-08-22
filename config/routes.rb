@@ -13,6 +13,12 @@ Rails.application.routes.draw do
   namespace :account do
     resources :answers
     resources :questions
+    resources :follows, only:[:like, :unlike] do
+      member do
+        post :like
+        post :unlike
+      end
+    end
   end
 
   root 'welcome_test#index'
@@ -85,4 +91,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+
+
+
+
 end
