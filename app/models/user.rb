@@ -3,7 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   after_create :add_original_balance
-  validates :balance, numericality: { greater_than_or_equal_to: 0}
 
   def add_original_balance
     self.balance += 1000
