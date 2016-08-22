@@ -19,10 +19,6 @@ Rails.application.routes.draw do
     resources :answers do
       member do
         post :publish_hidden
-      end
-
-      member do
-        post :pay_subscription
         post :subscribe_answers
       end
     end

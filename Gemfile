@@ -48,6 +48,7 @@ gem 'ransack'
 gem 'will_paginate'
 gem 'gravatarify'
 
+
 group :production do
   gem 'pg'
 end
@@ -58,6 +59,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'sqlite3'
+  gem 'activerecord-session_store' # 我不确定这个gem要不要放在这里
 end
 
 group :development do

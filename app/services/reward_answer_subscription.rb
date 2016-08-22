@@ -1,4 +1,4 @@
-class RewardAnswerSubscriptionPaymentService
+class RewardAnswerSubscription
   def initialize(user)
     @user = user
   end
