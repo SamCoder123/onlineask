@@ -109,6 +109,18 @@ class Account::QuestionsController < ApplicationController
     redirect_to :back
   end
 
+  # 把question的status改为close
+  def cancel
+    @question = Question.find(params[:id])
+    if @question.answers.count == 0
+      @question.close!
+      flash[:notice] = "Your question has been cancelled. Please check your account."
+    else
+      flash[:alert] = "Sorry, you can't cancel this question as it has already been answered."
+    end
+    redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question

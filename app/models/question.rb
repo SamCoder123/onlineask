@@ -15,6 +15,12 @@ class Question < ApplicationRecord
     self.is_hidden = false
     self.save
   end
+
+  def close!
+      self.status = "closed"
+      self.save
+  end
+
 end
 
 # == Schema Information
