@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         post :to_downpayment
         post :publish_hidden
         post :cancel
+        post :reopen
       end
     end
 

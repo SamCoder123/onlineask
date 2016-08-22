@@ -28,7 +28,7 @@
             <!-- <!%= link_to '我要回答', new_account_question_answer_path(question) %> -->
             <%= link_to '详情', account_question_path(question) %> |
             <%= link_to '编辑', edit_account_question_path(question) %> |
-            <%= link_to '取消提问并退款', cancel_account_question_path(question),method: :postdata, data: { confirm: 'Are you sure you want to cancel the question?' } %> |
+            <%= render_cancel_reopen(question)  %> |
             <%= link_to  "",publish_hidden_account_question_path(question), method: :post, data: { confirm: 'Are you sure you want to delete the question?' }, class:"fa fa-trash" %>
         </td>
       </tr>

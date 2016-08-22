@@ -21,6 +21,10 @@ class Question < ApplicationRecord
       self.save
   end
 
+  def reopen!
+      self.status = "open"
+      self.save
+  end
 end
 
 # == Schema Information
