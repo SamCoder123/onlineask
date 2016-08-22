@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
-  before_filter :validate_search_key, only: [:search]
+  before_action :validate_search_key, only: [:search]
 
   def index
     @questions = Question.all
