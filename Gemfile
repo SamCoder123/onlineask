@@ -37,16 +37,17 @@ gem "devise"
 
 gem "font-awesome-rails"
 
-gem "carrierwave"
-gem "mini_magick"
-gem "rmagick"
-gem "fog"
-gem "figaro"
-gem "awesome_rails_console"
-gem "annotate"
-gem "ransack"
-gem "will_paginate"
-gem "gravatarify"
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'rmagick'
+gem 'fog'
+gem 'figaro'
+gem 'awesome_rails_console'
+gem 'annotate'
+gem 'ransack'
+gem 'will_paginate'
+gem 'gravatarify'
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 group :production do
   gem "pg"

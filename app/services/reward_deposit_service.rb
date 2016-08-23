@@ -1,8 +1,8 @@
 class RewardDepositService
-  def initialize(user, invitated_user, question)
+  def initialize(user,invitated_users,question)
     @user = user
     @question = question
-    @invitated_user = invitated_user
+    @invitated_users = invitated_users
   end
 
   def perform!
@@ -10,6 +10,7 @@ class RewardDepositService
     @user.deposit_money!(200)
 
     # 被邀请的人存入关系
-    @invitated_user.invitation!(@question)
+    #@invitated_user.invitation!(@question)
+    @question.invitation!(@invitated_users)
   end
 end
