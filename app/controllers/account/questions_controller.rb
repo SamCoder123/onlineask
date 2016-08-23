@@ -57,22 +57,10 @@ class Account::QuestionsController < ApplicationController
 
     if @question.status != "closed"
       # 关闭问题
-      Question.transaction do
-        User.transaction do
-          # @question.status = "closed"
-          # @question.save
-          #
-          # #分钱 封装到 reward_best_answer.rb 的service中
-          # user = @answer.user
-          # user.balance += 150
-          # user.save
-          #
-          # @admin = User.super_admin
-          # @admin.balance -= 150
-          # @admin.save
-          RewardBestAnswer.new(@answer.user, @question).perform!
-        end
-      end
+      # Question.transaction do
+      #   User.transaction do  加事务的，之后再考虑
+      RewardBestAnswer.new(@answer.user, @question).perform!
+
       flash[:notice] = "悬赏成功！"
     else
       flash[:alert] = "此问题已经关闭！"
