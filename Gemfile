@@ -47,6 +47,7 @@ gem 'annotate'
 gem 'ransack'
 gem 'will_paginate'
 gem 'gravatarify'
+gem 'acts-as-taggable-on', '~> 4.0'
 
 group :production do
   gem 'pg'
