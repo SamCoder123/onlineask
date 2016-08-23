@@ -24,6 +24,9 @@ class User < ApplicationRecord
   has_many :question_invitations
   has_many :invitated_questions, through: :question_invitations, source: :question
 
+  has_many :answer_subscriptions
+  has_many :subscribed_answers, through: :answer_subscriptions, source: :answer
+
   # validates :name, presence: true
   # validates :role, presence: true
   # validates :gender, presence: true
@@ -48,10 +51,30 @@ class User < ApplicationRecord
   def deposit_money!(amount)
     self.balance -= amount
     save
+  end
 
+  def answer_owner_reward!(amount)
+    self.balance += amount
+    save
+  end
+
+  def question_owner_reward!(amount)
+    self.balance += amount
+    save
+  end
+
+  def super_admin_bill!(amount)
     super_admin = User.super_admin
     super_admin.balance += amount
     super_admin.save
+  end
+
+  def has_subscribed_answer?(answer)
+    subscribed_answers.include?(answer)
+  end
+
+  def subscribe!(answer)
+    subscribed_answers << answer
   end
 
   def already_follower?(followee)

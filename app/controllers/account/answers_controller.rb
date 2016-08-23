@@ -62,6 +62,26 @@ class Account::AnswersController < ApplicationController
     redirect_to :back
   end
 
+  def subscribe_answers
+    @answer = Answer.find(params[:id])
+    if @answer.user == current_user
+      flash[:alert] = "不能偷听自己的回答！"
+      return
+    end
+    if current_user.has_subscribed_answer?(@answer)
+      flash[:alert] = "您已经购买过答案，可以直接偷听"
+      redirect_to my_subscriptions_account_user_path(current_user)
+      return
+    end
+    if current_user.subscribe!(@answer)
+      RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user).perform!
+      flash[:notice] = "可以偷听答案了！"
+    else
+      flash[:alert] = "偷听不成功"
+    end
+    redirect_to :back
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

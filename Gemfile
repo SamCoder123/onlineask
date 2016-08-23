@@ -47,6 +47,7 @@ gem 'annotate'
 gem 'ransack'
 gem 'will_paginate'
 gem 'gravatarify'
+gem 'to_words'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 group :production do
@@ -55,10 +56,11 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platform: :mri
-  gem "pry"
-  gem "pry-nav"
-  gem "sqlite3"
+  gem 'byebug', platform: :mri
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'sqlite3'
+  gem 'activerecord-session_store' # 我不确定这个gem要不要放在这里
   gem "rubocop"
 end
 
