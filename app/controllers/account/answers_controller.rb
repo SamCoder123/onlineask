@@ -74,7 +74,6 @@ class Account::AnswersController < ApplicationController
       return
     end
     if current_user.subscribe!(@answer)
-      binding.pry
       RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user).perform!
       flash[:notice] = "可以偷听答案了！"
     else
