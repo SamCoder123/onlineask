@@ -1,5 +1,5 @@
 class Account::QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: %i(show edit update destroy)
   before_action :authenticate_user!
 
   # GET /questions
@@ -13,63 +13,32 @@ class Account::QuestionsController < ApplicationController
   def show
     @answers = @question.answers
     @invitated_users = @question.invitated_users
-
-  end
-
-  # GET
-  def new
-    @question = Question.new
   end
 
   # GET
   def edit
   end
 
-  # POST
-  # POST
-  def create
-    @question = Question.new(question_params)
-    @question.user = current_user
-
-    Question.transaction do
-      User.transaction do
-        if @question.save
-          #问题保存成功后 扣除用户钱到超级管理员
-          save_user
-
-          redirect_to account_questions_path, notice: '提问成功！'
-        else
-          render :new
-        end
-     end
-   end
-  end
-
   # PATCH/PUT
   # PATCH/PUT
   def update
     if @question.update(question_params)
-      redirect_to account_questions_path, notice: '提问修改成功！'
+      redirect_to account_questions_path, notice: "提问修改成功！"
     else
       render :edit
     end
   end
 
-  # def destroy
-  #   @question.destroy
-  #
-  #   redirect_to account_questions_path, notice: '提问成功删除！'
-  # end
-
   def publish_hidden
     @question = Question.find(params[:id])
     is_hidden = params[:is_hidden]
 
-    if is_hidden=="publish"
-      @question.is_hidden = false
-    else
-      @question.is_hidden = true
-    end
+    @question.is_hidden =
+      if is_hidden == "publish"
+        false
+      else
+        true
+      end
 
     if @question.save
       flash[:notice] = "操作成功！"
@@ -80,29 +49,18 @@ class Account::QuestionsController < ApplicationController
     redirect_to :back
   end
 
-  #赏他  分钱给平台和回答者
+  # 赏他  分钱给平台和回答者
   def to_downpayment
-    #接收参数并查询
+    # 接收参数并查询
     @question = Question.find(params[:id])
     @answer = Answer.find(params[:answer_id])
 
     if @question.status != "closed"
-      #关闭问题
-      Question.transaction do
-        User.transaction do
-          @question.status = "closed"
-          @question.save
+      # 关闭问题
+      # Question.transaction do
+      #   User.transaction do  加事务的，之后再考虑
+      RewardBestAnswer.new(@answer.user, @question).perform!
 
-          #分钱
-          user = @answer.user
-          user.balance += 150
-          user.save
-
-          @admin = User.super_admin
-          @admin.balance -= 150
-          @admin.save
-        end
-      end
       flash[:notice] = "悬赏成功！"
     else
       flash[:alert] = "此问题已经关闭！"
@@ -132,14 +90,15 @@ class Account::QuestionsController < ApplicationController
   # 把question的status改为open,并扣款
   def reopen
     @question = Question.find(params[:id])
-      @question.reopen!
-      current_user.balance -= 200
-      current_user.save
-      flash[:notice] = "Your question has been re-opened."
-      redirect_to :back
+    @question.reopen!
+    current_user.balance -= 200
+    current_user.save
+    flash[:notice] = "Your question has been re-opened."
+    redirect_to :back
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_question
     @question = Question.find(params[:id])
@@ -150,12 +109,4 @@ class Account::QuestionsController < ApplicationController
     params.require(:question).permit(:title, :tag_list, :description)
   end
 
-  def save_user
-    current_user.balance -= 200
-    current_user.save
-
-    super_admin = User.super_admin
-    super_admin.balance += 200
-    super_admin.save
-  end
 end

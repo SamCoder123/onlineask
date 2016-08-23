@@ -1,0 +1,3 @@
+<% if question.status=="open" %>
+<%= link_to('赏他', to_downpayment_account_question_path(question,answer_id:answer.id),method: :post,class:"btn btn-xs btn-danger",data: { confirm: "确定要赏他么?" })%>
+<% end %>

@@ -23,6 +23,12 @@
           <% answers.each do |answer| %>
           <div class="panel-body invitated_users_answer">
             <%= answer.content %>
+
+            <div class="total clearfix">
+              <span class="pull-right">
+                <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
+              </span>
+            </div>
           </div>
           <% end %>
      </div>
@@ -40,7 +46,7 @@
           </div>
           <div class="total clearfix">
             <span class="pull-right">
-              <%= show_button_base_status(@question,answer) %>
+              <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
             </span>
           </div>
        </div>

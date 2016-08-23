@@ -20,11 +20,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :image, ImageUploader
 
-
   has_many :questions
   has_many :answers
   has_many :question_invitations
   has_many :invitated_questions, through: :question_invitations, source: :question
+
+  has_many :answer_subscriptions
+  has_many :subscribed_answers, through: :answer_subscriptions, source: :answer
 
   # validates :name, presence: true
   # validates :role, presence: true
@@ -32,7 +34,6 @@ class User < ApplicationRecord
   # validates :school, presence: true
 
   scope :super_admin, -> { find(1) }
-
 
   def change_to_admin!
     self.is_admin = true
@@ -51,12 +52,31 @@ class User < ApplicationRecord
   def deposit_money!(amount)
     self.balance -= amount
     save
+  end
 
+  def answer_owner_reward!(amount)
+    self.balance += amount
+    save
+  end
+
+  def question_owner_reward!(amount)
+    self.balance += amount
+    save
+  end
+
+  def super_admin_bill!(amount)
     super_admin = User.super_admin
     super_admin.balance += amount
     super_admin.save
   end
 
+  def has_subscribed_answer?(answer)
+    subscribed_answers.include?(answer)
+  end
+
+  def subscribe!(answer)
+    subscribed_answers << answer
+  end
 
   def already_follower?(followee)
     followees.include?(followee)
@@ -73,7 +93,6 @@ class User < ApplicationRecord
   def invitation!(question)
     invitated_questions << question
   end
-
 end
 
 # == Schema Information

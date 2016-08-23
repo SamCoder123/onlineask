@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [ :create, :new, :edit, :update, :destroy]
+  before_action :set_answer, only: %i(show edit update destroy)
+  before_action :authenticate_user!, only: %i(create new edit update destroy)
 
   def new
     @answer = Answer.new
@@ -18,7 +18,7 @@ class AnswersController < ApplicationController
     @answer.question = @question
 
     if @answer.save
-      redirect_to root_path, notice: '回答已发送！'
+      redirect_to root_path, notice: "回答已发送！"
     else
       render :new
     end
@@ -26,7 +26,7 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update(answer_params)
-      redirect_to account_answers_path, notice: '回答已更新！'
+      redirect_to account_answers_path, notice: "回答已更新！"
     else
       render :edit
     end
@@ -43,5 +43,4 @@ class AnswersController < ApplicationController
   def answer_params
     params.require(:answer).permit(:content)
   end
-  
 end
