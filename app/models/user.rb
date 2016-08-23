@@ -53,26 +53,31 @@ class User < ApplicationRecord
     save
   end
 
+  # 给答主钱
   def answer_owner_reward!(amount)
     self.balance += amount
     save
   end
 
+  # 给问题主人钱
   def question_owner_reward!(amount)
     self.balance += amount
     save
   end
 
+  # 给管理员钱
   def super_admin_bill!(amount)
     super_admin = User.super_admin
     super_admin.balance += amount
     super_admin.save
   end
 
+  # 是否已经偷听问题
   def has_subscribed_answer?(answer)
     subscribed_answers.include?(answer)
   end
 
+  # 偷听问题，把问题加入偷听列表
   def subscribe!(answer)
     subscribed_answers << answer
   end

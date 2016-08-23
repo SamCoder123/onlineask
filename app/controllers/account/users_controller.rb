@@ -1,6 +1,9 @@
 class Account::UsersController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+
+  end
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
   def new_profile
     @user = current_user
