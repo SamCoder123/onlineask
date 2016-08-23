@@ -69,7 +69,7 @@ class Account::QuestionsController < ApplicationController
         false
       else
         true
-                               end
+      end
 
     if @question.save
       flash[:notice] = "操作成功！"

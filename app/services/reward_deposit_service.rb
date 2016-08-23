@@ -1,5 +1,5 @@
 class RewardDepositService
-  def initialize(user,invitated_user,question)
+  def initialize(user, invitated_user, question)
     @user = user
     @question = question
     @invitated_user = invitated_user
@@ -11,6 +11,5 @@ class RewardDepositService
 
     # 被邀请的人存入关系
     @invitated_user.invitation!(@question)
-
-   end
- end
+  end
+end
