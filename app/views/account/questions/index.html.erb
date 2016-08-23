@@ -25,7 +25,6 @@
         <td><%= question.answers.count %></td>
         <td><%= account_question_status(question.status) %></td>
         <td colspan="3">
-            <!-- <!%= link_to '我要回答', new_account_question_answer_path(question) %> -->
             <%= link_to '详情', account_question_path(question) %> |
             <%= link_to '编辑', edit_account_question_path(question) %> |
             <%= render_cancel_reopen(question)  %> |
@@ -39,10 +38,7 @@
 <br>
 
   <div class="total clearfix">
-    <!-- <!%= link_to '我要提问', new_account_question_path %> -->
 
-    <!-- <span class="pull-right">
-    </span> -->
   </div>
 
 

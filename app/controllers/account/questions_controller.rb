@@ -16,32 +16,7 @@ class Account::QuestionsController < ApplicationController
   end
 
   # GET
-  def new
-    @question = Question.new
-  end
-
-  # GET
   def edit
-  end
-
-  # POST
-  # POST
-  def create
-    @question = Question.new(question_params)
-    @question.user = current_user
-
-    Question.transaction do
-      User.transaction do
-        if @question.save
-          # 问题保存成功后 扣除用户钱到超级管理员
-          save_user
-
-          redirect_to account_questions_path, notice: "提问成功！"
-        else
-          render :new
-        end
-      end
-    end
   end
 
   # PATCH/PUT
@@ -53,12 +28,6 @@ class Account::QuestionsController < ApplicationController
       render :edit
     end
   end
-
-  # def destroy
-  #   @question.destroy
-  #
-  #   redirect_to account_questions_path, notice: '提问成功删除！'
-  # end
 
   def publish_hidden
     @question = Question.find(params[:id])
@@ -152,12 +121,4 @@ class Account::QuestionsController < ApplicationController
     params.require(:question).permit(:title, :description)
   end
 
-  def save_user
-    current_user.balance -= 200
-    current_user.save
-
-    super_admin = User.super_admin
-    super_admin.balance += 200
-    super_admin.save
-  end
 end
