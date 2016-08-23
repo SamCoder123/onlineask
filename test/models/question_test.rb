@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class QuestionTest < ActiveSupport::TestCase
   # test "the truth" do
@@ -19,5 +19,5 @@ end
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  downpayment :float            default(0.0)
-#  status      :string
+#  status      :string           default("open")
 #

@@ -1,5 +1,5 @@
 class RewardDepositService
-  def initialize(user,invitated_user,question)
+  def initialize(user, invitated_user, question)
     @user = user
     @question = question
     @invitated_user = invitated_user

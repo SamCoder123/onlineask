@@ -19,7 +19,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :image, ImageUploader
 
-
   has_many :questions
   has_many :answers
   has_many :question_invitations
@@ -34,7 +33,6 @@ class User < ApplicationRecord
   # validates :school, presence: true
 
   scope :super_admin, -> { find(1) }
-
 
   def change_to_admin!
     self.is_admin = true
@@ -94,7 +92,6 @@ class User < ApplicationRecord
   def invitation!(question)
     invitated_questions << question
   end
-
 end
 
 # == Schema Information

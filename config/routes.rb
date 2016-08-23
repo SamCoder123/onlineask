@@ -1,29 +1,22 @@
 Rails.application.routes.draw do
+  root "welcome_test#index"
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :welcome_test
+
+  devise_for :users
 
   resources :questions do
     resources :answers
-
     collection do
       get :search
     end
   end
 
-  devise_for :users
-
-  root 'welcome_test#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  resources :welcome_test
 
 # namespace for account ===========================
   namespace :account do
-
-    resources :follows, only:[:like, :unlike] do
-      member do
-        post :like
-        post :unlike
-      end
-    end
 
     resources :answers do
       member do
@@ -39,7 +32,6 @@ Rails.application.routes.draw do
         post :cancel
         post :reopen
       end
-
       collection do
         get :invitated_questions
       end
@@ -61,7 +53,13 @@ Rails.application.routes.draw do
         get :exhibition_profile
         get :my_subscriptions
       end
+    end
 
+    resources :follows, only: %i(like unlike) do
+      member do
+        post :like
+        post :unlike
+      end
     end
   end
 
@@ -94,5 +92,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
 end

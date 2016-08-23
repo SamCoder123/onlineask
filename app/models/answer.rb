@@ -9,12 +9,12 @@ class Answer < ApplicationRecord
 
   def hide!
     self.is_hidden = true
-    self.save
+    save
   end
 
   def publish!
     self.is_hidden = false
-    self.save
+    save
   end
 end
 

@@ -11,10 +11,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  downpayment :float            default(0.0)
-#  status      :string
+#  status      :string           default("open")
 #
 
-require 'test_helper'
+require "test_helper"
 
 class QuestionsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -32,7 +32,7 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create question" do
-    assert_difference('Question.count') do
+    assert_difference("Question.count") do
       post questions_url, params: { question: { description: @question.description, is_hidden: @question.is_hidden, title: @question.title, user_id: @question.user_id, vote: @question.vote } }
     end
 
@@ -55,7 +55,7 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy question" do
-    assert_difference('Question.count', -1) do
+    assert_difference("Question.count", -1) do
       delete question_url(@question)
     end
 

@@ -1,5 +1,5 @@
 class Account::AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :set_answer, only: %i(show edit update destroy)
   before_action :authenticate_user!
 
   def index
@@ -24,16 +24,15 @@ class Account::AnswersController < ApplicationController
     @answer.question = @question
 
     if @answer.save
-      redirect_to account_answers_path, notice: '回答已发送！'
+      redirect_to account_answers_path, notice: "回答已发送！"
     else
       render :new
     end
-
   end
 
   def update
     if @answer.update(answer_params)
-      redirect_to account_answers_path, notice: '回答已更新！'
+      redirect_to account_answers_path, notice: "回答已更新！"
     else
       render :edit
     end
@@ -47,11 +46,12 @@ class Account::AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     is_hidden = params[:is_hidden]
 
-    if is_hidden=="publish"
-      @answer.is_hidden = false
-    else
-      @answer.is_hidden = true
-    end
+    @answer.is_hidden =
+      if is_hidden == "publish"
+        false
+      else
+        true
+                             end
 
     if @answer.save
       flash[:notice] = "操作成功！"
@@ -83,13 +83,14 @@ class Account::AnswersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_answer
-      @answer = Answer.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def answer_params
-      params.require(:answer).permit(:content)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_answer
+    @answer = Answer.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def answer_params
+    params.require(:answer).permit(:content)
+  end
 end

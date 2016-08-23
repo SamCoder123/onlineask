@@ -4,7 +4,7 @@ class Admin::QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
-    render layout: 'admin'
+    render layout: "admin"
   end
 
   def show
