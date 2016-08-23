@@ -15,12 +15,15 @@
             <p>回答人数：<%= question.answers.count %></p>
             <hr>
             <div>
+              <div class="pull-left">
+                标签: <%= render question.tags %>
+              </div>
               <div class="pull-right">
                 悬赏金额: <%= question.downpayment %>
                 <%= link_to '问题详情', question, class: "btn btn-default" %>
                 <%= link_to '我要回答', new_question_answer_path(question), class: "btn btn-danger" %>
               </div>
-          </div>
+            </div>
           </div>
         </div>
       </div>

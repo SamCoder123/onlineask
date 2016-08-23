@@ -47,6 +47,7 @@ gem 'annotate'
 gem 'ransack'
 gem 'will_paginate'
 gem 'gravatarify'
+gem 'acts-as-taggable-on', '~> 4.0'
 gem 'to_words'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 

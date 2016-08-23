@@ -10,13 +10,22 @@
 
     <div class="panel-body">
       <p>描述：<%= @question.description %></p>
-    </div>
+      <br>
+      <div class="pull-left">
+        标签：<%= render @question.tags %>
+      </div>
+
       <div class="total clearfix">
         <span class="pull-right">
           <%= link_to '详情', @question %> |
           <%= link_to '返回', questions_path %>
         </span>
       </div>
+   </div>
+
+
+
+
     </div>
 
     <div class="panel panel-default ">
