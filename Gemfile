@@ -1,4 +1,4 @@
-source 'https://ruby.taobao.org'
+source 'https://gems.ruby-china.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
@@ -58,6 +58,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'sqlite3'
+  gem 'rubocop'
 end
 
 group :development do
