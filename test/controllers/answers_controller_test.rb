@@ -11,7 +11,7 @@
 #  updated_at  :datetime         not null
 #
 
-require 'test_helper'
+require "test_helper"
 
 class AnswersControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -29,7 +29,7 @@ class AnswersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create answer" do
-    assert_difference('Answer.count') do
+    assert_difference("Answer.count") do
       post answers_url, params: { answer: { content: @answer.content, is_hidden: @answer.is_hidden, question_id: @answer.question_id, user_id: @answer.user_id } }
     end
 
@@ -52,7 +52,7 @@ class AnswersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy answer" do
-    assert_difference('Answer.count', -1) do
+    assert_difference("Answer.count", -1) do
       delete answer_url(@answer)
     end
 
