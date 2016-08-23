@@ -1,4 +1,13 @@
 <ul class="nav nav-pills nav-stacked" style="max-width: 300px; padding-top:20px;">
     <li class="active"><%= link_to("立即提问",new_question_path) %> </li>
-    <li class="active"><%= link_to("添加关注","#") %> </li>
+    <li class="active">
+      <%= link_to(like_account_follow_path(@user),method: :post) do %>
+        关注
+        <% if !current_user.already_follower?(@user) %>
+          <i class="fa fa-heart" aria-hidden="true"></i>
+        <% else %>
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
+    </li>
 </ul>

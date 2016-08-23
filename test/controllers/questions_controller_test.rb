@@ -11,7 +11,8 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  downpayment :float            default(0.0)
-#  status      :string
+#  status      :string           default("open")
+#  tag         :string
 #
 
 require 'test_helper'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822092348) do
+ActiveRecord::Schema.define(version: 20160823131818) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content"
@@ -21,11 +21,25 @@ ActiveRecord::Schema.define(version: 20160822092348) do
     t.datetime "updated_at",                  null: false
   end
 
+  create_table "follow_relationships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "follower_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "images", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "question_invitations", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "questions", force: :cascade do |t|
@@ -34,10 +48,11 @@ ActiveRecord::Schema.define(version: 20160822092348) do
     t.integer  "vote"
     t.boolean  "is_hidden",   default: false
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.float    "downpayment", default: 0.0
-    t.string   "status"
+    t.string   "status",      default: "open"
+    t.string   "tag"
   end
 
   create_table "taggings", force: :cascade do |t|

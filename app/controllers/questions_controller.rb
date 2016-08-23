@@ -21,11 +21,13 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     @question.status = 'open'
+    #binding.pry
 
     if @question.save
-
       # 保存用户 从平台扣钱150转给回答者
-      RewardDepositService.new(current_user).perform!
+      # 把邀请人和问题存入关系表
+      @invitated_user = User.find(params[:invited_user_id])
+      RewardDepositService.new(current_user,@invitated_user,@question).perform!
 
       flash[:notice] = '提问成功！'
       redirect_to root_path
