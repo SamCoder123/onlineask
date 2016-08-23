@@ -90,17 +90,18 @@ class Account::QuestionsController < ApplicationController
       #关闭问题
       Question.transaction do
         User.transaction do
-          @question.status = "closed"
-          @question.save
-
-          #分钱
-          user = @answer.user
-          user.balance += 150
-          user.save
-
-          @admin = User.super_admin
-          @admin.balance -= 150
-          @admin.save
+          # @question.status = "closed"
+          # @question.save
+          #
+          # #分钱 封装到 reward_best_answer.rb 的service中
+          # user = @answer.user
+          # user.balance += 150
+          # user.save
+          #
+          # @admin = User.super_admin
+          # @admin.balance -= 150
+          # @admin.save
+          RewardBestAnswer.new(@answer.user, @question).perform!
         end
       end
       flash[:notice] = "悬赏成功！"
@@ -114,7 +115,7 @@ class Account::QuestionsController < ApplicationController
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
   end
-  
+
   # 把question的status改为close,并退款
   def cancel
     @question = Question.find(params[:id])

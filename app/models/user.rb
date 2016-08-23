@@ -53,10 +53,16 @@ class User < ApplicationRecord
   def deposit_money!(amount)
     self.balance -= amount
     save
+  end
 
-    # super_admin = User.super_admin
-    # super_admin.balance += amount
-    # super_admin.save
+  def answer_owner_reward!(amount)
+    self.balance += amount
+    save
+  end
+
+  def question_owner_reward!(amount)
+    self.balance += amount
+    save
   end
 
   def super_admin_bill!(amount)
