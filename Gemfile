@@ -47,6 +47,7 @@ gem 'annotate'
 gem 'ransack'
 gem 'will_paginate'
 gem 'gravatarify'
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 group :production do
   gem 'pg'

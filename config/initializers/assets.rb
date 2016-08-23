@@ -13,3 +13,5 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(welcome_test.css)
 
 Rails.application.config.assets.precompile += %w(admin/admins.css)
+
+Rails.application.config.assets.precompile += %w( questions.js )

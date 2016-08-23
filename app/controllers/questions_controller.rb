@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    @users = User.all
     @question = Question.new
   end
 
@@ -26,12 +27,16 @@ class QuestionsController < ApplicationController
     if @question.save
       # 保存用户 从平台扣钱150转给回答者
       # 把邀请人和问题存入关系表
-      @invitated_user = User.find(params[:invited_user_id])
-      RewardDepositService.new(current_user,@invitated_user,@question).perform!
+
+      @invitated_users = User.where(id: params[:filters].split(","))
+
+      # binding.pry
+      RewardDepositService.new(current_user,@invitated_users,@question).perform!
 
       flash[:notice] = '提问成功！'
       redirect_to root_path
     else
+      @users = User.all
       render :new
     end
   end

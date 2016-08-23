@@ -31,6 +31,10 @@ class Question < ApplicationRecord
       self.status = "open"
       self.save
   end
+
+  def invitation!(users)
+    invitated_users << users
+  end
 end
 
 # == Schema Information
