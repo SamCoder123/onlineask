@@ -64,15 +64,13 @@ class Account::AnswersController < ApplicationController
 
   def subscribe_answers
     @answer = Answer.find(params[:id])
-    if flash[:alert] =  current_user.subscribe!(@answer)
+    if current_user.subscribe!(@answer)
       pay_answers
-      flash[:notice] = "可以偷听答案#{@answer.content}了！"
-      # redirect_to :back
+      flash[:notice] = "可以偷听答案了！"
     else
       flash[:alert] = "偷听不成功"
-      # redirect_to :back
     end
-    redirect_to
+    redirect_to :back
   end
 
   def pay_answers

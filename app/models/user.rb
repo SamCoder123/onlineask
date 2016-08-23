@@ -3,18 +3,27 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   after_create :add_original_balance
+  has_many :questions
+  has_many :answers
+  has_many :follow_relationships
+  has_many :followees, through: :follow_relationships, source: :follow_relationship
+
+  scope :super_admin, -> { find(1) }
 
   def add_original_balance
     self.balance += 1000
-    self.save
+    save
   end
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :image, ImageUploader
 
+
   has_many :questions
   has_many :answers
+  has_many :question_invitations
+  has_many :invitated_questions, through: :question_invitations, source: :question
 
   has_many :answer_subscriptions
   has_many :subscribed_answers, through: :answer_subscriptions, source: :answer
@@ -26,14 +35,15 @@ class User < ApplicationRecord
 
   scope :super_admin, -> { find(1) }
 
+
   def change_to_admin!
     self.is_admin = true
-    self.save
+    save
   end
 
   def change_to_user!
     self.is_admin = false
-    self.save
+    save
   end
 
   def admin?
@@ -63,9 +73,22 @@ class User < ApplicationRecord
     subscribed_answers << answer
   end
 
-  def pay_subscription!(answer)
-
+  def already_follower?(followee)
+    followees.include?(followee)
   end
+
+  def follow!(followee)
+    followees << followee
+  end
+
+  def stop_follow!(followee)
+    followees.delete(followee)
+  end
+
+  def invitation!(question)
+    invitated_questions << question
+  end
+
 end
 
 # == Schema Information

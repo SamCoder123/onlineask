@@ -16,6 +16,14 @@ Rails.application.routes.draw do
   resources :welcome_test
 
   namespace :account do
+
+    resources :follows, only:[:like, :unlike] do
+      member do
+        post :like
+        post :unlike
+      end
+    end
+
     resources :answers do
       member do
         post :publish_hidden
@@ -27,6 +35,12 @@ Rails.application.routes.draw do
       member do
         post :to_downpayment
         post :publish_hidden
+        post :cancel
+        post :reopen
+      end
+
+      collection do
+        get :invitated_questions
       end
     end
 
@@ -38,9 +52,7 @@ Rails.application.routes.draw do
         get :edit_profile
         put :update_profile
         get :show_profile
-      end
       # add withdraw actions
-      member do
         get :withdraw_edit
         post :withdraw_change
         get :deposit_edit
@@ -51,6 +63,7 @@ Rails.application.routes.draw do
     end
   end
 
+# namespace for admin
   namespace :admin do
     resources :users do
       member do
@@ -79,4 +92,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
+
+
 end
