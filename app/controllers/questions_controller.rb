@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
+  before_action :set_question, only: %i(show edit update destroy)
+  before_action :authenticate_user!, only: %i(create new edit update destroy)
   before_action :validate_search_key, only: [:search]
 
   def index
@@ -20,16 +20,16 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user = current_user
-    @question.status = 'open'
-    #binding.pry
+    @question.status = "open"
+    # binding.pry
 
     if @question.save
       # 保存用户 从平台扣钱150转给回答者
       # 把邀请人和问题存入关系表
       @invitated_user = User.find(params[:invited_user_id])
-      RewardDepositService.new(current_user,@invitated_user,@question).perform!
+      RewardDepositService.new(current_user, @invitated_user, @question).perform!
 
-      flash[:notice] = '提问成功！'
+      flash[:notice] = "提问成功！"
       redirect_to root_path
     else
       render :new
@@ -38,7 +38,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      flash[:notice] = '提问修改成功！'
+      flash[:notice] = "提问修改成功！"
       redirect_to questions_path
     else
       render :edit
@@ -47,20 +47,20 @@ class QuestionsController < ApplicationController
 
   def search
     if @query_string.present?
-      #binding.pry
+      # binding.pry
       search_result = Question.ransack(@search_criteria).result(distinct: true).includes(:answers)
-      @questions = search_result.paginate(page: params[:page], per_page:2)
+      @questions = search_result.paginate(page: params[:page], per_page: 2)
 
       user_search_result = User.ransack(@user_search_criteria).result(distinct: true)
-      @users = user_search_result.paginate(page: params[:page], per_page:2)
-      #set_page_title "搜寻 #{@query_string}"
+      @users = user_search_result.paginate(page: params[:page], per_page: 2)
+      # set_page_title "搜寻 #{@query_string}"
     end
   end
 
   protected
 
   def validate_search_key
-    @query_string = params[:query_string].gsub(/\\|\'|\/|\?/, '') if params[:query_string].present?
+    @query_string = params[:query_string].gsub(/\\|\'|\/|\?/, "") if params[:query_string].present?
     @search_criteria = search_criteria(@query_string)
     @user_search_criteria = user_search_criteria(@query_string)
   end
