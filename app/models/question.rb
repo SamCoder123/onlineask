@@ -4,8 +4,6 @@ class Question < ApplicationRecord
 
   # status 字段 有两种状态 open closed
 
-  attr_accessible :tag_list
-  acts_as_taggable_on
 
   scope :published, -> { where(is_hidden:false) }
 
