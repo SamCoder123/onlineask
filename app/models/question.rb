@@ -23,13 +23,13 @@ class Question < ApplicationRecord
   end
 
   def close!
-      self.status = "closed"
-      self.save
+    self.status = "closed"
+    save
   end
 
   def reopen!
-      self.status = "open"
-      self.save
+    self.status = "open"
+    save
   end
 
   def invitation!(users)

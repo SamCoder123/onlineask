@@ -12,6 +12,5 @@ class RewardDepositService
     # 被邀请的人存入关系
     #@invitated_user.invitation!(@question)
     @question.invitation!(@invitated_users)
-
-   end
- end
+  end
+end

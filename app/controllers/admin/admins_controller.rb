@@ -1,7 +1,7 @@
 class Admin::AdminsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_is_admin
-  layout 'admin'
+  layout "admin"
 
   def index
     @questions = Question.all
@@ -10,7 +10,7 @@ class Admin::AdminsController < ApplicationController
   end
 
   def questions_bill
-    @open_questions = Question.where(status: 'open')
-    @closed_questions = Question.where(status: 'closed')
+    @open_questions = Question.where(status: "open")
+    @closed_questions = Question.where(status: "closed")
   end
 end
