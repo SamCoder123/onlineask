@@ -4,6 +4,10 @@ class Question < ApplicationRecord
   has_many :question_invitations
   has_many :invitated_users, through: :question_invitations, source: :user
 
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :downpayment, presence: true
+
   # status 字段 有两种状态 open closed
 
   scope :published, -> { where(is_hidden: false) }
@@ -42,5 +46,5 @@ end
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  downpayment :float            default(0.0)
-#  status      :string
+#  status      :string           default("open")
 #
