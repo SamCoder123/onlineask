@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822070850) do
+ActiveRecord::Schema.define(version: 20160823022356) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content"
@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(version: 20160822070850) do
     t.integer  "vote"
     t.boolean  "is_hidden",   default: false
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.float    "downpayment", default: 0.0
-    t.string   "status"
+    t.string   "status",      default: "open"
   end
 
   create_table "users", force: :cascade do |t|
