@@ -47,6 +47,7 @@ gem 'annotate'
 gem 'ransack'
 gem 'will_paginate'
 gem 'gravatarify'
+gem 'to_words'
 
 
 group :production do

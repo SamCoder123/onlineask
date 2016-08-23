@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :welcome_test
 
+# namespace for account ===========================
   namespace :account do
 
     resources :follows, only:[:like, :unlike] do
@@ -58,12 +59,13 @@ Rails.application.routes.draw do
         get :deposit_edit
         post :deposit_change
         get :exhibition_profile
+        get :my_subscriptions
       end
 
     end
   end
 
-# namespace for admin
+# namespace for admin ===========================
   namespace :admin do
     resources :users do
       member do
@@ -92,7 +94,5 @@ Rails.application.routes.draw do
       end
     end
   end
-
-
 
 end

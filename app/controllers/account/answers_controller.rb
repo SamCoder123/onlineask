@@ -64,6 +64,11 @@ class Account::AnswersController < ApplicationController
 
   def subscribe_answers
     @answer = Answer.find(params[:id])
+    if current_user.has_subscribed_answer?(@answer)
+      flash[:alert] = "您已经购买过答案，可以直接偷听"
+      redirect_to my_subscriptions_account_user_path(current_user)
+      return
+    end
     if current_user.subscribe!(@answer)
       pay_answers
       flash[:notice] = "可以偷听答案了！"
@@ -71,10 +76,6 @@ class Account::AnswersController < ApplicationController
       flash[:alert] = "偷听不成功"
     end
     redirect_to :back
-  end
-
-  def pay_answers
-    RewardAnswerSubscription.new(current_user).perform!
   end
 
   private
@@ -86,5 +87,9 @@ class Account::AnswersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
       params.require(:answer).permit(:content)
+    end
+
+    def pay_answers
+      RewardAnswerSubscription.new(current_user).perform!
     end
 end
