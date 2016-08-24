@@ -31,6 +31,8 @@ class QuestionsController < ApplicationController
 
       RewardDepositService.new.perform!(current_user,@invitated_users,@question,200)
 
+      NotificationService.new(@invitated_users.first,current_user,@question).send_notification!
+
       flash[:notice] = "提问成功！"
       redirect_to root_path
     else
