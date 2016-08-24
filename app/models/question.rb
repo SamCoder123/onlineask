@@ -1,16 +1,20 @@
 class Question < ApplicationRecord
   belongs_to :user
+  has_many :tags
   has_many :answers
   has_many :question_invitations
   has_many :invitated_users, through: :question_invitations, source: :user
 
   validates :title, presence: true
   validates :description, presence: true
+  validates :tag_list, presence: true
   validates :downpayment, presence: true
 
   # status 字段 有两种状态 open closed
 
   scope :published, -> { where(is_hidden: false) }
+
+  acts_as_taggable
 
   def hide!
     self.is_hidden = true
@@ -51,4 +55,5 @@ end
 #  updated_at  :datetime         not null
 #  downpayment :float            default(0.0)
 #  status      :string           default("open")
+#  tag         :string
 #

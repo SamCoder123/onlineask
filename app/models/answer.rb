@@ -2,7 +2,7 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
 
-  has_many :answer_subscription
+  has_many :answer_subscriptions
   has_many :subscribed_users, through: :answer_subscriptions, source: :user
 
   # answer_status 字段 有3种状态 pending best_answer unchosen

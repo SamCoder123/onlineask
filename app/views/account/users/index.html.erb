@@ -25,7 +25,7 @@
             我提过的问题
           </td>
           <td>
-            已提出<%= current_user.questions.published.count %>个问题，<%= current_user.questions.published.where(status: "closed").count %>个已关闭，<%= current_user.questions.published.where(status: "open").count %>个开放
+            已提出<%= @questions.count %>个问题，<%= @questions.where(status: "closed").count %>个已关闭，<%= @questions.where(status: "open").count %>个开放
             <%= link_to("查看", account_questions_path(current_user), class: "btn btn-primary") %>
           </td>
         </tr>
@@ -34,7 +34,8 @@
             我写过的答案
           </td>
           <td>
-            已回答<%= current_user.answers.published.count %>个问题，<%#= current_user.answers.published.where()count %>个被选为最佳，个被偷听，个被点赞
+            已回答<%= @answers.count %>个问题，<%= @answers.where(answer_status: "best_answer").count %>个被选为最佳，<%= @answer_subscriptions.count %>个被偷听，个被点赞
+            <%= link_to("查看", account_answers_path, class: "btn btn-primary") %>
           </td>
         </tr>
         <tr>

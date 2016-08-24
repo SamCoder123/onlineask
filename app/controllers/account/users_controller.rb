@@ -2,7 +2,9 @@ class Account::UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-
+    @questions = current_user.questions.published
+    @answers = current_user.answers.published
+    @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
   end
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
   def new_profile

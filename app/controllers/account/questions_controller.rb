@@ -16,32 +16,7 @@ class Account::QuestionsController < ApplicationController
   end
 
   # GET
-  def new
-    @question = Question.new
-  end
-
-  # GET
   def edit
-  end
-
-  # POST
-  # POST
-  def create
-    @question = Question.new(question_params)
-    @question.user = current_user
-
-    Question.transaction do
-      User.transaction do
-        if @question.save
-          # 问题保存成功后 扣除用户钱到超级管理员
-          save_user
-
-          redirect_to account_questions_path, notice: "提问成功！"
-        else
-          render :new
-        end
-      end
-    end
   end
 
   # PATCH/PUT
@@ -53,12 +28,6 @@ class Account::QuestionsController < ApplicationController
       render :edit
     end
   end
-
-  # def destroy
-  #   @question.destroy
-  #
-  #   redirect_to account_questions_path, notice: '提问成功删除！'
-  # end
 
   def publish_hidden
     @question = Question.find(params[:id])
@@ -93,22 +62,10 @@ class Account::QuestionsController < ApplicationController
 
     if @question.status != "closed"
       # 关闭问题
-      Question.transaction do
-        User.transaction do
-          # @question.status = "closed"
-          # @question.save
-          #
-          # #分钱 封装到 reward_best_answer.rb 的service中
-          # user = @answer.user
-          # user.balance += 150
-          # user.save
-          #
-          # @admin = User.super_admin
-          # @admin.balance -= 150
-          # @admin.save
-          RewardBestAnswer.new(@answer.user, @question).perform!
-        end
-      end
+      # Question.transaction do
+      #   User.transaction do  加事务的，之后再考虑
+      RewardBestAnswer.new(@answer.user, @question).perform!
+
       flash[:notice] = "悬赏成功！"
     else
       flash[:alert] = "此问题已经关闭！"
@@ -154,15 +111,7 @@ class Account::QuestionsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
-    params.require(:question).permit(:title, :description)
+    params.require(:question).permit(:title, :tag_list, :description)
   end
 
-  def save_user
-    current_user.balance -= 200
-    current_user.save
-
-    super_admin = User.super_admin
-    super_admin.balance += 200
-    super_admin.save
-  end
 end

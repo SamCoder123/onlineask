@@ -2,6 +2,17 @@ Rails.application.routes.draw do
   root "welcome_test#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+
+  resources :tags, only: [:index, :show]
+
+  resources :questions do
+    resources :answers
+
+    collection do
+      get :search
+    end
+  end
+
   resources :welcome_test
 
   devise_for :users
@@ -15,7 +26,7 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-# namespace for account ===========================
+# namespace for account
   namespace :account do
 
     resources :answers do
@@ -63,7 +74,7 @@ Rails.application.routes.draw do
     end
   end
 
-# namespace for admin ===========================
+# namespace for admin
   namespace :admin do
     resources :users do
       member do
