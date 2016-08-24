@@ -21,11 +21,12 @@ ActiveRecord::Schema.define(version: 20160824045022) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content"
-    t.boolean  "is_hidden",   default: false
+    t.boolean  "is_hidden",     default: false
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "answer_status", default: "pending"
   end
 
   create_table "follow_relationships", force: :cascade do |t|

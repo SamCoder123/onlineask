@@ -33,7 +33,7 @@
             <h3 class="panel-title"><%= question.title %></h3>
           </div>
           <div class="panel-body">
-            <p><%= question.description %></p>
+            <p><%= sanitize(question.description) %></p>
             <div class="pull-right">
             <%= gravatar_tag question.user.email, :size => 40, :default => avatar_url %>
             </div>
