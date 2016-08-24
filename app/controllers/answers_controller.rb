@@ -1,19 +1,17 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: %i(show edit update destroy)
   before_action :authenticate_user!, only: %i(create new edit update destroy)
+  before_action :check_question_and_require_not_self_reply, only: %i(new edit create update )
+  before_action :set_answer, only: %i(show edit update destroy)
 
   def new
     @answer = Answer.new
-    @question = Question.find(params[:question_id])
   end
 
   def edit
-    @question = Question.find(params[:question_id])
   end
 
   def create
     @answer = Answer.new(answer_params)
-    @question = Question.find(params[:question_id])
     @answer.user = current_user
     @answer.question = @question
 
@@ -42,5 +40,13 @@ class AnswersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def answer_params
     params.require(:answer).permit(:content)
+  end
+
+  def check_question_and_require_not_self_reply
+    @question = Question.find(params[:question_id])
+    if @question.user == current_user
+      redirect_to root_path
+      flash[:alert] = "亲，不要回答自己的问题哦~"
+    end
   end
 end
