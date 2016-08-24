@@ -20,7 +20,7 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.title %></td>
-        <td><%= question.description %></td>
+        <td><%= sanitize(question.description) %></td>
         <td>¥<%= question.downpayment %></td>
         <td><%= question.answers.count %></td>
         <td><%= account_question_status(question.status) %></td>
