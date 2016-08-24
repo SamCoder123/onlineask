@@ -1,6 +1,8 @@
 class Account::UsersController < ApplicationController
   before_action :authenticate_user!
 
+  layout "user_center"
+
   def index
     @questions = current_user.questions.published
     @answers = current_user.answers.published
