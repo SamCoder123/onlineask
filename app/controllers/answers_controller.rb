@@ -18,6 +18,7 @@ class AnswersController < ApplicationController
     @answer.question = @question
 
     if @answer.save
+      NotificationService.new(@question.user,current_user,@answer).send_notification!
       redirect_to root_path, notice: "回答已发送！"
     else
       render :new

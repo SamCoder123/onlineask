@@ -12,4 +12,5 @@ class NotificationService
   def send_notification!
     Notification.create(recipient: @recipient, actor: @actor, action: "notify_message", notifiable: @notifiable)
   end
+
 end
