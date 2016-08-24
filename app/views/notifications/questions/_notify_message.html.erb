@@ -1,0 +1,4 @@
+<div class="panel-body">
+  <%= notification.actor.name %> 邀请您回答他的问题
+  <%= link_to("去回答",new_question_answer_path(notification.notifiable_id)) %>
+</div>
