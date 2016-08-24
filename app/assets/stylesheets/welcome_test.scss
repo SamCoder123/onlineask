@@ -47,7 +47,7 @@
 .banner-image{
   position: absolute;
   z-index: 1 !important;
-
+  width: 100%;
 
 }
 
@@ -110,4 +110,34 @@
   padding-top: 30px;
   margin: 0 auto 35px auto;;
   width: 90%;
+}
+
+.navbar-bg{
+  margin: 0px;
+  border-color: transparent;
+}
+
+.footer-bg{
+  padding: 40px 0 30px 0;
+  background-color: #333333;
+
+}
+.footer-font{
+  text-align: center;
+  color:white;
+  font-size: 18px;
+}
+
+.footer-font-list{
+  text-align: center;
+  color:#00eaef;
+  font-size: 14px;
+  margin: 10px 30px;
+}
+
+.footer-font-copyright{
+  text-align: center;
+  color:#6f6f6f;
+  font-size: 12px;
+
 }
