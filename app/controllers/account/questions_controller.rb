@@ -55,6 +55,11 @@ class Account::QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = Answer.find(params[:answer_id])
 
+    @answer.best_answer!
+    flash[:alert] = "已经将#{@answer.user.name}答案选为最佳答案"
+
+    @answer.make_others_unchosen!(@question)
+
     if @question.status != "closed"
       # 关闭问题
       # Question.transaction do
