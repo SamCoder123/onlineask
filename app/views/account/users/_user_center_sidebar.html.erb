@@ -1,8 +1,9 @@
 
-<div class="nav nav-pills nav-stacked col-md-2">
-  <ul class="nav nav-sidebar">
+<div class="nav col-md-2" >
+  <ul class="nav nav-pills nav-stacked" style="padding-left: 30px">
     <li class="<%= 'active' if controller?('account/users') && action?('edit_profile') %>"><%= link_to("修改用户信息",edit_profile_account_user_path(@user)) %></li>
     <li class="<%= 'active' if controller?('account/users') && action?('deposit_edit') %>"><%= link_to("账户充值",deposit_edit_account_user_path(@user) ) %></li>
     <li class="<%= 'active' if controller?('account/users') && action?('withdraw_edit')%>"><%= link_to("账户提现",withdraw_edit_account_user_path(@user) ) %></li>
+
   </ul>
 </div>
