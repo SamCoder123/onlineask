@@ -17,7 +17,8 @@
         <% @questions.each do |question| %>
           <tr>
             <td><%= question.title%></td>
-            <td><%= truncate(question.description, limit:10) %></td>
+            <% pure_description = sanitize(question.description) %>
+            <td><%= truncate(pure_description, limit:10) %></td>
             <td>¥<%= question.downpayment %></td>
             <td><%= question.answers.count %></td>
             <td><%= account_question_status(question.status) %></td>

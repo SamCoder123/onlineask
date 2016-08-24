@@ -18,3 +18,4 @@
 //= require bootstrap/collapse
 //= require_tree .
 //= require semantic-ui
+//= require trix
