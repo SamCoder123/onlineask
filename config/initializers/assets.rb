@@ -15,3 +15,5 @@ Rails.application.config.assets.precompile += %w(welcome_test.css)
 Rails.application.config.assets.precompile += %w(admin/admins.css)
 
 Rails.application.config.assets.precompile += %w( questions.js )
+
+Rails.application.config.assets.precompile += %w( account/users.css )

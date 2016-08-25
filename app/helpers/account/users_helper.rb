@@ -11,5 +11,12 @@ module Account::UsersHelper
     action.include?(params[:action])
   end
 
+  def render_check_nil_or_display(user_attribute, alternative)
+    unless user_attribute.nil?
+      user_attribute
+    else
+      alternative
+    end
+  end
 
 end

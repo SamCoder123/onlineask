@@ -72,6 +72,9 @@ class Account::UsersController < ApplicationController
   def exhibition_profile
     @user = User.find(params[:id])
     @answers = @user.answers
+    @best_answers = @answers.where(answer_status: "best_answer")
+    @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
+    render layout: "profile"
   end
 
   def my_subscriptions

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160825015212) do
+ActiveRecord::Schema.define(version: 20160825081420) do
 
   create_table "answer_subscriptions", force: :cascade do |t|
     t.integer  "answer_id"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20160825015212) do
     t.string   "name"
     t.float    "balance",                default: 0.0
     t.string   "phone_number"
+    t.string   "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
