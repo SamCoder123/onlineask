@@ -61,18 +61,14 @@ class Account::QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = Answer.find(params[:answer_id])
 
-    @answer.best_answer!
-    flash[:alert] = "已经将#{@answer.user.name}答案选为最佳答案"
-
-    @answer.make_others_unchosen!(@question)
-
     if @question.status != "closed"
       # 关闭问题
       # Question.transaction do
-      #   User.transaction do  加事务的，之后再考虑
-      RewardBestAnswer.new(@answer.user, @question).perform!
+      # User.transaction do  加事务的，之后再考虑
+      # 赏钱
+      RewardBestAnswer.new(@answer, @question).perform!
 
-      flash[:notice] = "悬赏成功！"
+      flash[:notice] = "已经向#{@answer.user.name}悬赏成功！"
     else
       flash[:alert] = "此问题已经关闭！"
     end

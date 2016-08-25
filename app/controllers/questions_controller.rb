@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.all
     drop_breadcrumb("公共问题")
+    @questions = Question.published
   end
 
   def show
@@ -33,7 +34,7 @@ class QuestionsController < ApplicationController
       # 把邀请人和问题存入关系表
       @invitated_users = User.where(id: params[:filters].split(","))
 
-      RewardDepositService.new.perform!(current_user,@invitated_users,@question,200)
+      RewardDepositService.new(current_user,@invitated_users,@question).perform!
 
       # 如何一下给多个用户发送？循环新增是不是不好？
       for user in @invitated_users

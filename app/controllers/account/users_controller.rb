@@ -68,6 +68,10 @@ class Account::UsersController < ApplicationController
     cost = params[:user][:balance]
     @user.balance = @user.balance + cost.to_f
     @user.save
+    @user.phone_number = params[:user][:phone_number]
+    @user.save
+    options = {phone_number: @user.phone_number}
+    SmsService.new(options).send_sms
     redirect_to show_profile_account_user_path(@user)
     flash[:notice] = "充值成功啦！"
   end
@@ -76,9 +80,13 @@ class Account::UsersController < ApplicationController
   def exhibition_profile
     @user = User.find(params[:id])
     @answers = @user.answers
+    @best_answers = @answers.where(answer_status: "best_answer")
+    @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
+    render layout: "profile"
   end
 
   def my_subscriptions
+    @user = current_user
     @answers = current_user.subscribed_answers.paginate(page: params[:page], per_page: 5)
   end
 
