@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_action :validate_search_key, only: [:search]
 
   def index
-    @questions = Question.published
+    @questions = Question.published.last(3)
   end
 
   def show
@@ -57,10 +57,10 @@ class QuestionsController < ApplicationController
     if @query_string.present?
       # binding.pry
       search_result = Question.ransack(@search_criteria).result(distinct: true).includes(:answers)
-      @questions = search_result.paginate(page: params[:page], per_page: 2)
+      @questions = search_result.paginate(page: params[:page], per_page: 20)
 
       user_search_result = User.ransack(@user_search_criteria).result(distinct: true)
-      @users = user_search_result.paginate(page: params[:page], per_page: 2)
+      @users = user_search_result.paginate(page: params[:page], per_page: 20)
       # set_page_title "搜寻 #{@query_string}"
     end
   end

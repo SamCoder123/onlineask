@@ -24,5 +24,6 @@ class RewardBestAnswer
     # 更新answer的状态
     @answer.best_answer!
     @answer.make_others_unchosen!(@question)
+
    end
  end
