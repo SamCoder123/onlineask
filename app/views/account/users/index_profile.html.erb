@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-8 col-md-offest-2">
-  
+
     <table class="table table-stripped">
       <thead>
         <th>
@@ -52,13 +52,13 @@
         </tr>
         <tr>
           <td>
-            我被邀请的回答
+            我被邀请回答的问题
           </td>
           <td>
-            有个问题邀请我回答，已完成个回答
+            共有<%= @user.invitated_questions.count %>个问题邀请我回答
           </td>
           <td>
-
+            <%= link_to("被邀请回答的问题", invitated_questions_account_questions_path, class:"btn btn-xs btn-default") %>
           </td>
         </tr>
         <tr>
@@ -66,10 +66,10 @@
             我偷听的答案
           </td>
           <td>
-            偷听了个回答
+            我偷听了 <%= @answer_subscriptions.count %>个回答
           </td>
           <td>
-
+            <%= link_to("我偷听的答案", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-default") %>
           </td>
         </tr>
         <tr>

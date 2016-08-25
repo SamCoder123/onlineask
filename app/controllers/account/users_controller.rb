@@ -29,6 +29,7 @@ class Account::UsersController < ApplicationController
 
   def show_profile
     @user = current_user
+    @questions = Question.all
   end
 
   def withdraw_edit
