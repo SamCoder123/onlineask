@@ -31,6 +31,11 @@ class QuestionsController < ApplicationController
 
       RewardDepositService.new.perform!(current_user,@invitated_users,@question,200)
 
+      # 如何一下给多个用户发送？循环新增是不是不好？
+      for user in @invitated_users
+        NotificationService.new(user,current_user,@question).send_notification!
+      end
+
       flash[:notice] = "提问成功！"
       redirect_to root_path
     else

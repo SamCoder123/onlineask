@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 20160825015212) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "question_invitations", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "user_id"
