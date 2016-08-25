@@ -1,9 +1,10 @@
 class Account::UsersController < ApplicationController
   before_action :authenticate_user!
 
-  layout "user_center",except: %i(index)
+  layout "user_center"
 
-  def index
+  def index_profile
+    @user = current_user
     @questions = current_user.questions.published
     @answers = current_user.answers.published
     @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
@@ -32,6 +33,7 @@ class Account::UsersController < ApplicationController
   def show_profile
     @user = current_user
     drop_breadcrumb("用户信息")
+    @questions = Question.all
   end
 
   def withdraw_edit
@@ -86,6 +88,7 @@ class Account::UsersController < ApplicationController
   end
 
   def my_subscriptions
+    drop_breadcrumb("我偷听的答案")
     @user = current_user
     @answers = current_user.subscribed_answers.paginate(page: params[:page], per_page: 5)
   end

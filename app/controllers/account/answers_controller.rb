@@ -5,6 +5,7 @@ class Account::AnswersController < ApplicationController
   def index
     @answers = current_user.answers.published
     drop_breadcrumb("我回答的问题")
+    @answers = @answers.paginate(page: params[:page], per_page: 10)
   end
 
   def show

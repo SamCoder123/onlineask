@@ -6,8 +6,7 @@ class AnswersController < ApplicationController
   def new
     @answer = Answer.new
     @question = Question.find(params[:question_id])
-    drop_breadcrumb("公共问题", questions_path(@question))
-    drop_breadcrumb(@question.title)
+    drop_breadcrumb(@question.title, question_path(@question))
     drop_breadcrumb("我要回答")
   end
 

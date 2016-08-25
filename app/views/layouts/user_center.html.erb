@@ -4,6 +4,7 @@
     <title>Onlineask</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'account/users', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,6 +15,7 @@
       <%= render_breadcrumb %>
       <div class="row">
         <%= render "account/users/user_center_sidebar" %>
+        <%= render "account/users/user_center_navbar" %>
         <div class="col-md-10">
           <%= yield %>
         </div>

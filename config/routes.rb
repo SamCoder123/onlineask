@@ -17,13 +17,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :questions do
-    resources :answers
-    collection do
-      get :search
-    end
-  end
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 # namespace for account
@@ -56,6 +49,7 @@ Rails.application.routes.draw do
         get :edit_profile
         put :update_profile
         get :show_profile
+        get :index_profile
       # add withdraw actions
         get :withdraw_edit
         post :withdraw_change

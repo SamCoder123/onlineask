@@ -7,6 +7,7 @@ class Account::QuestionsController < ApplicationController
   def index
     @questions = current_user.questions.published
     drop_breadcrumb("我问过的问题")
+    @questions = @questions.paginate(page: params[:page], per_page: 10)
   end
 
   # GET
@@ -68,6 +69,8 @@ class Account::QuestionsController < ApplicationController
       # 赏钱
       RewardBestAnswer.new(@answer, @question).perform!
 
+      NotificationService.new(@answer.user,current_user,@answer).send_notification_to_answer_owner!
+
       flash[:notice] = "已经向#{@answer.user.name}悬赏成功！"
     else
       flash[:alert] = "此问题已经关闭！"
@@ -78,6 +81,7 @@ class Account::QuestionsController < ApplicationController
 
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
+    drop_breadcrumb("被邀请的问题")
   end
 
   # 把question的status改为close,并退款

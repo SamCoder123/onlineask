@@ -1,45 +1,34 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h4>我问过的问题</h4>
-    <table class="table table-stripped">
-      <thead>
-        <tr>
-          <th>主题</th>
-          <th>描述</th>
-          <th>悬赏金额</th>
-          <th>回答人数</th>
-          <th>状态</th>
-          <th colspan="5">操作</th>
-        </tr>
-      </thead>
 
-      <tbody>
+    <div class="panel panel-default">
+      <div class="panel-heading">我问过的问题</div>
+
+      <ul class="list-group">
         <% @questions.each do |question| %>
-          <tr>
-            <td><%= question.title%></td>
-            <% pure_description = sanitize(question.description) %>
-            <td><%= truncate(pure_description, limit:10) %></td>
-            <td>¥<%= question.downpayment %></td>
-            <td><%= question.answers.count %></td>
-            <td><%= account_question_status(question.status) %></td>
-            <td>
-              <%= link_to '详情', account_question_path(question) %>
-            </td>
-            <td>
-              <%= link_to '编辑', edit_account_question_path(question) %>
-            </td>
-            <td>
-              <%= link_to '编辑', edit_account_question_path(question) %>
-            </td>
-            <td>
+
+          <li class="list-group-item" style="padding:1em">
+            <span class="label label-default" style="padding:1em;margin-right:16px"><%=question.answers.count%>人回答过</span>
+
+            <%= link_to question.title,account_question_path(question) %>
+
+            <div class="pull-right">
+              <%= link_to "编辑",edit_account_question_path(question),class:"btn btn-primary btn-xs" %>
+
+              <%= link_to  "删除",publish_hidden_account_question_path(question), method: :post, data: { confirm: 'Are you sure you want to delete the question?' }, class:"btn btn-primary btn-xs" %>
+
               <%= render_cancel_reopen(question)  %>
-            </td>
-            <td>
-              <%= link_to  "",publish_hidden_account_question_path(question), method: :post, data: { confirm: 'Are you sure you want to delete the question?' }, class:"fa fa-trash" %>
-            </td>
-          </tr>
+
+            </div>
+          </li>
         <% end %>
-      </tbody>
-    </table>
+      </ul>
+
+      <div class="text-center">
+       <%= will_paginate @questions %>
+      </div>
+    </div>
+
+
   </div>
 </div>

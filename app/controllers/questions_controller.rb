@@ -7,16 +7,18 @@ class QuestionsController < ApplicationController
     @questions = Question.all
     drop_breadcrumb("公共问题")
     @questions = Question.published
+    @questions = Question.published.last(3)
   end
 
   def show
-    drop_breadcrumb("公共问题", questions_path(@question))
     drop_breadcrumb(@question.title)
   end
 
   def new
     @users = User.all
     @question = Question.new
+    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    drop_breadcrumb("我要提问")
   end
 
   def edit
@@ -62,10 +64,10 @@ class QuestionsController < ApplicationController
     if @query_string.present?
       # binding.pry
       search_result = Question.ransack(@search_criteria).result(distinct: true).includes(:answers)
-      @questions = search_result.paginate(page: params[:page], per_page: 2)
+      @questions = search_result.paginate(page: params[:page], per_page: 20)
 
       user_search_result = User.ransack(@user_search_criteria).result(distinct: true)
-      @users = user_search_result.paginate(page: params[:page], per_page: 2)
+      @users = user_search_result.paginate(page: params[:page], per_page: 20)
       # set_page_title "搜寻 #{@query_string}"
     end
   end
