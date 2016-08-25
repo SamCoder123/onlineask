@@ -17,14 +17,12 @@
 
       <div class="total clearfix">
         <span class="pull-right">
-          <%= link_to '详情', @question %> |
-          <%= link_to '返回', questions_path %>
+          <%= link_to '返回', questions_path,class: "btn btn-sm btn-info" %>
         </span>
       </div>
    </div>
+  </div>
 
-
-    </div>
 
     <div class="panel panel-default ">
       <div class="panel-heading">
@@ -32,14 +30,23 @@
       </div>
 
       <div class="panel-body">
-        <% @question.answers.each do |answer| %>
-          <%= image_tag(answer.user.image.thumb, class: "thumbnail") %>
-          <%= link_to(answer.user.name, exhibition_profile_account_user_path(id: answer.user.id)) %>
-          <%= answer.updated_at %>
-          <hr>
+        <%if @question.answers.size>0  %>
+          <% @question.answers.each do |answer| %>
+            <%= gravatar_tag answer.user.email, :size => 40, :default => avatar_url %>
+
+            <%= link_to(answer.user.name, exhibition_profile_account_user_path(id: answer.user.id)) %>
+            在
+            <%= answer.updated_at_formate %>
+            回答了这个问题
+            <%= link_to("偷听", subscribe_answers_account_answer_path(answer), method: :post, class:"btn btn-sm btn-danger pull-right") %>
+            <hr>
+          <% end %>
+        <% else %>
+            <span class="label label-info">还没有人回答呢，快来抢沙发吧？</span>
+            <%= link_to '我要回答', new_question_answer_path(@question), class: "btn btn-sm btn-danger pull-right" %>
         <% end %>
       </div>
+    </div>
 
 
-  </div>
 </div>

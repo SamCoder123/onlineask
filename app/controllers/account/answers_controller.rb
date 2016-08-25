@@ -4,6 +4,7 @@ class Account::AnswersController < ApplicationController
 
   def index
     @answers = current_user.answers.published
+    @answers = @answers.paginate(page: params[:page], per_page: 10)
   end
 
   def show
