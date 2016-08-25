@@ -51,6 +51,8 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'to_words'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem "trix"
+gem 'twilio-ruby', '~> 4.11.1'
+gem 'phonelib'
 
 group :production do
   gem "pg"

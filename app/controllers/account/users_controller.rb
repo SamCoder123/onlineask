@@ -60,6 +60,10 @@ class Account::UsersController < ApplicationController
     cost = params[:user][:balance]
     @user.balance = @user.balance + cost.to_f
     @user.save
+    @user.phone_number = params[:user][:phone_number]
+    @user.save
+    options = {phone_number: @user.phone_number}
+    SmsService.new(options).send_sms
     redirect_to show_profile_account_user_path(@user)
     flash[:notice] = "充值成功啦！"
   end
