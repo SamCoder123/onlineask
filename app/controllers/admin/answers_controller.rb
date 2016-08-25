@@ -1,14 +1,18 @@
 class Admin::AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :require_is_admin
+  layout "admin"
+
 
   def index
     @answers = Answer.all
-    render layout: "admin"
+    drop_breadcrumb("答案管理")
   end
 
   def show
     @answer = Answer.find(params[:id])
+    drop_breadcrumb("答案管理", admin_answers_path)
+    drop_breadcrumb(@answer.question.title)
   end
 
   def hide

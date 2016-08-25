@@ -3,21 +3,20 @@
   <head>
     <title>Onlineask</title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'admin/admins', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'account/users', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body style="background-image: url(/crossword.png);">
     <div class="container-fluid">
+    <!-- <div class="container"> -->
       <%= render "common/navbar" %>
       <%= render "common/flashes" %>
-      <%= render_breadcrumb %>
       <div class="row">
-        <%= render "common/admin_sidebar" %>
-        <div class="col-md-10">
+        <!-- <div class="col-md-10"> -->
           <%= yield %>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   <%= render "common/footer" %>

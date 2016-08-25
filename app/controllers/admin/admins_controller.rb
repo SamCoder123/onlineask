@@ -7,6 +7,7 @@ class Admin::AdminsController < ApplicationController
     @questions = Question.all
     @answers = Answer.all
     @users = User.all
+    drop_breadcrumb("后台首页")
   end
 
   def questions_bill

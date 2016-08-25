@@ -13,5 +13,6 @@ module Onlineask
     # -- all .rb files in that directory are automatically loaded.
 
     config.generators.test_framework = nil
+    config.autoload_paths << Rails.root.join("lib")
   end
 end
