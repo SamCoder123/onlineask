@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_action :validate_search_key, only: [:search]
 
   def index
-    @questions = Question.all
+    @questions = Question.published
   end
 
   def show
