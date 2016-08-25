@@ -6,6 +6,7 @@ class Account::QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @questions = current_user.questions.published
+    drop_breadcrumb("我问过的问题")
   end
 
   # GET
@@ -13,10 +14,15 @@ class Account::QuestionsController < ApplicationController
   def show
     @answers = @question.answers
     @invitated_users = @question.invitated_users
+    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    drop_breadcrumb(@question.title)
+
   end
 
   # GET
   def edit
+    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    drop_breadcrumb("编辑问题")
   end
 
   # PATCH/PUT

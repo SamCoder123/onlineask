@@ -7,6 +7,7 @@ class Account::UsersController < ApplicationController
     @questions = current_user.questions.published
     @answers = current_user.answers.published
     @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
+    drop_breadcrumb("个人主页")
   end
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
   def new_profile
@@ -15,6 +16,8 @@ class Account::UsersController < ApplicationController
 
   def edit_profile
     @user = current_user
+    drop_breadcrumb("用户信息", show_profile_account_user_path(@user))
+    drop_breadcrumb("修改信息")
   end
 
   def update_profile
@@ -28,10 +31,13 @@ class Account::UsersController < ApplicationController
 
   def show_profile
     @user = current_user
+    drop_breadcrumb("用户信息")
   end
 
   def withdraw_edit
     @user = current_user
+    drop_breadcrumb("用户信息", show_profile_account_user_path(@user))
+    drop_breadcrumb("提现")
   end
 
   # withdraw_change显示取现后余额
@@ -52,6 +58,8 @@ class Account::UsersController < ApplicationController
   # deposit_edit用户账户充值表单页面
   def deposit_edit
     @user = current_user
+    drop_breadcrumb("用户信息", show_profile_account_user_path(@user))
+    drop_breadcrumb("充值")
   end
 
   # deposit_change用户账户充值功能

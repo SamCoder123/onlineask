@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20160824045022) do
     t.datetime "updated_at",                   null: false
     t.float    "downpayment", default: 0.0
     t.string   "status",      default: "open"
-    t.string   "tag
+    t.string   "tag"
   end
 
   create_table "sessions", force: :cascade do |t|

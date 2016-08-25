@@ -1,10 +1,11 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :require_is_admin
+  layout "admin"
 
   def index
     @users = User.all
-    render layout: "admin"
+    drop_breadcrumb("用户管理")
   end
 
   def change_to_admin

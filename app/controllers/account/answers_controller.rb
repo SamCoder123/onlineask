@@ -4,9 +4,12 @@ class Account::AnswersController < ApplicationController
 
   def index
     @answers = current_user.answers.published
+    drop_breadcrumb("我回答的问题")
   end
 
   def show
+    drop_breadcrumb("我回答的问题", account_answers_path(@answer))
+    drop_breadcrumb("我的回答")
   end
 
   def new
@@ -15,6 +18,8 @@ class Account::AnswersController < ApplicationController
   end
 
   def edit
+    drop_breadcrumb("我回答的问题", account_answers_path(@answer))
+    drop_breadcrumb("修改我的回答")
   end
 
   def create

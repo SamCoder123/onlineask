@@ -5,9 +5,12 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    drop_breadcrumb("公共问题")
   end
 
   def show
+    drop_breadcrumb("公共问题", questions_path(@question))
+    drop_breadcrumb(@question.title)
   end
 
   def new
@@ -16,6 +19,7 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+
   end
 
   def create
