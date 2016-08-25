@@ -1,9 +1,10 @@
 class Account::UsersController < ApplicationController
   before_action :authenticate_user!
 
-  layout "user_center",except: %i(index)
+  layout "user_center"
 
-  def index
+  def index_profile
+    @user = current_user
     @questions = current_user.questions.published
     @answers = current_user.answers.published
     @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
@@ -28,6 +29,7 @@ class Account::UsersController < ApplicationController
 
   def show_profile
     @user = current_user
+    @questions = Question.all
   end
 
   def withdraw_edit

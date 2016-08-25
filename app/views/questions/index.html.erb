@@ -21,7 +21,7 @@
         <td><%= question.title %></td>
         <td>
           <div class="trix">
-            <%= sanitize(question.description) %>
+            <%= truncate(sanitize(question.description), limit:10) %>
           </div>
 
         </td>

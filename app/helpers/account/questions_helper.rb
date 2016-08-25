@@ -8,9 +8,9 @@ module Account::QuestionsHelper
 
   def render_cancel_reopen(question)
     if question.status == "closed"
-      link_to("重开", reopen_account_question_path(question), method: :post)
+      link_to("重开", reopen_account_question_path(question), method: :post,class:"btn btn-default btn-xs")
     elsif question.status == "open"
-      link_to("取消提问并退款", cancel_account_question_path(question), method: :post, data: { confirm: "Are you sure you want to cancel the question?" })
+      link_to("取消提问并退款", cancel_account_question_path(question), method: :post,class:"btn btn-default btn-xs", data: { confirm: "Are you sure you want to cancel the question?" })
     end
   end
 end

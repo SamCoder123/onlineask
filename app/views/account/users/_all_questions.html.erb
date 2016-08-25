@@ -1,0 +1,42 @@
+<div class="col-md-9" style="padding-left:0">
+  <div class="panel panel-default" style="background:transparent;">
+    <div class="panel-body">
+      问题列表
+      <div class="btn-group pull-right">
+        <%= link_to("所有问题","#",class:"btn btn-default btn-group-sm ") %>
+      </div>
+
+      <table class="table table-filter">
+        <% @questions.each do |question| %>
+        <tr>
+          <td>
+            <div class="media">
+              <div class="pull-left">
+                <%= gravatar_tag question.user.email, :size => 30, :default => avatar_url %>
+              </div>
+                <div class="media-body">
+                  <span class="media-meta pull-right"><%= question.created_at %></span>
+                  <h4 class="title">
+                    <%= question.title %>
+                    <span class="pull-right pagado">(Pagado)</span>
+                  </h4>
+
+                  <p class="summary">
+                    <% pure_description = sanitize(question.description) %>
+                    <%= truncate(pure_description, limit:15) %>
+
+                    <span class="pull-right"><%= link_to("偷听","#",class:"btn btn-default btn-xs") %></span>
+                    <span class="pull-right"><%= link_to("我要回答","#",class:"btn btn-default btn-xs") %></span>
+                  </p>
+
+                </div>
+              </div>
+            </td>
+        </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+
+</div>
