@@ -14,7 +14,7 @@ class Question < ApplicationRecord
 
   scope :published, -> { where(is_hidden: false) }
 
-  acts_as_taggable
+  acts_as_taggable_on :tags
 
   def hide!
     self.is_hidden = true
