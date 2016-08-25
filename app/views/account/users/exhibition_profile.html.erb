@@ -5,12 +5,12 @@
 <div class="col-md-8">
   <%= render "profile_exhibition" %>
   <hr/>
-  <h3>我回答过的问题</h3>
+  <h3>Ta回答过的问题</h3>
 
     <% @answers.each do |answer| %>
     <div class="panel panel-default ">
       <div class="panel-heading">
-        <h3 class="panel-title">问题主题：<%= answer.question.title %></h3>
+        <h3 class="panel-title">问题主题：<%= answer.question.title %><i class="fa fa-eye pull-right" aria-hidden="true"></i></h3>
       </div>
       <div class="panel-body">
         <p>问题描述：<%= answer.question.description %></p>
