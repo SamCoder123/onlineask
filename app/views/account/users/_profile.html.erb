@@ -1,69 +1,64 @@
-<h1>用户信息</h1>
-<table class="table table-boldered">
-  <tr>
-    <td>
-      头像
-    </td>
-    <td>
-      <%= gravatar_tag @user.email, :size => 100, :default => avatar_url %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Email
-    </td>
-    <td>
-      <%= @user.email %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      角色
-    </td>
-    <td>
-      <%= @user.role %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      姓名
-    </td>
-    <td>
-      <%= @user.name %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      性别
-    </td>
-    <td>
-      <%= @user.gender %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      学校
-    </td>
-    <td>
-      <%= @user.school %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      专业
-    </td>
-    <td>
-      <%= @user.major %>
-    </td>
-  </tr>
+<div class="pull-left">
+  <%= gravatar_tag @user.email, :size => 100, :default => avatar_url %>
+</div>
+<div class="pull-left">
+  <table class="table" style="background: transparent; margin-left:40px;">
+    <tr>
+      <td>
+        Email
+      </td>
+      <td>
+        <%= @user.email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        角色
+      </td>
+      <td>
+        <%= @user.role %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        姓名
+      </td>
+      <td>
+        <%= @user.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        性别
+      </td>
+      <td>
+        <%= @user.gender %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        学校
+      </td>
+      <td>
+        <%= @user.school %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        专业
+      </td>
+      <td>
+        <%= @user.major %>
+      </td>
+    </tr>
 
-  <tr>
-    <td>
-      余额
-    </td>
-    <td>
-      <%= @user.balance %>
-    </td>
-  </tr>
-
-</table>
+    <tr>
+      <td>
+        余额
+      </td>
+      <td>
+        <%= @user.balance %>
+      </td>
+    </tr>
+  </table>
+</div>
