@@ -11,7 +11,7 @@
     </div>
 
     <div class="panel-body">
-      <p>问题描述：<%= @question.description %></p>
+      <p>问题描述：<%= sanitize(@question.description) %></p>
     </div>
 
     <% @invitated_users.each do |user| %>

@@ -28,7 +28,7 @@
               <%= link_to(question.title, admin_question_path(question)) %>
             </td>
             <td>
-              <%= question.description %>
+              <%= sanitize(question.description) %>
             </td>
             <td>
               <%= question.vote %>

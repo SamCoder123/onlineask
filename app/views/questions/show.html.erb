@@ -9,7 +9,7 @@
     </div>
 
     <div class="panel-body">
-      <p>描述：<%= @question.description %></p>
+      <p>描述：<%= sanitize(@question.description) %></p>
       <br>
       <div class="pull-left">
         标签：<%= render @question.tags %>
@@ -22,8 +22,6 @@
         </span>
       </div>
    </div>
-
-
 
 
     </div>

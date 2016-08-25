@@ -1,16 +1,3 @@
-<!-- <section style="height: 440px; background-image: url(http://www.shangyutang.com.cn/images/banner2.jpg);">
- <div class="center-block w-100p p-15" style="max-width: 1000px;">
-   <div class="row">
-     <div class="col-sm-12 text-center mt-40 mb-60 headline">
-       <h1 class="heading"><br/>学霸在线<br>让小白不再无路可走。</h1>
-       <div class="mt-20 font-18 lh-30 center-block subheading">
-         <p> 我们对于学习的热爱，一直让我们引以为豪。<br /> 从一开始，这种爱就不断推动和启发着我们。</p>
-       </div>
-     </div>
-   </div>
- </div>
-</section> -->
-
 <div class="col-md-12">
 
 <!-- <p id="notice"><%= notice %></p> -->
@@ -32,7 +19,12 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.title %></td>
-        <td><%= question.description %></td>
+        <td>
+          <div class="trix">
+            <%= sanitize(question.description) %>
+          </div>
+
+        </td>
         <td><%= render question.tags %></td>
         <td>¥<%= question.downpayment %></td>
         <td colspan="3">

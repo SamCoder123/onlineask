@@ -1,0 +1,6 @@
+<div class="panel-body">
+  <%= notification.actor.name %> 回答了您的问题
+  <% answers = notification.actor.answers %>
+  <% answer = answers.find(notification.notifiable_id) %>
+  <%= link_to("去查看",account_question_path(answer.question)) %>
+</div>
