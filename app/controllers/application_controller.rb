@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  include BootstrapHelper::Breadcrumb
+
   def require_is_admin
     unless current_user.admin?
       flash[:alert] = "你没有管理员权限"

@@ -4,18 +4,25 @@ class QuestionsController < ApplicationController
   before_action :validate_search_key, only: [:search]
 
   def index
+    @questions = Question.all
+    drop_breadcrumb("公共问题")
+    @questions = Question.published
     @questions = Question.published.last(3)
   end
 
   def show
+    drop_breadcrumb(@question.title)
   end
 
   def new
     @users = User.all
     @question = Question.new
+    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    drop_breadcrumb("我要提问")
   end
 
   def edit
+
   end
 
   def create
