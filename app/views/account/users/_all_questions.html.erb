@@ -17,13 +17,13 @@
                 <div class="media-body">
                   <span class="media-meta pull-right"><%= question.created_at %></span>
                   <h4 class="title">
-                    <%= question.title %>
-                    <span class="pull-right pagado">(Pagado)</span>
+                    <%= question.user.name %>: <%= link_to(question.title,question)  %>
+                    <span class="pull-right pagado">回答人数：<%= question.answers.count %></span>
                   </h4>
 
                   <p class="summary">
                     <% pure_description = sanitize(question.description) %>
-                    <%= truncate(pure_description, limit:15) %>
+                    <%= truncate(pure_description, limit:25) %>
 
                     <span class="pull-right"><%= link_to("偷听","#",class:"btn btn-default btn-xs") %></span>
                     <span class="pull-right"><%= link_to("我要回答","#",class:"btn btn-default btn-xs") %></span>
