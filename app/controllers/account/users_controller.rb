@@ -1,7 +1,7 @@
 class Account::UsersController < ApplicationController
   before_action :authenticate_user!
 
-  layout "user_center"
+  layout "user_center",except: %i(index)
 
   def index
     @questions = current_user.questions.published
