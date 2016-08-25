@@ -3,8 +3,8 @@
 
   <ul class="nav nav-pills">
     <li><%= gravatar_tag current_user.email, :size => 30, :default => avatar_url %></li>
-    <li role="presentation"><a href="#">提问</a></li>
-    <li role="presentation"><a href="#">回答</a></li>
-
+    <li><%= link_to("提问",new_question_path) %></li>
+    <li><%= link_to("回答",account_answers_path) %></li>
+    
   </ul>
 </div>
