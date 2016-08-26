@@ -115,44 +115,53 @@
           <div class="col-xs-12 col-sm-4 emphasis">
             <h2>
               <strong>
-                <%= "20.7K" %>
+                <%= @followers.count %>
               </strong>
             </h2>
             <p>
               <small>Followers</small>
             </p>
-            <button class="btn btn-success btn-block">
-              <span class="fa fa-plus-circle"></span>
-              Follow
-            </button>
+            <% unless current_user.already_follower?(@user) %>
+              <%= link_to(like_account_follow_path(@user), method: :post) do %>
+                <button class="btn btn-success btn-block">
+                  <span class="fa fa-plus-circle"></span>
+                  关注Ta
+                </button>
+              <% end %>
+            <% else %>
+              <button class="btn btn-success btn-block disabled">
+                <span class="fa fa-plus-circle"></span>
+                已关注
+              </button>
+            <% end %>
           </div>
           <div class="col-xs-12 col-sm-4 emphasis">
             <h2>
-              <strong>245</strong>
+              <strong><%= @followings.count %></strong>
             </h2>
             <p>
               <small>Following</small>
             </p>
             <button class="btn btn-info btn-block">
               <span class="fa fa-user"></span>
-              View Profile
+              向Ta提问
             </button>
           </div>
           <div class="col-xs-12 col-sm-4 emphasis">
             <h2>
-              <strong>43</strong>
+              <strong><%= @answers.count %></strong>
             </h2>
             <p>
-              <small>Snippets</small>
+              <small>Answers</small>
             </p>
             <button class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown">
               <span class="fa fa-gear"></span>
-              Options
+              More
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu text-left" role="menu">
-              <li>
+              <!-- <li>
                 <a href="#">
                   <span class="fa fa-envelope pull-right"></span>
                   Send an email
@@ -164,16 +173,17 @@
                   Add or remove from a list
                 </a>
               </li>
-              <li class="divider"></li>
+              <li class="divider"></li> -->
               <li>
                 <a href="#">
                   <span class="fa fa-warning pull-right"></span>Report this user for spam</a>
               </li>
               <li class="divider"></li>
               <li>
-                <a href="#" class="btn disabled" role="button">
-                  Unfollow
-                </a>
+                <%= link_to("取消关注", unlike_account_follow_path(@user), method: :post, class:"btn disabled", role:"button") %>
+                <!-- <a href="#" class="btn disabled" role="button">
+                  取消关注
+                </a> -->
               </li>
             </ul>
             <!-- <div class="btn-group dropup btn-block">
