@@ -81,6 +81,10 @@ class Account::UsersController < ApplicationController
   # 链接到user展示页
   def exhibition_profile
     @user = User.find(params[:id])
+    if @user == current_user
+      redirect_to index_profile_account_user_path(current_user)
+      return
+    end
     @followers = FollowRelationship.where(user_id: @user)
     @followings = FollowRelationship.where(follower_id: @user)
     @answers = @user.answers
