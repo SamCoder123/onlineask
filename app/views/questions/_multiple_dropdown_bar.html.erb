@@ -1,7 +1,22 @@
-<%= javascript_include_tag 'questions', 'data-turbolinks-track': 'reload' %>
-
 <script type="text/javascript">
 $(function(){
+  //var data = '<%=@invitated_users.to_json.to_s.html_safe%>';
+  // data = $.parseJSON(data);
+  // if(data.length > 0) {
+  //   var content = "";
+  //   $.each(data, function(index, user) {
+  //     //alert(user.name);
+  //     var email = user.email;
+  //
+  //     //$("#dropdown").append(content);
+  //   })
+  // }
+  //alert($('&gt; .label').attr('class'))
+  // $('#dropdown').find('a').each(function(e) {
+  //
+  //   alert(this);
+  // });
+
   $('.ui.dropdown')
   .dropdown({
     allowAdditions: true
@@ -10,12 +25,21 @@ $(function(){
 
 </script>
 
-<div class="ui multiple dropdown">
-  <input type="hidden" name="filters">
+<div class="ui multiple dropdown" id="dropdown">
+  <input type="hidden" name="filters" value="<%=@filters%>">
   <!-- <i class="filter icon"></i> -->
   <!-- 86b846 6d8f29 -->
+
   <i class="fa fa-users" aria-hidden="true"></i>
-  <span class="text" style="color:#adda4d">邀请回答</span>
+  <span class="text" style="color:#adda4d" id="invite">邀请回答</span>
+  <% @invitated_users.each do |user| %>
+   <a class="ui label transition visible" data-value="<%= user.id %>" style="display: inline-block !important;">
+      <%= gravatar_tag user.email, :size => 50, :default => avatar_url %>
+      <%= user.name %>
+      回答数量：<%= user.answers.count %>
+      <i class="delete icon"></i>
+   </a>
+  <% end %>
   <div class="menu">
     <div class="ui icon search input">
       <i class="search icon"></i>
