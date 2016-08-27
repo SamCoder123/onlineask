@@ -38,6 +38,12 @@ class Account::QuestionsController < ApplicationController
 
   def publish_hidden
     @question = Question.find(params[:id])
+    if @question.answers.count >0
+      flash[:alert] = "亲，您的问题已被回答，不能删除了"
+      redirect_to :back
+      return
+    end
+
     is_hidden = params[:is_hidden]
 
     @question.is_hidden =
