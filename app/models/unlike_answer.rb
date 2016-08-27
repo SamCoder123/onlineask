@@ -1,9 +1,11 @@
-class VoteAnswer < ApplicationRecord
+class UnlikeAnswer < ApplicationRecord
+  belongs_to :user
+  belongs_to :answer
 end
 
 # == Schema Information
 #
-# Table name: vote_answers
+# Table name: unlike_answers
 #
 #  id         :integer          not null, primary key
 #  answer_id  :integer

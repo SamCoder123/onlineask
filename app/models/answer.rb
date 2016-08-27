@@ -4,6 +4,10 @@ class Answer < ApplicationRecord
 
   has_many :answer_subscriptions
   has_many :subscribed_users, through: :answer_subscriptions, source: :user
+  has_many :like_answers
+  # has_many :user_likes, through: :like_answers, source: :user
+  has_many :unlike_answers
+
 
   # answer_status 字段 有3种状态 pending best_answer unchosen
 
