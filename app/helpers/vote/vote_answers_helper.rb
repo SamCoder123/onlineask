@@ -1,0 +1,2 @@
+module Vote::VoteAnswersHelper
+end

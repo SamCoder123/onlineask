@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :answers
   has_many :follow_relationships
   has_many :followees, through: :follow_relationships, source: :follow_relationship
+  has_many :like_answers
+  has_many :a_likes, through: :like_answers, source: :answer
+  has_many :unlike_answers
+  has_many :a_unlikes, through: :unlike_answers, source: :answer
 
   scope :super_admin, -> { find(1) }
 
@@ -97,6 +101,31 @@ class User < ApplicationRecord
 
   def invitation!(question)
     invitated_questions << question
+  end
+
+  # 对回答点赞或踩
+  def already_like?(answer)
+    a_likes.include?(answer)
+  end
+
+  def like!(answer)
+    a_likes << answer
+  end
+
+  def like_cancel!(answer)
+    a_likes.delete(answer)
+  end
+
+  def already_unlike?(answer)
+    a_unlikes.include?(answer)
+  end
+
+  def unlike!(answer)
+    a_unlikes << answer
+  end
+
+  def unlike_cancel!(answer)
+    a_unlikes.delete(answer)
   end
 end
 

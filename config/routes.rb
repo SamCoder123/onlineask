@@ -104,4 +104,15 @@ Rails.application.routes.draw do
       post :mark_as_read
     end
   end
+
+  #vote功能
+  namespace :vote do
+    # 对answer的vote
+    resources :vote_answers, only: %i(like,like_cancel,unlike,unlike_cancel) do
+      member do
+        post :like
+        post :unlike
+      end
+    end
+  end
 end

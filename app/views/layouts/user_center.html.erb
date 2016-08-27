@@ -8,8 +8,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body style="background-image: url(/crossword.png);">
-    <div class="container-fluid">
+  <body>
+    <div class="container-fluid" id="wrap">
       <%= render "common/navbar" %>
       <%= render "common/flashes" %>
       <%= render_breadcrumb %>
@@ -20,7 +20,8 @@
           <%= yield %>
         </div>
       </div>
+      <div class="row">
+        <%= render "common/footer" %>
+      </div>
     </div>
-      <%= render "common/footer_index" %>
-  </body>
 </html>
