@@ -8,13 +8,13 @@ class Question < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
   validates :tag_list, presence: true
-  validates :downpayment, presence: true,numericality:{greater_than:0} 
+  validates :downpayment, presence: true,numericality:{greater_than:0}
 
   # status 字段 有两种状态 open closed
 
   scope :published, -> { where(is_hidden: false) }
 
-  acts_as_taggable
+  acts_as_taggable_on :tags
 
   def updated_at_formate
     self.updated_at.strftime("%Y-%m-%d %H:%M:%S")

@@ -5,6 +5,7 @@ class Account::FollowsController < ApplicationController
 
     if !current_user.already_follower?(@followee)
       current_user.follow!(@followee)
+      flash[:notice] = "您已成功关注#{@followee.name}"
     else
       current_user.stop_follow!(@followee)
     end

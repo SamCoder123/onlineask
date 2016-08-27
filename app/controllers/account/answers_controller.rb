@@ -4,10 +4,13 @@ class Account::AnswersController < ApplicationController
 
   def index
     @answers = current_user.answers.published
+    drop_breadcrumb("我回答的问题")
     @answers = @answers.paginate(page: params[:page], per_page: 10)
   end
 
   def show
+    drop_breadcrumb("我回答的问题", account_answers_path(@answer))
+    drop_breadcrumb("我的回答")
   end
 
   def new
@@ -16,6 +19,8 @@ class Account::AnswersController < ApplicationController
   end
 
   def edit
+    drop_breadcrumb("我回答的问题", account_answers_path(@answer))
+    drop_breadcrumb("修改我的回答")
   end
 
   def create
@@ -52,7 +57,7 @@ class Account::AnswersController < ApplicationController
         false
       else
         true
-                             end
+      end
 
     if @answer.save
       flash[:notice] = "操作成功！"
@@ -67,6 +72,7 @@ class Account::AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     if @answer.user == current_user
       flash[:alert] = "不能偷听自己的回答！"
+      redirect_to :back
       return
     end
     if current_user.has_subscribed_answer?(@answer)
@@ -76,11 +82,12 @@ class Account::AnswersController < ApplicationController
     end
     if current_user.subscribe!(@answer)
       RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user).perform!
-      flash[:notice] = "可以偷听答案了！"
+      flash[:notice] = "可以偷听答案了！" ##{link_to("去查看", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-success")}
+      redirect_to my_subscriptions_account_user_path(current_user)
     else
       flash[:alert] = "偷听不成功"
+      redirect_to :back
     end
-    redirect_to :back
   end
 
   private

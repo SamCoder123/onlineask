@@ -18,3 +18,8 @@
 //= require semantic-ui
 //= require trix
 //= require notifications
+$(function() {
+    $('a[disabled=disabled]').click(function(event){
+        return false; // Prevent link from following its href
+    });
+});

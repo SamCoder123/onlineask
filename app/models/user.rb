@@ -156,6 +156,7 @@ end
 #  name                   :string
 #  balance                :float            default(0.0)
 #  phone_number           :string
+#  introduction           :string
 #
 # Indexes
 #

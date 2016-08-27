@@ -6,6 +6,7 @@ class Account::QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @questions = current_user.questions.published
+    drop_breadcrumb("我问过的问题")
     @questions = @questions.paginate(page: params[:page], per_page: 10)
   end
 
@@ -14,10 +15,15 @@ class Account::QuestionsController < ApplicationController
   def show
     @answers = @question.answers
     @invitated_users = @question.invitated_users
+    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    drop_breadcrumb(@question.title)
+
   end
 
   # GET
   def edit
+    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    drop_breadcrumb("编辑问题")
   end
 
   # PATCH/PUT
@@ -32,6 +38,12 @@ class Account::QuestionsController < ApplicationController
 
   def publish_hidden
     @question = Question.find(params[:id])
+    if @question.answers.count >0
+      flash[:alert] = "亲，您的问题已被回答，不能删除了"
+      redirect_to :back
+      return
+    end
+
     is_hidden = params[:is_hidden]
 
     @question.is_hidden =
@@ -75,6 +87,7 @@ class Account::QuestionsController < ApplicationController
 
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
+    drop_breadcrumb("被邀请的问题")
   end
 
   # 把question的status改为close,并退款
