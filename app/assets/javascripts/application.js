@@ -18,6 +18,8 @@
 //= require semantic-ui
 //= require trix
 //= require notifications
+//= require bootstrap/tab
+
 $(function() {
     $('a[disabled=disabled]').click(function(event){
         return false; // Prevent link from following its href

@@ -99,6 +99,12 @@ class Account::UsersController < ApplicationController
     @answers = current_user.subscribed_answers.paginate(page: params[:page], per_page: 5)
   end
 
+  def my_questions_answers
+    @user = current_user
+    @questions = @user.questions.paginate(page: params[:page], per_page: 10)
+    @answers = @user.answers.paginate(page: params[:page], per_page: 10)
+  end
+
   private
 
   def params_user

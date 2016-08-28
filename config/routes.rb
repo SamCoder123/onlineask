@@ -50,6 +50,7 @@ Rails.application.routes.draw do
         put :update_profile
         get :show_profile
         get :index_profile
+        get :my_questions_answers
       # add withdraw actions
         get :withdraw_edit
         post :withdraw_change
