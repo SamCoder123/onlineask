@@ -16,8 +16,10 @@ class User < ApplicationRecord
   scope :super_admin, -> { find(1) }
 
   def add_original_balance
-    self.balance += 1000
+    amount = 1000
+    self.balance += amount
     save
+    Bill.create!(flow: "out", detail: "注册奖励", amount: amount, user_id: self.id)
   end
 
   devise :database_authenticatable, :registerable,
