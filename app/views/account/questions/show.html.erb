@@ -40,6 +40,11 @@
         <div class="panel panel-info ">
           <div class="panel-heading">
             <h3 class="panel-title">回答人：<%= answer.user.name %>
+              <% if answer.answer_status == "best_answer" %>
+                <div class="btn btn-xs btn-danger" style="margin-left:30px">
+                  <small><span class="glyphicon glyphicon-star"></span>最佳答案</small>
+                </div>
+              <% end %>
               <%= link_to(answer.unlike_answers.count, unlike_vote_vote_answer_path(answer), method: :post, class:"fa fa-thumbs-o-down pull-right") %>
               <%= link_to(answer.like_answers.count, like_vote_vote_answer_path(answer), method: :post, class:"fa fa-thumbs-o-up pull-right", style:"margin-right:10px") %>
             </h3>
@@ -57,5 +62,5 @@
       <% end %>
     <% end %>
   </div>
-  
+
 </div>

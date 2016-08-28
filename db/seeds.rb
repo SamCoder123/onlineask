@@ -13,8 +13,22 @@ create_account = User.create([email: "liumiao2023@gmail.com", password: "123456"
 puts "Admin account created."
 
 create_replyer = User.create([email: "1@1", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "I am studing in Havard currently", gender: "male", school: "Havard", major: "IT", name: "Havard boy", balance: 0])
-
 create_asker = User.create([email: "2@2", password: "123123", password_confirmation: "123123", is_admin: "false", role: "asker", description: "I want to study in Havard", gender: "female", major: "IT", name: "Shoot", balance: 0])
+
+i = 0
+100.times do
+  i += 1
+  create_replyer = User.create(email: "#{i}@gmail.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "User#{i} is studing in Havard Business School", gender: "male", school: "Havard",  name: "Boy#{i}", major: "IT")
+end
+
+i = 0
+50.times do
+  i += 1
+  create_question = Question.create([title: "Q#{i},请问如何申请斯坦福大学呢？", description: "明年9月份想去斯坦福，不知道有没有大神可以给些意见？", user_id: 2*i, downpayment: 200, is_hidden: false, status: "open",tag_list:'美国'])
+  create_answer = Answer.create([content: "A#{i},首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。", question_id: i, user_id: 2*i+1, is_hidden: false])
+  create_answer = Answer.create([content: "A#{i}比如选商科，要先问自己是不是真的喜欢商科，对其有多深的了解，具体课程内容自己是否感兴趣。当然也可以参考自己选择的文理科方向，也需要考虑就读专业将来在社会上的应用，了解课程设置、相关专业。", question_id: i, user_id: 2*i+3, is_hidden:false])
+  create_answer = Answer.create([content: "A#{i}US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。", question_id: i, user_id: 2*i+5, is_hidden: false])
+end
 
 # "title"
 # "description"
