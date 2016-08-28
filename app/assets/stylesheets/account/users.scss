@@ -142,3 +142,9 @@ img.headshot
 .table-filter .media .summary {
 	font-size: 14px;
 }
+
+// sidebar 高亮底色
+a.active {
+  background-color: #337ab7;
+  color:#FFF;
+}

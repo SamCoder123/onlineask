@@ -53,6 +53,7 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem "trix"
 gem 'twilio-ruby', '~> 4.11.1'
 gem 'phonelib'
+gem 'active_link_to'
 
 group :production do
   gem "pg"
