@@ -24,7 +24,7 @@
   </div>
 
 
-    <div class="panel panel-default ">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">回答者列表</h3>
       </div>
@@ -43,10 +43,8 @@
               <br />
               <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px 0 45px"><%= answer.like_answers.count %></i>
               <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %></i>
-              <hr>
-
               <%= link_to("偷听", subscribe_answers_account_answer_path(answer), method: :post, class:"btn btn-sm btn-danger pull-right") %>
-
+              <hr>
           <% end %>
         <% else %>
             <span class="label label-info">还没有人回答呢，快来抢沙发吧？</span>
