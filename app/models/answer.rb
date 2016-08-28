@@ -8,7 +8,6 @@ class Answer < ApplicationRecord
   # has_many :user_likes, through: :like_answers, source: :user
   has_many :unlike_answers
 
-
   # answer_status 字段 有3种状态 pending best_answer unchosen
 
   scope :published, -> { where(is_hidden: false) }
