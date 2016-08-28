@@ -32,13 +32,16 @@ $(function(){
 
   <i class="fa fa-users" aria-hidden="true"></i>
   <span class="text" style="color:#adda4d" id="invite">邀请回答</span>
-  <% @invitated_users.each do |user| %>
-   <a class="ui label transition visible" data-value="<%= user.id %>" style="display: inline-block !important;">
-      <%= gravatar_tag user.email, :size => 50, :default => avatar_url %>
-      <%= user.name %>
-      回答数量：<%= user.answers.count %>
-      <i class="delete icon"></i>
-   </a>
+  <% unless @invitated_users.nil? %>
+    <% @invitated_users.each do |user| %>
+    <%# @users.each do |user| %>
+     <a class="ui label transition visible" data-value="<%= user.id %>" style="display: inline-block !important;">
+        <%= gravatar_tag user.email, :size => 50, :default => avatar_url %>
+        <%= user.name %>
+        回答数量：<%= user.answers.count %>
+        <i class="delete icon"></i>
+     </a>
+    <% end %>
   <% end %>
   <div class="menu">
     <div class="ui icon search input">
