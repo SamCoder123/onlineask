@@ -1,0 +1,9 @@
+<ul class="list-group">
+  <% @followers.each do |follower| %>
+    <li class="list-group-item" style="padding:1em">
+      <%= link_to(follower.user.name,exhibition_profile_account_user_path(follower.user_id)) %>
+      <%= follower.user.school %>
+      问题总数<%= follower.user.questions.count %>
+    </li>
+  <% end %>
+</ul>

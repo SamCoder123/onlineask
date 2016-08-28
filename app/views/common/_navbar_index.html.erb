@@ -33,11 +33,7 @@
                  <% if current_user.admin? %>
                    <li><%= link_to("管理者后台",admin_admins_path)%></li>
                  <% else %>
-                   <li> <%= link_to("个人中心", show_profile_account_user_path(current_user)) %></li>
-                   <li> <%= link_to("我的问题", account_questions_path) %></li>
-                   <li> <%= link_to("我的回答", account_answers_path) %></li>
-                   <li> <%= link_to("被邀请的问题", invitated_questions_account_questions_path) %></li>
-                   <li> <%= link_to("我偷听的答案", my_subscriptions_account_user_path(current_user)) %></li>
+                   <li> <%= link_to("个人主页", show_profile_account_user_path(current_user)) %></li>
                  <%end %>
 
                  <li class="divider"> </li>

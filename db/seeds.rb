@@ -30,6 +30,7 @@ i = 0
   create_answer = Answer.create([content: "A#{i}US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。", question_id: i, user_id: 2*i+5, is_hidden: false])
 end
 
+create_replyer = User.create([email: "3@3", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "I am studing in MIT currently", gender: "male", school: "MIT", major: "IT", name: "MIT boy", balance: 0])
 # "title"
 # "description"
 # "vote"

@@ -44,6 +44,10 @@ class Question < ApplicationRecord
   def invitation!(users)
     invitated_users << users
   end
+
+  def cancel_invitation!(users)
+    invitated_users.delete(users)
+  end
 end
 
 # == Schema Information

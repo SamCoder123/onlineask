@@ -99,6 +99,27 @@ class Account::UsersController < ApplicationController
     @answers = current_user.subscribing_answers.paginate(page: params[:page], per_page: 5)
   end
 
+  def my_questions_answers
+    @user = current_user
+    @questions = @user.questions.paginate(page: params[:page], per_page: 10)
+    @answers = @user.answers.paginate(page: params[:page], per_page: 10)
+  end
+
+  def wallet
+    @user = current_user
+  end
+
+  def replyers
+    @replyers = User.where(role: "replyer")
+  end
+
+  def follow_show
+    @user = current_user
+    #followers 是关注我的人，followees 是我关注的人
+    @followers = FollowRelationship.where(follower_id: @user)
+    @followees = FollowRelationship.where(user_id: @user)
+  end
+
   private
 
   def params_user
