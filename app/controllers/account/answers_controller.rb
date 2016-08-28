@@ -6,6 +6,7 @@ class Account::AnswersController < ApplicationController
     @answers = current_user.answers.published
     drop_breadcrumb("我回答的问题")
     @answers = @answers.paginate(page: params[:page], per_page: 10)
+    render layout: "user_center"
   end
 
   def show

@@ -9,6 +9,7 @@ class Account::QuestionsController < ApplicationController
     @questions = current_user.questions.published
     drop_breadcrumb("我问过的问题")
     @questions = @questions.paginate(page: params[:page], per_page: 10)
+    render layout: "user_center"
   end
 
   # GET
@@ -18,11 +19,17 @@ class Account::QuestionsController < ApplicationController
     @invitated_users = @question.invitated_users
     drop_breadcrumb("我问过的问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
-
   end
 
   # GET
   def edit
+    @invitated_users = @question.invitated_users
+    @filters_arry = Array.new
+    for user in @invitated_users
+      @filters_arry << user.id
+    end
+    @filters = @filters_arry.map(&:inspect).join(',')
+    @users = User.all - @invitated_users
     drop_breadcrumb("我问过的问题", account_questions_path(@question))
     drop_breadcrumb("编辑问题")
   end
@@ -31,6 +38,36 @@ class Account::QuestionsController < ApplicationController
   # PATCH/PUT
   def update
     if @question.update(question_params)
+      # 新的
+      @new_invitated_users = User.where(id: params[:filters].split(","))
+
+      # 旧的
+      @old_invitated_users = @question.invitated_users
+
+      # 并集
+      union_users = @new_invitated_users | @old_invitated_users
+
+      # 并集－旧的 ＝ 新增
+      add_users = union_users - @old_invitated_users
+
+      # 并集－新的 ＝ 删除的
+      delete_users = union_users - @new_invitated_users
+
+      # 新增邀请
+      unless add_users.empty?
+        @question.invitation!(add_users)
+        # 如何一下给多个用户发送？循环新增是不是不好？
+        for user in add_users
+          NotificationService.new(user,current_user,@question).send_notification!
+          OrderMailer.notify_invited_question(@question, user).deliver!
+        end
+      end
+
+      # 取消邀请
+      unless delete_users.empty?
+        @question.cancel_invitation!(delete_users)
+      end
+
       redirect_to account_questions_path, notice: "提问修改成功！"
     else
       render :edit
@@ -89,6 +126,7 @@ class Account::QuestionsController < ApplicationController
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
     drop_breadcrumb("被邀请的问题")
+    render layout: "user_center"
   end
 
   # 把question的status改为close,并退款

@@ -1,11 +1,10 @@
-<div class="col-md-8 col-md-offset-2">
-  <div class="total clearfix">
+<div class="col-md-8">
+  <div class="total clearfix btn-right-bottom">
     <span class="pull-right">
-      <%= link_to '返回', account_questions_path %>
+      <%= link_to '返回', account_questions_path,class:"btn btn-primary btn-xs" %>
     </span>
   </div>
   <div class="panel panel-default ">
-
     <div class="panel-heading">
       <h3 class="panel-title">问题主题：<%= @question.title %></h3>
     </div>
@@ -49,7 +48,7 @@
           <div class="panel-body">
             <%= answer.content %>
           </div>
-          <div class="total clearfix">
+          <div class="total clearfix btn-right-bottom">
             <span class="pull-right">
               <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
             </span>
