@@ -8,6 +8,7 @@ class Account::QuestionsController < ApplicationController
     @questions = current_user.questions.published
     drop_breadcrumb("我问过的问题")
     @questions = @questions.paginate(page: params[:page], per_page: 10)
+    render layout: "user_center"
   end
 
   # GET
@@ -17,11 +18,17 @@ class Account::QuestionsController < ApplicationController
     @invitated_users = @question.invitated_users
     drop_breadcrumb("我问过的问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
-
   end
 
   # GET
   def edit
+    @invitated_users = @question.invitated_users
+    @filters_arry = Array.new
+    for user in @invitated_users
+      @filters_arry << user.id
+    end
+    @filters = @filters_arry.map(&:inspect).join(', ')
+    @users = User.all - @invitated_users
     drop_breadcrumb("我问过的问题", account_questions_path(@question))
     drop_breadcrumb("编辑问题")
   end
@@ -30,6 +37,16 @@ class Account::QuestionsController < ApplicationController
   # PATCH/PUT
   def update
     if @question.update(question_params)
+      # 保存用户 从平台扣钱150转给回答者
+      # 把邀请人和问题存入关系表
+      @invitated_users = User.where(id: params[:filters].split(","))
+
+      RewardDepositService.new(current_user,@invitated_users,@question).perform!
+
+      # 如何一下给多个用户发送？循环新增是不是不好？
+      for user in @invitated_users
+        NotificationService.new(user,current_user,@question).send_notification!
+      end
       redirect_to account_questions_path, notice: "提问修改成功！"
     else
       render :edit
@@ -38,6 +55,12 @@ class Account::QuestionsController < ApplicationController
 
   def publish_hidden
     @question = Question.find(params[:id])
+    if @question.answers.count >0
+      flash[:alert] = "亲，您的问题已被回答，不能删除了"
+      redirect_to :back
+      return
+    end
+
     is_hidden = params[:is_hidden]
 
     @question.is_hidden =
@@ -82,6 +105,7 @@ class Account::QuestionsController < ApplicationController
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
     drop_breadcrumb("被邀请的问题")
+    render layout: "user_center"
   end
 
   # 把question的status改为close,并退款

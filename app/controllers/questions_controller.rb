@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-
+    @users = User.all
   end
 
   def create

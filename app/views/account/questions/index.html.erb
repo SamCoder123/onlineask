@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10">
 
     <div class="panel panel-default">
       <div class="panel-heading">我问过的问题</div>
@@ -15,10 +15,13 @@
             <div class="pull-right">
               <%= link_to "编辑",edit_account_question_path(question),class:"btn btn-primary btn-xs" %>
 
-              <%= link_to  "删除",publish_hidden_account_question_path(question), method: :post, data: { confirm: 'Are you sure you want to delete the question?' }, class:"btn btn-primary btn-xs" %>
-
-              <%= render_cancel_reopen(question)  %>
-
+              <% if question.answers.count>0 %>
+                <%= render_cancel_reopen(question,true)  %>
+                <%= link_to  "删除",publish_hidden_account_question_path(question), method: :post, data: { confirm: 'Are you sure you want to delete the question?' }, class:"btn btn-default btn-xs",disabled:true %>
+              <% else %>
+                <%= render_cancel_reopen(question,false)  %>
+                <%= link_to  "删除",publish_hidden_account_question_path(question), method: :post, data: { confirm: 'Are you sure you want to delete the question?' }, class:"btn btn-default btn-xs" %>
+              <% end %>
             </div>
           </li>
         <% end %>
