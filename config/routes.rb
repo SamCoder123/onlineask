@@ -51,6 +51,7 @@ Rails.application.routes.draw do
         get :show_profile
         get :index_profile
         get :my_questions_answers
+        get :wallet
       # add withdraw actions
         get :withdraw_edit
         post :withdraw_change
@@ -58,6 +59,10 @@ Rails.application.routes.draw do
         post :deposit_change
         get :exhibition_profile
         get :my_subscriptions
+      end
+
+      collection do
+        get :replyers
       end
     end
 

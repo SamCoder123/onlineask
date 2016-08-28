@@ -105,6 +105,14 @@ class Account::UsersController < ApplicationController
     @answers = @user.answers.paginate(page: params[:page], per_page: 10)
   end
 
+  def wallet
+    @user = current_user
+  end
+
+  def replyers
+    @replyers = User.where(role: "replyer")
+  end
+
   private
 
   def params_user

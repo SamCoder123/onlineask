@@ -1,0 +1,40 @@
+<div class="col-md-10" style="padding-left:0">
+  <div class="panel panel-default" style="background:transparent;">
+    <div class="panel-body">
+      学霸列表
+      <div class="btn-group pull-right">
+        <%= link_to("sort","#",class:"btn btn-default btn-group-sm ") %>
+      </div>
+
+      <table class="table table-filter">
+        <% @replyers.each do |replyer| %>
+        <tr>
+          <td>
+            <div class="media">
+              <div class="pull-left">
+                <%= gravatar_tag replyer.email, :size => 30, :default => avatar_url %>
+              </div>
+                <div class="media-body">
+                  <span class="media-meta pull-right"><%= replyer.created_at %></span>
+                  <h4 class="title">
+                    <%= replyer.name %>: <%= link_to(replyer.school,exhibition_profile_account_user_path(replyer))  %>
+                    <span class="pull-right pagado">回答总数：<%= replyer.answers.count %></span>
+                  </h4>
+
+                  <p class="summary">
+
+                    <%= truncate(replyer.description, limit:25) %>
+                    <span class="pull-right"><%= link_to("向Ta提问", new_question_path, class:"btn btn-default btn-xs") %></span>
+                  </p>
+
+                </div>
+              </div>
+            </td>
+        </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+
+</div>
