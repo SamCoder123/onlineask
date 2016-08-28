@@ -13,7 +13,9 @@ class RewardDepositService
     @user.super_admin_bill!(amount)
     # 被邀请的人存入关系
     @question.invitation!(@invitated_users)
-    OrderMailer.notify_invited_question(@question).deliver!
+    @invitated_users.each do |user|
+      OrderMailer.notify_invited_question(@question, user).deliver!
+    end
   end
 
 end
