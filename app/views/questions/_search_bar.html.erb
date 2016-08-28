@@ -1,5 +1,5 @@
 <div class="row" style="text-align:center">
-  <div class="col-sm-8 col-lg-8 col-lg-offset-2">
+  <div class="col-sm-8 col-sm-offset-2 col-lg-8 col-lg-offset-2">
     <%= form_tag search_questions_path, method: :get, class: 'questions-search-form'  do %>
       <div class="input-group input-group-lg">
         <input type="text" class="form-control" name="query_string" value="<%= params[:query_string] %>" placeholder="您想问的问题、答案、学长、学姐...">

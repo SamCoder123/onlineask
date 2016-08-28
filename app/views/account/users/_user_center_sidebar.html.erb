@@ -1,20 +1,10 @@
 <div class="nav col-md-2 col-xs-12" >
   <ul class="nav nav-pills nav-stacked" style="padding-left: 30px">
-    <li class="<%= 'active' if controller?('account/users') && action?('show_profile')%>"><%= link_to("个人首页",show_profile_account_user_path(current_user)) %></li>
-    <li class="<%= 'active' if controller?('account/users') && action?('index_profile')%>"><%= link_to("个人资料",index_profile_account_user_path(current_user)) %></li>
-    <li class="<%= 'active' if controller?('account/questions')&& action?('index') %>">
-      <%= link_to("我的提问",account_questions_path) %>
-    </li>
-    <li class="<%= 'active' if controller?('account/answers')&& action?('index')%>">
-       <%= link_to("我的回答",account_answers_path) %>
-    </li>
-    <li class="<%= 'active' if controller?('account/questions')&& action?('invitated_questions')%>">
-      <%= link_to("被邀请的问题",invitated_questions_account_questions_path) %>
-    </li>
-    <li class="<%= 'active' if controller?('account/users') && action?('my_subscriptions')%>">
-      <%= link_to("我偷听的答案",my_subscriptions_account_user_path(current_user)) %>
-    </li>
-    <li class="<%= 'active' if controller?('account/users') && action?('deposit_edit') %>"><%= link_to("账户充值",deposit_edit_account_user_path(current_user) ) %></li>
-    <li class="<%= 'active' if controller?('account/users') && action?('withdraw_edit')%>"><%= link_to("账户提现",withdraw_edit_account_user_path(current_user) ) %></li>
+    <li><%= active_link_to "个人首页", show_profile_account_user_path(@user) %></li>
+    <li><%= active_link_to "个人资料", index_profile_account_user_path(@user) %></li>
+    <li><%= active_link_to "我的问题与答案", my_questions_answers_account_user_path(@user) %></li>
+    <li><%= active_link_to "账户充值", deposit_edit_account_user_path(@user) %></li>
+    <li><%= active_link_to "账户提现", withdraw_edit_account_user_path(@user)  %></li>
+
   </ul>
 </div>
