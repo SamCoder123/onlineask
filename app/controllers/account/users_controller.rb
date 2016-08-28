@@ -96,7 +96,7 @@ class Account::UsersController < ApplicationController
   def my_subscriptions
     drop_breadcrumb("我偷听的答案")
     @user = current_user
-    @answers = current_user.subscribing_answers.paginate(page: params[:page], per_page: 5)
+    @answer_subscriptions = AnswerSubscription.where(user_id: current_user).order("created_at DESC").paginate(page: params[:page], per_page: 5)
   end
 
   def my_questions_answers
