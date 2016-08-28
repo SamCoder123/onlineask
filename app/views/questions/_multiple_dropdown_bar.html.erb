@@ -17,10 +17,14 @@ $(function(){
   //   alert(this);
   // });
 
+
   $('.ui.dropdown')
   .dropdown({
     allowAdditions: true
   });
+
+  //$('.ui.dropdown').dropdown('set selected',['Role1','Role2']);
+
 });
 
 </script>
@@ -34,7 +38,6 @@ $(function(){
   <span class="text" style="color:#adda4d" id="invite">邀请回答</span>
   <% unless @invitated_users.nil? %>
     <% @invitated_users.each do |user| %>
-    <%# @users.each do |user| %>
      <a class="ui label transition visible" data-value="<%= user.id %>" style="display: inline-block !important;">
         <%= gravatar_tag user.email, :size => 50, :default => avatar_url %>
         <%= user.name %>
