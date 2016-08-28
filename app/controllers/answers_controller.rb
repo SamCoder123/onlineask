@@ -49,8 +49,8 @@ class AnswersController < ApplicationController
   def check_question_and_require_not_self_reply
     @question = Question.find(params[:question_id])
     if @question.user == current_user
-      redirect_to root_path
-      flash[:alert] = "亲，不要回答自己的问题哦~"
+      flash[:warning] = "亲，不要回答自己的问题哦~"
+      redirect_to :back
     end
   end
 end

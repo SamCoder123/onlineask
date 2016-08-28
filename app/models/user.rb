@@ -12,12 +12,15 @@ class User < ApplicationRecord
   has_many :a_likes, through: :like_answers, source: :answer
   has_many :unlike_answers
   has_many :a_unlikes, through: :unlike_answers, source: :answer
+  has_many :bills
 
   scope :super_admin, -> { find(1) }
 
   def add_original_balance
-    self.balance += 1000
+    amount = 1000
+    self.balance += amount
     save
+    Bill.create!(flow: "out", detail: "注册奖励", amount: amount, user_id: self.id)
   end
 
   devise :database_authenticatable, :registerable,
@@ -30,8 +33,7 @@ class User < ApplicationRecord
   has_many :invitated_questions, through: :question_invitations, source: :question
 
   has_many :answer_subscriptions
-  has_many :subscribed_answers, through: :answer_subscriptions, source: :answer
-
+  has_many :subscribing_answers, through: :answer_subscriptions, source: :answer
   # validates :name, presence: true
   # validates :role, presence: true
   # validates :gender, presence: true
@@ -79,12 +81,12 @@ class User < ApplicationRecord
 
   # 是否已经偷听问题
   def has_subscribed_answer?(answer)
-    subscribed_answers.include?(answer)
+    subscribing_answers.include?(answer)
   end
 
   # 偷听问题，把问题加入偷听列表
   def subscribe!(answer)
-    subscribed_answers << answer
+    subscribing_answers << answer
   end
 
   def already_follower?(followee)

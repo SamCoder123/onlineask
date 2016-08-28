@@ -4,6 +4,7 @@ class Question < ApplicationRecord
   has_many :answers
   has_many :question_invitations
   has_many :invitated_users, through: :question_invitations, source: :user
+  has_many :bills
 
   validates :title, presence: true
   validates :description, presence: true

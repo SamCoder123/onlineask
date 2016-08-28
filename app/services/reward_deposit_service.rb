@@ -17,6 +17,8 @@ class RewardDepositService
       NotificationService.new(user,current_user,@question).send_notification!
       OrderMailer.notify_invited_question(@question, user).deliver!
     end
+
+    Bill.create!(amount: amount, question: @question, user: @user, flow: "in", detail: "提问押金")
   end
 
 end
