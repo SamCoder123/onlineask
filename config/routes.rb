@@ -59,6 +59,8 @@ Rails.application.routes.draw do
         post :deposit_change
         get :exhibition_profile
         get :my_subscriptions
+        # 显示我的关注
+        get :follow_show
       end
 
       collection do

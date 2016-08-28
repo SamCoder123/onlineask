@@ -15,7 +15,7 @@ puts "Admin account created."
 create_replyer = User.create([email: "1@1", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "I am studing in Havard currently", gender: "male", school: "Havard", major: "IT", name: "Havard boy", balance: 0])
 
 create_asker = User.create([email: "2@2", password: "123123", password_confirmation: "123123", is_admin: "false", role: "asker", description: "I want to study in Havard", gender: "female", major: "IT", name: "Shoot", balance: 0])
-
+create_replyer = User.create([email: "3@3", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "I am studing in MIT currently", gender: "male", school: "MIT", major: "IT", name: "MIT boy", balance: 0])
 # "title"
 # "description"
 # "vote"
