@@ -101,7 +101,7 @@ Rails.application.routes.draw do
 
     resources :admins do
       collection do
-        get :questions_bill
+        get :bill
       end
     end
   end
