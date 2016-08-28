@@ -99,10 +99,16 @@
   width: 85%;
 }
 
+.picture-center img{
+  height: 278px;
+  width: 232px;
+  overflow: hidden;
+}
+
 .picture-mask{
     position: absolute;
-    top: 635px;
-    overflow: hidden;
+    bottom:0px;
+    overflow:hidden;;
     width: 232px;
     height: 60px;
     z-index: 2;
@@ -110,6 +116,9 @@
     color: #FFF;
     text-align: center;
     padding-top: 20px;
+    margin-bottom: 30px;
+    font-size: 16px;
+    float: left;
 }
 
 .footer-color{

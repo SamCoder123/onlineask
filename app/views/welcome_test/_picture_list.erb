@@ -2,19 +2,36 @@
   <div class="row picture-center hidden-sm">
       <div class=" hidden-sm hidden-xs">
           <div class="pull-left">
+            <%= link_to(new_user_registration_path) do %>
             <img src="/replyer1.png"/>
             <div class="picture-mask">
-              <%= link_to("成为学霸",new_user_registration_path) %>
+                <span>成为学霸</span>
             </div>
+            <% end %>
           </div>
           <div class="pull-left">
+            <%= link_to(new_question_path) do %>
             <img src="/replyer2.png"/>
+            <div class="picture-mask">
+              <span>马上提问</span>
+            </div>
+            <% end %>
           </div>
           <div class="pull-left">
+            <%= link_to(show_profile_account_user_path(current_user)) do %>
               <img src="/replyer3.png"/>
+              <div class="picture-mask">
+                <span>问题海淘</span>
+              </div>
+            <% end %>
           </div>
           <div class="pull-left">
-              <img src="/replyer4.png"/>
+              <%= link_to(show_profile_account_user_path(current_user)) do %>
+                <img src="/replyer4.png"/>
+                <div class="picture-mask">
+                  <span>寻找学霸</span>
+                </div>
+              <% end %>
           </div>
 
       </div>
