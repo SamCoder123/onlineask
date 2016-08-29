@@ -21,6 +21,7 @@
 //= require bootstrap/tab
 //= require bootstrap/tooltip
 //= require bootstrap/popover
+//= require simditor
 
 $(function() {
     $('a[disabled=disabled]').click(function(event){

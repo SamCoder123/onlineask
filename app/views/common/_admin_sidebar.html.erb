@@ -5,5 +5,6 @@
     <li class="<%= 'active' if controller?('admin/answers') %>"><%= link_to("答案管理", admin_answers_path) %></li>
     <li class="<%= 'active' if controller?('admin/users') %>"><%= link_to("用户管理", admin_users_path) %></li>
     <li class="<%= 'active' if controller?('admin/admins') && action?('bill') %>"><%= link_to("交易管理", bill_admin_admins_path) %></li>
+    <li class="<%= 'active' if controller?('admin/tags') %>"><%= link_to("标签管理", admin_tags_path) %></li>
   </ul>
 </div>

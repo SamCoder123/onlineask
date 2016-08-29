@@ -54,6 +54,8 @@ gem "trix"
 gem 'twilio-ruby', '~> 4.11.1'
 gem 'phonelib'
 gem 'active_link_to'
+# simditor文本编辑器
+gem "simditor"
 
 group :production do
   gem "pg"

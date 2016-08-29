@@ -2,7 +2,7 @@ class Account::QuestionsController < ApplicationController
   before_action :set_question, only: %i(show edit update destroy)
   before_action :authenticate_user!
 
-  
+
   # GET /questions
   # GET /questions.json
   def index
@@ -18,7 +18,7 @@ class Account::QuestionsController < ApplicationController
     @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
     drop_breadcrumb("我问过的问题", account_questions_path(@question))
-    drop_breadcrumb(@question.title)
+    drop_breadcrumb(@question.title) 
   end
 
   # GET

@@ -107,3 +107,14 @@
   display: inline-block;
   border-radius: 50%;
 }
+
+
+// sidebar 高亮底色
+
+a.active {
+  background-color: #337ab7;
+  color:#FFF;
+}
+
+a:hover { background-color: #337ab7;
+color:#FFF; }
