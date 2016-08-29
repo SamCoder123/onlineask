@@ -1,10 +1,8 @@
 class Tag < ApplicationRecord
-
   belongs_to :question
   has_many :taggings
 
   validates :name, uniqueness: true
-
 end
 
 # == Schema Information

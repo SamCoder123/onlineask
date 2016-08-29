@@ -12,7 +12,10 @@ Style/ClassAndModuleChildren:
 
 Style/AsciiComments:
   Enabled: false
-  
+
+Lint/UselessAssignment:
+  Enabled: false
+
 Metrics/AbcSize:
   Enabled: false
 
@@ -106,3 +109,6 @@ Style/TrailingCommaInArguments:
 
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: no_comma
+
+Rails/Output:
+  Enabled: false

@@ -18,7 +18,6 @@ class User < ApplicationRecord
     end
   end
 
-
   after_create :add_original_balance
   has_many :questions
   has_many :answers
@@ -39,7 +38,7 @@ class User < ApplicationRecord
     amount = 1000
     self.balance += amount
     save
-    Bill.create!(flow: "out", detail: "注册奖励", amount: amount, user_id: self.id)
+    Bill.create!(flow: "out", detail: "注册奖励", amount: amount, user_id: id)
   end
 
   devise :database_authenticatable, :registerable,
@@ -97,7 +96,7 @@ class User < ApplicationRecord
   end
 
   # 是否已经偷听问题
-  def has_subscribed_answer?(answer)
+  def subscribed_answer?(answer)
     subscribing_answers.include?(answer)
   end
 
@@ -172,7 +171,6 @@ class User < ApplicationRecord
   def question_unlike_cancle!(question)
     q_unlikes.delete(question)
   end
-
 end
 
 # == Schema Information
