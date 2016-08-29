@@ -9,4 +9,55 @@
       <% end %>
     <% end %>
     </li>
+    <li>他有<%= @blogs.count %>文章</li>
+      <ul>
+        <% @blogs.each do |blog| %>
+          <li><%= link_to blog.title, account_blog_path(blog) %></li>
+          <% i = 0 %>
+          <% i += 1 %>
+          <% if i == 3 %>
+            <% break %>
+          <% end %>
+        <% end %>
+      </ul>
+    <li class="divider"></li>
+
+    <li>他的限免回答</li>
+      <ul>
+        <li>暂无</li>
+      </ul>
+    <li class="divider"></li>
+
+    <li>他擅长的问题</li>
+      <ul>
+        <li>暂无</li>
+      </ul>
+    <li class="divider"></li>
+
+    <li>他获得的标签</li>
+      <ul>
+        <li>暂无</li>
+      </ul>
+    <li class="divider"></li>
+
+    <li>关注了<%= @user.q_likes.count %>个问题</li>
+      <ul>
+        <% @user.q_likes.each do |qlike| %>
+          <li><%= link_to qlike.title, question_path(qlike) %></li>
+          <% i = 0 %>
+          <% i += 1 %>
+          <% if i == 3 %>
+            <% break %>
+          <% end %>
+        <% end %>
+      </ul>
+    <li class="divider"></li>
+
+    <li>我关注的人中，5人也关注Ta</li>
+    <li class="divider"></li>
+
+    <li>你们共同关注了3人</li>
+    <li class="divider"></li>
+
+
 </ul>

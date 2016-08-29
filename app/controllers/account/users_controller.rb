@@ -6,8 +6,8 @@ class Account::UsersController < ApplicationController
   def index_profile
     @user = current_user
 
-    @followers = FollowRelationship.where(user_id: @user)
-    @followings = FollowRelationship.where(follower_id: @user)
+    @followers = FollowRelationship.where(follower_id: @user)
+    @followings = @user.followees
     @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
 
     @questions = current_user.questions.published
@@ -90,9 +90,11 @@ class Account::UsersController < ApplicationController
   # 链接到user展示页
   def exhibition_profile
     @user = User.find(params[:id])
-    @followers = FollowRelationship.where(user_id: @user)
-    @followings = FollowRelationship.where(follower_id: @user)
-    @answers = @user.answers
+    @blogs = @user.blogs
+    @followers = FollowRelationship.where(follower_id: @user)
+    @followings = @user.followees
+    # @same_followees = current_user.followees.where(follower_id: @followings)
+    @answers = @user.answers.paginate(page: params[:page], per_page: 5)
     @best_answers = @answers.where(answer_status: "best_answer")
     @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
     render layout: "profile"
