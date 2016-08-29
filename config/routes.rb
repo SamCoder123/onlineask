@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   resources :tags, only: [:index, :show]
 
   resources :questions do
+    member do
+      post :question_like_up
+    end
     resources :answers
-
     collection do
       get :search
     end

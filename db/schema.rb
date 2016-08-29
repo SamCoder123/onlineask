@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160825081420) do
+ActiveRecord::Schema.define(version: 20160829055232) do
 
   create_table "answer_subscriptions", force: :cascade do |t|
     t.integer  "answer_id"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 20160825081420) do
   create_table "images", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -72,6 +78,7 @@ ActiveRecord::Schema.define(version: 20160825081420) do
     t.float    "downpayment", default: 0.0
     t.string   "status",      default: "open"
     t.string   "tag"
+    t.integer  "likes",       default: 0
   end
 
   create_table "sessions", force: :cascade do |t|

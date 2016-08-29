@@ -72,6 +72,13 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def question_like_up
+    @question_like = Question.find(params[:id])
+    @question_like.likes += 1
+    @question_like.save
+    redirect_to :back
+  end
+
   protected
 
   def validate_search_key
@@ -87,6 +94,8 @@ class QuestionsController < ApplicationController
   def user_search_criteria(query_string)
     { email_or_name_cont: query_string }
   end
+
+
 
   private
 
