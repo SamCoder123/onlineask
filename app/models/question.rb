@@ -4,12 +4,15 @@ class Question < ApplicationRecord
   has_many :answers
   has_many :question_invitations
   has_many :invitated_users, through: :question_invitations, source: :user
+  has_many :bills
 
   validates :title, presence: true
   validates :description, presence: true
   validates :tag_list, presence: true
+
   validates :likes, presence: true, numericality:{greater_than:0}
   validates :downpayment, presence: true, numericality:{greater_than:0}
+
 
   # status 字段 有两种状态 open closed
 
@@ -43,6 +46,10 @@ class Question < ApplicationRecord
 
   def invitation!(users)
     invitated_users << users
+  end
+
+  def cancel_invitation!(users)
+    invitated_users.delete(users)
   end
 end
 

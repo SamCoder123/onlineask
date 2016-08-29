@@ -24,7 +24,7 @@
   </div>
 
 
-    <div class="panel panel-default ">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">回答者列表</h3>
       </div>
@@ -32,14 +32,19 @@
       <div class="panel-body">
         <%if @question.answers.size>0  %>
           <% @question.answers.each do |answer| %>
-            <%= gravatar_tag answer.user.email, :size => 40, :default => avatar_url %>
 
-            <%= link_to(answer.user.name, exhibition_profile_account_user_path(id: answer.user.id)) %>
-            在
-            <%= answer.updated_at_formate %>
-            回答了这个问题
-            <%= link_to("偷听", subscribe_answers_account_answer_path(answer), method: :post, class:"btn btn-sm btn-danger pull-right") %>
-            <hr>
+              <%= gravatar_tag answer.user.email, :size => 40, :default => avatar_url %>
+
+
+              <%= link_to(answer.user.name, exhibition_profile_account_user_path(id: answer.user.id)) %>
+              在
+              <%= answer.updated_at_formate %>
+              回答了这个问题
+              <br />
+              <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px 0 45px"><%= answer.like_answers.count %></i>
+              <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %></i>
+              <%= link_to("偷听", subscribe_answers_account_answer_path(answer), method: :post, class:"btn btn-sm btn-danger pull-right") %>
+              <hr>
           <% end %>
         <% else %>
             <span class="label label-info">还没有人回答呢，快来抢沙发吧？</span>
@@ -47,6 +52,5 @@
         <% end %>
       </div>
     </div>
-
 
 </div>

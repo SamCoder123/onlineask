@@ -1,6 +1,7 @@
 class AnswerSubscription < ApplicationRecord
   belongs_to :answer
   belongs_to :user
+  has_many :bills
 end
 
 # == Schema Information

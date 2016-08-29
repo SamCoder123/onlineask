@@ -1,11 +1,10 @@
-<div class="col-md-8 col-md-offset-2">
-  <div class="total clearfix">
+<div class="col-md-8">
+  <div class="total clearfix btn-right-bottom">
     <span class="pull-right">
-      <%= link_to '返回', account_questions_path %>
+      <%= link_to '返回', account_questions_path,class:"btn btn-primary btn-xs" %>
     </span>
   </div>
   <div class="panel panel-default ">
-
     <div class="panel-heading">
       <h3 class="panel-title">问题主题：<%= @question.title %></h3>
     </div>
@@ -13,11 +12,13 @@
     <div class="panel-body">
       <p>问题描述：<%= sanitize(@question.description) %></p>
     </div>
+  </div>
 
+  <div>
     <% @invitated_users.each do |user| %>
       <div class="panel panel-info ">
         <div class="panel-heading">
-          <h3 class="panel-title">邀请人：<%= user.name %> & 他的回答</ h3>
+          <h3 class="panel-title">邀请人：<%= user.name %> & 他的回答</h3>
         </div>
           <% answers = user.answers.where(question_id:@question.id) %>
           <% answers.each do |answer| %>
@@ -38,22 +39,28 @@
       <% if !@question.invitated_users.include?(answer.user)  %>
         <div class="panel panel-info ">
           <div class="panel-heading">
-            <h3 class="panel-title">回答人：<%= answer.user.name %></h3>
+            <h3 class="panel-title">回答人：<%= answer.user.name %>
+              <% if answer.answer_status == "best_answer" %>
+                <div class="btn btn-xs btn-danger" style="margin-left:30px;font">
+                  <small><span class="glyphicon glyphicon-star"></span>最佳答案</small>
+                </div>
+              <% end %>
+              <%= link_to(answer.unlike_answers.count, unlike_vote_vote_answer_path(answer), method: :post, class:"fa fa-thumbs-o-down pull-right") %>
+              <%= link_to(answer.like_answers.count, like_vote_vote_answer_path(answer), method: :post, class:"fa fa-thumbs-o-up pull-right", style:"margin-right:10px") %>
+            </h3>
           </div>
 
           <div class="panel-body">
             <%= answer.content %>
           </div>
-          <div class="total clearfix">
+          <div class="total clearfix btn-right-bottom">
             <span class="pull-right">
               <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
             </span>
           </div>
        </div>
       <% end %>
-
     <% end %>
-
-
   </div>
+
 </div>

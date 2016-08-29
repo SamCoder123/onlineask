@@ -52,6 +52,8 @@ Rails.application.routes.draw do
         put :update_profile
         get :show_profile
         get :index_profile
+        get :my_questions_answers
+        get :wallet
       # add withdraw actions
         get :withdraw_edit
         post :withdraw_change
@@ -59,6 +61,12 @@ Rails.application.routes.draw do
         post :deposit_change
         get :exhibition_profile
         get :my_subscriptions
+        # 显示我的关注
+        get :follow_show
+      end
+
+      collection do
+        get :replyers
       end
     end
 
@@ -95,7 +103,7 @@ Rails.application.routes.draw do
 
     resources :admins do
       collection do
-        get :questions_bill
+        get :bill
       end
     end
   end
@@ -104,6 +112,17 @@ Rails.application.routes.draw do
   resources :notifications do
     collection do
       post :mark_as_read
+    end
+  end
+
+  #vote功能
+  namespace :vote do
+    # 对answer的vote
+    resources :vote_answers, only: %i(like,like_cancel,unlike,unlike_cancel) do
+      member do
+        post :like
+        post :unlike
+      end
     end
   end
 end

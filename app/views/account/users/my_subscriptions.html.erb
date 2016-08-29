@@ -3,7 +3,7 @@
     <h2>我偷听的答案</h2>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <% collapse_num = 0 %>
-      <% @answers.each do |answer| %>
+      <% @answer_subscriptions.each do |subscription| %>
         <% collapse_num += 1 %>
         <% collapse_num_to_id = collapse_num.to_words.split.map(&:capitalize).join() %>
         <div class="panel panel-default">
@@ -14,20 +14,23 @@
               <% else %>
                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= collapse_num_to_id %>" aria-expanded="false" aria-controls="collapse<%= collapse_num_to_id %>">
               <% end %>
-                <%= answer.question.title %><b class="caret"></b>
+                <%= subscription.answer.question.title %><b class="caret"></b>
+                <% if collapse_num == 1 %>
+                  <small class="pull-right"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>最近偷听</small>
+                <% end %>
               </a>
             </h4>
           </div>
-          <div id="collapse<%= collapse_num_to_id %>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<%= collapse_num_to_id %>">
+          <div id="collapse<%= collapse_num_to_id %>" class="panel-collapse collapse <%= "in" if collapse_num == 1 %>" role="tabpanel" aria-labelledby="heading<%= collapse_num_to_id %>">
             <div class="panel-body">
-              <%= answer.content %>
+              <%= subscription.answer.content %>
             </div>
           </div>
         </div>
       <% end %>
     </div>
     <div class="text-center">
-     <%= will_paginate @answers %>
+     <%= will_paginate @answer_subscriptions, class:"paginate"%>
     </div>
   </div>
 </div>

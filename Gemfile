@@ -53,6 +53,7 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem "trix"
 gem 'twilio-ruby', '~> 4.11.1'
 gem 'phonelib'
+gem 'active_link_to'
 
 group :production do
   gem "pg"
@@ -76,6 +77,7 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "rails-erd"
+  gem "letter_opener"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -25,5 +25,7 @@ class RewardBestAnswer
     @answer.best_answer!
     @answer.make_others_unchosen!(@question)
 
+    Bill.create!(amount: original_amount - service_fee, question: @question, answer: @answer, user: @answer_owner, flow: "out", detail: "最佳答案")
+
    end
  end

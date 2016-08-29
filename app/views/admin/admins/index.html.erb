@@ -52,11 +52,11 @@
         账目管理
       </td>
       <td>
-        流水金额：
-        <%= render_admin_questions_bill_total(@questions.where(status: 'open')) %>
+        账单数量：
+        <%= @bills.count %>
       </td>
       <td>
-        <%= link_to("去查看", questions_bill_admin_admins_path, class: "btn btn-primary") %>
+        <%= link_to("去查看", bill_admin_admins_path, class: "btn btn-primary") %>
       </td>
     </tr>
   </tbody>

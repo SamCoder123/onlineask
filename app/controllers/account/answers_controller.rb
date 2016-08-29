@@ -6,6 +6,7 @@ class Account::AnswersController < ApplicationController
     @answers = current_user.answers.published
     drop_breadcrumb("我回答的问题")
     @answers = @answers.paginate(page: params[:page], per_page: 10)
+    render layout: "user_center"
   end
 
   def show
@@ -81,7 +82,7 @@ class Account::AnswersController < ApplicationController
       return
     end
     if current_user.subscribe!(@answer)
-      RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user).perform!
+      RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user, @answer).perform!
       flash[:notice] = "可以偷听答案了！" ##{link_to("去查看", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-success")}
       redirect_to my_subscriptions_account_user_path(current_user)
     else

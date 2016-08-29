@@ -98,7 +98,7 @@ img.headshot
 }
 .user-nav{
   padding:10px 10px 10px 30px;
-  margin: 0 0 20px 20px;
+  margin: 0 0 20px 0px;
   border: 1px;
   border-style: solid;
   border-color: #dedede;
@@ -141,4 +141,10 @@ img.headshot
 }
 .table-filter .media .summary {
 	font-size: 14px;
+}
+
+// sidebar 高亮底色
+a.active {
+  background-color: #337ab7;
+  color:#FFF;
 }

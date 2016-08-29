@@ -13,6 +13,7 @@
  *= require_self
  *= require font-awesome
  *= require questions
+ *= require answers
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -20,7 +21,23 @@
 @import "semantic-ui";
 @import "trix";
 
-mark{ background:yellow  }
+mark{ background:yellow }
+
+html,body{
+    height: 100%;
+    width: 100%;
+    background-image: url(/crossword.png);
+}
+
+#wrap{
+  min-height: 100%;
+
+  position:relative;
+  // padding-bottom 是footer的高度，当footer变化时需要相应改变
+  padding-bottom:153px;
+}
+
+
 
 .invitated_users_answer{ border-bottom: 1px solid #999;}
 
@@ -32,10 +49,10 @@ mark{ background:yellow  }
 .footer-bg{
   padding: 35px 0 20px 0;
   background-color: #333333;
-  position:fixed;
+  position:absolute;
   bottom:0px;
   width: 100%;
-  margin:50px 0px 0 0;
+  margin: 0;
 }
 .footer-font{
   text-align: center;
@@ -54,7 +71,6 @@ mark{ background:yellow  }
   text-align: center;
   color:#6f6f6f;
   font-size: 12px;
-
 }
 
 .footer-index-bg{
@@ -64,4 +80,10 @@ mark{ background:yellow  }
   bottom:0px;
   width: 100%;
   margin:0px;
+}
+
+.paginate{
+  padding: 5px 20px;
+  background-color: #eee;
+  width: 30%;
 }
