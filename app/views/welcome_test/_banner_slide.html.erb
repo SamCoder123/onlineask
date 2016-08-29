@@ -1,0 +1,53 @@
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <div class="">
+        <img src="index/1.jpg" alt="..." class="banner-image" />
+      </div>
+
+      <div class="banner dark-bg">
+        <img src="/logo.png" class="logo"/>
+        <div class="banner-font">
+          <div class="line"></div>
+          <h1>学霸在线</h1>
+          <h3>提高声誉，即刻赚钱</h3>
+        </div>
+
+        <!-- 添加searchbar -->
+        <div class="search-bar">
+          <%= render "questions/search_bar" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="">
+        <img src="index/3.jpg" alt="..." class="banner-image"/>
+      </div>
+      <div class="banner dark-bg2">
+
+        <div class="banner-font">
+          <h1>注册就送1000积分！</h1><br />
+          <%= link_to("马上注册",new_user_registration_path, class:"btn btn-lg btn-danger") %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

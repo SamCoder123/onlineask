@@ -22,6 +22,7 @@
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 //= require simditor
+//= require bootstrap-sprockets
 
 $(function() {
     $('a[disabled=disabled]').click(function(event){

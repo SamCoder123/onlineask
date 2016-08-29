@@ -1,0 +1,32 @@
+<div class="col-md-10">
+
+    <div class="">
+      <h3>我的动态
+      <span><%= link_to("新建动态", new_account_blog_path, class:"btn btn-default btn-sm pull-right") %></span>
+      </h3>
+    </div>
+    <hr />
+
+    <% @blogs.each do |blog| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <%= blog.title %>
+            <div class="pull-right">
+              <%= blog.created_at %>
+            </div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <p><%= sanitize(blog.description) %></p>
+        <div class="total clearfix">
+          <span class="pull-right">
+            <%= link_to '编辑', edit_account_blog_path(blog),class: "btn btn-sm btn-primary" %>
+            <%= link_to '删除', account_blog_path(blog),method: :delete,class: "btn btn-sm btn-primary" %>
+          </span>
+        </div>
+     </div>
+   </div>
+  <% end %>
+</div>
