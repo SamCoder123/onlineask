@@ -8,7 +8,6 @@ module BootstrapHelper
     end
 
     module ClassMethods
-
     end
 
     module InstanceMethods
@@ -18,19 +17,19 @@ module BootstrapHelper
         @breadcrumbs = []
       end
 
-      def drop_breadcrumb(title=nil, url=nil)
+      def drop_breadcrumb(title = nil, url = nil)
         title ||= @page_title
 
         if title && url
-          @breadcrumbs.push("<a href='#{url}'>#{title}</a>".html_safe)
+          @breadcrumbs.push(view_context.link_to(title, url))
         elsif title
-          @breadcrumbs.push("#{title}".html_safe)
+          @breadcrumbs.push(title)
         end
       end
 
       def drop_page_title(title)
         @page_title = title
-        return @page_title
+        @page_title
       end
 
       def no_breadcrumbs
@@ -39,24 +38,20 @@ module BootstrapHelper
     end
 
     module Helpers
-
       def render_breadcrumb
         return "" if @breadcrumbs.size <= 0
-        prefix = "".html_safe
-        crumb = "".html_safe
+        content_tag(:ul, class: "breadcrumb menu clearfix") do
+          @breadcrumbs.each_with_index do |c, i|
+            breadcrumb_class = []
+            breadcrumb_class << "first" if i.zero?
+            breadcrumb_class << "last active" if i == (@breadcrumbs.length - 1)
 
-        @breadcrumbs.each_with_index do |c, i|
-          breadcrumb_class = []
-          breadcrumb_class << "first" if i == 0
-          breadcrumb_class << "last active" if i == (@breadcrumbs.length - 1)
+            breadcrumb_content = c
 
-          breadcrumb_content = c
-
-          crumb += content_tag(:li, breadcrumb_content ,:class => breadcrumb_class ) + "\n"
+            concat content_tag(:li, breadcrumb_content, class: breadcrumb_class)
+          end
         end
-        return prefix + content_tag(:ul, crumb, :class => "breadcrumb menu clearfix")
       end
     end
   end
-
 end
