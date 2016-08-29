@@ -19,6 +19,7 @@
 //= require trix
 //= require notifications
 //= require bootstrap/tab
+//= require simditor
 
 $(function() {
     $('a[disabled=disabled]').click(function(event){
