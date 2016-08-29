@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :unlike_answers
   has_many :a_unlikes, through: :unlike_answers, source: :answer
   has_many :bills
+  has_many :blogs
 
   scope :super_admin, -> { find(1) }
 

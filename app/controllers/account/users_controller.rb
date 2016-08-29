@@ -88,7 +88,7 @@ class Account::UsersController < ApplicationController
   end
 
   # 链接到user展示页
-  def exhibition_profile
+  def abition_profile
     @user = User.find(params[:id])
     @followers = FollowRelationship.where(user_id: @user)
     @followings = FollowRelationship.where(follower_id: @user)
