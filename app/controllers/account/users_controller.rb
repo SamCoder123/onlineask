@@ -5,9 +5,15 @@ class Account::UsersController < ApplicationController
 
   def index_profile
     @user = current_user
+
+    @followers = FollowRelationship.where(user_id: @user)
+    @followings = FollowRelationship.where(follower_id: @user)
+    @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
+
     @questions = current_user.questions.published
     @answers = current_user.answers.published
-    @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
+    @best_answers = @answers.where(answer_status: "best_answer")
+
     drop_breadcrumb("个人主页")
   end
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
@@ -81,10 +87,6 @@ class Account::UsersController < ApplicationController
   # 链接到user展示页
   def exhibition_profile
     @user = User.find(params[:id])
-    if @user == current_user
-      redirect_to index_profile_account_user_path(current_user)
-      return
-    end
     @followers = FollowRelationship.where(user_id: @user)
     @followings = FollowRelationship.where(follower_id: @user)
     @answers = @user.answers
