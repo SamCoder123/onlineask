@@ -19,9 +19,12 @@
 //= require trix
 //= require notifications
 //= require bootstrap/tab
+//= require bootstrap/tooltip
+//= require bootstrap/popover
 
 $(function() {
     $('a[disabled=disabled]').click(function(event){
         return false; // Prevent link from following its href
     });
+
 });
