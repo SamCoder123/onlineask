@@ -28,6 +28,9 @@ Metrics/MethodLength:
 Rails:
   Enabled: true
 
+Style/RegexpLiteral:
+  Enabled: false
+
 Style/AutoResourceCleanup:
   Enabled: true
 
