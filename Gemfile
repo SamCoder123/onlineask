@@ -56,6 +56,8 @@ gem 'phonelib'
 gem 'active_link_to'
 # simditor文本编辑器
 gem "simditor"
+gem "aasm"
+
 
 group :production do
   gem "pg"

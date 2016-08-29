@@ -2,6 +2,23 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
+  include AASM
+
+  aasm do
+    state :verification_applied, initail: true
+    state :application_pending
+    state :application_approved
+
+    event :submit_application do
+      transitions from: :verification_applied, to: :application_pending
+    end
+
+    event :approved do
+      transitions from: :application_pending, to: :application_approved
+    end
+  end
+
+
   after_create :add_original_balance
   has_many :questions
   has_many :answers
@@ -186,9 +203,11 @@ end
 #  balance                :float            default(0.0)
 #  phone_number           :string
 #  introduction           :string
+#  aasm_state             :string           default("verification_applied")
 #
 # Indexes
 #
+#  index_users_on_aasm_state            (aasm_state)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
