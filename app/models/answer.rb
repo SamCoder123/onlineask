@@ -13,7 +13,7 @@ class Answer < ApplicationRecord
   scope :published, -> { where(is_hidden: false) }
 
   def updated_at_formate
-    self.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+    updated_at.strftime("%Y-%m-%d %H:%M:%S")
   end
 
   def hide!

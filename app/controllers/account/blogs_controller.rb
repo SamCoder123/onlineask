@@ -1,6 +1,4 @@
-class Account::BlogsController < ApplicationController
-  before_action :authenticate_user!
-
+class Account::BlogsController < AccountController
   layout "user_center"
 
   def index
@@ -35,6 +33,7 @@ class Account::BlogsController < ApplicationController
   end
 
   private
+
   def params_blog
     params.require(:blog).permit(:title, :description)
   end

@@ -1,5 +1,4 @@
 module Admin::AdminsHelper
-
   def controller?(controller)
     controller.include?(params[:controller])
   end

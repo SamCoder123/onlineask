@@ -59,7 +59,7 @@ Rails.application.configure do
     config.auth_token = ENV["TWILIO_TOKEN"]
   end
 
-  #use letter_opener to veiw mail in development
-  config.action_mailer.default_url_options = {host: 'localhost:3000'}
+  # use letter_opener to veiw mail in development
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
   config.action_mailer.delivery_method = :letter_opener
 end
