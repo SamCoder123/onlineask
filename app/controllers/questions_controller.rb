@@ -5,19 +5,20 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
-    drop_breadcrumb("公共问题")
+    drop_breadcrumb("所有问题")
     @questions = Question.published
     @questions = Question.published.last(3)
   end
 
   def show
+    drop_breadcrumb("Home", root_path)
     drop_breadcrumb(@question.title)
   end
 
   def new
     @users = User.all
     @question = Question.new
-    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    drop_breadcrumb("Home", root_path)
     drop_breadcrumb("我要提问")
   end
 

@@ -4,12 +4,14 @@ class Account::AnswersController < ApplicationController
 
   def index
     @answers = current_user.answers.published
+    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我回答的问题")
     @answers = @answers.paginate(page: params[:page], per_page: 10)
     render layout: "user_center"
   end
 
   def show
+    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我回答的问题", account_answers_path(@answer))
     drop_breadcrumb("我的回答")
   end

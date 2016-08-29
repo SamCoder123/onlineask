@@ -5,6 +5,7 @@ class Admin::QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    drop_breadcrumb("后台首页", admin_user_path(current_user))
     drop_breadcrumb("问题管理")
 
   end

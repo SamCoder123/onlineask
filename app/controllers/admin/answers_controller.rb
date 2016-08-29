@@ -6,11 +6,13 @@ class Admin::AnswersController < ApplicationController
 
   def index
     @answers = Answer.all
+    drop_breadcrumb("后台首页", admin_user_path(current_user))
     drop_breadcrumb("答案管理")
   end
 
   def show
     @answer = Answer.find(params[:id])
+    drop_breadcrumb("后台首页", admin_user_path(current_user))
     drop_breadcrumb("答案管理", admin_answers_path)
     drop_breadcrumb(@answer.question.title)
   end

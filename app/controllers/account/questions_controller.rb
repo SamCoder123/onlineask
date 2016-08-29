@@ -2,11 +2,12 @@ class Account::QuestionsController < ApplicationController
   before_action :set_question, only: %i(show edit update destroy)
   before_action :authenticate_user!
 
-  
+
   # GET /questions
   # GET /questions.json
   def index
     @questions = current_user.questions.published
+    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我问过的问题")
     @questions = @questions.paginate(page: params[:page], per_page: 10)
     render layout: "user_center"
@@ -17,6 +18,7 @@ class Account::QuestionsController < ApplicationController
   def show
     @answers = @question.answers
     @invitated_users = @question.invitated_users
+    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我问过的问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
   end
@@ -125,6 +127,7 @@ class Account::QuestionsController < ApplicationController
 
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
+    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("被邀请的问题")
     render layout: "user_center"
   end
