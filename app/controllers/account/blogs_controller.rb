@@ -1,6 +1,8 @@
 class Account::BlogsController < ApplicationController
   before_action :authenticate_user!
 
+  layout "user_center"
+
   def index
     @blogs = Blog.all.order("created_at DESC")
   end
