@@ -24,6 +24,15 @@
   left: 48%;
 }
 
+// .banner{
+//     position: relative;;
+//     overflow: hidden;
+//     width: 100%;
+//     height: 300px;
+//     z-index: 2;
+//     top: 0;
+// }
+
 .banner{
     position: relative;;
     overflow: hidden;
@@ -31,6 +40,8 @@
     height: 300px;
     z-index: 2;
     top: 0;
+    background: rgba(4,28,58,0.5);
+
 }
 
 .banner-font{
@@ -44,10 +55,21 @@
   color: #fff;
 }
 
+// .banner-image{
+//   position: absolute;
+//   z-index: 1 ;
+//   // width: 100%;
+//   height: 300px;
+// }
+
 .banner-image{
   position: absolute;
+  top:0;
+  background-size: cover;
   z-index: 1 ;
   width: 100%;
+  height: 300px;
+
 
 }
 
@@ -58,9 +80,11 @@
 }
 
 .dark-bg{
-  background: rgba(4,28,58,0.8);
+  background: rgba(4,28,58,0.2);
 }
-
+.dark-bg2{
+  background: rgba(4,28,58,0.2);
+}
 
 .question-list{
   display: block;
@@ -173,4 +197,12 @@
   bottom:0px;
   width: 100%;
   margin:0px;
+}
+
+.navbar-index-bg{
+  margin: 0px;
+  border-color: transparent;
+  background: rgba(0,0,0,0);
+  z-index: 3;
+  // position: absolute;
 }

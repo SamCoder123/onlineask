@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 # namespace for account
   namespace :account do
 
+    resources :blogs
+
     resources :answers do
       member do
         post :publish_hidden

@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20160829115334) do
 
+
   create_table "answer_subscriptions", force: :cascade do |t|
     t.integer  "answer_id"
     t.datetime "created_at", null: false
@@ -41,6 +42,17 @@ ActiveRecord::Schema.define(version: 20160829115334) do
     t.integer  "answer_subscription_id"
   end
 
+<<<<<<< HEAD
+=======
+  create_table "blogs", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+>>>>>>> 8b4155045e10fdaf165f8c57d12d69dd160dd052
   create_table "follow_relationships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "follower_id"
