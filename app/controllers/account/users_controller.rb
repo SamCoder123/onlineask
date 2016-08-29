@@ -36,6 +36,7 @@ class Account::UsersController < ApplicationController
     @user = current_user
     drop_breadcrumb("个人首页")
     @questions = Question.all
+    @questions = Question.all.paginate(page: params[:page], per_page: 15)
   end
 
   def withdraw_edit
@@ -99,13 +100,36 @@ class Account::UsersController < ApplicationController
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我偷听的答案")
     @user = current_user
-    @answers = current_user.subscribing_answers.paginate(page: params[:page], per_page: 5)
+    @answer_subscriptions = AnswerSubscription.where(user_id: current_user).order("created_at DESC").paginate(page: params[:page], per_page: 5)
   end
 
   def my_questions_answers
+    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("我的问题和回答")
     @user = current_user
     @questions = @user.questions.paginate(page: params[:page], per_page: 10)
     @answers = @user.answers.paginate(page: params[:page], per_page: 10)
+  end
+
+  def wallet
+    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("我的钱包")
+    @user = current_user
+  end
+
+  def replyers
+    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("学霸广场")
+    @replyers = User.where(role: "replyer").paginate(:page => params[:page], :per_page => 12)
+  end
+
+  def follow_show
+    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("我的关注")
+    @user = current_user
+    #followers 是关注我的人，followees 是我关注的人
+    @followers = FollowRelationship.where(follower_id: @user).paginate(page: params[:page], per_page: 10)
+    @followees = FollowRelationship.where(user_id: @user).paginate(page: params[:page], per_page: 10)
   end
 
   private

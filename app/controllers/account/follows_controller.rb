@@ -1,5 +1,5 @@
 class Account::FollowsController < ApplicationController
-  # followee 是被关注的人，如xdite
+  # followee 是被我关注的人，如xdite
   def like
     @followee = User.find(params[:id])
 

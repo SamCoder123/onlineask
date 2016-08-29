@@ -16,11 +16,11 @@ class Account::QuestionsController < ApplicationController
   # GET
   # GET
   def show
-    @answers = @question.answers
+    @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我问过的问题", account_questions_path(@question))
-    drop_breadcrumb(@question.title)
+    drop_breadcrumb(@question.title) 
   end
 
   # GET

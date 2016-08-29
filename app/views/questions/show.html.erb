@@ -1,9 +1,20 @@
+<script type="text/javascript">
+$(function() {
+  $('[data-toggle="popover"]').popover({
+    html : true,
+    content: function() {
+      return $('#popover_content_wrapper').html();
+    }
+  });
+});
+</script>
+
 <div class="col-md-12">
   <div class="panel panel-default ">
     <div class="panel-heading">
       <h3 class="panel-title">主题：<%= @question.title %>
         <span class="pull-right">
-          提问人：<%= @question.user.email %>
+          提问人：<%= gravatar_tag @question.user.email, :size => 30, :default => avatar_url %><%= link_to @question.user.name, exhibition_profile_account_user_path(@question.user) %>
         </span>
       </h3>
     </div>
@@ -17,6 +28,14 @@
 
       <div class="total clearfix">
         <span class="pull-right">
+          <% if current_user == @question.user %>
+            <span class="owner-border">
+              你是问题的主人，你可以
+              <%= link_to '编辑', edit_question_path(@question), class: "btn btn-warning btn-xs" %>
+              <%= link_to '删除', publish_hidden_account_question_path(@question), class: "btn btn-danger btn-xs" %>
+              <%= link_to '查看完整答案', account_question_path(@question), class: "btn btn-success btn-xs" %>
+            </span>
+          <% end %>
           <%= link_to '返回', questions_path,class: "btn btn-sm btn-info" %>
         </span>
       </div>
@@ -24,34 +43,57 @@
   </div>
 
 
-    <div class="panel panel-default ">
+    <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">回答者列表</h3>
+        <h3 class="panel-title">回答者列表
+          <% if @question.status == "closed" %>
+            <small class="small-tips"><i class="glyphicon glyphicon-ok"></i>已选出最佳答案</small></h3>
+          <% end %>
       </div>
 
       <div class="panel-body">
-        <%if @question.answers.size>0  %>
+        <%if @question.answers.size > 0 %>
           <% @question.answers.each do |answer| %>
 
               <%= gravatar_tag answer.user.email, :size => 40, :default => avatar_url %>
 
-
               <%= link_to(answer.user.name, exhibition_profile_account_user_path(id: answer.user.id)) %>
-              在
-              <%= answer.updated_at_formate %>
               回答了这个问题
-              <br />
-              <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px 0 45px"><%= answer.like_answers.count %></i>
-              <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %></i>
+              <span class="answer-time">
+                <i class="fa fa-clock-o" aria-hidden="true"></i> <%= answer.updated_at_formate %>
+              </span>
+              <% if answer.answer_status == "best_answer" %>
+                <span class="pull-right">
+                  <i class="glyphicon glyphicon-star"></i>最佳答案
+                </span>
+              <% end %>
+              <br/>
+              <span class="answer-like-stats">
+                赞数：
+                <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px"><%= answer.like_answers.count %></i>
+                <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %></i>
+              </span>
+              <% unless current_user.subscribing_answers.include?(answer) %>
+                <%= link_to("偷听", subscribe_answers_account_answer_path(answer), method: :post, class:"btn btn-sm btn-danger pull-right") %>
+              <% else %>
+                <span class="pull-right">
+                  <small>已付费偷听，</small>
+                  <a tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-placement="left"
+                      title='回答者-<%= answer.user.name %>:' >查看</a>
+                </span>
+                <div id="popover_content_wrapper" style="display: none">
+                  <p><%= truncate(answer.content, limit: 20) %></p>
+                  <%= link_to("查看完整答案", my_subscriptions_account_user_path(current_user)) %>
+                </div>
+              <% end %>
               <hr>
-
-              <%= link_to("偷听", subscribe_answers_account_answer_path(answer), method: :post, class:"btn btn-sm btn-danger pull-right") %>
-
           <% end %>
         <% else %>
             <span class="label label-info">还没有人回答呢，快来抢沙发吧？</span>
             <%= link_to '我要回答', new_question_answer_path(@question), class: "btn btn-sm btn-danger pull-right" %>
         <% end %>
+
+
       </div>
     </div>
 

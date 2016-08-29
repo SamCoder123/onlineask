@@ -1,0 +1,36 @@
+<div class="col-md-10" >
+  <div class="row">
+  <% @replyers.each do |replyer| %>
+    <div class="col-md-3 col-sm-3 col-xs-2 replyer">
+      <div class="thumbnail replyer">
+        <div class="replyer-image">
+          <% if replyer.image.present? %>
+            <%= link_to(image_tag(replyer.image.thumb.url)) %>
+          <% else %>
+            <%= gravatar_tag replyer.email, :size => 60, :default => avatar_url %>
+          <% end %>
+        </div>
+        <div class="caption">
+          <h5><%= link_to(exhibition_profile_account_user_path(replyer)) do%>
+            <%= replyer.name %></h5>
+            <p>留学学校：<%= replyer.school %><br />
+            关注：<%= replyer.followees.count %> | 回答：<%= replyer.answers.count %></p>
+            <% end %>
+
+          <p>
+            <span><%= link_to("向Ta提问", new_question_path, class:"btn btn-success btn-xs") %></span>
+            <% if current_user.already_follower?(replyer) %>
+              <span class="label label-primary" style="padding:5px ">已关注</span>
+            <% else %>
+              <span><%= link_to("关注", like_account_follow_path(replyer),method: :post, class:"btn btn-default btn-xs") %></span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  <div class="text-center">
+    <%= will_paginate @replyers %>
+  </div>
+</div>
