@@ -20,6 +20,7 @@
 //= require notifications
 //= require bootstrap/tab
 //= require simditor
+//= require bootstrap-sprockets
 
 $(function() {
     $('a[disabled=disabled]').click(function(event){
