@@ -1,41 +1,36 @@
-<div class="col-md-10" style="padding-left:0">
-  <div class="panel panel-default" style="background:transparent;">
-    <div class="panel-body">
-      学霸列表
-      <div class="btn-group pull-right">
-        <%= link_to("sort","#",class:"btn btn-default btn-group-sm ") %>
+<div class="col-md-10" >
+  <div class="row">
+  <% @replyers.each do |replyer| %>
+    <div class="col-md-3 col-sm-3 col-xs-2 replyer">
+      <div class="thumbnail replyer">
+        <div class="replyer-image">
+          <% if replyer.image.present? %>
+            <%= link_to(image_tag(replyer.image.thumb.url)) %>
+          <% else %>
+            <%= gravatar_tag replyer.email, :size => 60, :default => avatar_url %>
+          <% end %>
+        </div>
+        <div class="caption">
+          <h5><%= link_to(exhibition_profile_account_user_path(replyer)) do%>
+            <%= replyer.name %></h5>
+            <p>留学学校：<%= replyer.school %><br />
+            关注：<%= replyer.followees.count %> | 回答：<%= replyer.answers.count %></p>
+            <% end %>
+
+          <p>
+            <span><%= link_to("向Ta提问", new_question_path, class:"btn btn-success btn-xs") %></span>
+            <% if current_user.already_follower?(replyer) %>
+              <span class="label label-primary" style="padding:5px ">已关注</span>
+            <% else %>
+              <span><%= link_to("关注", like_account_follow_path(replyer),method: :post, class:"btn btn-default btn-xs") %></span>
+            <% end %>
+          </p>
+        </div>
       </div>
-
-      <table class="table table-filter">
-        <% @replyers.each do |replyer| %>
-        <tr>
-          <td>
-            <div class="media">
-              <div class="pull-left">
-                <%= gravatar_tag replyer.email, :size => 30, :default => avatar_url %>
-              </div>
-                <div class="media-body">
-                  <span class="media-meta pull-right"><%= replyer.created_at %></span>
-                  <h4 class="title">
-                    <%= replyer.name %>: <%= link_to(replyer.school,exhibition_profile_account_user_path(replyer))  %>
-                    <span class="pull-right pagado">回答总数：<%= replyer.answers.count %></span>
-                  </h4>
-
-                  <p class="summary">
-
-                    <%= truncate(replyer.description, limit:25) %>
-                    <span class="pull-right"><%= link_to("向Ta提问", new_question_path, class:"btn btn-default btn-xs") %></span>
-                    <span class="pull-right"><%= link_to("关注", like_account_follow_path(replyer),method: :post, class:"btn btn-default btn-xs") %></span>
-                  </p>
-
-                </div>
-              </div>
-            </td>
-        </tr>
-        <% end %>
-      </table>
-
     </div>
+  <% end %>
   </div>
-
+  <div class="text-center">
+    <%= will_paginate @replyers %>
+  </div>
 </div>

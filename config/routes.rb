@@ -107,6 +107,8 @@ Rails.application.routes.draw do
         get :bill
       end
     end
+
+    resources :tags
   end
 
   # 站内信

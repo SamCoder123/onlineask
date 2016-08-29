@@ -14,7 +14,7 @@ class WelcomeTestController < ApplicationController
     end
 
     # 如果上次请求是登录或注册，直接跳入个人首页。
-    if flag
+    if flag&current_user
       if current_user.admin?
         redirect_to admin_admins_path
       else

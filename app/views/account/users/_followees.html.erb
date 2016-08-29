@@ -1,10 +1,33 @@
-<ul class="list-group">
+<div class="col-md-10" >
+  <div class="row">
   <% @followees.each do |followee| %>
-    <li class="list-group-item" style="padding:1em">
-      <% f = User.find(followee.follower_id) %>
-      <%= link_to f.name,exhibition_profile_account_user_path(f) %>
-      <%= f.school %>
-      问题总数<%= f.answers.count %>
-    </li>
+    <% f = User.find(followee.follower_id) %>
+    <div class="col-md-3 col-sm-3 col-xs-2 replyer">
+      <div class="thumbnail replyer">
+        <div class="replyer-image">
+          <% if f.image.present? %>
+            <%= link_to(image_tag(f.image.thumb.url)) %>
+          <% else %>
+            <%= gravatar_tag f.email, :size => 200, :default => avatar_url %>
+          <% end %>
+        </div>
+        <div class="caption">
+          <h5><%= link_to(exhibition_profile_account_user_path(f)) do%>
+            <%= f.name %></h5>
+            <p>留学学校：<%= f.school %><br />
+            关注：<%= f.followees.count %> | 回答：<%= f.answers.count %></p>
+            <% end %>
+
+          <p>
+            <span><%= link_to("向Ta提问", new_question_path, class:"btn btn-success btn-xs") %></span>
+            <span><%= link_to("取消关注", like_account_follow_path(f),method: :post, class:"btn btn-default btn-xs") %></span>
+          </p>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+  </div>
+  <div class="text-center">
+    <%= will_paginate @followees %>
+  </div>
+</div>

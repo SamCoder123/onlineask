@@ -1,2 +1,5 @@
-<h2><%= link_to question.title, question_path(question) %></h2>
-<div><%= render question.tags %></div>
+<li class="list-group-item" style="padding:1em">
+  <span class="label label-default" style="padding:1em;margin-right:16px"><%=question.answers.count%>人回答过</span>
+
+    <%= link_to question.title, question_path(question) %>
+</li>

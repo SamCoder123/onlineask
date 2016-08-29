@@ -33,7 +33,7 @@ class Account::UsersController < ApplicationController
   def show_profile
     @user = current_user
     drop_breadcrumb("用户信息")
-    @questions = Question.all
+    @questions = Question.all.paginate(page: params[:page], per_page: 15)
   end
 
   def withdraw_edit
@@ -110,14 +110,14 @@ class Account::UsersController < ApplicationController
   end
 
   def replyers
-    @replyers = User.where(role: "replyer")
+    @replyers = User.where(role: "replyer").paginate(:page => params[:page], :per_page => 12)
   end
 
   def follow_show
     @user = current_user
     #followers 是关注我的人，followees 是我关注的人
-    @followers = FollowRelationship.where(follower_id: @user)
-    @followees = FollowRelationship.where(user_id: @user)
+    @followers = FollowRelationship.where(follower_id: @user).paginate(page: params[:page], per_page: 10)
+    @followees = FollowRelationship.where(user_id: @user).paginate(page: params[:page], per_page: 10)
   end
 
   private
