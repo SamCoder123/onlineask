@@ -18,6 +18,7 @@ class User < ApplicationRecord
     end
   end
 
+
   after_create :add_original_balance
   has_many :questions
   has_many :answers
@@ -29,6 +30,8 @@ class User < ApplicationRecord
   has_many :a_unlikes, through: :unlike_answers, source: :answer
   has_many :bills
   has_many :blogs
+  has_many :question_likes
+  has_many :q_likes, through: :question_likes, source: :question
 
   scope :super_admin, -> { find(1) }
 
@@ -143,6 +146,33 @@ class User < ApplicationRecord
   def unlike_cancel!(answer)
     a_unlikes.delete(answer)
   end
+
+  # 对问题点赞或踩
+
+  def question_already_like?(question)
+    q_likes.include?(question)
+  end
+
+  def question_like!(question)
+    q_likes << question
+  end
+
+  def question_like_cancle!(question)
+    q_likes.delete(question)
+  end
+
+  def question_already_unlike?(question)
+    q_unlikes.include?(question)
+  end
+
+  def question_unlike!(question)
+    q_unlikes << question
+  end
+
+  def question_unlike_cancle!(question)
+    q_unlikes.delete(question)
+  end
+
 end
 
 # == Schema Information

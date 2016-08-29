@@ -13,6 +13,7 @@
 #  downpayment :float            default(0.0)
 #  status      :string           default("open")
 #  tag         :string
+#  likes       :integer          default(0)
 #
 
 require "test_helper"
