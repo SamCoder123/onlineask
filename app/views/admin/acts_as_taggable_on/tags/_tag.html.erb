@@ -1,0 +1,12 @@
+<tr>
+  <td>
+    <%= link_to tag.name, admin_tag_path(tag) %>
+  </td>
+  <td>
+    <%= tag.taggings_count %>
+  </td>
+  <td>
+    <%= link_to "编辑",edit_admin_tag_path(tag),class:"btn btn-primary btn-xs" %>
+    <%= link_to "删除",admin_tag_path(tag),method: :delete,class:"btn btn-primary btn-xs",data: { confirm: '确定要删除么?' } %>
+  </td>
+</tr>

@@ -1,0 +1,13 @@
+<h3><span class="label label-info"><%= @tag.name %> / 此标签下的问题 </span></h3>
+<div>
+  <table class="table table-stripped">
+      <thead>
+          <th>问题主题</th>
+          <th>问题描述</th>
+          <th>问题</th>
+      </thead>
+      <tbody>
+        <%= render @questions %>
+      </tbody>
+  </table>
+</div>

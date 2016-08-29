@@ -21,6 +21,10 @@ class Question < ApplicationRecord
     self.updated_at.strftime("%Y-%m-%d %H:%M:%S")
   end
 
+  def created_at_formate
+    self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+  end
+
   def hide!
     self.is_hidden = true
     save
