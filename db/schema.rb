@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(version: 20160829102157) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "question_likes", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -100,6 +107,7 @@ ActiveRecord::Schema.define(version: 20160829102157) do
     t.float    "downpayment", default: 0.0
     t.string   "status",      default: "open"
     t.string   "tag"
+    t.integer  "likes",       default: 0
   end
 
   create_table "sessions", force: :cascade do |t|
