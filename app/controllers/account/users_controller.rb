@@ -98,6 +98,10 @@ class Account::UsersController < ApplicationController
     render layout: "profile"
   end
 
+  def method_name
+
+  end
+
   def my_subscriptions
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我偷听的答案")
@@ -133,6 +137,12 @@ class Account::UsersController < ApplicationController
     @followers = FollowRelationship.where(follower_id: @user).paginate(page: params[:page], per_page: 10)
     @followees = FollowRelationship.where(user_id: @user).paginate(page: params[:page], per_page: 10)
   end
+
+  def submit_application
+    @user = User.find(params[:id])
+    @user.submit_application!
+    redirect_to :back
+end
 
   private
 

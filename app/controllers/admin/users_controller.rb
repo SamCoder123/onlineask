@@ -21,6 +21,22 @@ class Admin::UsersController < ApplicationController
     redirect_to :back
   end
 
+
+
+ def approved
+   @user = User.find(params[:id])
+       @user.approved!
+       redirect_to :back
+ end
+
+# applied
+# approved
+  def change_to_admin
+    @user = User.find(params[:id])
+    @user.change_to_admin!
+    redirect_to :back
+  end
+
   private
 
   def require_is_admin

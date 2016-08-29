@@ -61,6 +61,7 @@ Rails.application.routes.draw do
         get :my_subscriptions
         # 显示我的关注
         get :follow_show
+        post :submit_application
       end
 
       collection do
@@ -82,6 +83,8 @@ Rails.application.routes.draw do
       member do
         post :change_to_admin
         post :change_to_user
+        post :approved
+
       end
     end
 
