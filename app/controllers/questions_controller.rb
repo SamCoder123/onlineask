@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i(show edit update destroy)
-  before_action :authenticate_user!, only: %i(create new edit update destroy)
+  before_action :authenticate_user!, only: %i(create new edit update destroy question_like_up)
   before_action :validate_search_key, only: [:search]
 
   def index
@@ -60,8 +60,8 @@ class QuestionsController < ApplicationController
 
   def question_like_up
     @question_like = Question.find(params[:id])
-    @question_like.likes += 1
-    @question_like.save
+    @question_like.question_likes.create
+    @user = current_user
     redirect_to :back
   end
 

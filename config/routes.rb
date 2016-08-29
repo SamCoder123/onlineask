@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :questions do
     member do
       post :question_like_up
+      post :question_like_down
     end
     resources :answers
     collection do

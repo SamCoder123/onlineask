@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829055232) do
+ActiveRecord::Schema.define(version: 20160829083003) do
 
   create_table "answer_subscriptions", force: :cascade do |t|
     t.integer  "answer_id"
@@ -63,12 +63,6 @@ ActiveRecord::Schema.define(version: 20160829055232) do
     t.integer  "like_answer"
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.integer  "answer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "notifications", force: :cascade do |t|
     t.integer  "recipient_id"
     t.integer  "actor_id"
@@ -81,6 +75,13 @@ ActiveRecord::Schema.define(version: 20160829055232) do
   end
 
   create_table "question_invitations", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "question_likes", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false

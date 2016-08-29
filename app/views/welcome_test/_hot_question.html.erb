@@ -7,7 +7,7 @@
             <h3 class="panel-title" style="display : inline"><%= question.title %></h3>
             <%= link_to(question_like_up_question_path(question), method: :post) do %>
               <button type="button" class="btn btn-default" aria-label="Left Align">
-                <span><%= question.likes %> </span>
+                <span><%= question.question_likes.count %> </span>
                 <span class="fa fa-thumbs-o-up" aria-hidden="true"></span>
               </button>
             <% end %>
