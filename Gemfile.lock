@@ -9,6 +9,7 @@ GEM
   remote: https://gems.ruby-china.org/
   specs:
     CFPropertyList (2.3.2)
+    aasm (4.11.0)
     actioncable (5.0.0.1)
       actionpack (= 5.0.0.1)
       nio4r (~> 1.2)
@@ -409,6 +410,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   active_link_to
   activerecord-session_store
   acts-as-taggable-on (~> 4.0)
