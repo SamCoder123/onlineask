@@ -13,7 +13,8 @@ class Question < ApplicationRecord
 
   # status 字段 有两种状态 open closed
 
-  scope :published, -> { where(is_hidden: false) }
+
+  scope :published, -> { where(is_hidden:false) }
 
   acts_as_taggable_on :tags
 
@@ -27,12 +28,12 @@ class Question < ApplicationRecord
 
   def hide!
     self.is_hidden = true
-    save
+    self.save
   end
 
   def publish!
     self.is_hidden = false
-    save
+    self.save
   end
 
   def close!
