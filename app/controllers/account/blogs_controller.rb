@@ -35,6 +35,7 @@ class Account::BlogsController < ApplicationController
   end
 
   private
+
   def params_blog
     params.require(:blog).permit(:title, :description)
   end

@@ -3,7 +3,6 @@ class Admin::AnswersController < ApplicationController
   before_action :require_is_admin
   layout "admin"
 
-
   def index
     @answers = Answer.all
     drop_breadcrumb("后台首页", admin_user_path(current_user))

@@ -1,7 +1,7 @@
 class Admin::TagsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_is_admin
-  before_action :find_tag,only: %i(show edit update destroy)
+  before_action :find_tag, only: %i(show edit update destroy)
 
   layout "admin"
 

@@ -17,6 +17,7 @@ class Account::UsersController < ApplicationController
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("个人资料")
   end
+
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
   def new_profile
     @user = current_user
@@ -81,7 +82,7 @@ class Account::UsersController < ApplicationController
     @user.save
     @user.phone_number = params[:user][:phone_number]
     @user.save
-    options = {phone_number: @user.phone_number}
+    options = { phone_number: @user.phone_number }
     SmsService.new(options).send_sms
     redirect_to show_profile_account_user_path(@user)
     flash[:notice] = "充值成功啦！"
@@ -101,7 +102,6 @@ class Account::UsersController < ApplicationController
   end
 
   def method_name
-
   end
 
   def my_subscriptions
@@ -128,14 +128,14 @@ class Account::UsersController < ApplicationController
   def replyers
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("学霸广场")
-    @replyers = User.where(role: "replyer").paginate(:page => params[:page], :per_page => 12)
+    @replyers = User.where(role: "replyer").paginate(page: params[:page], per_page: 12)
   end
 
   def follow_show
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的关注")
     @user = current_user
-    #followers 是关注我的人，followees 是我关注的人
+    # followers 是关注我的人，followees 是我关注的人
     @followers = FollowRelationship.where(follower_id: @user).paginate(page: params[:page], per_page: 10)
     @followees = FollowRelationship.where(user_id: @user).paginate(page: params[:page], per_page: 10)
   end
@@ -144,7 +144,7 @@ class Account::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.submit_application!
     redirect_to :back
-end
+  end
 
   private
 

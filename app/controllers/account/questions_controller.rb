@@ -2,7 +2,6 @@ class Account::QuestionsController < ApplicationController
   before_action :set_question, only: %i(show edit update destroy)
   before_action :authenticate_user!
 
-
   # GET /questions
   # GET /questions.json
   def index
@@ -20,17 +19,17 @@ class Account::QuestionsController < ApplicationController
     @invitated_users = @question.invitated_users
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我问过的问题", account_questions_path(@question))
-    drop_breadcrumb(@question.title) 
+    drop_breadcrumb(@question.title)
   end
 
   # GET
   def edit
     @invitated_users = @question.invitated_users
-    @filters_arry = Array.new
+    @filters_arry = []
     for user in @invitated_users
       @filters_arry << user.id
     end
-    @filters = @filters_arry.map(&:inspect).join(',')
+    @filters = @filters_arry.map(&:inspect).join(",")
     @users = User.all - @invitated_users
     drop_breadcrumb("我问过的问题", account_questions_path(@question))
     drop_breadcrumb("编辑问题")
@@ -60,7 +59,7 @@ class Account::QuestionsController < ApplicationController
         @question.invitation!(add_users)
         # 如何一下给多个用户发送？循环新增是不是不好？
         for user in add_users
-          NotificationService.new(user,current_user,@question).send_notification!
+          NotificationService.new(user, current_user, @question).send_notification!
           OrderMailer.notify_invited_question(@question, user).deliver!
         end
       end
@@ -78,7 +77,7 @@ class Account::QuestionsController < ApplicationController
 
   def publish_hidden
     @question = Question.find(params[:id])
-    if @question.answers.count >0
+    if @question.answers.count.positive?
       flash[:alert] = "亲，您的问题已被回答，不能删除了"
       redirect_to :back
       return
@@ -115,7 +114,7 @@ class Account::QuestionsController < ApplicationController
       # 赏钱
       RewardBestAnswer.new(@answer, @question).perform!
 
-      NotificationService.new(@answer.user,current_user,@answer).send_notification_to_answer_owner!
+      NotificationService.new(@answer.user, current_user, @answer).send_notification_to_answer_owner!
 
       flash[:notice] = "已经向#{@answer.user.name}悬赏成功！"
     else
@@ -135,7 +134,7 @@ class Account::QuestionsController < ApplicationController
   # 把question的status改为close,并退款
   def cancel
     @question = Question.find(params[:id])
-    if @question.answers.count == 0
+    if @question.answers.count.zero?
       @question.close!
       current_user.balance += 200
       current_user.save
@@ -167,5 +166,4 @@ class Account::QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:title, :tag_list, :description)
   end
-
 end

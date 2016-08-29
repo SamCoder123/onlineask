@@ -7,7 +7,7 @@ class Vote::VoteAnswersController < ApplicationController
     else
       @user.like_cancel!(@answer)
     end
-      redirect_to :back
+    redirect_to :back
   end
 
   def unlike
@@ -18,8 +18,6 @@ class Vote::VoteAnswersController < ApplicationController
     else
       @user.unlike_cancel!(@answer)
     end
-      redirect_to :back
+    redirect_to :back
   end
-
-
 end

@@ -9,28 +9,20 @@ class Admin::UsersController < ApplicationController
     drop_breadcrumb("用户管理")
   end
 
-  def change_to_admin
-    @user = User.find(params[:id])
-    @user.change_to_admin!
-    redirect_to :back
-  end
-
   def change_to_user
     @user = User.find(params[:id])
     @user.change_to_user!
     redirect_to :back
   end
 
+  def approved
+    @user = User.find(params[:id])
+    @user.approved!
+    redirect_to :back
+  end
 
-
- def approved
-   @user = User.find(params[:id])
-       @user.approved!
-       redirect_to :back
- end
-
-# applied
-# approved
+  # applied
+  # approved
   def change_to_admin
     @user = User.find(params[:id])
     @user.change_to_admin!
