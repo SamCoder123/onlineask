@@ -1,6 +1,4 @@
-class Account::BlogsController < ApplicationController
-  before_action :authenticate_user!
-
+class Account::BlogsController < AccountController
   layout "user_center"
 
   def index

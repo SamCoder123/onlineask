@@ -1,9 +1,6 @@
-class Account::QuestionsController < ApplicationController
+class Account::QuestionsController < AccountController
   before_action :set_question, only: %i(show edit update destroy)
-  before_action :authenticate_user!
 
-  # GET /questions
-  # GET /questions.json
   def index
     @questions = current_user.questions.published
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
@@ -12,8 +9,6 @@ class Account::QuestionsController < ApplicationController
     render layout: "user_center"
   end
 
-  # GET
-  # GET
   def show
     @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
@@ -22,7 +17,6 @@ class Account::QuestionsController < ApplicationController
     drop_breadcrumb(@question.title)
   end
 
-  # GET
   def edit
     @invitated_users = @question.invitated_users
     @filters_arry = []
@@ -35,8 +29,6 @@ class Account::QuestionsController < ApplicationController
     drop_breadcrumb("编辑问题")
   end
 
-  # PATCH/PUT
-  # PATCH/PUT
   def update
     if @question.update(question_params)
       # 新的

@@ -1,7 +1,5 @@
-class Account::AnswersController < ApplicationController
+class Account::AnswersController < AccountController
   before_action :set_answer, only: %i(show edit update destroy)
-  before_action :authenticate_user!
-
   def index
     @answers = current_user.answers.published
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))

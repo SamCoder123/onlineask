@@ -1,6 +1,4 @@
-class Account::UsersController < ApplicationController
-  before_action :authenticate_user!
-
+class Account::UsersController < AccountController
   layout "user_center"
 
   def index_profile
