@@ -49,13 +49,6 @@ ActiveRecord::Schema.define(version: 20160829102157) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "favorite_questions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "follow_relationships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "follower_id"
