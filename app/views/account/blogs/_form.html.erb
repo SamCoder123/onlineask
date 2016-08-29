@@ -1,0 +1,26 @@
+<%= simple_form_for(@blog) do |f| %>
+  <%#= f.error_notification %>
+  <div class="form-inputs">
+    <%= f.input :title,label:"主题" %>
+    <%= f.input :description,label:"内容",placeholder:"动态内容"%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit,value:"提交" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+var editor = new Simditor({
+ textarea: $('#blog_description'),
+ toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', 'image', '|','hr','indent','outdent','alignment','fullscreen'],
+ placeholder: '想问的问题...',
+ upload: {
+   fileKey: 'file',
+   params: null,
+   pasteImage: true,
+   connectionCount: 3,
+   leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
+ }
+});
+</script>

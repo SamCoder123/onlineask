@@ -79,7 +79,7 @@ class Account::UsersController < ApplicationController
   end
 
   # 链接到user展示页
-  def exhibition_profile
+  def abition_profile
     @user = User.find(params[:id])
     if @user == current_user
       redirect_to index_profile_account_user_path(current_user)
