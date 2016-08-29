@@ -8,7 +8,7 @@ class WelcomeTestController < ApplicationController
     # 记录上一次请求路径是否是登录或者注册
     flag = false
     if request.referer.present?
-      if request.referer.include?("/users/sign_in") || request.referer.include?("/users/sign_up")
+      if ["/users/sign_in", "/users/sign_up"].include?(request.referer)
         flag = true
       end
     end
