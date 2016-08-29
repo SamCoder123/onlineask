@@ -47,8 +47,8 @@
 .banner-image{
   position: absolute;
   z-index: 1 ;
-  width: 100%;
-
+  // width: 100%;
+  height: 300px;
 }
 
 .search-bar {
@@ -58,7 +58,7 @@
 }
 
 .dark-bg{
-  background: rgba(4,28,58,0.8);
+  background: rgba(4,28,58,0.2);
 }
 .dark-bg2{
   background: rgba(4,28,58,0.2);
