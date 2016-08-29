@@ -41,6 +41,7 @@
     z-index: 2;
     top: 0;
     background: rgba(4,28,58,0.5);
+
 }
 
 .banner-font{
@@ -63,11 +64,12 @@
 
 .banner-image{
   position: absolute;
+  top:0;
   background-size: cover;
   z-index: 1 ;
   width: 100%;
   height: 300px;
-  
+
 
 }
 
@@ -195,4 +197,12 @@
   bottom:0px;
   width: 100%;
   margin:0px;
+}
+
+.navbar-index-bg{
+  margin: 0px;
+  border-color: transparent;
+  background: rgba(0,0,0,0);
+  z-index: 3;
+  // position: absolute;
 }

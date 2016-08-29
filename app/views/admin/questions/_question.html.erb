@@ -1,0 +1,12 @@
+<!-- <div><%＃= render question.tags %></div> -->
+<tr>
+  <td>
+    <%= link_to question.title, admin_question_path(question) %>
+  </td>
+  <td>
+    <%= truncate(sanitize(question.description), limit:10) %>
+  </td>
+  <td>
+    <td> <%= question.created_at_formate %> </td>
+  </td>
+</tr>

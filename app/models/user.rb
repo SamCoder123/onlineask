@@ -28,8 +28,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :image, ImageUploader
 
-  has_many :questions
-  has_many :answers
   has_many :question_invitations
   has_many :invitated_questions, through: :question_invitations, source: :question
 

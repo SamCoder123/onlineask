@@ -3,6 +3,11 @@
 </div>
 
 <div class="col-md-8">
+  <% if current_user == @user %>
+    <div class="alert alert-warning">
+      这是你自己的个人主页，资料完善度80% <%= link_to("去完善", index_profile_account_user_path(current_user), class:"btn btn-danger btn-sm") %>
+    </div>
+  <% end %>
   <%= render "profile_exhibition" %>
   <hr/>
   <h3>Ta回答过的问题</h3>

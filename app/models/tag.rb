@@ -1,3 +1,12 @@
+class Tag < ApplicationRecord
+
+  belongs_to :question
+  has_many :taggings
+
+  validates :name, uniqueness: true
+
+end
+
 # == Schema Information
 #
 # Table name: tags
@@ -10,11 +19,3 @@
 #
 #  index_tags_on_name  (name) UNIQUE
 #
-
-require 'test_helper'
-
-class TagsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
-end

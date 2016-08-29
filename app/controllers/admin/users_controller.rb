@@ -5,6 +5,7 @@ class Admin::UsersController < ApplicationController
 
   def index
     @users = User.all
+    drop_breadcrumb("后台首页", admin_user_path(current_user))
     drop_breadcrumb("用户管理")
   end
 
