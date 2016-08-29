@@ -17,6 +17,7 @@
             </div>
             <% end %>
           </div>
+          <% if current_user %>
           <div class="pull-left">
               <%= link_to(new_user_registration_path) do %>
               <img src="/replyer3.png"/>
@@ -33,7 +34,7 @@
                 </div>
               <% end %>
           </div>
-
+          <% end %>
       </div>
   </div>
 </div>
