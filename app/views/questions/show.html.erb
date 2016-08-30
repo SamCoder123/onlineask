@@ -73,8 +73,11 @@ $(function() {
                 <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px"><%= answer.like_answers.count %></i>
                 <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %></i>
               </span>
+              <% if current_user %>
+
               <% unless current_user.subscribing_answers.include?(answer) %>
                 <%= link_to("偷听", subscribe_answers_account_answer_path(answer), method: :post, class:"btn btn-sm btn-danger pull-right") %>
+                <% # TODO : 需處理未登入的顯示 %>
               <% else %>
                 <span class="pull-right">
                   <small>已付费偷听，</small>
@@ -85,6 +88,8 @@ $(function() {
                   <p><%= truncate(answer.content, limit: 20) %></p>
                   <%= link_to("查看完整答案", my_subscriptions_account_user_path(current_user)) %>
                 </div>
+              <% end %>
+
               <% end %>
               <hr>
           <% end %>

@@ -1,9 +1,5 @@
-class Admin::TagsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :require_is_admin
-  before_action :find_tag,only: %i(show edit update destroy)
-
-  layout "admin"
+class Admin::TagsController < AdminController
+  before_action :find_tag, only: %i(show edit update destroy)
 
   def index
     drop_breadcrumb("标签管理")

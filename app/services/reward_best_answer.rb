@@ -11,7 +11,7 @@ class RewardBestAnswer
   def perform!
     original_amount = @question.downpayment
 
-    service_fee = original_amount*0.2
+    service_fee = original_amount * 0.2
     # 从问题赏金中扣除服务费
     @answer_owner.super_admin_bill!(service_fee - original_amount)
     # 向最佳回答者转入 赏金的80%
@@ -26,6 +26,5 @@ class RewardBestAnswer
     @answer.make_others_unchosen!(@question)
 
     Bill.create!(amount: original_amount - service_fee, question: @question, answer: @answer, user: @answer_owner, flow: "out", detail: "最佳答案")
-
-   end
- end
+  end
+end

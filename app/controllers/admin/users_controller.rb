@@ -1,18 +1,8 @@
-class Admin::UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :require_is_admin
-  layout "admin"
-
+class Admin::UsersController < AdminController
   def index
     @users = User.all
     drop_breadcrumb("后台首页", admin_user_path(current_user))
     drop_breadcrumb("用户管理")
-  end
-
-  def change_to_admin
-    @user = User.find(params[:id])
-    @user.change_to_admin!
-    redirect_to :back
   end
 
   def change_to_user
@@ -21,16 +11,14 @@ class Admin::UsersController < ApplicationController
     redirect_to :back
   end
 
+  def approved
+    @user = User.find(params[:id])
+    @user.approved!
+    redirect_to :back
+  end
 
-
- def approved
-   @user = User.find(params[:id])
-       @user.approved!
-       redirect_to :back
- end
-
-# applied
-# approved
+  # applied
+  # approved
   def change_to_admin
     @user = User.find(params[:id])
     @user.change_to_admin!

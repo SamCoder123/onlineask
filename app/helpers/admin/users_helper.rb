@@ -14,6 +14,4 @@ module Admin::UsersHelper
       link_to("ChangeToAdmin", change_to_admin_admin_user_path(user), method: :post, class: "btn btn-xs btn-info")
     end
   end
-
-
 end

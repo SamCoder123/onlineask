@@ -1,6 +1,34 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :questions
+  has_many :answers
+  has_many :follow_relationships
+  has_many :followees, through: :follow_relationships, source: :follow_relationship
+  has_many :like_answers
+  has_many :a_likes, through: :like_answers, source: :answer
+  has_many :unlike_answers
+  has_many :a_unlikes, through: :unlike_answers, source: :answer
+  has_many :bills
+  has_many :blogs
+  has_many :question_likes
+  has_many :q_likes, through: :question_likes, source: :question
+
+  has_many :question_invitations
+  has_many :invitated_questions, through: :question_invitations, source: :question
+
+  has_many :answer_subscriptions
+  has_many :subscribing_answers, through: :answer_subscriptions, source: :answer
+  # validates :name, presence: true
+  # validates :role, presence: true
+  # validates :gender, presence: true
+  # validates :school, presence: true
+
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  mount_uploader :image, ImageUploader
+
+  scope :super_admin, -> { find(1) }
+
+  after_create :add_original_balance
 
   include AASM
 
@@ -18,45 +46,12 @@ class User < ApplicationRecord
     end
   end
 
-
-  after_create :add_original_balance
-  has_many :questions
-  has_many :answers
-  has_many :follow_relationships
-  has_many :followees, through: :follow_relationships, source: :follow_relationship
-  has_many :like_answers
-  has_many :a_likes, through: :like_answers, source: :answer
-  has_many :unlike_answers
-  has_many :a_unlikes, through: :unlike_answers, source: :answer
-  has_many :bills
-  has_many :blogs
-  has_many :question_likes
-  has_many :q_likes, through: :question_likes, source: :question
-
-  scope :super_admin, -> { find(1) }
-
   def add_original_balance
     amount = 1000
     self.balance += amount
     save
-    Bill.create!(flow: "out", detail: "注册奖励", amount: amount, user_id: self.id)
+    Bill.create!(flow: "out", detail: "注册奖励", amount: amount, user_id: id)
   end
-
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  mount_uploader :image, ImageUploader
-
-  has_many :question_invitations
-  has_many :invitated_questions, through: :question_invitations, source: :question
-
-  has_many :answer_subscriptions
-  has_many :subscribing_answers, through: :answer_subscriptions, source: :answer
-  # validates :name, presence: true
-  # validates :role, presence: true
-  # validates :gender, presence: true
-  # validates :school, presence: true
-
-  scope :super_admin, -> { find(1) }
 
   def change_to_admin!
     self.is_admin = true
@@ -97,7 +92,7 @@ class User < ApplicationRecord
   end
 
   # 是否已经偷听问题
-  def has_subscribed_answer?(answer)
+  def subscribed_answer?(answer)
     subscribing_answers.include?(answer)
   end
 
@@ -172,7 +167,6 @@ class User < ApplicationRecord
   def question_unlike_cancle!(question)
     q_unlikes.delete(question)
   end
-
 end
 
 # == Schema Information
