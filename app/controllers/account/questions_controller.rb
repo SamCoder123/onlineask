@@ -34,7 +34,6 @@ def index
       @filters_arry << user.id
     end
     @filters = @filters_arry.map(&:inspect).join(",")
-    @tags = @question.tags.map(&:inspect).join(",")
     @users = User.all - @invitated_users
     @tags = Tag.all - @question.tags
     drop_breadcrumb("问题", account_questions_path(@question))
