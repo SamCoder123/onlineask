@@ -10,7 +10,7 @@ CarrierWave.configure do |config|
       region: "us-west-1"
     }
     config.aws_attributes = {
-      expires: 1.month.from_now.httpdate
+      expires: 1.month.from_now.httpdate,
       cache_control: 'max-age=604800'
     }
   else
