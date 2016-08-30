@@ -69,9 +69,8 @@ $(function() {
               <% end %>
               <br/>
               <span class="answer-like-stats">
-                赞数：
-                <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px"><%= answer.like_answers.count %></i>
-                <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %></i>
+                <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px 0 0"><%= answer.like_answers.count %> 人赞这个答案</i>
+                <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %>人踩这个答案</i>
               </span>
               <% if current_user %>
 
