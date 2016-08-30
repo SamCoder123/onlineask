@@ -40,15 +40,7 @@ class Account::UsersController < AccountController
   def show_profile
     @user = current_user
     drop_breadcrumb("个人首页")
-    questions = case params[:order]
-      when "by_question_created_at"
-        Question.published.recent
-      when "by_question_like_count"
-        Question.published.sort_by{|question| question.question_likes.count}.reverse
-      else
-        Question.published
-      end
-    @questions = questions.paginate(:page => params[:page], :per_page => 10)
+    
   end
 
   def withdraw_edit

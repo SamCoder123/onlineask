@@ -2,12 +2,14 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i(show edit update destroy)
   before_action :authenticate_user!, only: %i(create new edit update destroy question_like_up)
   before_action :validate_search_key, only: [:search]
+  layout "user_center"
 
   def index
     @questions = Question.all
     drop_breadcrumb("所有问题")
     @questions = Question.published
     @questions = Question.published.last(3)
+    
   end
 
   def show

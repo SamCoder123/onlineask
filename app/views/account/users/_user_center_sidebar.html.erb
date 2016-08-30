@@ -1,6 +1,6 @@
 
   <ul class="nav nav-pills nav-stacked" style="padding-left: 30px">
-    <li><%= active_link_to " 个人首页", show_profile_account_user_path(current_user), class: "fa fa-list" %></li>
+    <li><%= active_link_to " 个人首页", account_questions_path, active: true, class: "fa fa-list" %></li>
     <li><%= active_link_to " 个人资料", index_profile_account_user_path(current_user),class: "fa fa-user" %></li>
     <li><%= active_link_to " 我的问题与答案", my_questions_answers_account_user_path(current_user), class: "fa fa-comments-o" %></li>
     <li><%= active_link_to " 被邀请回答的问题", invitated_questions_account_questions_path, class: "fa fa-diamond" %></li>
