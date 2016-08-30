@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
       RewardDepositService.new(current_user, @invitated_users, @question).perform!
 
       flash[:notice] = "提问成功！"
-      redirect_to root_path
+      redirect_to show_profile_account_user_path(current_user)
     else
       @users = User.all
       render :new

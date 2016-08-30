@@ -113,8 +113,8 @@ class Account::UsersController < AccountController
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的问题和回答")
     @user = current_user
-    @questions = @user.questions.paginate(page: params[:page], per_page: 10)
-    @answers = @user.answers.paginate(page: params[:page], per_page: 10)
+    @questions = @user.questions.published.paginate(page: params[:page], per_page: 10)
+    @answers = @user.answers.published.paginate(page: params[:page], per_page: 10)
   end
 
   def wallet
