@@ -1,7 +1,7 @@
 class Tag < ApplicationRecord
-  belongs_to :question
   has_many :taggings
-
+  has_many :questions,through: :taggings, source: :question
+  
   validates :name, uniqueness: true
 end
 

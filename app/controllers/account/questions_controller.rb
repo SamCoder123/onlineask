@@ -34,12 +34,19 @@ def index
       @filters_arry << user.id
     end
     @filters = @filters_arry.map(&:inspect).join(",")
+    @tags = @question.tags.map(&:inspect).join(",")
     @users = User.all - @invitated_users
+    @tags = Tag.all - @question.tags
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb("编辑问题")
   end
 
   def update
+    unless params[:question][:tag_list]
+      flash[:alert] = "标签不能为空"
+      redirect_to :back
+      return
+    end
     if @question.update(question_params)
       # 新的
       @new_invitated_users = User.where(id: params[:filters].split(","))
@@ -162,6 +169,10 @@ def index
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
-    params.require(:question).permit(:title, :tag_list, :description)
+    # tag_list 这个gem接收name1,name2,name3这种字符串形式，所以在permit之前要解析成字符串
+    if params[:question][:tag_list]
+      params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
+    end
+    params.require(:question).permit(:title, :description, :tag_list, :downpayment)
   end
 end
