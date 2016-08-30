@@ -127,9 +127,7 @@ class Account::QuestionsController < AccountController
   def cancel
     @question = Question.find(params[:id])
     if @question.answers.count.zero?
-      @question.close!
-      current_user.balance += 200
-      current_user.save
+      QuestionCancelService.new(@question,current_user).question_cancel!
       flash[:notice] = "Your question has been cancelled. Please check your account."
     else
       flash[:alert] = "Sorry, you can't cancel this question as it has already been answered."
@@ -140,9 +138,7 @@ class Account::QuestionsController < AccountController
   # 把question的status改为open,并扣款
   def reopen
     @question = Question.find(params[:id])
-    @question.reopen!
-    current_user.balance -= 200
-    current_user.save
+    QuestionCancelService.new(@question,current_user).question_reopen!
     flash[:notice] = "Your question has been re-opened."
     redirect_to :back
   end
