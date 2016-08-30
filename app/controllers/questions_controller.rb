@@ -24,11 +24,6 @@ class QuestionsController < ApplicationController
     drop_breadcrumb("我要提问")
   end
 
-  def edit
-    @tags = Tag.all
-    @users = User.all
-  end
-
   def create
     unless params[:question][:tag_list]
       flash[:alert] = "标签不能为空"
