@@ -10,7 +10,7 @@
         <li><i class="glyphicon glyphicon-user"></i>提问者-<%= link_to @question.user.name, exhibition_profile_account_user_path(@question.user) %></li>
         <li><i class="glyphicon glyphicon-tags"></i>标签：<%= render @question.tags %></li>
         <li><i class="glyphicon glyphicon-edit"></i>已有回答<%= @question.answers.count %>个</li>
-        <li><i class="glyphicon glyphicon-eye-open"></i>被浏览XX次</li>
+        <li><i class="glyphicon glyphicon-eye-open"></i>被浏览<%= @question.watches %>次</li>
       </ul>
     </div>
   </div>

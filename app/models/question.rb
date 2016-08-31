@@ -73,4 +73,5 @@ end
 #  status      :string           default("open")
 #  tag         :string
 #  likes       :integer          default(0)
+#  watches     :integer          default(0)
 #

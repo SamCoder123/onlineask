@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829115334) do
+ActiveRecord::Schema.define(version: 20160831050009) do
 
   create_table "answer_subscriptions", force: :cascade do |t|
     t.integer  "answer_id"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20160829115334) do
     t.string   "status",      default: "open"
     t.string   "tag"
     t.integer  "likes",       default: 0
+    t.integer  "watches",     default: 0
   end
 
   create_table "sessions", force: :cascade do |t|
