@@ -4,23 +4,35 @@
         <%= link_to '返回', account_answers_path, class: "btn btn-primary btn-xs"%>
       </span>
   </div>
-  <%= render "questions/question_info_panel" %>
+    <%= render "account/answers/question_info_panel" %>
 
   <div class="panel panel-default ">
     <div class="panel-heading">
       <h3 class="panel-title">我的回答</h3>
     </div>
-
     <div class="panel-body">
       <p>
         回答内容：<%= @answer.content %>
       </p>
     </div>
-
     <div class="total clearfix btn-right-bottom">
         <span class="pull-right">
           <%= link_to '编辑', edit_account_answer_path(@answer), class: "btn btn-primary btn-xs" %>
         </span>
     </div>
   </div>
+
+  更多相似问题
+  <div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="..." alt="...">
+      <div class="caption">
+        <h3>Thumbnail label</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+</div>
 </div>

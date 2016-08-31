@@ -13,6 +13,7 @@ class Account::AnswersController < AccountController
     drop_breadcrumb("我回答的问题", account_answers_path(@answer))
     drop_breadcrumb("我的回答")
     @question = @answer.question
+    @refer_questions = Question.order("watches DESC").limit(3)
   end
 
   def new
