@@ -24,41 +24,46 @@ $(function(){
     </div>
   </div>
 
-  <div class="addtional-info-border">
-    <p>
-      您可以调整悬赏和邀请，让您更快得到回答：
-    </p>
-    <%= simple_form_for @question, url: refine_reward_account_question_path(@question) do |form| %>
-      <%= form.input :downpayment, label:"调整悬赏", class:"radio-inline"%>
-      <%#= form.collection_radio_buttons :downpayment, [[@question.downpayment + 20, '+20'] ,[@question.downpayment + 50, '+50'],[@question.downpayment + 100, '+100']], :first, :last, label:"hah" %>
-      <br>
-      <%= render "multiple_dropdown_bar" %>
-      <br>
-      <%= form.submit "调整一下", disable_with:"调整中…", class:"btn btn-danger btn-sm pull-right  clearfix" %>
-    <% end %>
-  </div>
+  <% if @question.status == "open" %>
+    <div class="addtional-info-border">
+      <p>
+        您可以调整悬赏和邀请，让您更快得到回答：
+      </p>
+      <%= simple_form_for @question, url: refine_reward_account_question_path(@question) do |form| %>
+        <%= form.input :downpayment, label:"调整悬赏", class:"radio-inline"%>
+        <%#= form.collection_radio_buttons :downpayment, [[@question.downpayment + 20, '+20'] ,[@question.downpayment + 50, '+50'],[@question.downpayment + 100, '+100']], :first, :last, label:"hah" %>
+        <br>
+        <%= render "multiple_dropdown_bar" %>
+        <br>
+        <%= form.submit "调整一下", disable_with:"调整中…", class:"btn btn-danger btn-sm pull-right  clearfix" %>
+      <% end %>
+    </div>
+  <% end %>
 
   <div>
     <% @invitated_users.each do |user| %>
       <div class="panel panel-info " style="margin-top:20px">
         <div class="panel-heading">
-          <h3 class="panel-title">邀请人：<%= user.name %> <small class="small-tips pull-right"><i class="fa fa-spinner fa-pulse fa-fw"></i>Ta暂时没有回答</small></h3>
+          <h3 class="panel-title">邀请人：<%= user.name %> <small class="small-tips pull-right"><i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"></i>Ta暂时没有回答</small></h3>
         </div>
           <% answers = user.answers.where(question_id:@question.id) %>
-          <% answers.each do |answer| %>
-          <div class="panel-body invitated_users_answer">
-            <%= answer.content %>
-
-            <div class="total clearfix">
-              <span class="pull-right">
-                <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
-              </span>
+            <% answers.each do |answer| %>
+            <div class="panel-body invitated_users_answer">
+              <%= answer.content %>
+              <div class="total clearfix">
+                <span class="pull-right">
+                  <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
+                </span>
+              </div>
             </div>
-          </div>
           <% end %>
-     </div>
+      </div>
     <% end %>
-
+    <% if @answers.empty? %>
+      <hr>
+      <small class="small-tips">还没有回答，可以看看其他热门问题</small>
+      <%= render "account/answers/hot_question" %>
+    <% end %>
     <% @answers.each do |answer| %>
       <% if !@question.invitated_users.include?(answer.user)  %>
         <div class="panel panel-info ">

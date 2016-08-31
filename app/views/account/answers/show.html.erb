@@ -24,22 +24,5 @@
 
   <h3>更多热门问题:</h3>
 
-  <div class="row">
-    <% @refer_questions.each do |refer| %>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <!-- <img src="..." alt="..."> -->
-          <div class="caption">
-            <h3><%= refer.title %></h3>
-            <p><%= truncate(sanitize(refer.description), limit: 20) %></p>
-            <p>
-              <small class="small-tips">悬赏<i class="glyphicon glyphicon-yen"></i><%= @question.downpayment.to_i %>, <%= refer.liking_users.count %>人也想听</small>
-            </p>
-            <p><%= link_to("去回答", new_question_answer_path(refer), class:"btn btn-danger btn-sm") %>
-              <%= link_to("去查看", question_path(refer), class:"btn btn-default btn-sm") %></p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <%= render "hot_question" %>
 </div>
