@@ -3,8 +3,8 @@ class WelcomeV1Controller < ApplicationController
 
   def index
     # @questions = Question.all
-    @questions = Question.limit(6)
-
+    @questions = Question.limit(4)
+    # @questions = Question.where(status:"closed").order("watches DESC").limit(4)
     # 记录上一次请求路径是否是登录或者注册
     flag = false
 
