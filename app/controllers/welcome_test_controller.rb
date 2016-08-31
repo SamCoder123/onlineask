@@ -1,5 +1,6 @@
 class WelcomeTestController < ApplicationController
-  layout "welcome_test",except: [:register_guide]
+  layout "welcome_test"
+  layout:false,only: [:register_guide]
 
   def index
     # @questions = Question.all
@@ -10,6 +11,7 @@ class WelcomeTestController < ApplicationController
 
     # 注册页进入guide页面
     if flag
+      #redirect_to register_guide_welcome_test_index_path
       redirect_to register_guide_welcome_test_index_path
       return
     end
@@ -29,4 +31,5 @@ class WelcomeTestController < ApplicationController
   def register_guide
     @tags = Tag.all
   end
+
 end
