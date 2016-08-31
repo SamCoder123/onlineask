@@ -41,7 +41,7 @@
                   <p class="summary">
                     <% pure_description = sanitize(question.description) %>
                     <%= truncate(pure_description, limit:25) %>
-                    <span class="pull-right"><%= link_to("我要偷听",question,class:"btn btn-default btn-xs") %></span>
+                    <span class="pull-right"><%= link_to("我要偷听",question,class:"btn btn-danger btn-xs") %></span>
                     <span class="pull-right"><%= link_to("我要回答",new_question_answer_path(question),class:"btn btn-default btn-xs") %></span>
                     <span class="pull-right" style="font-size:12px">回答人数：<%= question.answers.count %>&nbsp&nbsp</span>
                   </p>

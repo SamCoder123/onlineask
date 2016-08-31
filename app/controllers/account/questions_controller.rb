@@ -16,6 +16,7 @@ class Account::QuestionsController < AccountController
         Question.published
       end
 
+    questions = questions.tagged_with(current_user.tags, :match_all => true)
     @questions = questions.paginate(:page => params[:page], :per_page => 15)
   end
 
