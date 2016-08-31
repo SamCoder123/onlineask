@@ -2,12 +2,14 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i(show edit update destroy)
   before_action :authenticate_user!, only: %i(create new edit update destroy question_like_up)
   before_action :validate_search_key, only: [:search]
+  layout "user_center"
 
   def index
     @questions = Question.all
     drop_breadcrumb("所有问题")
     @questions = Question.published
     @questions = Question.published.last(3)
+    
   end
 
   def show
@@ -17,20 +19,23 @@ class QuestionsController < ApplicationController
 
   def new
     @users = User.all
+    #binding.pry
+    @tags = Tag.all
     @question = Question.new
     drop_breadcrumb("Home", root_path)
     drop_breadcrumb("我要提问")
   end
 
-  def edit
-    @users = User.all
-  end
-
   def create
+    unless params[:question][:tag_list]
+      flash[:alert] = "标签不能为空"
+      redirect_to :back
+      return
+    end
+
     @question = Question.new(question_params)
     @question.user = current_user
     @question.status = "open"
-    # binding.pry
 
     if @question.save
       # 保存用户 从平台扣钱150转给回答者
@@ -40,9 +45,10 @@ class QuestionsController < ApplicationController
       RewardDepositService.new(current_user, @invitated_users, @question).perform!
 
       flash[:notice] = "提问成功！"
-      redirect_to root_path
+      redirect_to show_profile_account_user_path(current_user)
     else
       @users = User.all
+      @tags = Tag.all
       render :new
     end
   end
@@ -91,6 +97,9 @@ class QuestionsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
+    if params[:question][:tag_list]
+      params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
+    end
     params.require(:question).permit(:title, :description, :tag_list, :downpayment)
   end
 end

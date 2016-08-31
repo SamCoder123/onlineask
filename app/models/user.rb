@@ -27,6 +27,7 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   scope :super_admin, -> { find(1) }
+  
 
   after_create :add_original_balance
 

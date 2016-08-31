@@ -1,19 +1,29 @@
 class Account::QuestionsController < AccountController
   before_action :set_question, only: %i(show edit update destroy)
+  layout "user_center"
 
-  def index
-    @questions = current_user.questions.published
+def index
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("我问过的问题")
-    @questions = @questions.paginate(page: params[:page], per_page: 10)
-    render layout: "user_center"
+    drop_breadcrumb("问题")
+
+    # 所有问题questions进行排序
+    questions = case params[:order]
+      when "by_question_created_at"
+        Question.published.recent
+      when "by_question_like_count"
+        Question.published.sort_by{|question| question.question_likes.count}.reverse
+      else
+        Question.published
+      end
+    @questions = questions.paginate(:page => params[:page], :per_page => 15)
+
   end
 
   def show
     @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
   end
 
@@ -25,11 +35,17 @@ class Account::QuestionsController < AccountController
     end
     @filters = @filters_arry.map(&:inspect).join(",")
     @users = User.all - @invitated_users
-    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    @tags = Tag.all - @question.tags
+    drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb("编辑问题")
   end
 
   def update
+    unless params[:question][:tag_list]
+      flash[:alert] = "标签不能为空"
+      redirect_to :back
+      return
+    end
     if @question.update(question_params)
       # 新的
       @new_invitated_users = User.where(id: params[:filters].split(","))
@@ -127,9 +143,7 @@ class Account::QuestionsController < AccountController
   def cancel
     @question = Question.find(params[:id])
     if @question.answers.count.zero?
-      @question.close!
-      current_user.balance += 200
-      current_user.save
+      QuestionCancelService.new(@question,current_user).question_cancel!
       flash[:notice] = "Your question has been cancelled. Please check your account."
     else
       flash[:alert] = "Sorry, you can't cancel this question as it has already been answered."
@@ -140,9 +154,7 @@ class Account::QuestionsController < AccountController
   # 把question的status改为open,并扣款
   def reopen
     @question = Question.find(params[:id])
-    @question.reopen!
-    current_user.balance -= 200
-    current_user.save
+    QuestionCancelService.new(@question,current_user).question_reopen!
     flash[:notice] = "Your question has been re-opened."
     redirect_to :back
   end
@@ -156,6 +168,10 @@ class Account::QuestionsController < AccountController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
-    params.require(:question).permit(:title, :tag_list, :description)
+    # tag_list 这个gem接收name1,name2,name3这种字符串形式，所以在permit之前要解析成字符串
+    if params[:question][:tag_list]
+      params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
+    end
+    params.require(:question).permit(:title, :description, :tag_list, :downpayment)
   end
 end
