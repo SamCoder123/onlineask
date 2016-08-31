@@ -40,9 +40,9 @@ $(function(){
 
   <div>
     <% @invitated_users.each do |user| %>
-      <div class="panel panel-info ">
+      <div class="panel panel-info " style="margin-top:20px">
         <div class="panel-heading">
-          <h3 class="panel-title">邀请人：<%= user.name %> & 他的回答</h3>
+          <h3 class="panel-title">邀请人：<%= user.name %> <small class="small-tips pull-right"><i class="fa fa-spinner fa-pulse fa-fw"></i>Ta暂时没有回答</small></h3>
         </div>
           <% answers = user.answers.where(question_id:@question.id) %>
           <% answers.each do |answer| %>
