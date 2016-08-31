@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "welcome_test#index"
+  root "welcome_v1#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :tags, only: %i(index show)
@@ -16,11 +16,13 @@ Rails.application.routes.draw do
     resources :answers
   end
 
-  resources :welcome_test do
+  resources :welcome_test, only: %i(index)  do
     collection do
       get :register_guide
     end
   end
+
+  resources :welcome_v1, only: %i(index)
 
   devise_for :users
 

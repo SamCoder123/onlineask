@@ -21,13 +21,12 @@ module Account::UsersHelper
 
   def display_user_status(user)
     case user.aasm_state
-    when "verification_applied"
-      content_tag(:span, "已申请", class: "fa fa-user")
-    when "application_pending"
-      content_tag(:span, "审核中", class: "fa fa-user")
+    when "unapplied"
+      content_tag(:span, "未申请", class: "fa fa-user")
+    when "application_applied"
+      content_tag(:span, "已申请", class: "fa fa-star-o")
     when "application_approved"
-      content_tag(:span, "已认证", class: "fa fa-user")
-
+      content_tag(:span, "已认证", class:"fa fa-star") 
     end
   end
 end

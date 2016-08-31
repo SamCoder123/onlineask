@@ -1,0 +1,29 @@
+<!-- <div class="banner-image" style="background:url(index/banner_v1.jpg) center no-repeat; background-size:cover"> -->
+<div class="">
+  <video autoplay loop id="bgvid">
+    <source src="index/bgv.mp4" type="video/mp4" style="background-repeat: no-repeat">
+  </video>
+</div>
+
+<div class="banner-mask">
+  <div class="container">
+    <!-- 右侧注册div -->
+    <div class="" style="margin-top:100px">
+      <%= render "register_index"%>
+      <%= render "login_index" %>
+    </div>
+
+    <!-- 左侧文字 -->
+    <div class="banner-font pull-left">
+      <p class="banner-font-title">海外学霸在线</p>
+      <p class="banner-font-text">提高声誉，即刻赚钱</p>
+      <%= link_to('马上提问', new_question_path, class: "btn btn-lg btn-primary")  %>
+    </div>
+
+
+  </div>
+
+  <div class="search-bar-index">
+    <%= render "welcome_v1/search_bar_index" %>
+  </div>
+</div>
