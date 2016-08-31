@@ -52,7 +52,7 @@ class Account::QuestionsController < AccountController
       # 把邀请人和问题存入关系表
       @invitated_users = User.where(id: params[:filters].split(","))
 
-      RewardDepositService.new(current_user, @invitated_users, @question).perform!
+      RewardDepositService.new(current_user, @invitated_users, @question, current_user).perform!
 
       flash[:notice] = "提问成功！"
       redirect_to show_profile_account_user_path(current_user)
