@@ -15,7 +15,7 @@
     <div class="panel panel-default ">
       <div class="panel-heading">
         <h3 class="panel-title">问题主题：<%= answer.question.title %>
-          <% if current_user.has_subscribed_answer?(answer) %>
+          <% if current_user.subscribed_answer?(answer) %>
             <i class="fa fa-eye pull-right" aria-hidden="true"><small>已偷听</small></i>
           <% end %>
           <% if answer.answer_status == "best_answer" %>

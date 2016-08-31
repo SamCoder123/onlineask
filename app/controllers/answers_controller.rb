@@ -8,7 +8,6 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     drop_breadcrumb(@question.title, question_path(@question))
     drop_breadcrumb("我要回答")
-
   end
 
   def edit
@@ -22,7 +21,6 @@ class AnswersController < ApplicationController
       current_user.gender = params[:gender].downcase if params[:gender]
       current_user.school = params[:school] if params[:school]
       current_user.major = params[:major] if params[:major]
-      binding.pry
       current_user.save
     end
 
