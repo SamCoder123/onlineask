@@ -55,7 +55,7 @@ class Account::QuestionsController < AccountController
       RewardDepositService.new(current_user, @invitated_users, @question, current_user).perform!
 
       flash[:notice] = "提问成功！"
-      redirect_to show_profile_account_user_path(current_user)
+      redirect_to account_question_path(@question)
     else
       @users = User.all
       @tags = Tag.all
