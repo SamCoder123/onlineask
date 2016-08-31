@@ -35,6 +35,13 @@ $(function() {
               <%= link_to '删除', publish_hidden_account_question_path(@question), class: "btn btn-danger btn-xs" %>
               <%= link_to '查看完整答案', account_question_path(@question), class: "btn btn-success btn-xs" %>
             </span>
+          <% else %>
+            <% if @question.status == "open" %>
+              <small class="small-tips">问题开放，悬赏<i class="glyphicon glyphicon-yen"></i><%= @question.downpayment %></small></h3>
+              <%= link_to(new_question_answer_path(@question), class: "btn btn-danger btn-sm") do %>
+                <i class="glyphicon glyphicon-pencil"></i>回答问题
+              <% end %>
+            <% end %>
           <% end %>
           <%= link_to '返回', questions_path,class: "btn btn-sm btn-info" %>
         </span>
