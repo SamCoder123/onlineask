@@ -6,6 +6,7 @@ class Question < ApplicationRecord
   has_many :invitated_users, through: :question_invitations, source: :user
   has_many :bills
   has_many :question_likes
+  has_many :liking_users, through: :question_likes, source: :user
 
   validates :title, presence: true
   validates :description, presence: true
