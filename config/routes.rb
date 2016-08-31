@@ -37,7 +37,7 @@ Rails.application.routes.draw do
         post :publish_hidden
         post :cancel
         post :reopen
-        post :refine_reward
+        patch :refine_reward
       end
       collection do
         get :invitated_questions
