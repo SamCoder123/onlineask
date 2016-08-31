@@ -1,0 +1,18 @@
+<div class="banner-register-bg pull-right container">
+  <p>欢迎注册，新同学</p>
+  <div class="col-md-12">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs">
+        <%= f.input :name, required: true, autofocus: true, label:false, placeholder: "姓名", input_html: { background: "transparent"} %>
+        <%= f.input :email, required: true, autofocus: true, label:false, placeholder:"邮箱" %>
+        <%= f.input :password, required: true, label:false, placeholder:"密码", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+        <%= f.input :password_confirmation, required: true, label:false, placeholder:"确认密码" %>
+      </div>
+
+      <div class="form-actions">
+        <span><%= f.button :submit, "Sign up",class:"btn btn-success pull-right" %></span><% end %>
+        <!-- <span><%= render "devise/shared/links" %></span> -->
+      </div>
+  </div>
+</div>
