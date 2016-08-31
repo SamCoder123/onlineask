@@ -55,6 +55,11 @@ class Question < ApplicationRecord
   def cancel_invitation!(users)
     invitated_users.delete(users)
   end
+
+  def watches_counter!
+    self.watches += 1
+    save
+  end
 end
 
 # == Schema Information

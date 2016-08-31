@@ -8,6 +8,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     drop_breadcrumb(@question.title, question_path(@question))
     drop_breadcrumb("我要回答")
+    @question.watches_counter!
   end
 
   def edit

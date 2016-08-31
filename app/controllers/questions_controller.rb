@@ -15,8 +15,7 @@ class QuestionsController < ApplicationController
   def show
     drop_breadcrumb("Home", root_path)
     drop_breadcrumb(@question.title)
-    @question.watches += 1
-    @question.save
+    @question.watches_counter!
   end
 
   def new
