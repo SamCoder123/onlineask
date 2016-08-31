@@ -12,6 +12,7 @@ class Account::AnswersController < AccountController
     drop_breadcrumb("个人首页", account_questions_path(current_user))
     drop_breadcrumb("我回答的问题", account_answers_path(@answer))
     drop_breadcrumb("我的回答")
+    @question = @answer.question
   end
 
   def new

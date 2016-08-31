@@ -4,22 +4,7 @@
         <%= link_to '返回', account_answers_path, class: "btn btn-primary btn-xs"%>
       </span>
   </div>
-  <div class="panel panel-default ">
-    <div class="panel-heading">
-      <h3 class="panel-title">问题详情</h3>
-    </div>
-    <div class="panel-body">
-      <p>
-        <%= @answer.question.title %>
-      </p>
-      <div class="panel-body">
-        问题补充：
-        <p>
-          <%= @answer.question.description %>
-        </p>
-      </div>
-    </div>
-  </div>
+  <%= render "questions/question_info_panel" %>
 
   <div class="panel panel-default ">
     <div class="panel-heading">
@@ -30,7 +15,6 @@
       <p>
         回答内容：<%= @answer.content %>
       </p>
-
     </div>
 
     <div class="total clearfix btn-right-bottom">
