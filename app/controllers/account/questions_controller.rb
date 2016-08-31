@@ -2,8 +2,8 @@ class Account::QuestionsController < AccountController
   before_action :set_question, only: %i(show edit update destroy)
   layout "user_center"
 
-def index
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+  def index
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("问题")
 
     # 所有问题questions进行排序
@@ -15,16 +15,52 @@ def index
       else
         Question.published
       end
-    @questions = questions.paginate(:page => params[:page], :per_page => 15)
 
+    @questions = questions.paginate(:page => params[:page], :per_page => 15)
   end
 
   def show
     @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
+  end
+
+  def new
+    @users = User.all
+    #binding.pry
+    @tags = Tag.all
+    @question = Question.new
+    drop_breadcrumb("Home", root_path)
+    drop_breadcrumb("我要提问")
+  end
+
+  def create
+    unless params[:question][:tag_list]
+      flash[:alert] = "标签不能为空"
+      redirect_to :back
+      return
+    end
+
+    @question = Question.new(question_params)
+    @question.user = current_user
+    @question.status = "open"
+
+    if @question.save
+      # 保存用户 从平台扣钱150转给回答者
+      # 把邀请人和问题存入关系表
+      @invitated_users = User.where(id: params[:filters].split(","))
+
+      RewardDepositService.new(current_user, @invitated_users, @question).perform!
+
+      flash[:notice] = "提问成功！"
+      redirect_to show_profile_account_user_path(current_user)
+    else
+      @users = User.all
+      @tags = Tag.all
+      render :new
+    end
   end
 
   def edit
@@ -134,7 +170,7 @@ def index
 
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("被邀请的问题")
     render layout: "user_center"
   end

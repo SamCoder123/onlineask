@@ -1,5 +1,5 @@
 <ul class="nav nav-pills nav-stacked" style="max-width:300px; padding-top:20px;">
-    <li><%= active_link_to("立即提问",new_question_path) %></li>
+    <li><%= active_link_to("立即提问",new_account_question_path) %></li>
     <li><%= active_link_to(like_account_follow_path(@user),method: :post) do %>
       关注
       <% if !current_user.already_follower?(@user) %>

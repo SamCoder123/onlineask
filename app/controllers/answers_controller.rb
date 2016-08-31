@@ -11,9 +11,6 @@ class AnswersController < ApplicationController
     @question.watches_counter!
   end
 
-  def edit
-  end
-
   def create
     @answer = Answer.new(answer_params)
     @answer.user = current_user
@@ -30,14 +27,6 @@ class AnswersController < ApplicationController
       redirect_to root_path, notice: "回答已发送！"
     else
       render :new
-    end
-  end
-
-  def update
-    if @answer.update(answer_params)
-      redirect_to account_answers_path, notice: "回答已更新！"
-    else
-      render :edit
     end
   end
 

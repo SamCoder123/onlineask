@@ -18,42 +18,6 @@ class QuestionsController < ApplicationController
     @question.watches_counter!
   end
 
-  def new
-    @users = User.all
-    #binding.pry
-    @tags = Tag.all
-    @question = Question.new
-    drop_breadcrumb("Home", root_path)
-    drop_breadcrumb("我要提问")
-  end
-
-  def create
-    unless params[:question][:tag_list]
-      flash[:alert] = "标签不能为空"
-      redirect_to :back
-      return
-    end
-
-    @question = Question.new(question_params)
-    @question.user = current_user
-    @question.status = "open"
-
-    if @question.save
-      # 保存用户 从平台扣钱150转给回答者
-      # 把邀请人和问题存入关系表
-      @invitated_users = User.where(id: params[:filters].split(","))
-
-      RewardDepositService.new(current_user, @invitated_users, @question).perform!
-
-      flash[:notice] = "提问成功！"
-      redirect_to show_profile_account_user_path(current_user)
-    else
-      @users = User.all
-      @tags = Tag.all
-      render :new
-    end
-  end
-
   def search
     if @query_string.present?
       # binding.pry
@@ -94,13 +58,5 @@ class QuestionsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_question
     @question = Question.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def question_params
-    if params[:question][:tag_list]
-      params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
-    end
-    params.require(:question).permit(:title, :description, :tag_list, :downpayment)
   end
 end

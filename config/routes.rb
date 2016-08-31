@@ -9,17 +9,16 @@ Rails.application.routes.draw do
       post :question_like_up
       post :question_like_down
     end
-    resources :answers
     collection do
       get :search
     end
+
+    resources :answers
   end
 
   resources :welcome_test
 
   devise_for :users
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # namespace for account
   namespace :account do
