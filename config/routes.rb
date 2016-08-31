@@ -16,13 +16,22 @@ Rails.application.routes.draw do
     resources :answers
   end
 
-  resources :welcome_test
+  resources :welcome_test do
+    collection do
+      get :register_guide
+    end
+  end
 
   devise_for :users
 
   # namespace for account
   namespace :account do
     resources :blogs
+    resources :tags do
+      member do
+        post :cancel
+      end
+    end
 
     resources :answers do
       member do
@@ -64,6 +73,7 @@ Rails.application.routes.draw do
         # 显示我的关注
         get :follow_show
         post :submit_application
+        post :add_tags
       end
 
       collection do

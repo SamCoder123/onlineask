@@ -17,6 +17,9 @@ class User < ApplicationRecord
 
   has_many :answer_subscriptions
   has_many :subscribing_answers, through: :answer_subscriptions, source: :answer
+
+  has_many :tags
+
   # validates :name, presence: true
   # validates :role, presence: true
   # validates :gender, presence: true
@@ -27,7 +30,8 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   scope :super_admin, -> { find(1) }
-  
+
+  acts_as_taggable_on :tags
 
   after_create :add_original_balance
 
