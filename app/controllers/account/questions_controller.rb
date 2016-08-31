@@ -3,7 +3,7 @@ class Account::QuestionsController < AccountController
   layout "user_center"
 
 def index
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("问题")
 
     # 所有问题questions进行排序
@@ -22,7 +22,7 @@ def index
   def show
     @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
   end
@@ -134,7 +134,7 @@ def index
 
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("被邀请的问题")
     render layout: "user_center"
   end

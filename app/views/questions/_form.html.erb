@@ -9,7 +9,7 @@ $(function(){
   <%#= f.error_notification %>
   <div class="form-inputs">
     <%= f.input :title,label:"问题主题",placeholder:"写下你的问题" %>
-    <%= f.input :description,label:"问题说明",placeholder:"问题说明"%>
+    <%= f.input :description,label:"问题说明",placeholder:"问题说明", input_html: {rows:10}%>
 
     <label class="float required control-label" for="question_tag_list"><abbr title="required">*</abbr> 问题标签</label>
     <%= select_tag 'question[tag_list][]', options_for_select(@tags.collect{ |t| [t.name, t.name] }),multiple: true, class: 'ui fluid search dropdown' %>
@@ -23,7 +23,7 @@ $(function(){
   </div>
 <% end %>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 var editor = new Simditor({
  textarea: $('#question_description'),
  toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', '|','hr','indent','outdent','alignment','fullscreen'],
@@ -35,4 +35,4 @@ var editor = new Simditor({
    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
  }
 });
-</script>
+</script> -->
