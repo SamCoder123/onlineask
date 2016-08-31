@@ -1,9 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-
-
-  after_create :add_original_balance
   has_many :questions
   has_many :answers
   has_many :follow_relationships
@@ -13,21 +8,9 @@ class User < ApplicationRecord
   has_many :unlike_answers
   has_many :a_unlikes, through: :unlike_answers, source: :answer
   has_many :bills
+  has_many :blogs
   has_many :question_likes
   has_many :q_likes, through: :question_likes, source: :question
-
-  scope :super_admin, -> { find(1) }
-
-  def add_original_balance
-    amount = 1000
-    self.balance += amount
-    save
-    Bill.create!(flow: "out", detail: "注册奖励", amount: amount, user_id: self.id)
-  end
-
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  mount_uploader :image, ImageUploader
 
   has_many :question_invitations
   has_many :invitated_questions, through: :question_invitations, source: :question
@@ -39,7 +22,37 @@ class User < ApplicationRecord
   # validates :gender, presence: true
   # validates :school, presence: true
 
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  mount_uploader :image, ImageUploader
+
   scope :super_admin, -> { find(1) }
+  
+
+  after_create :add_original_balance
+
+  include AASM
+
+  aasm do
+    state :verification_applied, initail: true
+    state :application_pending
+    state :application_approved
+
+    event :submit_application do
+      transitions from: :verification_applied, to: :application_pending
+    end
+
+    event :approved do
+      transitions from: :application_pending, to: :application_approved
+    end
+  end
+
+  def add_original_balance
+    amount = 1000
+    self.balance += amount
+    save
+    Bill.create!(flow: "out", detail: "注册奖励", amount: amount, user_id: id)
+  end
 
   def change_to_admin!
     self.is_admin = true
@@ -80,7 +93,7 @@ class User < ApplicationRecord
   end
 
   # 是否已经偷听问题
-  def has_subscribed_answer?(answer)
+  def subscribed_answer?(answer)
     subscribing_answers.include?(answer)
   end
 
@@ -155,7 +168,6 @@ class User < ApplicationRecord
   def question_unlike_cancle!(question)
     q_unlikes.delete(question)
   end
-
 end
 
 # == Schema Information
@@ -186,9 +198,11 @@ end
 #  balance                :float            default(0.0)
 #  phone_number           :string
 #  introduction           :string
+#  aasm_state             :string           default("verification_applied")
 #
 # Indexes
 #
+#  index_users_on_aasm_state            (aasm_state)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #

@@ -37,25 +37,26 @@ gem "devise"
 
 gem "font-awesome-rails"
 
-gem 'carrierwave'
-gem 'mini_magick'
-gem 'rmagick'
-gem 'fog'
-gem 'figaro'
-gem 'awesome_rails_console'
-gem 'annotate'
-gem 'ransack'
-gem 'will_paginate'
-gem 'gravatarify'
-gem 'acts-as-taggable-on', '~> 4.0'
-gem 'to_words'
-gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem "carrierwave"
+gem "mini_magick"
+gem "rmagick"
+gem "fog"
+gem "figaro"
+gem "awesome_rails_console"
+gem "annotate"
+gem "ransack"
+gem "will_paginate"
+gem "gravatarify"
+gem "acts-as-taggable-on", "~> 4.0"
+gem "to_words"
+gem "semantic-ui-sass", github: "doabit/semantic-ui-sass"
 gem "trix"
-gem 'twilio-ruby', '~> 4.11.1'
-gem 'phonelib'
-gem 'active_link_to'
+gem "twilio-ruby", "~> 4.11.1"
+gem "phonelib"
+gem "active_link_to"
 # simditor文本编辑器
 gem "simditor"
+gem "aasm"
 
 group :production do
   gem "pg"
@@ -63,11 +64,11 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
-  gem 'pry'
-  gem 'pry-nav'
-  gem 'sqlite3'
-  gem 'activerecord-session_store' # 我不确定这个gem要不要放在这里
+  gem "byebug", platform: :mri
+  gem "pry"
+  gem "pry-nav"
+  gem "sqlite3"
+  gem "activerecord-session_store" # 我不确定这个gem要不要放在这里
   gem "rubocop"
 end
 

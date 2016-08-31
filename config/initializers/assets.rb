@@ -14,12 +14,14 @@ Rails.application.config.assets.precompile += %w(welcome_test.css)
 
 Rails.application.config.assets.precompile += %w(admin/admins.css)
 
-Rails.application.config.assets.precompile += %w( questions.js )
+Rails.application.config.assets.precompile += %w(questions.js)
 
-Rails.application.config.assets.precompile += %w( account/users.css )
+Rails.application.config.assets.precompile += %w(account/users.css)
 
-Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w(search.js)
 
 Rails.application.config.assets.precompile += %w(simplemde.min.scss)
 
 Rails.application.config.assets.precompile += %w(simplemde.min.js)
+
+Rails.application.config.assets.precompile += %w(welcome_v1.css)

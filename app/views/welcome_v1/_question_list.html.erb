@@ -1,0 +1,13 @@
+<div class="question-list-bg">
+  <div class="container">
+
+    <% @questions.each do |question| %>
+      <div class="col-md-6 question-list-box">
+        <h3><%= question.title %></h3>
+        <%= question.answers.first.content %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

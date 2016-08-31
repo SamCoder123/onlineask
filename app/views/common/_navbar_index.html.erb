@@ -1,13 +1,14 @@
-<nav class="navbar navbar-default navbar-bg" role="navigation">
+<nav class="navbar navbar-default col-md-12 col-sm-12 col-xs-12 navbar-index-bg" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped fro better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">onlineask</a>
+      <a class="navbar-brand" href="/" style="color:#FFF">OnlineAsk</a>
     </div>
 
     <!-- Collect the nav links,forms,and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+
         <% if !current_user %>
            <li><%= link_to("注册", new_user_registration_path) %> </li>
            <li><%= link_to("登入", new_user_session_path) %></li>
@@ -33,9 +34,8 @@
                  <% if current_user.admin? %>
                    <li><%= link_to("管理者后台",admin_admins_path)%></li>
                  <% else %>
-                   <li> <%= link_to("个人首页", show_profile_account_user_path(current_user)) %></li>
+                   <li> <%= link_to("个人首页", account_questions_path) %></li>
                  <%end %>
-
                  <li class="divider"> </li>
                  <li> <%= link_to("登出", destroy_user_session_path, method: :delete) %> </li>
              </ul>

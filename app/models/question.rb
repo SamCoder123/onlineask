@@ -10,32 +10,31 @@ class Question < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
   validates :tag_list, presence: true
-  validates :downpayment, presence: true, numericality:{greater_than:0}
-
+  validates :downpayment, presence: true, numericality: { greater_than: 0 }
 
   # status 字段 有两种状态 open closed
 
-
-  scope :published, -> { where(is_hidden:false) }
+  scope :published, -> { where(is_hidden: false) }
+  scope :recent, -> { order("created_at DESC") }
 
   acts_as_taggable_on :tags
 
   def updated_at_formate
-    self.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+    updated_at.strftime("%Y-%m-%d %H:%M:%S")
   end
 
   def created_at_formate
-    self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+    created_at.strftime("%Y-%m-%d %H:%M:%S")
   end
 
   def hide!
     self.is_hidden = true
-    self.save
+    save
   end
 
   def publish!
     self.is_hidden = false
-    self.save
+    save
   end
 
   def close!

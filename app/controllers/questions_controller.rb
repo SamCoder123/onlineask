@@ -2,49 +2,19 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i(show edit update destroy)
   before_action :authenticate_user!, only: %i(create new edit update destroy question_like_up)
   before_action :validate_search_key, only: [:search]
+  layout "user_center"
 
   def index
     @questions = Question.all
     drop_breadcrumb("所有问题")
     @questions = Question.published
     @questions = Question.published.last(3)
+
   end
 
   def show
     drop_breadcrumb("Home", root_path)
     drop_breadcrumb(@question.title)
-  end
-
-  def new
-    @users = User.all
-    @question = Question.new
-    drop_breadcrumb("Home", root_path)
-    drop_breadcrumb("我要提问")
-  end
-
-  def edit
-    @users = User.all
-  end
-
-  def create
-    @question = Question.new(question_params)
-    @question.user = current_user
-    @question.status = "open"
-    # binding.pry
-
-    if @question.save
-      # 保存用户 从平台扣钱150转给回答者
-      # 把邀请人和问题存入关系表
-      @invitated_users = User.where(id: params[:filters].split(","))
-
-      RewardDepositService.new(current_user,@invitated_users,@question).perform!
-
-      flash[:notice] = "提问成功！"
-      redirect_to root_path
-    else
-      @users = User.all
-      render :new
-    end
   end
 
   def search
@@ -82,17 +52,10 @@ class QuestionsController < ApplicationController
     { email_or_name_cont: query_string }
   end
 
-
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_question
     @question = Question.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def question_params
-    params.require(:question).permit(:title, :description, :tag_list, :downpayment,)
   end
 end

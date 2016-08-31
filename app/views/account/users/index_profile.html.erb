@@ -1,144 +1,151 @@
-<div class="row">
-  <div class="col-md-8 col-md-offest-2">
-
-    <table class="table table-stripped">
-      <thead>
-        <th>
-          功能
-        </th>
-        <th>
-          操作
-        </th>
-        <th>
-        </th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            个人资料
-          </td>
-          <td>
-            <%= render "profile" %>
-            <!-- 查看姓名、邮箱等
-            <%= link_to("查看", show_profile_account_user_path(current_user), class: "btn btn-primary") %> -->
-          </td>
-          <td>
-            <%= link_to("修改个人信息",edit_profile_account_user_path(@user),class:"btn btn-xs btn-default")%>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            我提过的问题
-          </td>
-          <td>
-            已提出<%= @questions.count %>个问题，<%= @questions.where(status: "closed").count %>个已关闭，<%= @questions.where(status: "open").count %>个开放
-
-          </td>
-          <td>
-            <%= link_to("查看", account_questions_path(current_user), class: "btn btn-xs btn-default") %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            我写过的答案
-          </td>
-          <td>
-            已回答<%= @answers.count %>个问题，<%= @answers.where(answer_status: "best_answer").count %>个被选为最佳，<%= @answer_subscriptions.count %>个被偷听，个被点赞
-
-          </td>
-          <td>
-            <%= link_to("查看", account_answers_path, class: "btn btn-xs btn-default") %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            我被邀请回答的问题
-          </td>
-          <td>
-            共有<%= @user.invitated_questions.count %>个问题邀请我回答
-          </td>
-          <td>
-            <%= link_to("被邀请回答的问题", invitated_questions_account_questions_path, class:"btn btn-xs btn-default") %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            我偷听的答案
-          </td>
-          <td>
-            我偷听了 <%= @answer_subscriptions.count %>个回答
-          </td>
-          <td>
-            <%= link_to("我偷听的答案", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-default") %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            我的答案收到的赞
-          </td>
-          <td>
-
-          </td>
-          <td>
-
-          </td>
-        </tr>
-        <tr>
-          <td>
-            我关注的人
-          </td>
-          <td>
-
-          </td>
-          <td>
-
-          </td>
-        </tr>
-        <tr>
-          <td>
-            我被谁关注
-          </td>
-          <td>
-
-          </td>
-          <td>
-
-          </td>
-        </tr>
-        <tr>
-          <td>
-            充值记录
-          </td>
-          <td>
-
-          </td>
-          <td>
-
-          </td>
-        </tr>
-        <tr>
-          <td>
-            收钱记录
-          </td>
-          <td>
-
-          </td>
-          <td>
-
-          </td>
-        </tr>
-        <tr>
-          <td>
-            搜索问题和用户
-          </td>
-          <td>
-
-          </td>
-          <td>
-
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="col-md-10">
+  <div class="alert alert-warning">
+    <%= link_to("查看", exhibition_profile_account_user_path(current_user), class:"btn btn-danger btn-sm") %>个人主页展示效果
   </div>
+  <table class="table table-stripped">
+    <thead>
+      <th>
+        功能
+      </th>
+      <th>
+        操作
+      </th>
+      <th>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          个人资料
+        </td>
+        <td>
+          <%= render "profile" %>
+          <!-- 查看姓名、邮箱等
+          <%= link_to("查看", show_profile_account_user_path(current_user), class: "btn btn-primary") %> -->
+        </td>
+        <td>
+          <%= link_to("修改个人信息",edit_profile_account_user_path(@user),class:"btn btn-xs btn-default")%>
+        </td>
+        <td>
+          <%= display_user_status(@user)  %>
+          <% unless current_user.application_approved? %>
+            <%= link_to("申请", submit_application_account_user_path(@user) , method: :post, class:"btn btn-xs btn-default") %>
+          <% end %>
+          <%#= link_to("", ) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          我提过的问题
+        </td>
+        <td>
+          已提出<%= @questions.count %>个问题，<%= @questions.where(status: "closed").count %>个已关闭，<%= @questions.where(status: "open").count %>个开放
+
+        </td>
+        <td>
+          <%= link_to("查看", account_questions_path(current_user), class: "btn btn-xs btn-default") %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          我写过的答案
+        </td>
+        <td>
+          已回答<%= @answers.count %>个问题，<%= @answers.where(answer_status: "best_answer").count %>个被选为最佳，<%= @answer_subscriptions.count %>个被偷听，个被点赞
+
+        </td>
+        <td>
+          <%= link_to("查看", account_answers_path, class: "btn btn-xs btn-default") %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          我被邀请回答的问题
+        </td>
+        <td>
+          共有<%= @user.invitated_questions.count %>个问题邀请我回答
+        </td>
+        <td>
+          <%= link_to("被邀请回答的问题", invitated_questions_account_questions_path, class:"btn btn-xs btn-default") %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          我偷听的答案
+        </td>
+        <td>
+          我偷听了 <%= @answer_subscriptions.count %>个回答
+        </td>
+        <td>
+          <%= link_to("我偷听的答案", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-default") %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          我的答案收到的赞
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          我关注的人
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          我被谁关注
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          充值记录
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          收钱记录
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          搜索问题和用户
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -1,44 +1,87 @@
-class Account::QuestionsController < ApplicationController
+class Account::QuestionsController < AccountController
   before_action :set_question, only: %i(show edit update destroy)
-  before_action :authenticate_user!
+  layout "user_center"
 
-
-  # GET /questions
-  # GET /questions.json
   def index
-    @questions = current_user.questions.published
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("我问过的问题")
-    @questions = @questions.paginate(page: params[:page], per_page: 10)
-    render layout: "user_center"
+    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("问题")
+
+    # 所有问题questions进行排序
+    questions = case params[:order]
+      when "by_question_created_at"
+        Question.published.recent
+      when "by_question_like_count"
+        Question.published.sort_by{|question| question.question_likes.count}.reverse
+      else
+        Question.published
+      end
+
+    @questions = questions.paginate(:page => params[:page], :per_page => 15)
   end
 
-  # GET
-  # GET
   def show
     @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("我问过的问题", account_questions_path(@question))
-    drop_breadcrumb(@question.title) 
+    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("问题", account_questions_path(@question))
+    drop_breadcrumb(@question.title)
   end
 
-  # GET
+  def new
+    @users = User.all
+    #binding.pry
+    @tags = Tag.all
+    @question = Question.new
+    drop_breadcrumb("Home", root_path)
+    drop_breadcrumb("我要提问")
+  end
+
+  def create
+    unless params[:question][:tag_list]
+      flash[:alert] = "标签不能为空"
+      redirect_to :back
+      return
+    end
+
+    @question = Question.new(question_params)
+    @question.user = current_user
+    @question.status = "open"
+
+    if @question.save
+      # 保存用户 从平台扣钱150转给回答者
+      # 把邀请人和问题存入关系表
+      @invitated_users = User.where(id: params[:filters].split(","))
+
+      RewardDepositService.new(current_user, @invitated_users, @question).perform!
+
+      flash[:notice] = "提问成功！"
+      redirect_to show_profile_account_user_path(current_user)
+    else
+      @users = User.all
+      @tags = Tag.all
+      render :new
+    end
+  end
+
   def edit
     @invitated_users = @question.invitated_users
-    @filters_arry = Array.new
+    @filters_arry = []
     for user in @invitated_users
       @filters_arry << user.id
     end
-    @filters = @filters_arry.map(&:inspect).join(',')
+    @filters = @filters_arry.map(&:inspect).join(",")
     @users = User.all - @invitated_users
-    drop_breadcrumb("我问过的问题", account_questions_path(@question))
+    @tags = Tag.all - @question.tags
+    drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb("编辑问题")
   end
 
-  # PATCH/PUT
-  # PATCH/PUT
   def update
+    unless params[:question][:tag_list]
+      flash[:alert] = "标签不能为空"
+      redirect_to :back
+      return
+    end
     if @question.update(question_params)
       # 新的
       @new_invitated_users = User.where(id: params[:filters].split(","))
@@ -60,7 +103,7 @@ class Account::QuestionsController < ApplicationController
         @question.invitation!(add_users)
         # 如何一下给多个用户发送？循环新增是不是不好？
         for user in add_users
-          NotificationService.new(user,current_user,@question).send_notification!
+          NotificationService.new(user, current_user, @question).send_notification!
           OrderMailer.notify_invited_question(@question, user).deliver!
         end
       end
@@ -78,7 +121,7 @@ class Account::QuestionsController < ApplicationController
 
   def publish_hidden
     @question = Question.find(params[:id])
-    if @question.answers.count >0
+    if @question.answers.count.positive?
       flash[:alert] = "亲，您的问题已被回答，不能删除了"
       redirect_to :back
       return
@@ -115,7 +158,7 @@ class Account::QuestionsController < ApplicationController
       # 赏钱
       RewardBestAnswer.new(@answer, @question).perform!
 
-      NotificationService.new(@answer.user,current_user,@answer).send_notification_to_answer_owner!
+      NotificationService.new(@answer.user, current_user, @answer).send_notification_to_answer_owner!
 
       flash[:notice] = "已经向#{@answer.user.name}悬赏成功！"
     else
@@ -127,7 +170,7 @@ class Account::QuestionsController < ApplicationController
 
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("被邀请的问题")
     render layout: "user_center"
   end
@@ -135,10 +178,8 @@ class Account::QuestionsController < ApplicationController
   # 把question的status改为close,并退款
   def cancel
     @question = Question.find(params[:id])
-    if @question.answers.count == 0
-      @question.close!
-      current_user.balance += 200
-      current_user.save
+    if @question.answers.count.zero?
+      QuestionCancelService.new(@question,current_user).question_cancel!
       flash[:notice] = "Your question has been cancelled. Please check your account."
     else
       flash[:alert] = "Sorry, you can't cancel this question as it has already been answered."
@@ -149,9 +190,7 @@ class Account::QuestionsController < ApplicationController
   # 把question的status改为open,并扣款
   def reopen
     @question = Question.find(params[:id])
-    @question.reopen!
-    current_user.balance -= 200
-    current_user.save
+    QuestionCancelService.new(@question,current_user).question_reopen!
     flash[:notice] = "Your question has been re-opened."
     redirect_to :back
   end
@@ -165,7 +204,10 @@ class Account::QuestionsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
-    params.require(:question).permit(:title, :tag_list, :description)
+    # tag_list 这个gem接收name1,name2,name3这种字符串形式，所以在permit之前要解析成字符串
+    if params[:question][:tag_list]
+      params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
+    end
+    params.require(:question).permit(:title, :description, :tag_list, :downpayment)
   end
-
 end

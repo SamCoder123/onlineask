@@ -1,17 +1,15 @@
-class Account::AnswersController < ApplicationController
+class Account::AnswersController < AccountController
   before_action :set_answer, only: %i(show edit update destroy)
-  before_action :authenticate_user!
-
   def index
     @answers = current_user.answers.published
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path(current_user))
     drop_breadcrumb("我回答的问题")
     @answers = @answers.paginate(page: params[:page], per_page: 10)
     render layout: "user_center"
   end
 
   def show
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path(current_user))
     drop_breadcrumb("我回答的问题", account_answers_path(@answer))
     drop_breadcrumb("我的回答")
   end
@@ -47,10 +45,6 @@ class Account::AnswersController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @answer.destroy
-  #   redirect_to account_answers_path, notice: '回答已删除！'
-  # end
   def publish_hidden
     @answer = Answer.find(params[:id])
     is_hidden = params[:is_hidden]
@@ -78,14 +72,14 @@ class Account::AnswersController < ApplicationController
       redirect_to :back
       return
     end
-    if current_user.has_subscribed_answer?(@answer)
+    if current_user.subscribed_answer?(@answer)
       flash[:alert] = "您已经购买过答案，可以直接偷听"
       redirect_to my_subscriptions_account_user_path(current_user)
       return
     end
     if current_user.subscribe!(@answer)
       RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user, @answer).perform!
-      flash[:notice] = "可以偷听答案了！" ##{link_to("去查看", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-success")}
+      flash[:notice] = "可以偷听答案了！" # #{link_to("去查看", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-success")}
       redirect_to my_subscriptions_account_user_path(current_user)
     else
       flash[:alert] = "偷听不成功"

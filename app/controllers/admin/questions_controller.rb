@@ -1,13 +1,8 @@
-class Admin::QuestionsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :require_is_admin
-  layout "admin"
-
+class Admin::QuestionsController < AdminController
   def index
     @questions = Question.all
     drop_breadcrumb("后台首页", admin_user_path(current_user))
     drop_breadcrumb("问题管理")
-
   end
 
   def show

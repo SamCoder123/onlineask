@@ -1,29 +1,29 @@
 Rails.application.routes.draw do
-  root "welcome_test#index"
+  root "welcome_v1#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-
-  resources :tags, only: [:index, :show]
+  resources :tags, only: %i(index show)
 
   resources :questions do
     member do
       post :question_like_up
       post :question_like_down
     end
-    resources :answers
     collection do
       get :search
     end
+
+    resources :answers
   end
 
-  resources :welcome_test
+  resources :welcome_test, only: %i(index)
+  resources :welcome_v1, only: %i(index)
 
   devise_for :users
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-# namespace for account
+  # namespace for account
   namespace :account do
+    resources :blogs
 
     resources :answers do
       member do
@@ -55,7 +55,7 @@ Rails.application.routes.draw do
         get :index_profile
         get :my_questions_answers
         get :wallet
-      # add withdraw actions
+        # add withdraw actions
         get :withdraw_edit
         post :withdraw_change
         get :deposit_edit
@@ -64,6 +64,7 @@ Rails.application.routes.draw do
         get :my_subscriptions
         # 显示我的关注
         get :follow_show
+        post :submit_application
       end
 
       collection do
@@ -79,12 +80,13 @@ Rails.application.routes.draw do
     end
   end
 
-# namespace for admin
+  # namespace for admin
   namespace :admin do
     resources :users do
       member do
         post :change_to_admin
         post :change_to_user
+        post :approved
       end
     end
 
@@ -118,7 +120,7 @@ Rails.application.routes.draw do
     end
   end
 
-  #vote功能
+  # vote功能
   namespace :vote do
     # 对answer的vote
     resources :vote_answers, only: %i(like,like_cancel,unlike,unlike_cancel) do

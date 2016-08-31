@@ -1,4 +1,21 @@
 <div class="col-md-10" >
+
+    <strong><span style="font-size:16px">学霸广场</span></strong>
+    <div class="dropdown clearfix pull-right">
+      <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        排序
+       <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
+          <li>
+            <%= link_to("按关注人数", replyers_account_users_path(:order => "by_like_count")) %>
+          </li>
+          <li>
+             <%= link_to("按学校", replyers_account_users_path(:order => "by_school")) %>
+          </li>
+      </ul>
+  </div>
+  <hr>
   <div class="row">
   <% @replyers.each do |replyer| %>
     <div class="col-md-3 col-sm-3 col-xs-2 replyer">
@@ -14,11 +31,10 @@
           <h5><%= link_to(exhibition_profile_account_user_path(replyer)) do%>
             <%= replyer.name %></h5>
             <p>留学学校：<%= replyer.school %><br />
-            关注：<%= replyer.followees.count %> | 回答：<%= replyer.answers.count %></p>
+            被关注：<%= FollowRelationship.where(follower_id: replyer).count %> | 回答：<%= replyer.answers.count %></p>
             <% end %>
-
           <p>
-            <span><%= link_to("向Ta提问", new_question_path, class:"btn btn-success btn-xs") %></span>
+            <span><%= link_to("向Ta提问", new_account_question_path, class:"btn btn-success btn-xs") %></span>
             <% if current_user.already_follower?(replyer) %>
               <span class="label label-primary" style="padding:5px ">已关注</span>
             <% else %>

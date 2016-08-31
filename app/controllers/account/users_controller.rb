@@ -1,16 +1,21 @@
-class Account::UsersController < ApplicationController
-  before_action :authenticate_user!
-
+class Account::UsersController < AccountController
   layout "user_center"
 
   def index_profile
     @user = current_user
+
+    @followers = FollowRelationship.where(follower_id: @user)
+    @followings = @user.followees
+    @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
+
     @questions = current_user.questions.published
     @answers = current_user.answers.published
-    @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    @best_answers = @answers.where(answer_status: "best_answer")
+
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("个人资料")
   end
+
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
   def new_profile
     @user = current_user
@@ -18,7 +23,7 @@ class Account::UsersController < ApplicationController
 
   def edit_profile
     @user = current_user
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("个人资料", index_profile_account_user_path(current_user))
     drop_breadcrumb("修改个人资料")
   end
@@ -38,14 +43,18 @@ class Account::UsersController < ApplicationController
     drop_breadcrumb("用户信息")
 =======
     drop_breadcrumb("个人首页")
+<<<<<<< HEAD
     @questions = Question.all
 >>>>>>> 7f517b87ad7606be35b24bbe7eb945ab02f4661a
     @questions = Question.all.paginate(page: params[:page], per_page: 15)
+=======
+
+>>>>>>> 532eafa7d38590c98417276ad7d31f7fb60bc1e4
   end
 
   def withdraw_edit
     @user = current_user
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("提现")
   end
 
@@ -67,7 +76,7 @@ class Account::UsersController < ApplicationController
   # deposit_edit用户账户充值表单页面
   def deposit_edit
     @user = current_user
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("账户充值")
   end
 
@@ -79,7 +88,7 @@ class Account::UsersController < ApplicationController
     @user.save
     @user.phone_number = params[:user][:phone_number]
     @user.save
-    options = {phone_number: @user.phone_number}
+    options = { phone_number: @user.phone_number }
     SmsService.new(options).send_sms
     redirect_to show_profile_account_user_path(@user)
     flash[:notice] = "充值成功啦！"
@@ -88,55 +97,77 @@ class Account::UsersController < ApplicationController
   # 链接到user展示页
   def exhibition_profile
     @user = User.find(params[:id])
-    if @user == current_user
-      redirect_to index_profile_account_user_path(current_user)
-      return
-    end
-    @followers = FollowRelationship.where(user_id: @user)
-    @followings = FollowRelationship.where(follower_id: @user)
-    @answers = @user.answers
+    @blogs = @user.blogs
+    @followers = FollowRelationship.where(follower_id: @user)
+    @followings = @user.followees
+    # @same_followees = current_user.followees.where(follower_id: @followings)
+    @answers = @user.answers.paginate(page: params[:page], per_page: 5)
     @best_answers = @answers.where(answer_status: "best_answer")
     @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
     render layout: "profile"
   end
 
+  def method_name
+  end
+
   def my_subscriptions
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("我偷听的答案")
     @user = current_user
     @answer_subscriptions = AnswerSubscription.where(user_id: current_user).order("created_at DESC").paginate(page: params[:page], per_page: 5)
   end
 
   def my_questions_answers
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("我的问题和回答")
     @user = current_user
-    @questions = @user.questions.paginate(page: params[:page], per_page: 10)
-    @answers = @user.answers.paginate(page: params[:page], per_page: 10)
+    @questions = @user.questions.published.paginate(page: params[:page], per_page: 10)
+    @answers = @user.answers.published.paginate(page: params[:page], per_page: 10)
   end
 
   def wallet
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("我的钱包")
     @user = current_user
   end
 
   def replyers
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("学霸广场")
 >>>>>>> 7f517b87ad7606be35b24bbe7eb945ab02f4661a
     @replyers = User.where(role: "replyer").paginate(:page => params[:page], :per_page => 12)
+=======
+    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("学霸广场")
+
+    replyers = case params[:order]
+      when "by_like_count"
+        User.where(role: "replyer").sort_by{|replyer| FollowRelationship.where(follower_id: replyer).count }.reverse
+      when "by_school"
+        User.where(role: "replyer").order("school DESC")
+      else
+        User.where(role: "replyer")
+      end
+    @replyers = replyers.paginate(:page => params[:page], :per_page => 12)
+>>>>>>> 532eafa7d38590c98417276ad7d31f7fb60bc1e4
   end
 
   def follow_show
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("我的关注")
     @user = current_user
-    #followers 是关注我的人，followees 是我关注的人
+    # followers 是关注我的人，followees 是我关注的人
     @followers = FollowRelationship.where(follower_id: @user).paginate(page: params[:page], per_page: 10)
     @followees = FollowRelationship.where(user_id: @user).paginate(page: params[:page], per_page: 10)
+  end
+
+  def submit_application
+    @user = User.find(params[:id])
+    @user.submit_application!
+    redirect_to :back
   end
 
   private

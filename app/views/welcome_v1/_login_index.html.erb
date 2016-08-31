@@ -1,0 +1,23 @@
+<div class="banner-register-bg pull-right container">
+  <p>欢迎回来，老同学</p>
+  <div class="col-md-12">
+
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email, required: false, autofocus: true, label:false, placeholder: "邮箱" %>
+      <%= f.input :password, required: false, label:false, placeholder: "密码"%>
+      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    </div>
+
+    <div class="form-actions">
+      <!-- <%= f.button :submit, "登陆" %> -->
+      <!-- <hr/> -->
+    </div>
+  <% end %>
+
+  <div class="pull-right" style="text-align:right">
+    <%= render "devise/shared/links" %>
+  </div>
+
+  </div>
+</div>

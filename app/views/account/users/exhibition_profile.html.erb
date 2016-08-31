@@ -1,11 +1,16 @@
-<div class="col-md-2">
+<div class="col-md-3">
     <%= render "sidebar_exhibition" %>
 </div>
 
 <div class="col-md-8">
+  <% if current_user == @user %>
+    <div class="alert alert-warning">
+      这是你自己的个人主页，资料完善度80% <%= link_to("去完善", index_profile_account_user_path(current_user), class:"btn btn-danger btn-sm") %>
+    </div>
+  <% end %>
   <%= render "profile_exhibition" %>
   <hr/>
-  <h3>Ta回答过的问题</h3>
+  <h3>Ta的热门回答</h3>
 
     <% @answers.each do |answer| %>
     <div class="panel panel-default ">
@@ -13,6 +18,9 @@
         <h3 class="panel-title">问题主题：<%= answer.question.title %>
           <% if answer.answer_subscriptions.where(user_id: current_user).count > 0%>
             <i class="fa fa-eye pull-right" aria-hidden="true"><small>已偷听</small></i>
+          <% end %>
+          <% if answer.answer_status == "best_answer" %>
+            <i class="fa fa-star pull-right" aria-hidden="true"><small>荣获「最佳答案」</small></i>
           <% end %>
         </h3>
       </div>
@@ -22,4 +30,5 @@
       </div>
     </div>
     <% end %>
+    <%= will_paginate(@answers) %>
 </div>
