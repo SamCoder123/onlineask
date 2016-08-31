@@ -1,4 +1,14 @@
-<div class="col-md-8">
+<script type="text/javascript">
+$(function(){
+  $('.ui.dropdown').dropdown({
+    allowAdditions: false
+  });
+});
+</script>
+
+
+
+<div class="col-md-12">
   <div class="total clearfix btn-right-bottom">
     <span class="pull-right">
       <%= link_to '返回', account_questions_path,class:"btn btn-primary btn-xs" %>
@@ -13,6 +23,14 @@
       <p>问题描述：<%= sanitize(@question.description) %></p>
     </div>
   </div>
+
+  <%= simple_form_for @question, url: refine_reward_account_question_path(@question) do |form| %>
+    <%#= form.input :downpayment, collection: ["+10", "+20"], as: :radio_buttons, label:"调整悬赏", class:"radio-inline"%>
+    <%= form.collection_radio_buttons :downpayment, [[@question.downpayment + 20, '+20'] ,[@question.downpayment + 50, '+50'],[@question.downpayment + 100, '+100']], :first, :last, label:"hah" %>
+    <br>
+    <%= render "multiple_dropdown_bar" %>
+    <%=  %>
+  <% end %>
 
   <div>
     <% @invitated_users.each do |user| %>

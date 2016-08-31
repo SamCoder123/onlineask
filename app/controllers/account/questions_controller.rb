@@ -25,6 +25,12 @@ class Account::QuestionsController < AccountController
     drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
+
+    @users = User.all - @invitated_users
+  end
+
+  def refine_reward
+
   end
 
   def new
@@ -55,7 +61,7 @@ class Account::QuestionsController < AccountController
       RewardDepositService.new(current_user, @invitated_users, @question, current_user).perform!
 
       flash[:notice] = "提问成功！"
-      redirect_to account_question_path(@question)
+      redirect_to account_question_path (@question)
     else
       @users = User.all
       @tags = Tag.all
