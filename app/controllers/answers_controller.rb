@@ -8,6 +8,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     drop_breadcrumb(@question.title, question_path(@question))
     drop_breadcrumb("我要回答")
+
   end
 
   def edit
@@ -17,6 +18,13 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     @answer.user = current_user
     @answer.question = @question
+    unless current_user.gender && current_user.school && current_user.major
+      current_user.gender = params[:gender].downcase if params[:gender]
+      current_user.school = params[:school] if params[:school]
+      current_user.major = params[:major] if params[:major]
+      binding.pry
+      current_user.save
+    end
 
     if @answer.save
       NotificationService.new(@question.user, current_user, @answer).send_notification!
@@ -53,4 +61,5 @@ class AnswersController < ApplicationController
       redirect_to :back
     end
   end
+
 end
