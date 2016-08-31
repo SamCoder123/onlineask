@@ -1,13 +1,23 @@
 <div class="question-list-bg">
-  <div class="container">
+  <div class="container question-list-bg">
+    
+      <% @questions.each do |question| %>
+        <div class="col-sm-6 col-sx-12 question-list-box">
+          <div class="panel panel-default">
 
-    <% @questions.each do |question| %>
-      <div class="col-md-6 question-list-box">
-        <h3><%= question.title %></h3>
-        <%= question.answers.first.content %>
-      </div>
-
-    <% end %>
+            <div class="panel-body">
+              <h3><%= question.title %></h3>
+              <%= question.answers.first.content %>
+              <div>
+                <div class="pull-right">
+                  <%= link_to '偷听', new_question_answer_path(question), class: "btn btn-primary" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
   </div>
+
 </div>
