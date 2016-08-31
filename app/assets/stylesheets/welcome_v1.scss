@@ -84,3 +84,32 @@
   position: absolute;
   top: 600px;
 }
+
+#bgvid{
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+}
+
+
+// section1
+.text-section{
+  text-align: center;
+  padding-top: 80px;
+  height: 260px;
+}
+
+.text-section p{
+  color: #4299f4;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.picture-list{
+  height: 380px;
+  overflow: hidden;
+  margin-bottom: 80px;
+}
