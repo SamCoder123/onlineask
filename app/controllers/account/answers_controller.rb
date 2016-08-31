@@ -45,10 +45,6 @@ class Account::AnswersController < AccountController
     end
   end
 
-  # def destroy
-  #   @answer.destroy
-  #   redirect_to account_answers_path, notice: '回答已删除！'
-  # end
   def publish_hidden
     @answer = Answer.find(params[:id])
     is_hidden = params[:is_hidden]
