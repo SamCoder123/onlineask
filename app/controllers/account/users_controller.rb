@@ -26,12 +26,13 @@ class Account::UsersController < AccountController
     drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("个人资料", index_profile_account_user_path(current_user))
     drop_breadcrumb("修改个人资料")
+
   end
 
   def update_profile
     @user = current_user
     if @user.update(params_user)
-      redirect_to show_profile_account_user_path(@user)
+      redirect_to index_profile_account_user_path
     else
       render :edit_profile
     end
@@ -39,17 +40,23 @@ class Account::UsersController < AccountController
 
   def show_profile
     @user = current_user
-<<<<<<< HEAD
-    drop_breadcrumb("用户信息")
-=======
     drop_breadcrumb("个人首页")
-<<<<<<< HEAD
-    @questions = Question.all
->>>>>>> 7f517b87ad7606be35b24bbe7eb945ab02f4661a
-    @questions = Question.all.paginate(page: params[:page], per_page: 15)
-=======
 
->>>>>>> 532eafa7d38590c98417276ad7d31f7fb60bc1e4
+    # 所有问题questions进行排序
+    questions = case params[:order]
+      when "by_question_created_at"
+        Question.published.recent
+      when "by_question_like_count"
+        Question.published.sort_by{|question| question.question_likes.count}.reverse
+      else
+        Question.published
+      end
+
+    if current_user.tags.size.positive?
+      tags = current_user.tag_list
+      questions = questions.tagged_with(tags, :any => true)
+    end
+    @questions = questions.paginate(:page => params[:page], :per_page => 15)
   end
 
   def withdraw_edit

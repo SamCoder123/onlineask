@@ -28,7 +28,8 @@
 
               <div class="total clearfix">
                 <span class="pull-right">
-                  <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => question, :answer => answer } %>
+                  <%= link_to("编辑答案", edit_account_answer_path(answer), class:"btn btn-danger btn-xs") %>
+                  <%#= render :partial => "account/questions/show_button_base_status", :locals => { :question => question, :answer => answer } %>
                 </span>
               </div>
             </div>

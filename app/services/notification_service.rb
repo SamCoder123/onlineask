@@ -17,4 +17,8 @@ class NotificationService
   def send_notification_to_answer_owner!
     Notification.create(recipient: @recipient, actor: @actor, action: "notify_message_to_answer_owner", notifiable: @notifiable)
   end
+
+  def send_notification_to_approved_user!
+    Notification.create(recipient: @recipient, actor: @actor, action: "notify_message_to_approved_user", notifiable: @notifiable)
+  end
 end

@@ -3,7 +3,7 @@
   <div class="form-group">
      <%= f.input :name, required: true, autofocus: true, label:"昵称" %>
      <%= f.input :role, label:"角色" %>
-     
+     <%= f.input :gender, label:"性别", :collection => [["male", 'male'], ["female", 'female']], :as => :radio_buttons, :item_wrapper_class => 'inline'  %>
      <%= f.input :description, label:"个人介绍"%>
      <%= f.input :school, required: true, autofocus: true, label:"留学学校" %>
      <%= f.input :major, required: true, autofocus: true, label:"专业",input_html: { class: "form-control"} %>
