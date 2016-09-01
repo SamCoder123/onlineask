@@ -1,15 +1,14 @@
-<div class="col-md-8">
-  <h3>编辑回答</h3>
-
-  <hr>
-
-  <%= render "form" %>
-
-  <div class="total clearfix">
-    <span class="pull-right">
-      <%= link_to '详情', account_answer_path(@answer) %>
-      |
-      <%= link_to '返回', account_answers_path %>
-    </span>
-  </div>
+<%#= render template: "answers/new" %>
+<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+    <h3>我要回答</h3>
+    <h4><%= @question.title %></h4>
+    <span><%= sanitize(@question.description) %></span>
+    <div class="total clearfix">
+      <span class="pull-right">
+        <%= link_to '返回', account_answers_path %>
+      </span>
+    </div>
+    <hr>
+    <%= render "form" %>
 </div>
+<%#= render template: 'account/tags/index' %>

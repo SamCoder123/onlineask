@@ -16,15 +16,13 @@ Rails.application.routes.draw do
     resources :answers
   end
 
-  resources :welcome_test, only: %i(index)
-
-  resources :welcome_v1, only: %i(index)
-
-  resources :guides do
+  resources :welcome_test, only: %i(index)  do
     collection do
-      get :tags_guide
+      get :register_guide
     end
   end
+
+  resources :welcome_v1, only: %i(index)
 
   devise_for :users
 
@@ -51,6 +49,7 @@ Rails.application.routes.draw do
         post :cancel
         post :reopen
         patch :refine_reward
+        get :my_favorite_questions
       end
       collection do
         get :invitated_questions
@@ -82,7 +81,7 @@ Rails.application.routes.draw do
       end
 
       collection do
-        get :replyers 
+        get :replyers
       end
     end
 
