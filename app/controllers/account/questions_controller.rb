@@ -131,12 +131,12 @@ class Account::QuestionsController < AccountController
       end
 
     if @question.save
-      flash[:notice] = "操作成功！"
+      flash[:notice] = "您已删除问题！"
+      redirect_to show_profile_account_user_path(current_user)
     else
       flash[:alert] = "操作失败！"
+      redirect_to :back
     end
-
-    redirect_to :back
   end
 
   # 赏他  分钱给平台和回答者
