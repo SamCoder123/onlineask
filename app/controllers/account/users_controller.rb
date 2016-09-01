@@ -139,14 +139,7 @@ class Account::UsersController < AccountController
   end
 
   def replyers
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    drop_breadcrumb("个人首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("学霸广场")
->>>>>>> 7f517b87ad7606be35b24bbe7eb945ab02f4661a
-    @replyers = User.where(role: "replyer").paginate(:page => params[:page], :per_page => 12)
-=======
+
     drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("学霸广场")
 
@@ -159,7 +152,6 @@ class Account::UsersController < AccountController
         User.where(role: "replyer")
       end
     @replyers = replyers.paginate(:page => params[:page], :per_page => 12)
->>>>>>> 532eafa7d38590c98417276ad7d31f7fb60bc1e4
   end
 
   def follow_show
