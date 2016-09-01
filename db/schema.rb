@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20160831121701) do
     t.string   "status",      default: "open"
     t.string   "tag"
     t.integer  "likes",       default: 0
+    t.integer  "watches",     default: 0
   end
 
   create_table "sessions", force: :cascade do |t|

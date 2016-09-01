@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i(show edit update destroy)
   before_action :authenticate_user!, only: %i(create new edit update destroy question_like_up)
   before_action :validate_search_key, only: [:search]
-  layout "user_center"
+  layout "user_center",except: [:search]
 
   def index
     @questions = Question.all
@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
   def show
     drop_breadcrumb("Home", root_path)
     drop_breadcrumb(@question.title)
+    @question.watches_counter!
   end
 
   def search

@@ -1,8 +1,9 @@
 class RewardDepositService
-  def initialize(user, invitated_users, question)
+  def initialize(user, invitated_users, question, current_user)
     @user = user
     @question = question
     @invitated_users = invitated_users
+    @current_user = current_user
   end
 
   def perform!
@@ -13,7 +14,7 @@ class RewardDepositService
     # 被邀请的人存入关系
     @question.invitation!(@invitated_users)
     @invitated_users.each do |user|
-      NotificationService.new(user, current_user, @question).send_notification!
+      NotificationService.new(user, @current_user, @question).send_notification!
       OrderMailer.notify_invited_question(@question, user).deliver!
     end
 

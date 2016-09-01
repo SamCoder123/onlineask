@@ -11,12 +11,11 @@
   <%= render "profile_exhibition" %>
   <hr/>
   <h3>Ta的热门回答</h3>
-
     <% @answers.each do |answer| %>
     <div class="panel panel-default ">
       <div class="panel-heading">
         <h3 class="panel-title">问题主题：<%= answer.question.title %>
-          <% if answer.answer_subscriptions.where(user_id: current_user).count > 0%>
+          <% if current_user.subscribed_answer?(answer) %>
             <i class="fa fa-eye pull-right" aria-hidden="true"><small>已偷听</small></i>
           <% end %>
           <% if answer.answer_status == "best_answer" %>

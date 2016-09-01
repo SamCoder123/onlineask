@@ -8,16 +8,23 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     drop_breadcrumb(@question.title, question_path(@question))
     drop_breadcrumb("我要回答")
+    @question.watches_counter!
   end
 
   def create
     @answer = Answer.new(answer_params)
     @answer.user = current_user
     @answer.question = @question
+    unless current_user.gender && current_user.school && current_user.major
+      current_user.gender = params[:gender].downcase if params[:gender]
+      current_user.school = params[:school] if params[:school]
+      current_user.major = params[:major] if params[:major]
+      current_user.save
+    end
 
     if @answer.save
       NotificationService.new(@question.user, current_user, @answer).send_notification!
-      redirect_to root_path, notice: "回答已发送！"
+      redirect_to account_answer_path(@answer), notice: "回答已发送！"
     else
       render :new
     end
@@ -42,4 +49,5 @@ class AnswersController < ApplicationController
       redirect_to :back
     end
   end
+
 end
