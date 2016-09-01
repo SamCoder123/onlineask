@@ -177,7 +177,8 @@ class Account::UsersController < AccountController
       current_user.save
     end
 
-    redirect_to show_profile_account_user_path(current_user)
+    redirect_to replyers_guide_guides_path
+    #redirect_to show_profile_account_user_path(current_user)
   end
 
   private

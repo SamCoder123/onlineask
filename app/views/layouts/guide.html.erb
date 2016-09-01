@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Onlineask</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'simplemde.min' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'simplemde.min' %>
+  </head>
+  <body>
+    <div class="container-fluid" id="wrap">
+      <div class="row text-center col-md-offset-2" style="margin-top:50px ">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

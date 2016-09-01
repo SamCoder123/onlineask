@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :guides do
     collection do
       get :tags_guide
+      get :replyers_guide
     end
   end
 
@@ -82,7 +83,7 @@ Rails.application.routes.draw do
       end
 
       collection do
-        get :replyers 
+        get :replyers
       end
     end
 
