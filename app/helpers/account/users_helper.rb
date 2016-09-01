@@ -27,7 +27,9 @@ module Account::UsersHelper
     when "application_applied"
       content_tag(:span, "已申请", class: "fa fa-star-o")
     when "application_approved"
-      content_tag(:span, "已认证", class:"fa fa-star") 
+      content_tag(:span, "已认证", class:"fa fa-star")
     end
   end
+
+
 end

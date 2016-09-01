@@ -40,13 +40,7 @@ $(function() {
               <br/>
               <% if current_user.subscribed_answer?(answer) %>
                 <span class="answer-like-stats">
-                  评价答案：
-                  <%= link_to(like_vote_vote_answer_path(answer), method: :post, class:"btn btn-xs btn-danger") do %>
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px 0 0"><%= answer.like_answers.count %></i>
-                  <% end %>
-                  <%= link_to(unlike_vote_vote_answer_path(answer), method: :post, class:"btn btn-xs btn-default") do %>
-                    <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %></i>
-                  <% end %>
+                  <%= render partial: "account/users/judge_subscription", locals: {answer: answer} %>
                 </span>
               <% else %>
                 <span class="answer-like-stats">
