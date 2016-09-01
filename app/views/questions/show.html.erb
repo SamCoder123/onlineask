@@ -38,26 +38,39 @@ $(function() {
                 </span>
               <% end %>
               <br/>
-              <span class="answer-like-stats">
-                <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px 0 0"><%= answer.like_answers.count %> 人赞这个答案</i>
-                <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %>人踩这个答案</i>
-              </span>
+              <% if current_user.subscribed_answer?(answer) %>
+                <span class="answer-like-stats">
+                  评价答案：
+                  <%= link_to(like_vote_vote_answer_path(answer), method: :post, class:"btn btn-xs btn-danger") do %>
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px 0 0"><%= answer.like_answers.count %></i>
+                  <% end %>
+                  <%= link_to(unlike_vote_vote_answer_path(answer), method: :post, class:"btn btn-xs btn-default") do %>
+                    <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %></i>
+                  <% end %>
+                </span>
+              <% else %>
+                <span class="answer-like-stats">
+                  偷听指数：
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px 0 0"><%= answer.like_answers.count %></i>
+                  <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= answer.unlike_answers.count %></i>
+                </span>
+              <% end %>
               <% if current_user %>
 
-              <% unless current_user.subscribing_answers.include?(answer) %>
-                <%= link_to("偷听", subscribe_answers_account_answer_path(answer), method: :post, class:"btn btn-sm btn-danger pull-right") %>
-                <% # TODO : 需處理未登入的顯示 %>
-              <% else %>
-                <span class="pull-right">
-                  <small>已付费偷听，</small>
-                  <a tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-placement="left"
-                      title='回答者-<%= answer.user.name %>:' >查看</a>
-                </span>
-                <div id="popover_content_wrapper" style="display: none">
-                  <p><%= truncate(answer.content, limit: 20) %></p>
-                  <%= link_to("查看完整答案", my_subscriptions_account_user_path(current_user)) %>
-                </div>
-              <% end %>
+                <% unless current_user.subscribed_answer?(answer) %>
+                  <%= link_to("偷听", subscribe_answers_account_answer_path(answer), method: :post, class:"btn btn-sm btn-danger pull-right") %>
+                  <% # TODO : 需處理未登入的顯示 %>
+                <% else %>
+                  <span class="pull-right">
+                    <small>已付费偷听，</small>
+                    <a tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-placement="left"
+                        title='回答者-<%= answer.user.name %>:' >查看</a>
+                  </span>
+                  <div id="popover_content_wrapper" style="display: none">
+                    <p><%= truncate(answer.content, limit: 20) %></p>
+                    <%= link_to("查看完整答案", my_subscriptions_account_user_path(current_user)) %>
+                  </div>
+                <% end %>
 
               <% end %>
               <hr>

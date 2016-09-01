@@ -85,7 +85,7 @@ class Account::AnswersController < AccountController
     if current_user.subscribe!(@answer)
       RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user, @answer).perform!
       flash[:notice] = "可以偷听答案了！" # #{link_to("去查看", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-success")}
-      redirect_to my_subscriptions_account_user_path(current_user)
+      redirect_to :back
     else
       flash[:alert] = "偷听不成功"
       redirect_to :back
