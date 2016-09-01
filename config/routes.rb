@@ -18,7 +18,8 @@ Rails.application.routes.draw do
 
   resources :welcome_test, only: %i(index)  do
     collection do
-      get :register_guide
+      get :tags_guide
+      get :replyers_guide
     end
   end
 
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
     resources :tags do
       member do
         post :cancel
+        post :add_tag
       end
     end
 
