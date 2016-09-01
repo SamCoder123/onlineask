@@ -3,19 +3,20 @@
   <span><%= link_to("新建动态", new_account_blog_path, class:"btn btn-default btn-sm pull-right") %></span>
   </h3>
 </div>
-<hr />
+<hr/>
 
-    <% @blogs.each do |blog| %>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="panel-title">
-          <%= blog.title %>
-            <div class="pull-right">
-              <%= blog.created_at_formate %>
-            </div>
-        </div>
+
+<% @blogs.each do |blog| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <%= blog.title %>
+          <div class="pull-right">
+            <%= blog.created_at_formate %>
+          </div>
       </div>
     </div>
+  </div>
 
   <div class="panel-body">
     <p><%= sanitize(blog.description) %></p>
@@ -25,6 +26,5 @@
         <%= link_to '删除', account_blog_path(blog),method: :delete,class: "btn btn-sm btn-primary" %>
       </span>
     </div>
- </div>
-</div>
+  </div>
 <% end %>
