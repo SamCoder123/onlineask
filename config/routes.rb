@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :tags do
       member do
         post :cancel
+        post :add_tag
       end
     end
 

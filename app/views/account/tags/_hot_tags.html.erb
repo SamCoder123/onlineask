@@ -2,7 +2,7 @@
   <%= link_to tag.name, account_tag_path(tag) %>
 
   <span class="label label-success" style="padding: .2em .3em .2em;margin-left:1em;"><%= tag.taggings_count %></span>
-  <div class="pull-right"> 
-    <%= link_to "取消",cancel_account_tag_path(tag),method: :post,class:"btn btn-default btn-xs",data: { confirm: '确定要取消么?' } %>
+  <div class="pull-right">
+    <%= link_to "添加",add_tag_account_tag_path(tag),method: :post,class:"btn btn-success btn-xs"%>
   </div>
 </li>

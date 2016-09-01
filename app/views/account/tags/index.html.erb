@@ -9,5 +9,15 @@
         <%= render :partial => "/account/tags/tag", :collection => @tags, :as => :tag %>
       </ul>
     </div>
+
+    <div class="panel panel-default ">
+      <div class="panel-heading">
+        <h3 class="panel-title">更多热门标签～</h3>
+      </div>
+
+      <ul class="list-group">
+        <%= render :partial => "/account/tags/hot_tags", :collection => @hot_tags, :as => :tag %>
+      </ul>
+    </div>
   </div>
 </div>

@@ -173,7 +173,7 @@ class Account::UsersController < AccountController
     tag_list = params[:tag_list]
     if tag_list
       tag_list = tag_list.map{|k,v| "#{k}#{v}"}.join(',')
-      current_user.tag_list =tag_list
+      current_user.tag_list.add(tag_list) 
       current_user.save
     end
 
