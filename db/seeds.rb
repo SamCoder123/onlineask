@@ -28,7 +28,20 @@ i = 0
   Answer.create([content: "A#{i},首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。", question_id: i, user_id: 2 * i + 1, is_hidden: false])
   Answer.create([content: "A#{i}比如选商科，要先问自己是不是真的喜欢商科，对其有多深的了解，具体课程内容自己是否感兴趣。当然也可以参考自己选择的文理科方向，也需要考虑就读专业将来在社会上的应用，了解课程设置、相关专业。", question_id: i, user_id: 2 * i + 3, is_hidden: false])
   Answer.create([content: "A#{i}US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。", question_id: i, user_id: 2 * i + 5, is_hidden: false])
+  QuestionInvitation.create(question_id: 1, user_id: i)
+  QuestionInvitation.create(question_id: i+5, user_id: i)
+  AnswerSubscription.create(answer_id: 2*i, user_id: i)
+  AnswerSubscription.create(answer_id: 2*i-3, user_id: i)
+  Blog.create(title:"Blog#{i}，这是我的文章", description:"我喜欢写文章，大家也喜欢看我的文章，我的文章特别好", user_id: i)
+  FollowRelationship.create(user_id: i, follower_id: 2*i)
+  FollowRelationship.create(user_id: i, follower_id: i+3)
+  LikeAnswer.create(answer_id: 1, user_id: i, like_answer: i)
+  LikeAnswer.create(answer_id: 2*i, user_id: i, like_answer: i)
+  QuestionLike.create(question_id: 3, user_id: i)
+  QuestionLike.create(question_id:2*i-1, user_id: i)
+  Tag.create(name: "#{i}")
 end
+
 
 create_replyer = User.create([email: "3@3", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "I am studing in MIT currently", gender: "male", school: "MIT", major: "IT", name: "MIT boy", balance: 0])
 # "title"
