@@ -16,16 +16,18 @@ Rails.application.routes.draw do
     resources :answers
   end
 
-  resources :welcome_test, only: %i(index)  do
+  resources :welcome_test, only: %i(index)
+
+  resources :welcome_v1, only: %i(index)
+  resources :guides do
     collection do
       get :tags_guide
       get :replyers_guide
     end
   end
 
-  resources :welcome_v1, only: %i(index)
-
-  devise_for :users
+  # devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
   # namespace for account
   namespace :account do
