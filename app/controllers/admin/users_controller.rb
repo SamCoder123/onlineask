@@ -14,6 +14,7 @@ class Admin::UsersController < AdminController
   def approved
     @user = User.find(params[:id])
     @user.approved!
+    NotificationService.new(@user, current_user, @user).send_notification_to_approved_user!
     redirect_to :back
   end
 
