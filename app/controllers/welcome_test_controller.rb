@@ -17,7 +17,7 @@ class WelcomeTestController < ApplicationController
 
     flag = request.referer && request.referer.include?("/users/sign_in")
 
-    # 如果上次请求是登录或注册，直接跳入个人首页。
+    # 如果上次请求是登录或注册，直接跳入首页。
     if flag & current_user
       if current_user.admin?
         redirect_to admin_admins_path

@@ -3,7 +3,7 @@ class Account::QuestionsController < AccountController
   layout "user_center"
 
   def index
-    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("首页", account_questions_path)
     drop_breadcrumb("问题")
 
     # 所有问题questions进行排序
@@ -16,13 +16,13 @@ class Account::QuestionsController < AccountController
         Question.published
       end
 
-    @questions = questions.paginate(:page => params[:page], :per_page => 15)
+    @questions = questions.paginate(:page => params[:page], :per_page => 6)
   end
 
   def show
     @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
-    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("首页", account_questions_path)
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
     @users = User.all - @invitated_users
@@ -43,7 +43,7 @@ class Account::QuestionsController < AccountController
       render :show
     end
 
-    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("首页", account_questions_path)
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
   end
@@ -164,7 +164,7 @@ class Account::QuestionsController < AccountController
 
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
-    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("首页", account_questions_path)
     drop_breadcrumb("被邀请的问题")
     render layout: "user_center"
   end

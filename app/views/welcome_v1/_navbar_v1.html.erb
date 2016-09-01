@@ -6,7 +6,7 @@
     </div>
 
     <!-- Collect the nav links,forms,and other content for toggling -->
-    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
 
         <% if !current_user %>
@@ -34,7 +34,9 @@
                  <% if current_user.admin? %>
                    <li><%= link_to("管理者后台",admin_admins_path)%></li>
                  <% else %>
-                   <li> <%= link_to("个人首页", account_questions_path) %></li>
+                   <li> <%= link_to("首页", account_questions_path) %></li>
+                   <li><%= active_link_to " 个人资料", index_profile_account_user_path(current_user),class: "fa fa-user" %></li>
+                   <li><%= active_link_to " 我的钱包", wallet_account_user_path(current_user), class: "fa fa-money" %></li>
                  <%end %>
                  <li class="divider"> </li>
                  <li> <%= link_to("登出", destroy_user_session_path, method: :delete) %> </li>
@@ -42,7 +44,7 @@
            </li>
          <% end %>
       </ul>
-    </div> -->
+    </div>
     <!-- /.navbar-collapse -->
   <div>
   <!-- /.container-fluid -->
