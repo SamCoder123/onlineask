@@ -1,11 +1,11 @@
 class Account::AnswersController < AccountController
   before_action :set_answer, only: %i(show edit update destroy)
+  layout 'user_center', only: %i(index show)
   def index
     @answers = current_user.answers.published
     drop_breadcrumb("个人首页", account_questions_path(current_user))
     drop_breadcrumb("我回答的问题")
     @answers = @answers.paginate(page: params[:page], per_page: 10)
-    render layout: "user_center"
   end
 
   def show
