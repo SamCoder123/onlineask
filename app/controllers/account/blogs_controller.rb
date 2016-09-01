@@ -2,10 +2,15 @@ class Account::BlogsController < AccountController
   layout "user_center"
 
   def index
+    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("我的动态")
     @blogs = Blog.all.order("created_at DESC")
   end
 
   def new
+    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("我的动态")
+    drop_breadcrumb("新增动态")
     @blog = Blog.new
   end
 
@@ -17,6 +22,9 @@ class Account::BlogsController < AccountController
   end
 
   def edit
+    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("我的动态")
+    drop_breadcrumb("编辑动态")
     @blog = Blog.find(params[:id])
   end
 
