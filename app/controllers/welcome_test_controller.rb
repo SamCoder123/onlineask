@@ -11,8 +11,7 @@ class WelcomeTestController < ApplicationController
 
     # 注册页进入guide页面
     if flag
-      #redirect_to register_guide_welcome_test_index_path
-      redirect_to register_guide_welcome_test_index_path
+      redirect_to tags_guide_guides_path
       return
     end
 
@@ -26,10 +25,6 @@ class WelcomeTestController < ApplicationController
         redirect_to show_profile_account_user_path(current_user)
       end
     end
-  end
-
-  def register_guide
-    @tags = Tag.all
   end
 
 end
