@@ -6,6 +6,7 @@ class Question < ApplicationRecord
   has_many :invitated_users, through: :question_invitations, source: :user
   has_many :bills
   has_many :question_likes
+  has_many :liking_users, through: :question_likes, source: :user
 
   validates :title, presence: true
   validates :description, presence: true
@@ -54,6 +55,11 @@ class Question < ApplicationRecord
   def cancel_invitation!(users)
     invitated_users.delete(users)
   end
+
+  def watches_counter!
+    self.watches += 1
+    save
+  end
 end
 
 # == Schema Information
@@ -72,4 +78,5 @@ end
 #  status      :string           default("open")
 #  tag         :string
 #  likes       :integer          default(0)
+#  watches     :integer          default(0)
 #

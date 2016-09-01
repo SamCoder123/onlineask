@@ -170,9 +170,21 @@ class Account::UsersController < AccountController
     redirect_to :back
   end
 
+  def add_tags
+    tag_list = params[:tag_list]
+    if tag_list
+      tag_list = tag_list.map{|k,v| "#{k}#{v}"}.join(',')
+      current_user.tag_list =tag_list
+      current_user.save
+    end
+
+    redirect_to show_profile_account_user_path(current_user)
+  end
+
   private
 
   def params_user
     params.require(:user).permit(:role, :description, :gender, :school, :major, :image, :name)
   end
+
 end

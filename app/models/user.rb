@@ -17,6 +17,9 @@ class User < ApplicationRecord
 
   has_many :answer_subscriptions
   has_many :subscribing_answers, through: :answer_subscriptions, source: :answer
+
+  has_many :tags
+
   # validates :name, presence: true
   # validates :role, presence: true
   # validates :gender, presence: true
@@ -27,23 +30,24 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   scope :super_admin, -> { find(1) }
-  
+
+  acts_as_taggable_on :tags
 
   after_create :add_original_balance
 
   include AASM
 
   aasm do
-    state :verification_applied, initail: true
-    state :application_pending
+    state :unapplied, initail: true
+    state :application_applied
     state :application_approved
 
     event :submit_application do
-      transitions from: :verification_applied, to: :application_pending
+      transitions from: :unapplied, to: :application_applied
     end
 
     event :approved do
-      transitions from: :application_pending, to: :application_approved
+      transitions from: :application_applied, to: :application_approved
     end
   end
 
@@ -198,7 +202,7 @@ end
 #  balance                :float            default(0.0)
 #  phone_number           :string
 #  introduction           :string
-#  aasm_state             :string           default("verification_applied")
+#  aasm_state             :string           default("unapplied")
 #
 # Indexes
 #

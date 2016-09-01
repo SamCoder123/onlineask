@@ -1,5 +1,5 @@
 class Account::QuestionsController < AccountController
-  before_action :set_question, only: %i(show edit update destroy)
+  before_action :set_question, only: %i(show edit update destroy refine_reward)
   layout "user_center"
 
   def index
@@ -16,12 +16,36 @@ class Account::QuestionsController < AccountController
         Question.published
       end
 
+    if current_user.tags.size.positive?
+      questions = questions.tagged_with(current_user.tags, :match_all => true)
+    end
     @questions = questions.paginate(:page => params[:page], :per_page => 15)
   end
 
   def show
     @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
+    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("问题", account_questions_path(@question))
+    drop_breadcrumb(@question.title)
+    @users = User.all - @invitated_users
+    @refer_questions = Question.published.where(status: "open").order("watches DESC").limit(3)
+  end
+
+  def refine_reward
+    @answers = @question.answers.order("answer_status")
+    @invitated_users = @question.invitated_users
+    @users = User.all - @invitated_users
+
+    if @question.update(question_params)
+
+      update_invitated_users_and_notify
+
+      redirect_to account_question_path(@question), notice: "调整成功，学霸正在赶来！"
+    else
+      render :show
+    end
+
     drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
@@ -52,10 +76,10 @@ class Account::QuestionsController < AccountController
       # 把邀请人和问题存入关系表
       @invitated_users = User.where(id: params[:filters].split(","))
 
-      RewardDepositService.new(current_user, @invitated_users, @question).perform!
+      RewardDepositService.new(current_user, @invitated_users, @question, current_user).perform!
 
       flash[:notice] = "提问成功！"
-      redirect_to show_profile_account_user_path(current_user)
+      redirect_to account_question_path (@question)
     else
       @users = User.all
       @tags = Tag.all
@@ -83,37 +107,10 @@ class Account::QuestionsController < AccountController
       return
     end
     if @question.update(question_params)
-      # 新的
-      @new_invitated_users = User.where(id: params[:filters].split(","))
 
-      # 旧的
-      @old_invitated_users = @question.invitated_users
+      update_invitated_users_and_notify
 
-      # 并集
-      union_users = @new_invitated_users | @old_invitated_users
-
-      # 并集－旧的 ＝ 新增
-      add_users = union_users - @old_invitated_users
-
-      # 并集－新的 ＝ 删除的
-      delete_users = union_users - @new_invitated_users
-
-      # 新增邀请
-      unless add_users.empty?
-        @question.invitation!(add_users)
-        # 如何一下给多个用户发送？循环新增是不是不好？
-        for user in add_users
-          NotificationService.new(user, current_user, @question).send_notification!
-          OrderMailer.notify_invited_question(@question, user).deliver!
-        end
-      end
-
-      # 取消邀请
-      unless delete_users.empty?
-        @question.cancel_invitation!(delete_users)
-      end
-
-      redirect_to account_questions_path, notice: "提问修改成功！"
+      redirect_to account_question_path(@question), notice: "提问修改成功！"
     else
       render :edit
     end
@@ -209,5 +206,37 @@ class Account::QuestionsController < AccountController
       params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
     end
     params.require(:question).permit(:title, :description, :tag_list, :downpayment)
+  end
+
+  def update_invitated_users_and_notify
+    # 新的
+    @new_invitated_users = User.where(id: params[:filters].split(","))
+
+    # 旧的
+    @old_invitated_users = @question.invitated_users
+
+    # 并集
+    union_users = @new_invitated_users | @old_invitated_users
+
+    # 并集－旧的 ＝ 新增
+    add_users = union_users - @old_invitated_users
+
+    # 并集－新的 ＝ 删除的
+    delete_users = union_users - @new_invitated_users
+
+    # 新增邀请
+    unless add_users.empty?
+      @question.invitation!(add_users)
+      # 如何一下给多个用户发送？循环新增是不是不好？
+      for user in add_users
+        NotificationService.new(user, current_user, @question).send_notification!
+        OrderMailer.notify_invited_question(@question, user).deliver!
+      end
+    end
+
+    # 取消邀请
+    unless delete_users.empty?
+      @question.cancel_invitation!(delete_users)
+    end
   end
 end

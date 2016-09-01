@@ -1,8 +1,9 @@
-<!-- <div class="banner-image" style="background:url(index/banner_v1.jpg) center no-repeat; background-size:cover"> -->
-<div class="">
+<div class="hidden-xs">
   <video autoplay loop id="bgvid">
-    <source src="index/bgv.mp4" type="video/mp4" style="">
-  </video>
+      <source src="index/bgv.mp4" type="video/mp4" style="top:0;">
+    </video>
+</div>
+<div class="banner-image hidden-md hidden-lg visible-xs" style="background:url(index/banner_v1.jpg) center no-repeat; background-size:cover">
 </div>
 
 <div class="banner-mask">
@@ -19,9 +20,6 @@
       <p class="banner-font-subtitle">现在注册，立送1000积分，还不快来。</p>
       <%= link_to('马上提问', new_question_path, class: "btn btn-lg btn-primary pull-right")  %>
     </div>
-
-
-  </div>
 
   <div class="search-bar-index">
     <%= render "welcome_v1/search_bar_index" %>

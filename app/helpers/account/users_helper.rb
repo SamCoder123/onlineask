@@ -1,6 +1,7 @@
 module Account::UsersHelper
   def avatar_url
     "https://en.gravatar.com/userimage/108935282/73e80187e488d35c459472b0fbd720f4.png"
+    # "/public/headshot.png"
   end
 
   def controller?(controller)
@@ -21,13 +22,12 @@ module Account::UsersHelper
 
   def display_user_status(user)
     case user.aasm_state
-    when "verification_applied"
-      content_tag(:span, "已申请", class: "fa fa-user")
-    when "application_pending"
-      content_tag(:span, "审核中", class: "fa fa-user")
+    when "unapplied"
+      content_tag(:span, "未申请", class: "fa fa-user")
+    when "application_applied"
+      content_tag(:span, "已申请", class: "fa fa-star-o")
     when "application_approved"
-      content_tag(:span, "已认证", class: "fa fa-user")
-
+      content_tag(:span, "已认证", class:"fa fa-star") 
     end
   end
 end

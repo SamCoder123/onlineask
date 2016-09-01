@@ -1,0 +1,67 @@
+<style media="screen">
+.container{margin-top:150px;}
+  /* Hiding the checkbox, but allowing it to be focused */
+.badgebox
+{
+    opacity: 0;
+}
+.badge{width: 50px; height:50px}
+.badgebox + .badge
+{
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+	 width: 27px; height:20px
+}
+
+.badgebox:focus + .badge
+{
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+}
+
+.badgebox:checked + .badge
+{
+    /* Move the check mark back when checked */
+	text-indent: 0;
+}
+
+.btn{margin:20px 20px}
+</style>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Onlineask</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'simplemde.min' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'simplemde.min' %>
+  </head>
+  <body>
+    <div class="container-fluid" id="wrap">
+      <div class="row text-center" style="margin-top:50px">
+
+        <%= form_for [:account, current_user], url: add_tags_account_user_path(current_user), method: :post do |f| %>
+          <% @tags.each do |tag| %>
+        		<label for="default<%= tag.id %>" class="btn btn-default">
+              <%= tag.name %>
+              <img class="img-responsive" src="/replyer2.png">
+              <input name="tag_list[]" value="<%= tag.name %>" type="checkbox" id="default<%= tag.id %>" class="badgebox">
+              <span class="badge"><i class="fa fa-check fa-lg" aria-hidden="true"></i></span>
+            </label>
+          <% end %>
+          <div class="form-actions">
+            <%= f.submit "马上进入", disable_with: "进入中", class: "btn btn-primary"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>

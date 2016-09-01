@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829115334) do
+ActiveRecord::Schema.define(version: 20160831121701) do
 
   create_table "answer_subscriptions", force: :cascade do |t|
     t.integer  "answer_id"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20160829115334) do
     t.string   "status",      default: "open"
     t.string   "tag"
     t.integer  "likes",       default: 0
+    t.integer  "watches",     default: 0
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -152,18 +153,18 @@ ActiveRecord::Schema.define(version: 20160829115334) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",                     null: false
-    t.string   "encrypted_password",     default: "",                     null: false
+    t.string   "email",                  default: "",          null: false
+    t.string   "encrypted_password",     default: "",          null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,                      null: false
+    t.integer  "sign_in_count",          default: 0,           null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "role"
     t.boolean  "is_admin",               default: false
     t.text     "description"
@@ -175,7 +176,7 @@ ActiveRecord::Schema.define(version: 20160829115334) do
     t.float    "balance",                default: 0.0
     t.string   "phone_number"
     t.string   "introduction"
-    t.string   "aasm_state",             default: "verification_applied"
+    t.string   "aasm_state",             default: "unapplied"
     t.index ["aasm_state"], name: "index_users_on_aasm_state"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

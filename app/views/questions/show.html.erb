@@ -10,37 +10,7 @@ $(function() {
 </script>
 
 <div class="col-md-12">
-  <div class="panel panel-default ">
-    <div class="panel-heading">
-      <h3 class="panel-title">主题：<%= @question.title %>
-        <span class="pull-right">
-          提问人：<%= gravatar_tag @question.user.email, :size => 30, :default => avatar_url %><%= link_to @question.user.name, exhibition_profile_account_user_path(@question.user) %>
-        </span>
-      </h3>
-    </div>
-
-    <div class="panel-body">
-      <p>描述：<%= sanitize(@question.description) %></p>
-      <br>
-      <div class="pull-left">
-        标签：<%= render @question.tags %>
-      </div>
-
-      <div class="total clearfix">
-        <span class="pull-right">
-          <% if current_user == @question.user %>
-            <span class="owner-border">
-              你是问题的主人，你可以
-              <%= link_to '编辑', edit_question_path(@question), class: "btn btn-warning btn-xs" %>
-              <%= link_to '删除', publish_hidden_account_question_path(@question), class: "btn btn-danger btn-xs" %>
-              <%= link_to '查看完整答案', account_question_path(@question), class: "btn btn-success btn-xs" %>
-            </span>
-          <% end %>
-          <%= link_to '返回', questions_path,class: "btn btn-sm btn-info" %>
-        </span>
-      </div>
-   </div>
-  </div>
+  <%= render "questions/question_info_panel" %>
 
 
     <div class="panel panel-default">
