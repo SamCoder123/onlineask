@@ -25,14 +25,14 @@
         </td>
         <td>
           <%= link_to("修改个人信息",edit_profile_account_user_path(@user),class:"btn btn-xs btn-default")%>
-        </td>
-        <td>
+          <br>
+          <br>
           <%= display_user_status(@user)  %>
-          <% unless current_user.application_approved? %>
+          <% unless current_user.application_approved? || current_user.application_applied? %>
             <%= link_to("申请", submit_application_account_user_path(@user) , method: :post, class:"btn btn-xs btn-default") %>
           <% end %>
-          <%#= link_to("", ) %>
         </td>
+
       </tr>
       <tr>
         <td>
