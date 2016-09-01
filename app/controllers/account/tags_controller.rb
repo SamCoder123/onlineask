@@ -4,14 +4,14 @@ class Account::TagsController < AccountController
   before_action :find_tag, only: %i(show, cancel)
 
   def index
-    drop_breadcrumb("个人首页")
+    drop_breadcrumb("首页")
     drop_breadcrumb("兴趣标签")
     @tags = current_user.tags
     @hot_tags = Tag.where.not(id:@tags)
   end
 
   def show
-    drop_breadcrumb("个人首页")
+    drop_breadcrumb("首页")
     drop_breadcrumb("兴趣标签")
     drop_breadcrumb("标签详情")
     @tag = current_user.tags.find(params[:id])

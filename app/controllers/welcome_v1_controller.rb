@@ -8,25 +8,11 @@ class WelcomeV1Controller < ApplicationController
 
     @questions = Question.published.where(status:"closed").order("watches DESC").limit(4)
 
-    # 记录上一次请求路径是否是登录或者注册
-    # flag = request.referer && request.referer.include?("/users/sign_up")
-    #
-    # # 注册页进入guide页面
-    # if flag
-    #   redirect_to tags_guide_guides_path
-    #   return
-    # end
-    #
-    # flag = request.referer && request.referer.include?("/users/sign_in")
-    #
-    # # 如果上次请求是登录或注册，直接跳入个人首页。
-    # if flag & current_user
-    #   if current_user.admin?
-    #     redirect_to admin_admins_path
-    #   else
-    #     redirect_to show_profile_account_user_path(current_user)
-    #   end
-    # end
+    if current_user
+      if current_user.admin?
+        redirect_to admin_admins_path
+      end
+    end
   end
 
 end
