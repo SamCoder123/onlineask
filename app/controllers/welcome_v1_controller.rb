@@ -9,11 +9,10 @@ class WelcomeV1Controller < ApplicationController
 
     # 记录上一次请求路径是否是登录或者注册
     flag = request.referer && request.referer.include?("/users/sign_up")
-
+    
     # 注册页进入guide页面
     if flag
-      #redirect_to register_guide_welcome_test_index_path
-      redirect_to register_guide_welcome_test_index_path
+      redirect_to tags_guide_guides_path
       return
     end
 
@@ -24,12 +23,9 @@ class WelcomeV1Controller < ApplicationController
       if current_user.admin?
         redirect_to admin_admins_path
       else
-        redirect_to account_questions_path
+        redirect_to show_profile_account_user_path(current_user)
       end
     end
   end
 
-  def register_guide
-    @tags = Tag.all
-  end
 end
