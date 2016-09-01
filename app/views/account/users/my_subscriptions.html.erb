@@ -15,15 +15,29 @@
                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= collapse_num_to_id %>" aria-expanded="false" aria-controls="collapse<%= collapse_num_to_id %>">
               <% end %>
                 <%= subscription.answer.question.title %><b class="caret"></b>
+                </a>
+                <span class="pull-right">
+                  提问人：<%= gravatar_tag subscription.answer.question.user.email, :size => 30, :default => avatar_url %><%= link_to subscription.answer.question.user.name, exhibition_profile_account_user_path(subscription.answer.question.user) %>
+                </span>
                 <% if collapse_num == 1 %>
-                  <small class="pull-right"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>最近偷听</small>
+                  <small class="small-tips"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>最近偷听</small>
                 <% end %>
-              </a>
+
             </h4>
           </div>
           <div id="collapse<%= collapse_num_to_id %>" class="panel-collapse collapse <%= "in" if collapse_num == 1 %>" role="tabpanel" aria-labelledby="heading<%= collapse_num_to_id %>">
             <div class="panel-body">
               <%= subscription.answer.content %>
+              <br>
+              <span class="answer-like-stats pull-right">
+                评价答案：
+                <%= link_to(like_vote_vote_answer_path(subscription.answer), method: :post, class:"btn btn-xs btn-danger") do %>
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true" style="margin:0 10px 0 0"><%= subscription.answer.like_answers.count %></i>
+                <% end %>
+                <%= link_to(unlike_vote_vote_answer_path(subscription.answer), method: :post, class:"btn btn-xs btn-default") do %>
+                  <i class="fa fa-thumbs-o-down" aria-hidden="true"><%= subscription.answer.unlike_answers.count %></i>
+                <% end %>
+              </span>
             </div>
           </div>
         </div>
