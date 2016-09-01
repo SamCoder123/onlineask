@@ -39,8 +39,25 @@ class Account::UsersController < AccountController
 
   def show_profile
     @user = current_user
-    drop_breadcrumb("个人首页")
+    drop_breadcrumb("个人首页", account_questions_path)
+    drop_breadcrumb("问题")
 
+    # 所有问题questions进行排序
+    questions = case params[:order]
+      when "by_question_created_at"
+        Question.published.recent
+      when "by_question_like_count"
+        Question.published.sort_by{|question| question.question_likes.count}.reverse
+      else
+        Question.published
+      end
+
+    #binding.pry
+    if current_user.tags.size.positive?
+      tags = current_user.tag_list
+      questions = questions.tagged_with(tags, :any => true)
+    end
+    @questions = questions.paginate(:page => params[:page], :per_page => 15)
   end
 
   def withdraw_edit

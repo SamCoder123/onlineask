@@ -37,7 +37,7 @@ class User < ApplicationRecord
 
   include AASM
 
-  aasm do
+  aasm  :skip_validation_on_save => true do
     state :unapplied, initail: true
     state :application_applied
     state :application_approved

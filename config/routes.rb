@@ -49,6 +49,7 @@ Rails.application.routes.draw do
         post :cancel
         post :reopen
         patch :refine_reward
+        get :my_favorite_questions
       end
       collection do
         get :invitated_questions
