@@ -1,5 +1,9 @@
 class Blog < ApplicationRecord
   belongs_to :user
+
+  def created_at_formate
+    created_at.strftime("%Y-%m-%d %H:%M:%S")
+  end
 end
 
 # == Schema Information

@@ -5,11 +5,12 @@ class WelcomeV1Controller < ApplicationController
 
   def index
     # @questions = Question.all
-    @questions = Question.limit(6)
+
+    @questions = Question.published.where(status:"closed").order("watches DESC").limit(4)
 
     # 记录上一次请求路径是否是登录或者注册
     flag = request.referer && request.referer.include?("/users/sign_up")
-    
+
     # 注册页进入guide页面
     if flag
       redirect_to tags_guide_guides_path
