@@ -14,6 +14,7 @@ class Admin::UsersController < AdminController
   def approved
     @user = User.find(params[:id])
     @user.approved!
+    
     redirect_to :back
   end
 
