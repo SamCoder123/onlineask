@@ -11,9 +11,11 @@
 <% end %>
 
 <script type="text/javascript">
+
+
 var editor = new Simditor({
- textarea: $('#blog_description'),
- toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', '|','hr','indent','outdent','alignment','fullscreen'],
+ textarea: $("#blog_description"),
+ toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', '|','hr','indent','outdent','alignment'],
  placeholder: '想问的问题...',
  upload: {
    fileKey: 'file',
@@ -22,4 +24,5 @@ var editor = new Simditor({
    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
  }
 });
+editor.value()
 </script>
