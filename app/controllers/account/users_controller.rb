@@ -6,8 +6,8 @@ class Account::UsersController < AccountController
 
     @followers = FollowRelationship.where(follower_id: @user)
     @followings = @user.followees
-    @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
-
+    @answer_subscriptions = @user.subscribing_answers
+    @invitated_questions = @user.invitated_questions
     @questions = current_user.questions.published
     @answers = current_user.answers.published
     @best_answers = @answers.where(answer_status: "best_answer")
@@ -173,7 +173,7 @@ class Account::UsersController < AccountController
     tag_list = params[:tag_list]
     if tag_list
       tag_list = tag_list.map{|k,v| "#{k}#{v}"}.join(',')
-      current_user.tag_list.add(tag_list) 
+      current_user.tag_list.add(tag_list)
       current_user.save
     end
 
