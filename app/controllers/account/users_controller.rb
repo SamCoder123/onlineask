@@ -26,12 +26,13 @@ class Account::UsersController < AccountController
     drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("个人资料", index_profile_account_user_path(current_user))
     drop_breadcrumb("修改个人资料")
+
   end
 
   def update_profile
     @user = current_user
     if @user.update(params_user)
-      redirect_to show_profile_account_user_path(@user)
+      redirect_to index_profile_account_user_path
     else
       render :edit_profile
     end
@@ -39,8 +40,7 @@ class Account::UsersController < AccountController
 
   def show_profile
     @user = current_user
-    drop_breadcrumb("个人首页", account_questions_path)
-    drop_breadcrumb("问题")
+    drop_breadcrumb("个人首页")
 
     # 所有问题questions进行排序
     questions = case params[:order]
@@ -52,7 +52,6 @@ class Account::UsersController < AccountController
         Question.published
       end
 
-    #binding.pry
     if current_user.tags.size.positive?
       tags = current_user.tag_list
       questions = questions.tagged_with(tags, :any => true)
@@ -140,6 +139,7 @@ class Account::UsersController < AccountController
   end
 
   def replyers
+
     drop_breadcrumb("个人首页", account_questions_path)
     drop_breadcrumb("学霸广场")
 

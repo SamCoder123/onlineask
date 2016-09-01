@@ -1,12 +1,12 @@
 <nav class="navbar navbar-default col-md-12 col-sm-12 col-xs-12 navbar-v1-bg" role="navigation">
-  <div class="container-fluid">
+  <div class="container">
     <!-- Brand and toggle get grouped fro better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/" style="color:#FFF">OnlineAsk</a>
+      <a class="navbar-brand" href="/" style="color:#FFF;letter-spacing: 3px;">Online<span style="color:#4285f4;";>Ask</span></a>
     </div>
 
     <!-- Collect the nav links,forms,and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
 
         <% if !current_user %>
@@ -26,7 +26,7 @@
            <li class="dropdown">
              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                <%= gravatar_tag current_user.email, :size => 30, :default => avatar_url %>
-               Hi!, <%= current_user.email %>
+               Hi!, <%= current_user.name %>
                <b class="caret"></b>
              </a>
 
@@ -42,7 +42,7 @@
            </li>
          <% end %>
       </ul>
-    </div>
+    </div> -->
     <!-- /.navbar-collapse -->
   <div>
   <!-- /.container-fluid -->
