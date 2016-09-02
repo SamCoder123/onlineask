@@ -23,11 +23,11 @@ module Account::UsersHelper
   def display_user_status(user)
     case user.aasm_state
     when "unapplied"
-      content_tag(:span, "未申请", class: "fa fa-user")
+      content_tag(:span, "申请成为学霸", class: "fa fa-user")
     when "application_applied"
-      content_tag(:span, "已申请", class: "fa fa-star-o")
+      content_tag(:span, "学霸申请中", class: "fa fa-star-o")
     when "application_approved"
-      content_tag(:span, "已认证", class:"fa fa-star")
+      content_tag(:span, "已认证为学霸", class:"fa fa-star")
     end
   end
 

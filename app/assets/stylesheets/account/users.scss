@@ -142,6 +142,7 @@ img.headshot
 	font-size: 14px;
 }
 
+
 // sidebar 高亮底色
 a.active {
   background-color: #4285f4;
@@ -150,7 +151,7 @@ a.active {
 
 // 学霸广场的css
 .replyer{
-    width: 205px;
+    width: 260px;
     height: 320px;
     padding: 2px;
     margin: 0 40px 50px 0px;
@@ -161,4 +162,6 @@ a.active {
   height: 200px;
   overflow: hidden;
   text-align: center;
+  display: block;
+  margin: auto;
 }
