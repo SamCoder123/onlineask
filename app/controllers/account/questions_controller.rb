@@ -49,7 +49,7 @@ class Account::QuestionsController < AccountController
   end
 
   def new
-    @users = User.all
+    @users = User.where.not(id:current_user)
     #binding.pry
     @tags = Tag.all
     @question = Question.new
@@ -91,7 +91,7 @@ class Account::QuestionsController < AccountController
       @filters_arry << user.id
     end
     @filters = @filters_arry.map(&:inspect).join(",")
-    @users = User.all - @invitated_users
+    @users = User.where.not(id:current_user)
     @tags = Tag.all - @question.tags
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb("编辑问题")
