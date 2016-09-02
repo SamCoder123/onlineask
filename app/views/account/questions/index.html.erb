@@ -29,7 +29,7 @@
             <%= gravatar_tag question.user.email, :size => 30, :default => avatar_url %>
           </div>
             <div class="media-body">
-              <span class="media-meta pull-right"><%= question.created_at %></span>
+              <span class="media-meta pull-right"><%= question.created_at_formate %></span>
 
               <p><%= question.user.name %></p>
               <p class=""><%= link_to(question.title,question)  %></p>
