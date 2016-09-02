@@ -4,148 +4,90 @@
   </div>
   <table class="table table-stripped">
     <thead>
-      <th>
-        功能
-      </th>
-      <th>
-        操作
-      </th>
-      <th>
-      </th>
+      <th>功能</th>
+      <th>操作</th>
+      <th></th>
     </thead>
     <tbody>
       <tr>
+        <td>个人资料</td>
+        <td><%= render "profile" %></td>
         <td>
-          个人资料
+          <div class="index-profix-button">
+            <%= link_to(edit_profile_account_user_path(@user),class:"btn btn-xs btn-default") do%>
+              <i class="fa fa-cog" aria-hidden="true"></i><span>修改个人信息</span>
+            <% end %>
+          </div>
+          <div class="index-profix-button">
+            <%= display_user_status(@user) %>
+            <% unless current_user.application_approved? || current_user.application_applied? %>
+              <%= link_to(submit_application_account_user_path(@user) , method: :post, class:"btn btn-xs btn-default btn-danger") do%>
+                <i class="fa fa-rocket" aria-hidden="true"></i><span>申请认证，成为学霸</span>
+              <% end %>
+            <% end %>
+          </div>
         </td>
-        <td>
-          <%= render "profile" %>
-          <!-- 查看姓名、邮箱等
-          <%= link_to("查看", show_profile_account_user_path(current_user), class: "btn btn-primary") %> -->
-        </td>
-        <td>
-          <%= link_to("修改个人信息",edit_profile_account_user_path(@user),class:"btn btn-xs btn-default")%>
-          <br>
-          <br>
-          <%= display_user_status(@user)  %>
-          <% unless current_user.application_approved? || current_user.application_applied? %>
-            <%= link_to("申请", submit_application_account_user_path(@user) , method: :post, class:"btn btn-xs btn-default") %>
-          <% end %>
-        </td>
-
       </tr>
+    </tbody>
+  </table>
+<hr>
+  <h3><span class="tags"><i class="fa fa-line-chart" aria-hidden="true"></i>我的成就</span></h3>
+  <table class="table table-stripped">
+    <tbody>
       <tr>
+        <td><i class="fa fa-question-circle-o fa-lg" aria-hidden="true"></i> 我提过的问题</td>
         <td>
-          我提过的问题
-        </td>
-        <td>
-          已提出<%= @questions.count %>个问题，<%= @questions.where(status: "closed").count %>个已关闭，<%= @questions.where(status: "open").count %>个开放
-
+          已提出<%= content_tag(:span, @questions.count, class:"number_strong") %>个问题
         </td>
         <td>
           <%= link_to("查看", account_questions_path(current_user), class: "btn btn-xs btn-default") %>
         </td>
       </tr>
       <tr>
-        <td>
-          我写过的答案
-        </td>
-        <td>
-          已回答<%= @answers.count %>个问题，<%= @answers.where(answer_status: "best_answer").count %>个被选为最佳，<%= @answer_subscriptions.count %>个被偷听，个被点赞
-
-        </td>
-        <td>
-          <%= link_to("查看", account_answers_path, class: "btn btn-xs btn-default") %>
-        </td>
+        <td><i class="fa fa-check-circle-o fa-lg" aria-hidden="true"></i> 我写过的答案</td>
+        <td>已回答<%= content_tag(:span, @answers.count, class:"number_strong") %>个问题，<%= @answers.where(answer_status: "best_answer").count %>个被选为最佳
+        <td><%= link_to("查看", account_answers_path, class: "btn btn-xs btn-default") %></td>
       </tr>
       <tr>
-        <td>
-          我被邀请回答的问题
-        </td>
-        <td>
-          共有<%= @invitated_questions.count %>个问题邀请我回答
-        </td>
-        <td>
-          <%= link_to("被邀请回答的问题", invitated_questions_account_questions_path, class:"btn btn-xs btn-default") %>
-        </td>
+        <td><i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i> 我被邀请回答的问题</td>
+        <td><%= content_tag(:span, @invitated_questions.count, class:"number_strong") %>个问题邀请我回答</td>
+        <td><%= link_to("被邀请回答的问题", invitated_questions_account_questions_path, class:"btn btn-xs btn-default") %></td>
       </tr>
       <tr>
-        <td>
-          我偷听的答案
-        </td>
-        <td>
-          我偷听了 <%= @answer_subscriptions.count %>个回答
-        </td>
-        <td>
-          <%= link_to("我偷听的答案", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-default") %>
-        </td>
+        <td><i class="fa fa-headphones fa-lg" aria-hidden="true"></i> 我偷听的答案</td>
+        <td>已偷听<%= content_tag(:span, @answer_subscriptions.count, class:"number_strong") %>个回答</td>
+        <td><%= link_to("我偷听的答案", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-default") %></td>
       </tr>
       <tr>
-        <td>
-          我的答案收到的赞
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
+        <td><i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i> 答案收到的赞</td>
+        <td>已获得<%= content_tag(:span, @recieved_answers_likes.count, class:"number_strong") %>个赞</td>
+        <td><%= link_to("回答更多问题", show_profile_account_user_path(current_user), class:"btn btn-xs btn-default") %></td>
       </tr>
       <tr>
-        <td>
-          我关注的人
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
+        <td><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> 我关注的人</td>
+        <td>我关注了<%= content_tag(:span, @followings.count, class:"number_strong") %>个学霸</td>
+        <td><%= link_to("去学霸广场Social", replyers_account_users_path, class:"btn btn-xs btn-default") %></td>
       </tr>
       <tr>
-        <td>
-          我被谁关注
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
+        <td><i class="fa fa-users fa-lg" aria-hidden="true"></i> 我的粉丝</td>
+        <td><%= content_tag(:span, @followers.count, class:"number_strong") %>人关注了我</td>
+        <td><%= link_to("去学霸广场Social", replyers_account_users_path, class:"btn btn-xs btn-danger") %></td>
       </tr>
+      <!-- <tr>
+        <td><i class="fa fa-money fa-lg" aria-hidden="true"></i> 充值记录</td>
+        <td>      </td>
+        <td>      </td>
+      </tr> -->
       <tr>
-        <td>
-          充值记录
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
+        <td><i class="fa fa-trophy fa-lg" aria-hidden="true"></i> 收钱记录</td>
+        <td>知识变现<%= content_tag(:span, @bills.count, class:"number_strong") %></td>
+        <td><%= link_to("去答题赚钱", show_profile_account_user_path(current_user), class:"btn btn-xs btn-danger") %></td>
       </tr>
-      <tr>
-        <td>
-          收钱记录
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          搜索问题和用户
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
-      </tr>
+      <!-- <tr>
+        <td><i class="fa fa-search fa-lg" aria-hidden="true"></i> 搜索问题和用户</td>
+        <td>搜索问题XX个，连起来可以绕地球一圈</td>
+        <td></td>
+      </tr> -->
     </tbody>
   </table>
 </div>

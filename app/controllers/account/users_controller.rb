@@ -11,7 +11,8 @@ class Account::UsersController < AccountController
     @questions = current_user.questions.published
     @answers = current_user.answers.published
     @best_answers = @answers.where(answer_status: "best_answer")
-
+    @recieved_answers_likes = LikeAnswer.where(answer_id: @answers)
+    @bills = Bill.where(user_id: @user)
     drop_breadcrumb("首页", account_questions_path)
     drop_breadcrumb("个人资料")
   end
