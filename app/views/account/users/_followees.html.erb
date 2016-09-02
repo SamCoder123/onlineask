@@ -28,6 +28,6 @@
   <% end %>
   </div>
   <div class="text-center">
-    <%= will_paginate @followees %>
+    <%= will_paginate @followees, renderer: BootstrapPagination::Rails %>
   </div>
 </div>

@@ -56,7 +56,7 @@ class Account::UsersController < AccountController
       tags = current_user.tag_list
       questions = questions.tagged_with(tags, :any => true)
     end
-    @questions = questions.paginate(:page => params[:page], :per_page => 15)
+    @questions = questions.paginate(:page => params[:page], :per_page => 6)
   end
 
   def withdraw_edit

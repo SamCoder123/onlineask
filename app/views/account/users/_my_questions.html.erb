@@ -7,7 +7,7 @@
       <% else %>
         <span class="label label-default" style="padding:1em;margin-right:16px"><%=question.answers.count%>人回答过</span>
       <% end %>
-      
+
       <%= link_to question.title,account_question_path(question) %>
 
       <div class="pull-right">
@@ -26,5 +26,5 @@
 </ul>
 
 <div class="text-center">
- <%= will_paginate @questions %>
+ <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
 </div>
