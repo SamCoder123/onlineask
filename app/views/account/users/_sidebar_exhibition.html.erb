@@ -1,3 +1,19 @@
+<ul class="nav nav-pills nav-stacked" style="padding-left: 30px">
+  <li><%= active_link_to " 首页", show_profile_account_user_path(current_user), class: "fa fa-file-o" %></li>
+  <li><%= active_link_to " Ta的关注", follow_show_account_user_path(current_user),class: "fa fa-heart-o" %></li>
+  <li><%= active_link_to " Ta的文章", account_blogs_path, class: "fa fa-pencil-square-o" %></li>
+  <li><%= active_link_to " Ta的兴趣标签", account_tags_path, class: "fa fa-tag" %></li>
+  <hr />
+  <li><%= active_link_to " Ta偷听的回答", my_subscriptions_account_user_path(current_user),class: "fa fa-headphones" %></li>
+  <li><%= active_link_to " Ta的问题与答案", my_questions_answers_account_user_path(current_user), class: "fa fa-comments-o" %></li>
+  <li><%= active_link_to " Ta被邀请回答的问题", invitated_questions_account_questions_path, class: "fa fa-diamond" %></li>
+  <hr />
+  <li><%= active_link_to " 提问", new_account_question_path(current_user),class: "fa fa-question-circle-o" %></li>
+  <li><%= active_link_to " 热门学霸", replyers_account_users_path,class: "fa fa-truck" %></li>
+  <li><%= active_link_to " 问题广场", account_questions_path, class: "fa fa-list" %></li>
+</ul>
+
+<!--
 <ul class="nav nav-pills nav-stacked" style="max-width:300px; padding-top:20px;">
     <li><%= active_link_to("立即提问",new_account_question_path) %></li>
     <li><%= active_link_to(like_account_follow_path(@user),method: :post) do %>
@@ -22,22 +38,6 @@
       </ul>
     <li class="divider"></li>
 
-    <li>他的限免回答</li>
-      <ul>
-        <li>暂无</li>
-      </ul>
-    <li class="divider"></li>
-
-    <li>他擅长的问题</li>
-      <ul>
-        <li>暂无</li>
-      </ul>
-    <li class="divider"></li>
-
-    <li>他获得的标签</li>
-      <ul>
-        <li>暂无</li>
-      </ul>
     <li class="divider"></li>
 
     <li>关注了<%= @user.q_likes.count %>个问题</li>
@@ -60,4 +60,4 @@
     <li class="divider"></li>
 
 
-</ul>
+</ul> -->
