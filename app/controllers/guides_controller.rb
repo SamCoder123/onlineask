@@ -6,8 +6,6 @@ class GuidesController < ApplicationController
   end
 
   def replyers_guide
-    replyers = User.where(role: "replyer")
-
-    @replyers = replyers.paginate(:page => params[:page], :per_page => 12)
+    @replyers = User.where(role: "replyer").limit(12)
   end
 end
