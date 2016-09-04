@@ -39,7 +39,7 @@ Answer.create([content: "首先、确定专业方向。每个国家的大学专�
 Answer.create([content: "US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。",
   question_id: 2, user_id: 9, is_hidden: false, answer_status: "unchosen"])
 
-Question.create(title: "德州米饭大学怎么样？", description: "想去宾大，但是不知道去什么项目比较好，也想转CS，所以问问MCIT怎么样", user_id: 28, downpayment: 700, is_hidden: false, status: "closed", tag_list: "美国")
+Question.create(title: "德州米饭大学怎么样？", description: "好不好，差不差，香不香？", user_id: 28, downpayment: 700, is_hidden: false, status: "closed", tag_list: "美国")
 Answer.create([content: "我觉得Rice是一个非常注重本科生教育的学校。
 而且德州人比较保守，感觉学校里非常安全。Houston除了夏天热，非常适合生活居住。巨大的橡树，可爱的松树，充足的阳光，低廉的物价，各种石油科技公司蓬勃发展。同时我们也有很大的mall各种小牌大牌，不远处有美国最大的outlet。物价很低廉，中国超市有很多家，各种小吃生活用品应有尽有。
 
@@ -55,13 +55,13 @@ Answer.create([content: "首先、确定专业方向。每个国家的大学专�
 Answer.create([content: "US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。",
   question_id: 3, user_id: 10, is_hidden: false, answer_status: "unchosen"])
 
-  Question.create(title: "宾大的MCIT项目如何？", description: "好不好，差不差，香不香？", user_id: 32, downpayment: 600, is_hidden: false, status: "closed", tag_list: "美国")
-  Answer.create([content: "恩，总之在美国也有十几天了，也上了两天课。既然去年申请的时候是在地里知道有这个项目的，那么我也汇报一下，尽量帮一帮后来的申请人吧 我们的Director说MCIT 2016Fall有500+的申请，录取了70+，最后来了能有60左右，听说是多年来人数最多的一次。中国学生有个23成的样子，比我想的少。有小道消息说Director今年刻意压低了中国学生的数量 当然每年的录取情况都不大一样，数据也好八卦也好都没啥指导意义。 这个项目是一个面向非CS背景的人开设的项目，大家的背景五湖四海。我感觉大部分人都是数学&经济出身，也可能使我的英语听力水平只能捕捉到这两个单词也说不定 我记的一月份MCIT放录取的时候，地好多大神贴出自己的NB背景和UPENN的拒信，论坛上下都在讨论MCIT到底收怎样的学生，那叫一个热闹 总之哪怕对CS一无所知也没关系，这个项目就是为这样我们准备的 这个项目有不少外国人是读过其他的硕士学位或者有过几年的工作经验的，再不就是UPENN转专业的。即使是美国人看来也在削尖了脑袋往CS里挤嘛 新生基本上都是忧心忡忡的，不过整个项从上到下都洋溢着相当正能量，上到Director下到刚受过一年教育的MCIT前辈，都在传达出这样一种信息 跟着MCIT的培养方案走，从零开始学CS，找工作好说 作为CIT的新生我当然希望这是真的，不过我感觉其他系的Director应该也会说类似的话吧。。 暂时就这些咯，才来几天，也没有太多干货。尽量更新吧。 祝各位能找到自己理想的项目。 "
-    question_id: 4, user_id: 7, is_hidden: false, answer_status: "best_answer"])
-  Answer.create([content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。比如选商科，要先问自己是不是真的喜欢商科，对其有多深的了解，具体课程内容自己是否感兴趣。当然也可以参考自己选择的文理科方向，也需要考虑就读专业将来在社会上的应用，了解课程设置、相关专业。",
-    question_id: 4, user_id: 15, is_hidden: false, answer_status: "unchosen"])
-  Answer.create([content: "US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。",
-    question_id: 4, user_id: 13, is_hidden: false, answer_status: "unchosen"])
+Question.create(title: "宾大的MCIT项目如何？", description: "想去宾大，但是不知道去什么项目比较好，也想转CS，所以问问MCIT怎么样", user_id: 32, downpayment: 600, is_hidden: false, status: "closed", tag_list: "美国")
+Answer.create([content: "恩，总之在美国也有十几天了，也上了两天课。既然去年申请的时候是在地里知道有这个项目的，那么我也汇报一下，尽量帮一帮后来的申请人吧 我们的Director说MCIT 2016Fall有500+的申请，录取了70+，最后来了能有60左右，听说是多年来人数最多的一次。中国学生有个23成的样子，比我想的少。有小道消息说Director今年刻意压低了中国学生的数量 当然每年的录取情况都不大一样，数据也好八卦也好都没啥指导意义。 这个项目是一个面向非CS背景的人开设的项目，大家的背景五湖四海。我感觉大部分人都是数学&经济出身，也可能使我的英语听力水平只能捕捉到这两个单词也说不定 我记的一月份MCIT放录取的时候，地好多大神贴出自己的NB背景和UPENN的拒信，论坛上下都在讨论MCIT到底收怎样的学生，那叫一个热闹 总之哪怕对CS一无所知也没关系，这个项目就是为这样我们准备的 这个项目有不少外国人是读过其他的硕士学位或者有过几年的工作经验的，再不就是UPENN转专业的。即使是美国人看来也在削尖了脑袋往CS里挤嘛 新生基本上都是忧心忡忡的，不过整个项从上到下都洋溢着相当正能量，上到Director下到刚受过一年教育的MCIT前辈，都在传达出这样一种信息 跟着MCIT的培养方案走，从零开始学CS，找工作好说 作为CIT的新生我当然希望这是真的，不过我感觉其他系的Director应该也会说类似的话吧。。 暂时就这些咯，才来几天，也没有太多干货。尽量更新吧。 祝各位能找到自己理想的项目。 "
+  question_id: 4, user_id: 7, is_hidden: false, answer_status: "best_answer"])
+Answer.create([content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。比如选商科，要先问自己是不是真的喜欢商科，对其有多深的了解，具体课程内容自己是否感兴趣。当然也可以参考自己选择的文理科方向，也需要考虑就读专业将来在社会上的应用，了解课程设置、相关专业。",
+  question_id: 4, user_id: 15, is_hidden: false, answer_status: "unchosen"])
+Answer.create([content: "US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。",
+  question_id: 4, user_id: 13, is_hidden: false, answer_status: "unchosen"])
 
 
 
@@ -74,20 +74,19 @@ i = 0
   Answer.create([content: "A#{i}比如选商科，要先问自己是不是真的喜欢商科，对其有多深的了解，具体课程内容自己是否感兴趣。当然也可以参考自己选择的文理科方向，也需要考虑就读专业将来在社会上的应用，了解课程设置、相关专业。", question_id: 4+i, user_id: 3+i, is_hidden: false])
   Answer.create([content: "A#{i}US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。", question_id: 4+i, user_id: 3+i, is_hidden: false])
   QuestionInvitation.create(question_id: 1, user_id: i)
-  QuestionInvitation.create(question_id: i+5, user_id: i)
-  AnswerSubscription.create(answer_id: 2*i, user_id: i)
-  AnswerSubscription.create(answer_id: 2*i-3, user_id: i)
+  QuestionInvitation.create(question_id: i+4, user_id: i)
+  AnswerSubscription.create(answer_id: 1, user_id: i)
+  AnswerSubscription.create(answer_id: 1, user_id: i+18)
+  AnswerSubscription.create(answer_id: 1+i, user_id: i)
   Blog.create(title:"Blog#{i}，这是我的文章", description:"我喜欢写文章，大家也喜欢看我的文章，我的文章特别好", user_id: i)
-  FollowRelationship.create(user_id: i, follower_id: 2*i)
-  FollowRelationship.create(user_id: i, follower_id: i+3)
+  FollowRelationship.create(user_id: 18+i, follower_id: 3+i)
+  FollowRelationship.create(user_id: i+4, follower_id: 4)
   LikeAnswer.create(answer_id: 1, user_id: i, like_answer: i)
-  LikeAnswer.create(answer_id: 2*i, user_id: i, like_answer: i)
-  QuestionLike.create(question_id: 3, user_id: i)
-  QuestionLike.create(question_id:2*i-1, user_id: i)
+  LikeAnswer.create(answer_id: 11+i, user_id: 18+i, like_answer: i)
+  QuestionLike.create(question_id: 1, user_id: i+18)
+  QuestionLike.create(question_id:i+4, user_id: i+18)
 end
 
-
-create_replyer = User.create([email: "3@3", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "I am studing in MIT currently", gender: "male", school: "MIT", major: "IT", name: "MIT boy", balance: 0])
 # "title"
 # "description"
 # "vote"
@@ -96,32 +95,9 @@ create_replyer = User.create([email: "3@3", password: "123123", password_confirm
 # "created_at",  null: false
 # "updated_at"
 
-Question.create([title: "请问如何申请斯坦福大学呢？", description: "明年9月份想去斯坦福，不知道有没有大神可以给些意见？", user_id: 1, downpayment: 200, is_hidden: false, status: "open", tag_list: "美国"])
-Question.create([title: "想了解一下日本的留学政策？", description: "近年来，又迎来了一股赴日留学的新潮流，留学日本提前了解留学新政策是必须的，这样可以帮助留学生更好的准备留学规划，做好留学准备。", user_id: 1, downpayment: 200, is_hidden: false, status: "open", tag_list: "美国"])
-Question.create([title: "如何申请日本研究生？", description: "很多同学想要赴日本留学读研，但是日本语中国的研究生是不一样的，日本的研究生分为修士研究生和博士研究生两种。", user_id: 1, downpayment: 200, is_hidden: false, status: "open", tag_list: "美国"])
-
-Question.create([title: "谁呢那个给讲讲美国大学的排名？", description: "作为权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。综合大学前100中有81所学校出现了排名变化，可谓是最近几年最大变动。", user_id: 2, downpayment: 200, is_hidden: false, status: "open", tag_list: "日本"])
-Question.create([title: "香港留学计算机专业，谁能讲讲？", description: "目前去香港读计算机专业的学生逐年递增，以前因为香港是有名的金融商业中心，给绝大多数的学生留下的印象都是香港的商科很强，计算机和信息技术等理工科专业与商科相差甚远。", user_id: 2, downpayment: 200, is_hidden: false, status: "open", tag_list: "新加坡"])
-Question.create([title: "香港有什么好大学吗？", description: "不知道去香港，还是日本？大家能给些意见吗？", user_id: 2, downpayment: 200, is_hidden: false, status: "open", tag_list: "美国"])
-
-Question.create([title: "谁呢那个给讲讲美国大学的排名？", description: "作为权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。综合大学前100中有81所学校出现了排名变化，可谓是最近几年最大变动。", user_id: 3, downpayment: 200, is_hidden: false, status: "open", tag_list: "日本"])
-Question.create([title: "香港留学计算机专业，谁能讲讲？", description: "目前去香港读计算机专业的学生逐年递增，以前因为香港是有名的金融商业中心，给绝大多数的学生留下的印象都是香港的商科很强，计算机和信息技术等理工科专业与商科相差甚远。", user_id: 3, downpayment: 200, is_hidden: false, status: "open", tag_list: "新加坡"])
-Question.create([title: "香港有什么好大学吗？", description: "不知道去香港，还是日本？大家能给些意见吗？", user_id: 3, downpayment: 200, is_hidden: false, status: "open", tag_list: "美国"])
-
 # t.text     "content"
 # t.boolean  "is_hidden"
 # t.integer  "user_id"
 # t.integer  "question_id"
 # t.datetime "created_at",  null: false
 # t.datetime "updated_at",  null: false
-
-Answer.create([content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。在每一个大的分类下又有很多细分的专业，以传媒为例，可以分为新闻学、广告学、公共关系、大众传媒、多媒体、媒体管理、影视类等等，对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。", question_id: 1, user_id: 2, is_hidden: false])
-Answer.create([content: "比如选商科，要先问自己是不是真的喜欢商科，对其有多深的了解，具体课程内容自己是否感兴趣。当然也可以参考自己选择的文理科方向，也需要考虑就读专业将来在社会上的应用，了解课程设置、相关专业。再结合自己的综合成绩(包括英语和数学)考虑申请难度和就读的难易程度再做选择。", question_id: 1, user_id: 3, is_hidden: false])
-Answer.create([content: "US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。总体来看，综合大学前100中有81所学校出现了排名变化，这可谓是最近几年中最大的一次变动了，其中39所学校降底了名次，而同时42所学校名次有所上升。", question_id: 4, user_id: 3, is_hidden: false])
-Answer.create([content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。在每一个大的分类下又有很多细分的专业，以传媒为例，可以分为新闻学、广告学、公共关系、大众传媒、多媒体、媒体管理、影视类等等，对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。", question_id: 6, user_id: 3, is_hidden: false])
-Answer.create([content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。在每一个大的分类下又有很多细分的专业，以传媒为例，可以分为新闻学、广告学、公共关系、大众传媒、多媒体、媒体管理、影视类等等，对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。", question_id: 6, user_id: 4, is_hidden: false])
-Answer.create([content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。在每一个大的分类下又有很多细分的专业，以传媒为例，可以分为新闻学、广告学、公共关系、大众传媒、多媒体、媒体管理、影视类等等，对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。", question_id: 6, user_id: 2, is_hidden: false])
-Answer.create([content: "比如选商科，要先问自己是不是真的喜欢商科，对其有多深的了解，具体课程内容自己是否感兴趣。当然也可以参考自己选择的文理科方向，也需要考虑就读专业将来在社会上的应用，了解课程设置、相关专业。再结合自己的综合成绩(包括英语和数学)考虑申请难度和就读的难易程度再做选择。", question_id: 1, user_id: 3, is_hidden: false])
-Answer.create([content: "US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。总体来看，综合大学前100中有81所学校出现了排名变化，这可谓是最近几年中最大的一次变动了，其中39所学校降底了名次，而同时42所学校名次有所上升。", question_id: 7, user_id: 3, is_hidden: false])
-Answer.create([content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。在每一个大的分类下又有很多细分的专业，以传媒为例，可以分为新闻学、广告学、公共关系、大众传媒、多媒体、媒体管理、影视类等等，对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。", question_id: 7, user_id: 3, is_hidden: false])
-Answer.create([content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。在每一个大的分类下又有很多细分的专业，以传媒为例，可以分为新闻学、广告学、公共关系、大众传媒、多媒体、媒体管理、影视类等等，对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。", question_id: 7, user_id: 4, is_hidden: false])
