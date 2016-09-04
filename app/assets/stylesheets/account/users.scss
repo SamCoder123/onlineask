@@ -182,7 +182,7 @@ a.active {
 
 .card {
     padding-top: 20px;
-    margin: 10px 0 20px 0;
+    margin: 0 0 20px 0;
     background-color: rgba(214, 224, 226, 0.2);
     border-top-width: 0;
     border-bottom-width: 2px;
@@ -368,15 +368,17 @@ a.active {
 .card.hovercard {
     position: relative;
     padding-top: 0;
+    padding-bottom: 10px;
     overflow: hidden;
     text-align: center;
-    background-color: rgba(214, 224, 226, 0.2);
+    background-color: #fff;//rgba(255, 255, 255, 1);
+    box-shadow: 2px 2px 5px rgba(black, .1);
 }
 
 .card.hovercard .cardheader {
-    background: url("http://lorempixel.com/850/280/nature/4/");
+    background: #4285f4 ; //url("http://lorempixel.com/850/280/nature/4/");
     background-size: cover;
-    height: 135px;
+    height: 80px;
 }
 
 .card.hovercard .avatar {
@@ -397,7 +399,8 @@ a.active {
 }
 
 .card.hovercard .info {
-    padding: 4px 8px 10px;
+    padding: 4px 10px;
+    margin-bottom: 10px;
 }
 
 .card.hovercard .info .title {
@@ -416,9 +419,18 @@ a.active {
     text-overflow: ellipsis;
 }
 
+.card.hovercard .info .desc.desc-normal {
+    border-right-style: solid;
+    border-width: 1px;
+}
+
+.card.hovercard .info .desc.desc-last {
+    border-right-style: none;
+}
+
 .card.hovercard .bottom {
     padding: 0 20px;
     margin-bottom: 17px;
 }
 
-.btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
+// .btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }

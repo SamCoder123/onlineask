@@ -20,6 +20,11 @@ i = 0
 15.times do
   i += 1
   create_replyer = User.create(email: "#{i}@gmail.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "学霸#{i} is studing in Havard Business School", gender: "male", school: "Havard", name:"学霸"+name[i-1] , major: "IT")
+end
+
+i = 0
+15.times do
+  i += 1
   create_asker = User.create(email:"#{i}@163.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "asker", description: "小白#{i} is living in China", gender: "female", school: "清华", name:"小白"+name[i-1], major:"EE")
 end
 
