@@ -1,5 +1,6 @@
 class FollowRelationship < ApplicationRecord
   belongs_to :user
+  # 下面的follower_id 指的是当前user关注的人，如xdite
   belongs_to :follow_relationship, class_name: "User", foreign_key: "follower_id"
   validate :check_self
 
@@ -9,6 +10,8 @@ class FollowRelationship < ApplicationRecord
     end
   end
 end
+
+
 
 # == Schema Information
 #

@@ -1,4 +1,4 @@
-<div class="col-md-10" >
+
   <div class="row">
   <% @followees.each do |followee| %>
     <% f = User.find(followee.follower_id) %>
@@ -30,4 +30,3 @@
   <div class="text-center">
     <%= will_paginate @followees, renderer: BootstrapPagination::Rails %>
   </div>
-</div>

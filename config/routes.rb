@@ -31,7 +31,12 @@ Rails.application.routes.draw do
 
   # namespace for account
   namespace :account do
-    resources :blogs
+    resources :blogs do
+      member do
+        get :ta_blogs
+      end
+    end
+
     resources :tags do
       member do
         post :cancel

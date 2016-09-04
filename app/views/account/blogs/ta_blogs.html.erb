@@ -1,0 +1,18 @@
+
+<hr/>
+<h3>Ta的文章</h3>
+<% @blogs.each do |blog| %>
+<div class="panel panel-default ">
+  <div class="panel-heading">
+    <h3 class="panel-title">文章主题：<%= blog.title %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <p>文章内容：<%= blog.description %></p>
+  </div>
+</div>
+<% end %>
+
+<div class="text-center">
+ <%= will_paginate @blogs, renderer: BootstrapPagination::Rails %>
+</div>

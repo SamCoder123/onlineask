@@ -3,13 +3,13 @@ class Account::AnswersController < AccountController
   layout 'user_center', only: %i(index show edit)
   def index
     @answers = current_user.answers.published
-    drop_breadcrumb("首页", account_questions_path(current_user))
+    drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我回答的问题")
     @answers = @answers.paginate(page: params[:page], per_page: 10)
   end
 
   def show
-    drop_breadcrumb("首页", account_questions_path(current_user))
+    drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我回答的问题", account_answers_path(@answer))
     drop_breadcrumb("我的回答")
     @question = @answer.question

@@ -34,7 +34,7 @@
                  <% if current_user.admin? %>
                    <li><%= link_to("管理者后台",admin_admins_path)%></li>
                  <% else %>
-                   <li> <%= link_to("首页", account_questions_path) %></li>
+                   <li> <%= link_to(" 首页", show_profile_account_user_path(current_user), class: "fa fa-file-o") %></li>
                    <li><%= active_link_to " 个人资料", index_profile_account_user_path(current_user),class: "fa fa-user" %></li>
                    <li><%= active_link_to " 我的钱包", wallet_account_user_path(current_user), class: "fa fa-money" %></li>
                  <%end %>
