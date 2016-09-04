@@ -111,7 +111,9 @@ class User < ApplicationRecord
   end
 
   def follow!(followee)
-    followees << followee
+    unless followees << followee
+      false
+    end
   end
 
   def stop_follow!(followee)
