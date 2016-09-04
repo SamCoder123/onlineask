@@ -207,6 +207,8 @@ end
 #  introduction           :string
 #  aasm_state             :string           default("unapplied")
 #  fans_num               :integer
+#  country                :string
+#  outside_page_link      :string
 #
 # Indexes
 #
