@@ -17,10 +17,10 @@ create_xiaobai = User.create(email:"1@1", password: "123123", password_confirmat
 # 产生30个用户
 name = ["刘思宁","杜娟","张冕","刘苗","陈云莉","Sandy", "Cury", "Sherly", "Christina", "Austin", "Ethon", "Frank", "Newton", "Edison", "Eva"]
 i = 0
-30.times do
+15.times do
   i += 1
   create_replyer = User.create(email: "#{i}@gmail.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "学霸#{i} is studing in Havard Business School", gender: "male", school: "Havard", name:"学霸"+name[i-1] , major: "IT")
-  create_asker = User.create(email:"#{i}@163.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "asker", description: "小白#{i} is living in China", gender: "female", school: "清华", name:"小白" + name[i], major:"EE")
+  create_asker = User.create(email:"#{i}@163.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "asker", description: "小白#{i} is living in China", gender: "female", school: "清华", name:"小白"+name[i-1], major:"EE")
 end
 
 Question.create(title: "在美国谈恋爱，你要怎么过七夕？",
@@ -56,12 +56,12 @@ Answer.create([content: "US NEWS排名榜作为美国“官方唯一指定排名
   question_id: 3, user_id: 10, is_hidden: false, answer_status: "unchosen"])
 
 Question.create(title: "宾大的MCIT项目如何？", description: "想去宾大，但是不知道去什么项目比较好，也想转CS，所以问问MCIT怎么样", user_id: 32, downpayment: 600, is_hidden: false, status: "closed", tag_list: "美国")
-Answer.create([content: "恩，总之在美国也有十几天了，也上了两天课。既然去年申请的时候是在地里知道有这个项目的，那么我也汇报一下，尽量帮一帮后来的申请人吧 我们的Director说MCIT 2016Fall有500+的申请，录取了70+，最后来了能有60左右，听说是多年来人数最多的一次。中国学生有个23成的样子，比我想的少。有小道消息说Director今年刻意压低了中国学生的数量 当然每年的录取情况都不大一样，数据也好八卦也好都没啥指导意义。 这个项目是一个面向非CS背景的人开设的项目，大家的背景五湖四海。我感觉大部分人都是数学&经济出身，也可能使我的英语听力水平只能捕捉到这两个单词也说不定 我记的一月份MCIT放录取的时候，地好多大神贴出自己的NB背景和UPENN的拒信，论坛上下都在讨论MCIT到底收怎样的学生，那叫一个热闹 总之哪怕对CS一无所知也没关系，这个项目就是为这样我们准备的 这个项目有不少外国人是读过其他的硕士学位或者有过几年的工作经验的，再不就是UPENN转专业的。即使是美国人看来也在削尖了脑袋往CS里挤嘛 新生基本上都是忧心忡忡的，不过整个项从上到下都洋溢着相当正能量，上到Director下到刚受过一年教育的MCIT前辈，都在传达出这样一种信息 跟着MCIT的培养方案走，从零开始学CS，找工作好说 作为CIT的新生我当然希望这是真的，不过我感觉其他系的Director应该也会说类似的话吧。。 暂时就这些咯，才来几天，也没有太多干货。尽量更新吧。 祝各位能找到自己理想的项目。 "
-  question_id: 4, user_id: 7, is_hidden: false, answer_status: "best_answer"])
-Answer.create([content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。比如选商科，要先问自己是不是真的喜欢商科，对其有多深的了解，具体课程内容自己是否感兴趣。当然也可以参考自己选择的文理科方向，也需要考虑就读专业将来在社会上的应用，了解课程设置、相关专业。",
-  question_id: 4, user_id: 15, is_hidden: false, answer_status: "unchosen"])
-Answer.create([content: "US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。",
-  question_id: 4, user_id: 13, is_hidden: false, answer_status: "unchosen"])
+Answer.create(content: "恩，总之在美国也有十几天了，也上了两天课。既然去年申请的时候是在地里知道有这个项目的，那么我也汇报一下，尽量帮一帮后来的申请人吧 我们的Director说MCIT 2016Fall有500+的申请，录取了70+，最后来了能有60左右，听说是多年来人数最多的一次。中国学生有个23成的样子，比我想的少。有小道消息说Director今年刻意压低了中国学生的数量 当然每年的录取情况都不大一样，数据也好八卦也好都没啥指导意义。 这个项目是一个面向非CS背景的人开设的项目，大家的背景五湖四海。我感觉大部分人都是数学&经济出身，也可能使我的英语听力水平只能捕捉到这两个单词也说不定 我记的一月份MCIT放录取的时候，地好多大神贴出自己的NB背景和UPENN的拒信，论坛上下都在讨论MCIT到底收怎样的学生，那叫一个热闹 总之哪怕对CS一无所知也没关系，这个项目就是为这样我们准备的 这个项目有不少外国人是读过其他的硕士学位或者有过几年的工作经验的，再不就是UPENN转专业的。即使是美国人看来也在削尖了脑袋往CS里挤嘛 新生基本上都是忧心忡忡的，不过整个项从上到下都洋溢着相当正能量，上到Director下到刚受过一年教育的MCIT前辈，都在传达出这样一种信息 跟着MCIT的培养方案走，从零开始学CS，找工作好说 作为CIT的新生我当然希望这是真的，不过我感觉其他系的Director应该也会说类似的话吧。。 暂时就这些咯，才来几天，也没有太多干货。尽量更新吧。 祝各位能找到自己理想的项目。",
+  question_id: 4, user_id: 7, is_hidden: false, answer_status: "best_answer")
+Answer.create(content: "首先、确定专业方向。每个国家的大学专业分类并不完全一致，但大体上分为以下几类：文科、商科、理科、工程、建筑、艺术、医学、法学、传媒。对专业选择迷茫是可以由大类到细分，逐步进行精准定位。先确定专业方向，再具体到每一个专业。比如选商科，要先问自己是不是真的喜欢商科，对其有多深的了解，具体课程内容自己是否感兴趣。当然也可以参考自己选择的文理科方向，也需要考虑就读专业将来在社会上的应用，了解课程设置、相关专业。",
+  question_id: 4, user_id: 15, is_hidden: false, answer_status: "unchosen")
+Answer.create(content: "US NEWS排名榜作为美国“官方唯一指定排名”，常常被拿来申请者作为选校参考，作为可信度、权威性相当高的美国学校排名，2016年USNEWS全美综合大学排名正式也有很多的改变。",
+  question_id: 4, user_id: 13, is_hidden: false, answer_status: "unchosen")
 
 
 
