@@ -116,6 +116,7 @@ class User < ApplicationRecord
 
   def stop_follow!(followee)
     followees.delete(followee)
+
   end
 
   def invitation!(question)

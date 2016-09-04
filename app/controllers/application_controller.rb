@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   helper_method :hot_replyers
 
   def hot_replyers
-    @hot_replyers = User.limit(6)
+    @hot_replyers = User.order("fans_num DESC").limit(6)
   end
 
   protected
