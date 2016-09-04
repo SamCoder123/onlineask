@@ -25,6 +25,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # 定义全局变量@hot_questions
+  helper_method :hot_questions
+
+  def hot_questions
+    @hot_questions = Question.order("watches DESC").limit(6)
+  end
+
+  # 定义全局变量@hot_replyers
+  helper_method :hot_replyers
+
+  def hot_replyers
+    @hot_replyers = User.order("fans_num DESC").limit(6)
+  end
+
   protected
 
   def configure_permitted_parameters

@@ -1,0 +1,26 @@
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="card hovercard">
+  <div class="cardheader"></div>
+  <div class="avatar">
+    <%= gravatar_tag current_user.email %>
+  </div>
+  <div class="info">
+    <div class="col-md-3 col-xs-3 col-sm-3 desc desc-normal">
+      <p><%= current_user.questions.size %></p>
+      <p>问题</p>
+    </div>
+    <div class="col-md-3 col-xs-3 col-sm-3 desc desc-normal">
+      <p><%= current_user.answers.size %></p>
+      <p>回答</p>
+    </div>
+    <div class="col-md-3 col-xs-3 col-sm-3 desc desc-normal">
+      <p><%= current_user.followees.size %></p>
+      <p>关注</p>
+    </div>
+    <div class="col-md-3 col-xs-3 col-sm-3 desc desc-last">
+      <p><%= render_count_user_fans(current_user) %></p>
+      <p>粉丝</p>
+    </div>
+  </div>
+
+</div>

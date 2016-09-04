@@ -111,11 +111,14 @@ class User < ApplicationRecord
   end
 
   def follow!(followee)
-    followees << followee
+    unless followees << followee
+      false
+    end
   end
 
   def stop_follow!(followee)
     followees.delete(followee)
+
   end
 
   def invitation!(question)
@@ -203,6 +206,9 @@ end
 #  phone_number           :string
 #  introduction           :string
 #  aasm_state             :string           default("unapplied")
+#  fans_num               :integer
+#  country                :string
+#  outside_page_link      :string
 #
 # Indexes
 #
