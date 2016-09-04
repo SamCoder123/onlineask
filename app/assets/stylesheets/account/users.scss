@@ -378,7 +378,7 @@ a.active {
 .card.hovercard .cardheader {
     background: #4285f4 ; //url("http://lorempixel.com/850/280/nature/4/");
     background-size: cover;
-    height: 80px;
+    height: 65px;
 }
 
 .card.hovercard .avatar {
@@ -414,10 +414,15 @@ a.active {
 .card.hovercard .info .desc {
     overflow: hidden;
     font-size: 12px;
-    line-height: 20px;
+    line-height: 5px;
     color: #737373;
     text-overflow: ellipsis;
 }
+
+.card.hovercard .info .desc p {
+    line-height: 1em;
+}
+
 
 .card.hovercard .info .desc.desc-normal {
     border-right-style: solid;
