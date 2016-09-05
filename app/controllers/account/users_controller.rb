@@ -3,7 +3,6 @@ class Account::UsersController < AccountController
 
   def index_profile
     @user = current_user
-
     @followers = FollowRelationship.where(follower_id: @user)
     @followings = @user.followees
     @answer_subscriptions = @user.subscribing_answers
@@ -121,9 +120,6 @@ class Account::UsersController < AccountController
     @best_answers = @answers.where(answer_status: "best_answer")
     @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
     render layout: "profile"
-  end
-
-  def method_name
   end
 
   def my_subscriptions
