@@ -1,0 +1,17 @@
+<button class="btn btn-success btn-block" style="width:100px;margin:0 0 15px 15px;">
+  <span class="fa fa-plus-circle"></span>
+  <%= @tag.name %>
+</button>
+
+<div class="panel panel-default col-sm-8 ">
+  <div class="panel-heading">此标签下的问题</div>
+
+  <ul class="list-group">
+    <%= render @questions %>
+
+    <div class="text-center">
+     <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    </div>
+  </ul>
+
+</div>
