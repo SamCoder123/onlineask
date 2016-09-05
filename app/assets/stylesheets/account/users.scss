@@ -50,7 +50,7 @@ span.tags
     }
 .dropdown-menu
 {
-    background-color: #34495e;
+    background-color: #222;
     box-shadow: none;
     -webkit-box-shadow: none;
     width: 250px;
@@ -104,13 +104,13 @@ img.headshot
 }
 
 .table-filter {
-	// border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #eee;
 }
 
 .table-filter tbody tr td {
-	// padding: 10px;
+	padding: 10px;
 	vertical-align: middle;
-	border-top-color: transparent;
+	border-top-color: #eee;
 }
 
 
@@ -447,6 +447,12 @@ a.active {
   margin-bottom: 20px;
   border-top: 5px solid #4285f4;
   border-radius: 3px;
+  tbody tr td {
+  	// padding: 10px;
+  	vertical-align: middle;
+  	border-color: transparent;
+  }
+
 }
 
 

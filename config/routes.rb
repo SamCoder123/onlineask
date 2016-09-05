@@ -18,7 +18,8 @@ Rails.application.routes.draw do
 
   resources :welcome_test, only: %i(index)
 
-  resources :welcome_v1, only: %i(index)
+  resources :welcome_v1, only: %i(index) 
+
   resources :guides do
     collection do
       get :tags_guide
