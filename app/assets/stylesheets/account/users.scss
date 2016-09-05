@@ -104,13 +104,13 @@ img.headshot
 }
 
 .table-filter {
-	border-bottom: 1px solid #eee;
+	// border-bottom: 1px solid #eee;
 }
 
 .table-filter tbody tr td {
-	padding: 10px;
+	// padding: 10px;
 	vertical-align: middle;
-	border-top-color: #eee;
+	border-top-color: transparent;
 }
 
 
@@ -440,9 +440,28 @@ a.active {
 
 
 // right sidebar
+.hot-bg{
+  background-color: #fff;//rgba(255, 255, 255, 1);
+  box-shadow: 2px 2px 5px rgba(black, .1);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-top: 5px solid #4285f4;
+  border-radius: 3px;
+}
+
+
+
 .hot-title-font{
   font-size: 14px;
-  padding-bottom: 5px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  color: #4285f4;
+  a {color: #4285f4;}
+}
+
+.hot-list-font{
+  font-size: 12px;
+  a {color: #737373;}
 }
 
 .index-profix-button{
