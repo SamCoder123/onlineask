@@ -19,7 +19,7 @@ name = ["刘思宁","杜娟","张冕","刘苗","陈云莉","Sandy", "Cury", "She
 i = 0
 15.times do
   i += 1
-  create_replyer = User.create(email: "#{i}@gmail.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "学霸#{i} is studing in Havard Business School", gender: "male", school: "Havard", name:"学霸"+name[i-1] , major: "IT")
+  create_replyer = User.create(email: "#{i}@gmail.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "学霸#{i} is studing in Havard Business School", gender: "male", school: "Havard", name:"学霸"+name[i-1] , major: "IT", country: "美国")
 end
 
 i = 0

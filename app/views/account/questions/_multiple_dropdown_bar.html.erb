@@ -1,7 +1,8 @@
 <div class="ui multiple dropdown" id="dropdown">
   <input type="hidden" name="filters" value="<%=@filters%>">
-  <i class="fa fa-users" aria-hidden="true"></i>
-  <span class="text" style="color:#adda4d" id="invite">邀请回答</span>
+  <!-- <i class="fa fa-users" aria-hidden="true"></i> -->
+  <i class="student icon" aria-hidden="true"></i>
+  <label class="text" id="invite">邀请回答</label>
   <% unless @invitated_users.nil? %>
     <% @invitated_users.each do |user| %>
      <a class="ui label transition visible" data-value="<%= user.id %>" style="display: inline-block !important;">
