@@ -16,8 +16,9 @@
           <div class="hot-list-font">
             <%= link_to(exhibition_profile_account_user_path(replyer)) do %>
               <span><%= replyer.name %></span><br />
-              <span class="pull-left"><%= replyer.school %></span>
-              <span class="pull-right media-meta"><%= FollowRelationship.where(follower_id: replyer).count %></span>
+              <span class="pull-left" style="padding-right:10px"><%= replyer.country %></span>
+              <span><%= replyer.school %></span>
+              <span class="pull-right media-meta"><%= replyer.fans_num %></span>
             <% end %>
           </div>
         </td>
