@@ -16,7 +16,7 @@ class Question < ApplicationRecord
   # status 字段 有两种状态 open closed
 
   scope :published, -> { where(is_hidden: false) }
-  scope :recent, -> { order("created_at DESC") }
+  scope :recent, -> { order("id DESC") }
 
   acts_as_taggable_on :tags
 

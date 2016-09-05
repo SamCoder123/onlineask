@@ -28,7 +28,7 @@ mark{ background:yellow }
 html,body{
     height: 100%;
     width: 100%;
-    background-image: url(/crossword.png);
+    background-color:#f3f3f3;//background-image: url(/crossword.png);
 }
 
 #wrap{
@@ -85,6 +85,24 @@ html,body{
 
 .paginate{
   padding: 5px 20px;
-  background-color: #eee;
+  background-color: #4285f4;
   width: 30%;
+}
+
+.pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+    color: #fff;
+    background-color: #4285f4;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #4285f4;
+}
+.profile_image_100{
+  height: 100px;
+  width: 100px;
+}
+
+.profile_image_30{
+  height: 30px;
+  width: 30px;
 }

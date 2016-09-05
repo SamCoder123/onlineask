@@ -1,31 +1,34 @@
-<div style="padding-left:0">
-  <div class="panel panel-default" style="background:transparent;">
-    <div class="panel-body">
-      <div class="hot-title-font">
-          <strong><span>热门学霸</span></strong>
-          <div class="pull-right">
-            <%= link_to("更多学霸>>",replyers_account_users_path)  %>
-          </div>
-      </div>
-
-      <table class="table table-filter">
-        <% hot_replyers.each do |replyer| %>
-        <tr>
-          <td style="width:20px">
-            <%= gravatar_tag replyer.email, :size => 30, :default => avatar_url %>
-          </td>
-          <td>
-            <div class="hot-list-font">
-              <%= link_to(exhibition_profile_account_user_path(replyer)) do %>
-                <span style="color:#000000;"><%= replyer.name %></span><br />
-                <span class="pull-left"><%= replyer.school %></span>
-                <span class="pull-right media-meta"><%= FollowRelationship.where(follower_id: replyer).count %></span>
-              <% end %>
-            </div>
-          </td>
-        </tr>
-        <% end %>
-      </table>
+<div class="hot-bg">
+    <div class="hot-title-font">
+        <strong><span>热门学霸</span></strong>
+        <div class="pull-right">
+          <%= link_to("更多学霸>>",replyers_account_users_path)  %>
+        </div>
     </div>
-  </div>
+
+    <table class="table table-filter">
+      <% hot_replyers.each do |replyer| %>
+      <tr>
+        <td style="width:20px">
+
+          <% if replyer.image.nil? || replyer.image.url.nil?  %>
+            <%= gravatar_tag replyer.email, :size => 30, :default => avatar_url %>
+            <%#= gravatar_tag(current_user.email,class:"img-circle profile_image_30" )  %>
+          <% else %>
+            <%= image_tag(replyer.image.url, class:"img-circle profile_image_30")%>
+          <% end %>
+        </td>
+        <td>
+          <div class="hot-list-font">
+            <%= link_to(exhibition_profile_account_user_path(replyer)) do %>
+              <span><%= replyer.name %></span><br />
+              <span class="pull-left" style="padding-right:10px"><%= replyer.country %></span>
+              <span><%= replyer.school %></span>
+              <span class="pull-right media-meta"><%= replyer.fans_num %></span>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </table>
 </div>
