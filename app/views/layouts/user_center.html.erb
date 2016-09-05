@@ -14,14 +14,14 @@
       <%= render "common/flashes" %>
       <%= render_breadcrumb %>
       <div class="row">
-        <div class="col-md-2 col-xs-6">
-            <%= render "account/users/user_center_sidebar" %>
-        </div>
+        <!-- <div class="col-md-2 col-xs-6">
+            <%#= render "account/users/user_center_sidebar" %>
+        </div> -->
 
-        <div class="col-md-6">
+        <div class="col-md-7 col-xs-6 col-sm-offset-1">
           <%= yield %>
         </div>
-        <div class="pull-left col-md-3 col-xs-6">
+        <div class="pull-left col-md-3 col-xs-3 ">
           <%= render "account/users/user_center_right_sidebar" %>
         </div>
       </div>
