@@ -1,21 +1,3 @@
-<script type="text/javascript">
-$(function(){
-
-  var data = '<%= @question.tags.to_json.to_s.html_safe %>';
-  data = $.parseJSON(data)
-
-  var array = new Array();
-  $.each(data, function(index, tag) {
-    var name = tag.name;
-    array[index] = name;
-  });
-
-  $('.ui.fluid.dropdown').dropdown('set selected',array);
-  $('.ui.dropdown').dropdown({
-    allowAdditions: false
-  });
-});
-</script>
 <%= simple_form_for [:account,@question] do |f| %>
   <%#= f.error_notification %>
 
@@ -37,16 +19,33 @@ $(function(){
 <% end %>
 
 <script type="text/javascript">
-var editor = new Simditor({
- textarea: $("#question_description"),
- toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', '|','hr','indent','outdent','alignment'],
- placeholder: '想问的问题...',
- upload: {
-   fileKey: 'file',
-   params: null,
-   connectionCount: 3,
-   leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
- }
-});
-editor.value()
+  var editor = new Simditor({
+   textarea: $("#question_description"),
+   toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', '|','hr','indent','outdent','alignment'],
+   placeholder: '想问的问题...',
+   upload: {
+     fileKey: 'file',
+     params: null,
+     connectionCount: 3,
+     leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
+   }
+  });
+  editor.value()
+
+  $(function(){
+
+    var data = '<%= @question.tags.to_json.to_s.html_safe %>';
+    data = $.parseJSON(data)
+
+    var array = new Array();
+    $.each(data, function(index, tag) {
+      var name = tag.name;
+      array[index] = name;
+    });
+
+    $('.ui.fluid.dropdown').dropdown('set selected',array);
+    $('.ui.dropdown').dropdown({
+      allowAdditions: false
+    });
+  });
 </script>

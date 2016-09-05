@@ -1,6 +1,4 @@
-<div style="padding-left:0">
-  <div class="panel panel-default" style="background:transparent;">
-    <div class="panel-body">
+<div class="hot-bg">
       <div class="hot-title-font">
           <strong><span>热门问题</span></strong>
           <div class="pull-right">
@@ -8,12 +6,12 @@
           </div>
       </div>
 
-      <table class="table table-filter">
+      <table class="table">
         <% hot_questions.each do |question| %>
         <tr>
           <td>
             <div class="hot-list-font">
-              <p><%= link_to((question.title).truncate(20),account_question_path(question)) %>
+              <p><%= link_to((question.title).truncate(15),account_question_path(question)) %>
               <span class=" media-meta pull-right"><%= question.watches %></span>
               </p>
             </div>
@@ -21,6 +19,4 @@
         </tr>
         <% end %>
       </table>
-    </div>
-  </div>
 </div>

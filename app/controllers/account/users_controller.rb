@@ -11,8 +11,10 @@ class Account::UsersController < AccountController
     @questions = current_user.questions.published
     @answers = current_user.answers.published
     @best_answers = @answers.where(answer_status: "best_answer")
+
     @recieved_answers_likes = LikeAnswer.where(answer_id: @answers)
     @bills = Bill.where(user_id: @user)
+
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("个人资料")
   end
@@ -46,18 +48,23 @@ class Account::UsersController < AccountController
     # 所有问题questions进行排序
     questions = case params[:order]
       when "by_question_created_at"
-        Question.published.recent
+        Question.published.recent.includes(:answers)
       when "by_question_like_count"
-        Question.published.sort_by{|question| question.question_likes.count}.reverse
+        Question.published.includes(:answers).sort_by{|question| question.question_likes.count}.reverse
       else
-        Question.published
+        Question.published.includes(:answers)
       end
 
     if current_user.tags.size.positive?
       tags = current_user.tag_list
       questions = questions.tagged_with(tags, :any => true)
     end
+
     @questions = questions.paginate(:page => params[:page], :per_page => 6)
+
+    @users = User.where.not(id:current_user)
+    @tags = Tag.all
+    @question = Question.new
 
   end
 

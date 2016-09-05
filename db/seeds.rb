@@ -19,7 +19,7 @@ name = ["刘思宁","杜娟","张冕","刘苗","陈云莉","Sandy", "Cury", "She
 i = 0
 15.times do
   i += 1
-  create_replyer = User.create(email: "#{i}@gmail.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "学霸#{i} is studing in Havard Business School", gender: "male", school: "Havard", name:"学霸"+name[i-1] , major: "IT")
+  create_replyer = User.create(email: "#{i}@gmail.com", password: "123123", password_confirmation: "123123", is_admin: "false", role: "replyer", description: "学霸#{i} is studing in Havard Business School", gender: "male", school: "Havard", name:"学霸"+name[i-1] , major: "IT", country: "美国")
 end
 
 i = 0
@@ -69,8 +69,6 @@ Answer.create(content: "US NEWS排名榜作为美国“官方唯一指定排名�
   question_id: 4, user_id: 13, is_hidden: false, answer_status: "unchosen")
 
 
-
-
 i = 0
 15.times do
   i += 1
@@ -85,8 +83,14 @@ i = 0
   AnswerSubscription.create(answer_id: 1+i, user_id: i)
   Blog.create(title:"Blog#{i}，这是我的文章", description:"我喜欢写文章，大家也喜欢看我的文章，我的文章特别好", user_id: i)
   FollowRelationship.create(user_id: 18+i, follower_id: 3+i)
+  u = User.find(3+i)
+  u.fans_num += 1
+  u.save
   FollowRelationship.create(user_id: i+4, follower_id: 4)
-  LikeAnswer.create(answer_id: 1, user_id: i, like_answer: i)
+  u = User.find(4)
+  u.fans_num += 1
+  u.save
+  LikeAnswer.crearte(answer_id: 1, user_id: i, like_answer: i)
   LikeAnswer.create(answer_id: 11+i, user_id: 18+i, like_answer: i)
   QuestionLike.create(question_id: 1, user_id: i+18)
   QuestionLike.create(question_id:i+4, user_id: i+18)
