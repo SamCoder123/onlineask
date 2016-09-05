@@ -203,7 +203,11 @@ end
 #  phone_number           :string
 #  introduction           :string
 #  aasm_state             :string           default("unapplied")
+<<<<<<< HEAD
 #  fans_num               :integer          default(0)
+=======
+#  fans_num               :integer
+>>>>>>> 84cf6500c15e218a96bfcc3a725d507471a68705
 #  country                :string
 #  outside_page_link      :string
 #

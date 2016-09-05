@@ -12,10 +12,11 @@ class Account::UsersController < AccountController
     @answers = current_user.answers.published
     @best_answers = @answers.where(answer_status: "best_answer")
 
-    drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("个人资料")
     @recieved_answers_likes = LikeAnswer.where(answer_id: @answers)
     @bills = Bill.where(user_id: @user)
+
+    drop_breadcrumb("首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("个人资料")
   end
 
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session

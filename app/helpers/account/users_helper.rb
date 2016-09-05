@@ -31,5 +31,9 @@ module Account::UsersHelper
     end
   end
 
+  def render_count_user_fans(user)
+    user.follow_relationships.where(follower_id: current_user).size
+  end
+
 
 end
