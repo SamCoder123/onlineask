@@ -95,17 +95,47 @@ img.headshot
   padding-left: 20px;
   vertical-align: middle;
 }
-.user-nav{
-  padding:10px 10px 10px 30px;
-  margin: 0 0 20px 0px;
-  border: 1px;
-  border-style: solid;
-  border-color: #dedede;
+.user-nav-bg{
+  background-color: #fff;//rgba(255, 255, 255, 1);
+  box-shadow: 2px 2px 5px rgba(black, .1);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  tbody tr td {
+  	// padding: 10px;
+  	vertical-align: middle;
+    border-right-style: solid;
+    border-width: 1px;
+    padding-left: 50px;
+    padding-right: 35px;
+  }
+  a {color: #737373;}
+}
+
+.user-tag-bg{
+  background-color: #fff;//rgba(255, 255, 255, 1);
+  box-shadow: 2px 2px 5px rgba(black, .1);
+  padding: 10px 20px;
+  border-radius: 3px;
+  div {
+  	// padding: 10px;
+  	vertical-align: middle;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  a {color: #737373;}
+}
+
+.user-tag-title{
+  font-size: 16px;
+  font-color: #737373;
 }
 
 .table-filter {
 	border-bottom: 1px solid #eee;
 }
+
+
 
 .table-filter tbody tr td {
 	padding: 10px;
