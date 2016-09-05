@@ -9,4 +9,8 @@ class GuidesController < ApplicationController
     @replyers = User.where(role: "replyer").limit(12)
   end
 
+  def faq
+
+  end
+
 end
