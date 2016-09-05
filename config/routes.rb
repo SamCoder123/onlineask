@@ -89,6 +89,7 @@ Rails.application.routes.draw do
         get :follow_show
         post :submit_application
         post :add_tags
+        get :reply
       end
 
       collection do
