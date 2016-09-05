@@ -173,7 +173,6 @@ class User < ApplicationRecord
     q_unlikes.delete(question)
   end
 end
-
 # == Schema Information
 #
 # Table name: users
@@ -203,6 +202,16 @@ end
 #  phone_number           :string
 #  introduction           :string
 #  aasm_state             :string           default("unapplied")
+#  fans_num               :integer          default(0)
+#  country                :string
+#  outside_page_link      :string
+#
+# Indexes
+#
+#  index_users_on_aasm_state            (aasm_state)
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
 #  fans_num               :integer          default(0)
 #  country                :string
