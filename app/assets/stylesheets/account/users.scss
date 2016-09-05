@@ -438,12 +438,20 @@ a.active {
     margin-bottom: 17px;
 }
 
-// right sidebar
-.hot-list-font{
-  font-size: 14px;
-}
 
+// right sidebar
 .hot-title-font{
   font-size: 14px;
   padding-bottom: 5px;
+}
+
+.index-profix-button{
+  margin: 5px 10px 10px 10px;
+  padding: 2px 5px;
+}
+
+.number_strong{
+  padding: 2px 2px;
+  color: red;
+  font-weight: bold;
 }
