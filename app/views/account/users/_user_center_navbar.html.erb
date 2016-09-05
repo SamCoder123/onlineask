@@ -2,6 +2,9 @@
   <table>
     <tr>
       <td>
+          <%= gravatar_tag current_user.email, :size => 25, :default => avatar_url %>
+      </td>
+      <td>
         <%= link_to("提问",new_account_question_path) %>
       </td>
       <td>
@@ -13,4 +16,3 @@
     </tr>
   </table>
 </div>
-<%= render "account/users/user_tags" %>
