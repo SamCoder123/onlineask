@@ -7,9 +7,13 @@
     .simple_form label { color: #373a3c;font-size: 12px;}
 </style>
 
-
-
-<!-- Button trigger modal -->
+<script type="text/javascript">
+$(function(){
+  $('.ui.dropdown').dropdown({
+    allowAdditions: false
+  });
+});
+</script>
 
 <div class="panel panel-default">
     <%= simple_form_for [:account,@question] do |f| %>
@@ -20,20 +24,20 @@
         <%= f.input :title,label: false,placeholder:"问题主题",style:"margin-top:15px"  %>
         <%= f.input :description,label: false,placeholder:"问题说明"%>
 
-        <div class="special">
-            <%= render "account/questions/multiple_dropdown_bar" %>
-        </div>
-        <div class="special">
-            <label class="float required control-label" for="question_tag_list">问题标签</label>
-            <%= select_tag 'question[tag_list][]', options_for_select(@tags.collect{ |t| [t.name, t.name] }),multiple: true, class: 'ui search dropdown dp-btn-style'%>
-        </div>
-        <div class="special">
-          <label class="float required control-label" for="question_downpayment" style="margin-top:9px">悬赏金额</label>
-        </div>
-        <div class="special">
-          <%= f.input :downpayment,label:false, input_html: { min: '0', step: 'any',class: "special-size"}%>
-        </div>
-
+        <!-- <div class="special">
+            <%#= render "account/questions/multiple_dropdown_bar" %>
+        </div> -->
+        <div class="pull-right">
+          <div class="special">
+              <label class="float required control-label" for="question_tag_list">问题标签</label>
+              <%= select_tag 'question[tag_list][]', options_for_select(@tags.collect{ |t| [t.name, t.name] }),multiple: true, class: 'ui search dropdown'%>
+          </div>
+          <div class="special">
+            <label class="float required control-label" for="question_downpayment" style="margin-top:9px">悬赏金额</label>
+          </div>
+          <div class="special">
+            <%= f.input :downpayment,label:false, input_html: { min: '0', step: 'any',class: "special-size"}%>
+          </div>
         <%#= render "account/users/payment_modal", locals: {f: f}%>
 
         <!-- Modal -->
@@ -57,6 +61,7 @@
           </div>
         </div>
 
+        <!-- Button trigger modal -->
         <div class="special">
           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
             提问
