@@ -14,5 +14,4 @@ class WelcomeV1Controller < ApplicationController
       end
     end
   end
-
 end

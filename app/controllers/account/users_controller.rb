@@ -1,9 +1,8 @@
 class Account::UsersController < AccountController
+  before_action :find_current_user, only: [:index_profile, :new_profile, :edit_profile, :update_profile, :show_profile, :withdraw_edit, :deposit_edit, :my_subscriptions, :my_questions_answers, :wallet, :follow_show, :reply]
   layout "user_center"
 
   def index_profile
-    @user = current_user
-
     @followers = FollowRelationship.where(follower_id: @user)
     @followings = @user.followees
     @answer_subscriptions = @user.subscribing_answers
@@ -21,11 +20,9 @@ class Account::UsersController < AccountController
 
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
   def new_profile
-    @user = current_user
   end
 
   def edit_profile
-    @user = current_user
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("个人资料", index_profile_account_user_path(current_user))
     drop_breadcrumb("修改个人资料")
@@ -33,7 +30,6 @@ class Account::UsersController < AccountController
   end
 
   def update_profile
-    @user = current_user
     if @user.update(params_user)
       redirect_to index_profile_account_user_path
     else
@@ -42,7 +38,6 @@ class Account::UsersController < AccountController
   end
 
   def show_profile
-    @user = current_user
     drop_breadcrumb("首页")
 
     # 所有问题questions进行排序
@@ -68,8 +63,33 @@ class Account::UsersController < AccountController
 
   end
 
+  def reply
+    drop_breadcrumb("首页")
+
+    # 所有问题questions进行排序
+    questions = case params[:order]
+      when "by_question_created_at"
+        Question.published.recent.includes(:answers)
+      when "by_question_like_count"
+        Question.published.includes(:answers).sort_by{|question| question.question_likes.count}.reverse
+      else
+        Question.published.includes(:answers)
+      end
+
+    if current_user.tags.size.positive?
+      tags = current_user.tag_list
+      questions = questions.tagged_with(tags, :any => true)
+    end
+
+    @questions = questions.paginate(:page => params[:page], :per_page => 6)
+
+    @users = User.where.not(id:current_user)
+    @tags = Tag.all
+    @question = Question.new
+    @invitated_questions = current_user.invitated_questions
+  end
+
   def withdraw_edit
-    @user = current_user
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("提现")
   end
@@ -91,7 +111,6 @@ class Account::UsersController < AccountController
 
   # deposit_edit用户账户充值表单页面
   def deposit_edit
-    @user = current_user
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("账户充值")
   end
@@ -123,20 +142,15 @@ class Account::UsersController < AccountController
     render layout: "profile"
   end
 
-  def method_name
-  end
-
   def my_subscriptions
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我偷听的答案")
-    @user = current_user
     @answer_subscriptions = AnswerSubscription.where(user_id: current_user).order("created_at DESC").paginate(page: params[:page], per_page: 5)
   end
 
   def my_questions_answers
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的问题和回答")
-    @user = current_user
     @questions = @user.questions.published.paginate(page: params[:page], per_page: 10)
     @answers = @user.answers.published.paginate(page: params[:page], per_page: 10)
   end
@@ -144,7 +158,6 @@ class Account::UsersController < AccountController
   def wallet
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的钱包")
-    @user = current_user
   end
 
   def replyers
@@ -166,7 +179,6 @@ class Account::UsersController < AccountController
   def follow_show
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的关注")
-    @user = current_user
     # followers 是关注我的人，followees 是我关注的人
     @followers = FollowRelationship.where(follower_id: @user).paginate(page: params[:page], per_page: 10)
     @followees = FollowRelationship.where(user_id: @user).paginate(page: params[:page], per_page: 10)
@@ -194,6 +206,10 @@ class Account::UsersController < AccountController
 
   def params_user
     params.require(:user).permit(:role, :description, :gender, :country, :school, :major, :image, :name, :outside_page_link)
+  end
+
+  def find_current_user
+    @user = current_user
   end
 
 end

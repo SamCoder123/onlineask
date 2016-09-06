@@ -1,5 +1,5 @@
 class GuidesController < ApplicationController
-  layout "guide"
+  layout "guide", except: [:faq]
 
   def tags_guide
     @tags = Tag.all
@@ -8,4 +8,9 @@ class GuidesController < ApplicationController
   def replyers_guide
     @replyers = User.where(role: "replyer").limit(12)
   end
+
+  def faq
+
+  end
+
 end
