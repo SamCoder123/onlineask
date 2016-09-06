@@ -138,6 +138,8 @@ class Account::UsersController < AccountController
     @questions = @user.questions.paginate(page: params[:page], per_page: 5)
     @best_answers = @answers.where(answer_status: "best_answer")
     @answer_subscriptions = @user.subscribing_answers.order("id DESC").paginate(page: params[:page], per_page: 5)
+    @invitated_questions = @user.invitated_questions
+
     render layout: "profile"
   end
 
