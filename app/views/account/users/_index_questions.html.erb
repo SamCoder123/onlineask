@@ -1,0 +1,30 @@
+<div class="index-line">
+  <span class="pull-left">热门问题</span>
+
+  <div class="dropdown clearfix pull-right">
+
+     <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+       排序
+      <span class="caret"></span>
+     </button>
+     <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
+         <li>
+           <%= link_to("按创建时间", account_questions_path(:order => "by_question_created_at")) %>
+         </li>
+         <li>
+            <%= link_to("按想听人数", account_questions_path(:order => "by_question_like_count")) %>
+         </li>
+
+     </ul>
+  </div>
+</div>
+
+<div>
+  <ul class="list-group index-ul">
+    <%= render :partial => "/account/questions/each_question", :collection => @questions, :as => :question %>
+  </ul>
+
+  <div class="text-center">
+    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

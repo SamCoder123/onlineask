@@ -23,6 +23,7 @@
 //= require bootstrap/popover
 //= require simditor
 //= require bootstrap-sprockets
+//= require questions
 
 $(function() {
     $('a[disabled=disabled]').click(function(event){
