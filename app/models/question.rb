@@ -60,6 +60,11 @@ class Question < ApplicationRecord
     self.watches += 1
     save
   end
+
+  def pay!
+    self.is_paid = true
+    save
+  end
 end
 
 # == Schema Information
