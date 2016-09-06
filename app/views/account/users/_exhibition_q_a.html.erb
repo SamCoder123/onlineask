@@ -8,7 +8,7 @@
     <ul class="nav nav-tabs ">
       <li class="active">
         <a href="#tab_default_1" data-toggle="tab">
-          提过的问题
+          提出的问题
         </a>
       </li>
       <li>
@@ -30,15 +30,19 @@
     <div class="tab-content">
       <div class="tab-pane active" id="tab_default_1">
         <!-- 用来render第一个tab内容 -->
+        <%= render "my_questions" %>
       </div>
       <div class="tab-pane" id="tab_default_2">
         <!-- 用来render第二个tab -->
+        <%= render "my_answers" %>
       </div>
       <div class="tab-pane" id="tab_default_3">
         <!-- 用来render第三个tab -->
+        <%#= render "" %>
       </div>
       <div class="tab-pane" id="tab_default_4">
-        <!-- 用来render第三个tab -->
+        <!-- 用来render第4个tab -->
+        <%= render template: "account/users/my_subscriptions" %>
       </div>
     </div>
   </div>
