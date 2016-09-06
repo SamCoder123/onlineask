@@ -482,6 +482,13 @@ a.active {
   	vertical-align: middle;
   	border-color: transparent;
   }
+  .btn-primary{
+    background-color:#4285f4;
+    border-color: transparent;
+    padding:7px 35px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+  }
 
 }
 
@@ -509,4 +516,44 @@ a.active {
   padding: 2px 2px;
   color: red;
   font-weight: bold;
+}
+
+// exhibition page
+.exhibition-navbar-bg{
+  background-color: #4285f4;
+  border-radius: 2px;
+  height: 280px;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  p {
+    font-size: 16px;
+    color: #FFF;
+    padding-top: 20px;
+  }
+}
+
+.exhibition-title-font{
+  font-size: 18px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  color: black;
+}
+
+.exhibition-list-font{
+  font-size: 14px;
+  padding-left: 10px;
+  color: black;
+  span{
+  line-height: 1.7;
+  }
+}
+
+.exhibition-link-font{
+  font-size: 14px;
+  text-align: center;
+  a {color: #4285f4;}
 }

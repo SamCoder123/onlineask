@@ -14,4 +14,12 @@ module ImagesHelper
       image_tag("/default_image.png", class: "img-circle profile_image_100")
     end
   end
+
+    def render_head_image_130(user)
+      if user.image.present?
+        image_tag user.image, class:"img-circle profile_image_200"
+      else
+        image_tag("/default_image.png", class: "img-circle profile_image_200")
+      end
+    end
 end
