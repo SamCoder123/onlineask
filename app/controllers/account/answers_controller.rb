@@ -1,11 +1,11 @@
 class Account::AnswersController < AccountController
-  before_action :set_answer, only: %i(show edit update destroy)
+  before_action :set_answer, only: %i(show edit update destroy publish_hidden subscribe_answers)
   layout 'user_center', only: %i(index show edit)
   def index
     @answers = current_user.answers.published
+    @answers = @answers.paginate(page: params[:page], per_page: 10)
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我回答的问题")
-    @answers = @answers.paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -22,11 +22,10 @@ class Account::AnswersController < AccountController
   end
 
   def edit
-    @answer = Answer.find(params[:id])
     @question = @answer.question
+    @question.watches_counter!
     drop_breadcrumb("我回答的问题", account_answers_path(@answer))
     drop_breadcrumb("修改我的回答")
-    @question.watches_counter!
   end
 
   def create
@@ -51,9 +50,7 @@ class Account::AnswersController < AccountController
   end
 
   def publish_hidden
-    @answer = Answer.find(params[:id])
     is_hidden = params[:is_hidden]
-
     @answer.is_hidden =
       if is_hidden == "publish"
         false
@@ -71,7 +68,6 @@ class Account::AnswersController < AccountController
   end
 
   def subscribe_answers
-    @answer = Answer.find(params[:id])
     if @answer.user == current_user
       flash[:alert] = "不能偷听自己的回答！"
       redirect_to :back
@@ -84,12 +80,11 @@ class Account::AnswersController < AccountController
     end
     if current_user.subscribe!(@answer)
       RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user, @answer).perform!
-      flash[:notice] = "可以偷听答案了！" # #{link_to("去查看", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-success")}
-      redirect_to :back
+      flash[:notice] = "可以偷听答案了！"
     else
       flash[:alert] = "偷听不成功"
-      redirect_to :back
     end
+    redirect_to :back
   end
 
   private

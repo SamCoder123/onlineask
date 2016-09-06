@@ -1,0 +1,40 @@
+<!-- <div class="tab-content">
+  <div class="tab-pane fade in active" id="tab1"><%= render template: "account/users/deposit_edit" %></div>
+  <div class="tab-pane fade" id="tab2"><%= render template: "account/users/withdraw_edit" %></div>
+</div> -->
+
+<!-- <div class="tabbable-panel"> -->
+  <div class="tabbable-line">
+    <ul class="nav nav-tabs ">
+      <li class="active">
+        <a href="#tab_default_1" data-toggle="tab">
+          为你推荐
+        </a>
+      </li>
+      <li>
+        <a href="#tab_default_2" data-toggle="tab">
+          问题广场
+        </a>
+      </li>
+      <li>
+        <a href="#tab_default_3" data-toggle="tab">
+          被邀请回答
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab_default_1">
+        <!-- 用来render第一个tab内容 -->
+        <%= render "account/users/index_questions" %>
+      </div>
+      <div class="tab-pane" id="tab_default_2">
+        <!-- 用来render第二个tab -->
+        <%= render template: "account/questions/index" %>
+      </div>
+      <div class="tab-pane" id="tab_default_3">
+        <!-- 用来render第三个tab -->
+        <%= render template: "account/questions/invitated_questions" %>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->

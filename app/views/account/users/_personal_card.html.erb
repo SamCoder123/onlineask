@@ -2,12 +2,7 @@
 <div class="card hovercard">
   <div class="cardheader"></div>
   <div class="avatar">
-    <% if current_user.image.nil? || current_user.image.url.nil? %>
-      <%= gravatar_tag current_user.email, :size => 20, :default => avatar_url %>
-      <%#= gravatar_tag(current_user.email,class:"img-circle profile_image_100" )  %>
-    <% else %>
-      <%= image_tag(current_user.image.url, class:"img-circle profile_image_100")%>
-    <% end %>
+    <%= render_head_image_100(current_user) %>
   </div>
   <div class="info">
     <div class="col-md-3 col-xs-3 col-sm-3 desc desc-normal">
