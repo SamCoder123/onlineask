@@ -19,5 +19,7 @@ class RewardDepositService
     end
 
     Bill.create!(amount: amount, question: @question, user: @user, flow: "in", detail: "提问押金")
+
+    @question.pay!
   end
 end

@@ -189,7 +189,7 @@ class Account::QuestionsController < AccountController
     redirect_to :back
   end
 
-  
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -203,7 +203,7 @@ class Account::QuestionsController < AccountController
     if params[:question][:tag_list]
       params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
     end
-    params.require(:question).permit(:title, :description, :tag_list, :downpayment)
+    params.require(:question).permit(:title, :description, :tag_list, :downpayment, :payment_method)
   end
 
   def update_invitated_users_and_notify
