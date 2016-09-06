@@ -1,8 +1,5 @@
 <div class="pull-left">
-  <!-- <img src="<%= @user.image%>" class="img-circle profile_image_100"/> -->
-  <%= image_tag(@user.image.url, class:"img-circle profile_image_100")%>
-  <!-- <%= gravatar_tag @user.email, :size => 100, :default => avatar_url %> -->
-</div>
+  <%= render_head_image_100(current_user) %></div>
 <div class="pull-left">
   <table class="table" style="background: transparent; margin-left:40px;">
     <tr>

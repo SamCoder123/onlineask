@@ -11,11 +11,7 @@
       <tr>
         <td style="width:20px">
 
-          <% if replyer.image.nil? %>
-            <%= gravatar_tag(current_user.email,class:"img-circle profile_image_30" )  %>
-          <% else %>
-            <%= image_tag(current_user.image.url, class:"img-circle profile_image_30")%>
-          <% end %>
+          <%= render_head_image_30(replyer) %>
         </td>
         <td>
           <div class="hot-list-font">
