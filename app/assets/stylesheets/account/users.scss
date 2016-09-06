@@ -582,3 +582,12 @@ a.active {
   // border-bottom-color: transparent;
   cursor: default;
 }
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #4285f4;
+  border-radius: 5px;
+  color: white;
+
+  span {color: white; }
+}
