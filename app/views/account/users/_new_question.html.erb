@@ -15,6 +15,7 @@ $(function(){
   });
 });
 </script>
+
 <div class="panel panel-default">
     <%= simple_form_for [:account,@question] do |f| %>
     <div class="form-inputs">
@@ -43,7 +44,6 @@ $(function(){
             <%= f.button :submit,value:"提 问",class: "btn btn-primary" %>
           </div>
         </div>
-
     </div>
 
     <% end %>
