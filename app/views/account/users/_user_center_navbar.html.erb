@@ -5,14 +5,14 @@
           <%= gravatar_tag current_user.email, :size => 25, :default => avatar_url %>
       </td>
       <td>
-        <%= link_to("提问",new_account_question_path) %>
+        <%= active_link_to("提问",show_profile_account_user_path(current_user)) %>
       </td>
       <td>
-        <%= link_to("回答",account_answers_path) %>
+        <%= active_link_to("回答别人",reply_account_user_path(current_user)) %>
       </td>
-      <td>
-        <%= link_to("写文章",account_blogs_path) %>
-      </td>
+      <!-- <td>
+        <%#= link_to("写文章",account_blogs_path) %>
+      </td> -->
     </tr>
   </table>
 </div>

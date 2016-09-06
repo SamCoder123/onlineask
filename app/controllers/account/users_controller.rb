@@ -86,6 +86,7 @@ class Account::UsersController < AccountController
     @users = User.where.not(id:current_user)
     @tags = Tag.all
     @question = Question.new
+    @invitated_questions = current_user.invitated_questions
   end
 
   def withdraw_edit

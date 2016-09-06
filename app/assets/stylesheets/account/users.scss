@@ -107,9 +107,17 @@ img.headshot
     border-right-style: solid;
     border-width: 1px;
     padding-left: 50px;
-    padding-right: 35px;
+    padding-right: 50px;
+    text-align: center;
   }
   a {color: #737373;}
+  a.active {
+    color: #737373;
+    background-color: #fff;
+    border-bottom-style: solid;
+    border-width: 4px;
+    border-color: #4285f4;
+  }
 }
 
 .user-tag-bg{
