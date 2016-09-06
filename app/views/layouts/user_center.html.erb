@@ -14,11 +14,11 @@
       <%= render "common/flashes" %>
       <%= render_breadcrumb %>
       <div class="row">
-        <div class="col-md-2 col-xs-6">
+        <div class="col-md-2 col-md-offset-1 col-xs-6">
             <%= render "account/users/user_center_sidebar" %>
         </div>
 
-        <div class="col-md-8 pull-left">
+        <div class="col-md-6 pull-left">
           <%= yield %>
         </div>
         <div class="pull-left col-md-2 col-xs-6">
@@ -29,4 +29,5 @@
         <%= render "common/footer" %>
       </div>
     </div>
+  </body>
 </html>

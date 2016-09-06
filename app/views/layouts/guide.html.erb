@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  <style media="screen">
+  .container-fluid{margin-top:20px;}
+    /* Hiding the checkbox, but allowing it to be focused */
+  .badgebox
+  {
+      opacity: 0;
+  }
+  .badge{width: 50px; height:50px}
+  .badgebox + .badge
+  {
+      /* Move the check mark away when unchecked */
+      text-indent: -999999px;
+      /* Makes the badge's width stay the same checked and unchecked */
+     width: 27px; height:20px
+  }
+
+  .badgebox:focus + .badge
+  {
+      /* Set something to make the badge looks focused */
+      /* This really depends on the application, in my case it was: */
+
+      /* Adding a light border */
+      box-shadow: inset 0px 0px 5px;
+      /* Taking the difference out of the padding */
+  }
+
+  .badgebox:checked + .badge
+  {
+      /* Move the check mark back when checked */
+    text-indent: 0;
+  }
+
+  .btn{margin:20px 20px}
+
+  .img-size{width:20%}
+  </style>
+    <title>Onlineask</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'simplemde.min' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'simplemde.min' %>
+  </head>
+  <body>
+    <div class="container-fluid" id="wrap">
+      <div class="row text-center" style="margin-top:50px ">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

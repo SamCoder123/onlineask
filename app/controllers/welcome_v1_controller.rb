@@ -1,22 +1,18 @@
 class WelcomeV1Controller < ApplicationController
   layout "welcome_v1"
 
+  layout:false,only: [:register_guide]
+
   def index
     # @questions = Question.all
-    @questions = Question.limit(4)
-    # @questions = Question.where(status:"closed").order("watches DESC").limit(4)
-    # 记录上一次请求路径是否是登录或者注册
-    flag = false
 
-    flag = request.referer && ["/users/sign_in", "/users/sign_up"].include?(request.referer)
+    @questions = Question.published.where(status:"closed").order("watches DESC").limit(4)
 
-    # 如果上次请求是登录或注册，直接跳入个人首页。
-    if flag & current_user
+    if current_user
       if current_user.admin?
         redirect_to admin_admins_path
-      else
-        redirect_to show_profile_account_user_path(current_user)
       end
     end
   end
+
 end

@@ -1,5 +1,3 @@
-<div class="col-md-10" >
-
     <strong><span style="font-size:16px">学霸广场</span></strong>
     <div class="dropdown clearfix pull-right">
       <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -24,7 +22,7 @@
           <% if replyer.image.present? %>
             <%= link_to(image_tag(replyer.image.thumb.url)) %>
           <% else %>
-            <%= gravatar_tag replyer.email, :size => 60, :default => avatar_url %>
+            <%= gravatar_tag replyer.email, :size => 200, :default => avatar_url %>
           <% end %>
         </div>
         <div class="caption">
@@ -47,6 +45,5 @@
   <% end %>
   </div>
   <div class="text-center">
-    <%= will_paginate @replyers %>
+    <%= will_paginate @replyers, renderer: BootstrapPagination::Rails %>
   </div>
-</div>

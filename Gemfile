@@ -58,6 +58,8 @@ gem "active_link_to"
 # simditor文本编辑器
 gem "simditor"
 gem "aasm"
+# 分页套用bootstrap
+gem 'will_paginate-bootstrap'
 
 group :production do
   gem "pg"

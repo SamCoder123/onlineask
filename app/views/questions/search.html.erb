@@ -8,7 +8,7 @@
      <%= render :partial => "questions/users_item", :collection => @users, :as => :user %>
 
      <div class="text-center">
-      <%= will_paginate @users %>
+      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
      </div>
    </div>
 
@@ -18,7 +18,7 @@
      </table>
 
      <div class="text-center">
-      <%= will_paginate @questions %>
+      <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
      </div>
    </div>
 

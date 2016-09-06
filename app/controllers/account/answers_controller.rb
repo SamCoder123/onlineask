@@ -1,15 +1,15 @@
 class Account::AnswersController < AccountController
   before_action :set_answer, only: %i(show edit update destroy)
+  layout 'user_center', only: %i(index show edit)
   def index
     @answers = current_user.answers.published
-    drop_breadcrumb("个人首页", account_questions_path(current_user))
+    drop_breadcrumb("首页", account_questions_path(current_user))
     drop_breadcrumb("我回答的问题")
     @answers = @answers.paginate(page: params[:page], per_page: 10)
-    render layout: "user_center"
   end
 
   def show
-    drop_breadcrumb("个人首页", account_questions_path(current_user))
+    drop_breadcrumb("首页", account_questions_path(current_user))
     drop_breadcrumb("我回答的问题", account_answers_path(@answer))
     drop_breadcrumb("我的回答")
     @question = @answer.question
@@ -22,8 +22,11 @@ class Account::AnswersController < AccountController
   end
 
   def edit
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
     drop_breadcrumb("我回答的问题", account_answers_path(@answer))
     drop_breadcrumb("修改我的回答")
+    @question.watches_counter!
   end
 
   def create
@@ -33,7 +36,7 @@ class Account::AnswersController < AccountController
     @answer.question = @question
 
     if @answer.save
-      redirect_to account_answers_path, notice: "回答已发送！"
+      redirect_to account_answer_path(@answer), notice: "回答已发送！"
     else
       render :new
     end
@@ -41,7 +44,7 @@ class Account::AnswersController < AccountController
 
   def update
     if @answer.update(answer_params)
-      redirect_to account_answers_path, notice: "回答已更新！"
+      redirect_to account_answer_path(@answer), notice: "回答已更新！"
     else
       render :edit
     end
@@ -82,7 +85,7 @@ class Account::AnswersController < AccountController
     if current_user.subscribe!(@answer)
       RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user, @answer).perform!
       flash[:notice] = "可以偷听答案了！" # #{link_to("去查看", my_subscriptions_account_user_path(current_user), class:"btn btn-xs btn-success")}
-      redirect_to my_subscriptions_account_user_path(current_user)
+      redirect_to :back
     else
       flash[:alert] = "偷听不成功"
       redirect_to :back

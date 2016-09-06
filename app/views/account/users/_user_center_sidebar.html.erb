@@ -1,12 +1,16 @@
-
   <ul class="nav nav-pills nav-stacked" style="padding-left: 30px">
-    <li><%= active_link_to " 个人首页", account_questions_path, active: true, class: "fa fa-list" %></li>
-    <li><%= active_link_to " 个人资料", index_profile_account_user_path(current_user),class: "fa fa-user" %></li>
+    <li><%= active_link_to " 首页", show_profile_account_user_path(current_user), class: "fa fa-file-o" %></li>
+    <li><%= active_link_to " 我的关注", follow_show_account_user_path(current_user),class: "fa fa-heart-o" %></li>
+    <li><%= active_link_to " 我的文章", account_blogs_path, class: "fa fa-pencil-square-o" %></li>
+    <li><%= active_link_to " 我的兴趣标签", account_tags_path, class: "fa fa-tag" %></li>
+    <hr />
+    <li><%= active_link_to " 我偷听的回答", my_subscriptions_account_user_path(current_user),class: "fa fa-headphones" %></li>
     <li><%= active_link_to " 我的问题与答案", my_questions_answers_account_user_path(current_user), class: "fa fa-comments-o" %></li>
     <li><%= active_link_to " 被邀请回答的问题", invitated_questions_account_questions_path, class: "fa fa-diamond" %></li>
-    <li><%= active_link_to " 我偷听的回答", my_subscriptions_account_user_path(current_user),class: "fa fa-headphones" %></li>
-    <li><%= active_link_to " 我的关注", follow_show_account_user_path(current_user),class: "fa fa-heart-o" %></li>
-    <li><%= active_link_to " 我的动态", account_blogs_path, class: "fa fa-pencil-square-o" %></li>
-    <li><%= active_link_to " 我的钱包", wallet_account_user_path(current_user), class: "fa fa-money" %></li>
-    <li><%= active_link_to " 兴趣标签", account_tags_path, class: "fa fa-tag" %></li>
+    <hr />
+    <li><%= active_link_to " 提问", new_account_question_path(current_user),class: "fa fa-question-circle-o" %></li>
+    <li><%= active_link_to " 热门学霸", replyers_account_users_path,class: "fa fa-truck" %></li>
+    <li><%= active_link_to " 问题广场", account_questions_path, class: "fa fa-list" %></li>
   </ul>
+  <!-- <li><%= active_link_to " 个人资料", index_profile_account_user_path(current_user),class: "fa fa-user" %></li>
+  <li><%= active_link_to " 我的钱包", wallet_account_user_path(current_user), class: "fa fa-money" %></li> -->

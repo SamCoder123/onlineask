@@ -15,7 +15,7 @@
             <div class="pull-right">
               <%#= link_to '详情', account_answer_path(answer), class: "btn btn-primary btn-xs" %>
               <%= link_to '编辑', edit_account_answer_path(answer), class: "btn btn-primary btn-xs" %>
-              <%= link_to '删除', publish_hidden_account_answer_path(answer), class: "btn btn-primary btn-xs" %>
+              <%= link_to '删除', publish_hidden_account_answer_path(answer),method: :post, class: "btn btn-primary btn-xs" %>
               <%#= link_to(publish_hidden_account_answer_path(answer), method: :post, data: { confirm: 'Are you sure?' } ) do%>
                     <!-- <i class="fa fa-trash fa-lg" aria-hidden="true"></i> -->
               <%# end %>
@@ -24,7 +24,7 @@
         <% end %>
       </ul>
       <div class="text-center">
-       <%= will_paginate @questions %>
+       <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
       </div>
     </div>
 

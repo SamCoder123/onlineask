@@ -42,11 +42,16 @@ $(function(){
 
   <div>
     <% @invitated_users.each do |user| %>
+    <% answers = user.answers.where(question_id:@question.id) %>
       <div class="panel panel-info " style="margin-top:20px">
         <div class="panel-heading">
-          <h3 class="panel-title">邀请人：<%= user.name %> <small class="small-tips pull-right"><i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"></i>Ta暂时没有回答</small></h3>
+          <h3 class="panel-title">邀请人：<%= user.name %>
+            <% if answers.size.positive? %>
+              <small class="small-tips pull-right">
+               <i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"></i>Ta暂时没有回答</small>
+             <% end %>
+          </h3>
         </div>
-          <% answers = user.answers.where(question_id:@question.id) %>
             <% answers.each do |answer| %>
             <div class="panel-body invitated_users_answer">
               <%= answer.content %>

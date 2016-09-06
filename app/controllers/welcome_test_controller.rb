@@ -11,14 +11,13 @@ class WelcomeTestController < ApplicationController
 
     # 注册页进入guide页面
     if flag
-      #redirect_to register_guide_welcome_test_index_path
-      redirect_to register_guide_welcome_test_index_path
+      redirect_to tags_guide_guides_path
       return
     end
 
     flag = request.referer && request.referer.include?("/users/sign_in")
 
-    # 如果上次请求是登录或注册，直接跳入个人首页。
+    # 如果上次请求是登录或注册，直接跳入首页。
     if flag & current_user
       if current_user.admin?
         redirect_to admin_admins_path
@@ -26,10 +25,6 @@ class WelcomeTestController < ApplicationController
         redirect_to show_profile_account_user_path(current_user)
       end
     end
-  end
-
-  def register_guide
-    @tags = Tag.all
   end
 
 end

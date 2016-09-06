@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <strong><span style="font-size:16px">选择关注</span></strong>
+
+</div>
+<% @replyers.each do |replyer| %>
+		<label for="default<%= replyer.id %>" class="btn btn-default img-size">
+      <% if replyer.image.present? %>
+        <%= link_to(image_tag(replyer.image.thumb.url)) %>
+      <% else %>
+        <%= gravatar_tag replyer.email, :size => 60, :default => avatar_url %>
+      <% end %>
+      <h5><%= link_to(exhibition_profile_account_user_path(replyer)) do%>
+        <%= replyer.name %></h5>
+        <p>留学学校：<%= replyer.school %><br />
+        被关注：<%= FollowRelationship.where(follower_id: replyer).count %> | 回答：<%= replyer.answers.count %></p>
+        <% end %>
+      <p>
+        <% if current_user.already_follower?(replyer) %>
+          <span><%= link_to("已关注", like_account_follow_path(replyer),method: :post, class:"btn btn-primary btn-xs disable") %></span>
+        <% else %>
+          <span><%= link_to("关注", like_account_follow_path(replyer),method: :post, class:"btn btn-default btn-xs") %></span>
+        <% end %>
+      </p>
+    </label>
+
+<% end %>
+<div class="col-md-12">
+    <%= link_to('立即进入', show_profile_account_user_path(current_user), class: "btn btn-lg btn-danger")  %>
+  </div>

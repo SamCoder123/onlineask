@@ -16,15 +16,18 @@ Rails.application.routes.draw do
     resources :answers
   end
 
-  resources :welcome_test, only: %i(index)  do
+  resources :welcome_test, only: %i(index)
+
+  resources :welcome_v1, only: %i(index)
+  resources :guides do
     collection do
-      get :register_guide
+      get :tags_guide
+      get :replyers_guide
     end
   end
 
-  resources :welcome_v1, only: %i(index)
-
-  devise_for :users
+  # devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
   # namespace for account
   namespace :account do
@@ -32,6 +35,7 @@ Rails.application.routes.draw do
     resources :tags do
       member do
         post :cancel
+        post :add_tag
       end
     end
 
@@ -49,6 +53,7 @@ Rails.application.routes.draw do
         post :cancel
         post :reopen
         patch :refine_reward
+        get :my_favorite_questions
       end
       collection do
         get :invitated_questions

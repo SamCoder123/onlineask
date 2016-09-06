@@ -142,15 +142,16 @@ img.headshot
 	font-size: 14px;
 }
 
+
 // sidebar 高亮底色
 a.active {
-  background-color: #337ab7;
+  background-color: #4285f4;
   color:#FFF;
 }
 
 // 学霸广场的css
 .replyer{
-    width: 205px;
+    width: 260px;
     height: 320px;
     padding: 2px;
     margin: 0 40px 50px 0px;
@@ -161,4 +162,17 @@ a.active {
   height: 200px;
   overflow: hidden;
   text-align: center;
+  display: block;
+  margin: auto;
+}
+
+.index-profix-button{
+  margin: 5px 10px 10px 10px;
+  padding: 2px 5px;
+}
+
+.number_strong{
+  padding: 2px 2px;
+  color: red;
+  font-weight: bold;
 }

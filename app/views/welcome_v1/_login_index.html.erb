@@ -1,5 +1,5 @@
 <div class="banner-register-bg pull-right container">
-  <p>欢迎回来，老同学</p>
+  <p>欢迎登录，老同学</p>
   <div class="col-md-12">
 
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -10,13 +10,12 @@
     </div>
 
     <div class="form-actions">
-      <!-- <%= f.button :submit, "登陆" %> -->
-      <!-- <hr/> -->
+      <%= f.button :submit, "Log in", class:"btn-primary pull-right"%>
     </div>
   <% end %>
 
-  <div class="pull-right" style="text-align:right">
-    <%= render "devise/shared/links" %>
+  <div class="pull-left" >
+    <%= render "links" %>
   </div>
 
   </div>
