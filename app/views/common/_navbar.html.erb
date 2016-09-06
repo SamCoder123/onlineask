@@ -1,8 +1,8 @@
-<nav class="navbar navbar-default navbar-bg" role="navigation">
-  <div class="container-fluid">
+<nav class="navbar navbar-inverse navbar-bg" role="navigation">
+  <div class="container">
     <!-- Brand and toggle get grouped fro better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">onlineask</a>
+      <a class="navbar-brand" href="/" style="color:#FFF;letter-spacing: 3px;">Online<span style="color:#4285f4;";>Ask</span></a>
     </div>
     <!-- Collect the nav links,forms,and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -24,7 +24,7 @@
 
            <li class="dropdown">
              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-               <%= gravatar_tag current_user.email, :size => 30, :default => avatar_url %>
+               <%= render_head_image_30(current_user) %>
                Hi!, <%= current_user.name %>
                <b class="caret"></b>
              </a>
@@ -33,9 +33,18 @@
                  <% if current_user.admin? %>
                    <li><%= link_to("管理者后台",admin_admins_path)%></li>
                  <% else %>
-                   <li> <%= link_to("首页", account_questions_path) %></li>
-                   <li><%= active_link_to " 个人资料", index_profile_account_user_path(current_user),class: "fa fa-user" %></li>
-                   <li><%= active_link_to " 我的钱包", wallet_account_user_path(current_user), class: "fa fa-money" %></li>
+                   <li> <%= link_to(" 首页", show_profile_account_user_path(current_user), class: "fa fa-file-o") %></li>
+                    <hr />
+                    <li><%= active_link_to " 我的关注", follow_show_account_user_path(current_user),class: "fa fa-heart-o" %></li>
+                    <li><%= active_link_to " 我的文章", account_blogs_path, class: "fa fa-pencil-square-o" %></li>
+                    <li><%= active_link_to " 我的兴趣标签", account_tags_path, class: "fa fa-tag" %></li>
+                    <hr />
+                    <li><%= active_link_to " 我偷听的回答", my_subscriptions_account_user_path(current_user),class: "fa fa-headphones" %></li>
+                    <li><%= active_link_to " 我的问题与答案", my_questions_answers_account_user_path(current_user), class: "fa fa-comments-o" %></li>
+                    <li><%= active_link_to " 被邀请回答的问题", invitated_questions_account_questions_path, class: "fa fa-diamond" %></li>
+                    <hr />
+                    <li><%= active_link_to " 个人资料", index_profile_account_user_path(current_user),class: "fa fa-user" %></li>
+                    <li><%= active_link_to " 我的钱包", wallet_account_user_path(current_user), class: "fa fa-money" %></li>
                  <%end %>
 
                  <li class="divider"> </li>

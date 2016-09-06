@@ -38,3 +38,44 @@ small.small-tips{
   padding: 5px 10px;
   margin: 0 10px;
 }
+.account-nav-bar{  }
+.account-nav-bar-p {line-height: 2em;font-size: 14px;}
+.index-line{ height:35px;border-bottom:1px solid #ccc;margin:15px 0; }
+
+.index-ul li {margin-bottom: 12px; border:1px solid #e5e5e5; border-left:0.5em solid #4285f4;background-color: #fff;}
+
+.index-ul .btn-primary {
+    background-color: #4285f4;
+    border-color: transparent;
+    padding: 4px 16px;
+    margin-left:15px;
+    border-radius: 4px;
+}
+
+.index-ul .btn-default {
+  border-color: #4285f4;
+  padding: 4px 16px;
+  border-radius: 4px;
+}
+
+.special {
+    margin-left:15px;
+    float: left;
+}
+.special-size {
+    width:150px;
+    height: 37px;
+}
+
+.panel-default {padding-bottom: 50px}
+
+.form-actions input{
+    margin-left:15px;
+}
+
+.special .btn-primary {
+    background-color: #4285f4;
+    border-color: transparent;
+    padding: 4px 20px;
+    border-radius: 4px;
+}

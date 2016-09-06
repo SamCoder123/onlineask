@@ -19,10 +19,12 @@ Rails.application.routes.draw do
   resources :welcome_test, only: %i(index)
 
   resources :welcome_v1, only: %i(index)
+
   resources :guides do
     collection do
       get :tags_guide
       get :replyers_guide
+      get :faq
     end
   end
 
@@ -31,7 +33,12 @@ Rails.application.routes.draw do
 
   # namespace for account
   namespace :account do
-    resources :blogs
+    resources :blogs do
+      member do
+        get :ta_blogs
+      end
+    end
+
     resources :tags do
       member do
         post :cancel
@@ -82,6 +89,7 @@ Rails.application.routes.draw do
         get :follow_show
         post :submit_application
         post :add_tags
+        get :reply
       end
 
       collection do

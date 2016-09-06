@@ -34,7 +34,7 @@
                  <% if current_user.admin? %>
                    <li><%= link_to("管理者后台",admin_admins_path)%></li>
                  <% else %>
-                   <li> <%= link_to("首页", account_questions_path) %></li>
+                   <li> <%= link_to("首页", show_profile_account_user_path(current_user)) %></li>
                  <%end %>
                  <li class="divider"> </li>
                  <li> <%= link_to("登出", destroy_user_session_path, method: :delete) %> </li>

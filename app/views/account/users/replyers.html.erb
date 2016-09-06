@@ -22,14 +22,14 @@
           <% if replyer.image.present? %>
             <%= link_to(image_tag(replyer.image.thumb.url)) %>
           <% else %>
-            <%= gravatar_tag replyer.email, :size => 200, :default => avatar_url %>
+            <%= gravatar_tag replyer.email, :size => 50, :default => avatar_url %>
           <% end %>
         </div>
         <div class="caption">
           <h5><%= link_to(exhibition_profile_account_user_path(replyer)) do%>
             <%= replyer.name %></h5>
             <p>留学学校：<%= replyer.school %><br />
-            被关注：<%= FollowRelationship.where(follower_id: replyer).count %> | 回答：<%= replyer.answers.count %></p>
+            被关注：<%= replyer.fans_num %> | 回答：<%= replyer.answers.count %></p>
             <% end %>
           <p>
             <span><%= link_to("向Ta提问", new_account_question_path, class:"btn btn-success btn-xs") %></span>

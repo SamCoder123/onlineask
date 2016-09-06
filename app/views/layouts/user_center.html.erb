@@ -11,17 +11,13 @@
   <body>
     <div class="container-fluid" id="wrap">
       <%= render "common/navbar" %>
-      <%= render "common/flashes" %>
-      <%= render_breadcrumb %>
-      <div class="row">
-        <div class="col-md-2 col-md-offset-1 col-xs-6">
-            <%= render "account/users/user_center_sidebar" %>
-        </div>
-
-        <div class="col-md-6 pull-left">
+      <div class="container">
+        <%= render "common/flashes" %>
+        <%= render_breadcrumb %>
+        <div class="col-md-9 col-sm-8 col-xs-12">
           <%= yield %>
         </div>
-        <div class="pull-left col-md-2 col-xs-6">
+        <div class="col-md-3 col-sm-4 hidden-xs">
           <%= render "account/users/user_center_right_sidebar" %>
         </div>
       </div>

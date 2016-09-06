@@ -1,6 +1,5 @@
 <div class="pull-left">
-  <%= gravatar_tag @user.email, :size => 100, :default => avatar_url %>
-</div>
+  <%= render_head_image_100(current_user) %></div>
 <div class="pull-left">
   <table class="table" style="background: transparent; margin-left:40px;">
     <tr>
@@ -37,7 +36,15 @@
     </tr>
     <tr>
       <td>
-        学校
+        留学国家
+      </td>
+      <td>
+        <%= @user.country %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        留学学校
       </td>
       <td>
         <%= @user.school %>
@@ -66,6 +73,14 @@
       </td>
       <td>
         <%= @user.description %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        微博／个人主页
+      </td>
+      <td>
+        <%= @user.outside_page_link %>
       </td>
     </tr>
   </table>

@@ -1,9 +1,18 @@
-<div class="nav col-md-3 col-xs-12 pull-left user-nav">
-
-  <ul class="nav nav-pills">
-    <li><%= gravatar_tag current_user.email, :size => 30, :default => avatar_url %></li>
-    <li><%= link_to("提问",new_account_question_path) %></li>
-    <li><%= link_to("回答",account_answers_path) %></li>
-
-  </ul>
+<div class="user-nav-bg">
+  <table>
+    <tr>
+      <td>
+          <%= gravatar_tag current_user.email, :size => 25, :default => avatar_url %>
+      </td>
+      <td>
+        <%= active_link_to("提问",show_profile_account_user_path(current_user)) %>
+      </td>
+      <td>
+        <%= active_link_to("回答别人",reply_account_user_path(current_user)) %>
+      </td>
+      <!-- <td>
+        <%#= link_to("写文章",account_blogs_path) %>
+      </td> -->
+    </tr>
+  </table>
 </div>

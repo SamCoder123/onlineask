@@ -4,7 +4,7 @@
 body
 {
     font-family: 'Lato', 'sans-serif';
-    }
+}
 .profile
 {
     min-height: 355px;
@@ -50,7 +50,7 @@ span.tags
     }
 .dropdown-menu
 {
-    background-color: #34495e;
+    background-color: #222;
     box-shadow: none;
     -webkit-box-shadow: none;
     width: 250px;
@@ -95,17 +95,55 @@ img.headshot
   padding-left: 20px;
   vertical-align: middle;
 }
-.user-nav{
-  padding:10px 10px 10px 30px;
-  margin: 0 0 20px 0px;
-  border: 1px;
-  border-style: solid;
-  border-color: #dedede;
+.user-nav-bg{
+  background-color: #fff;//rgba(255, 255, 255, 1);
+  box-shadow: 2px 2px 5px rgba(black, .1);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  tbody tr td {
+  	// padding: 10px;
+  	vertical-align: middle;
+    border-right-style: solid;
+    border-width: 1px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
+  }
+  a {color: #737373;}
+  a.active {
+    color: #737373;
+    background-color: #fff;
+    border-bottom-style: solid;
+    border-width: 4px;
+    border-color: #4285f4;
+  }
+}
+
+.user-tag-bg{
+  background-color: #fff;//rgba(255, 255, 255, 1);
+  box-shadow: 2px 2px 5px rgba(black, .1);
+  padding: 10px 20px;
+  border-radius: 3px;
+  span {
+  	// padding: 10px;
+  	vertical-align: middle;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  a {color: #737373;}
+}
+
+.user-tag-title{
+  font-size: 16px;
+  font-color: #737373;
 }
 
 .table-filter {
 	border-bottom: 1px solid #eee;
 }
+
+
 
 .table-filter tbody tr td {
 	padding: 10px;
@@ -175,4 +213,372 @@ a.active {
   padding: 2px 2px;
   color: red;
   font-weight: bold;
+}
+
+// 个人卡片的css
+
+
+.card {
+    padding-top: 20px;
+    margin: 0 0 20px 0;
+    background-color: rgba(214, 224, 226, 0.2);
+    border-top-width: 0;
+    border-bottom-width: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.card .card-heading {
+    padding: 0 20px;
+    margin: 0;
+}
+
+.card .card-heading.simple {
+    font-size: 20px;
+    font-weight: 300;
+    color: #777;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.card .card-heading.image img {
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    margin-right: 15px;
+    vertical-align: top;
+    border: 0;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.card .card-heading.image .card-heading-header {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.card .card-heading.image .card-heading-header h3 {
+    margin: 0;
+    font-size: 14px;
+    line-height: 16px;
+    color: #262626;
+}
+
+.card .card-heading.image .card-heading-header span {
+    font-size: 12px;
+    color: #999999;
+}
+
+.card .card-body {
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.card .card-media {
+    padding: 0 20px;
+    margin: 0 -14px;
+}
+
+.card .card-media img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.card .card-actions {
+    min-height: 30px;
+    padding: 0 20px 20px 20px;
+    margin: 20px 0 0 0;
+}
+
+.card .card-comments {
+    padding: 20px;
+    margin: 0;
+    background-color: #f8f8f8;
+}
+
+.card .card-comments .comments-collapse-toggle {
+    padding: 0;
+    margin: 0 20px 12px 20px;
+}
+
+.card .card-comments .comments-collapse-toggle a,
+.card .card-comments .comments-collapse-toggle span {
+    padding-right: 5px;
+    overflow: hidden;
+    font-size: 12px;
+    color: #999;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-comments .media-heading {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.card.people {
+    position: relative;
+    display: inline-block;
+    width: 170px;
+    height: 300px;
+    padding-top: 0;
+    margin-left: 20px;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.card.people:first-child {
+    margin-left: 0;
+}
+
+.card.people .card-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 170px;
+    height: 150px;
+    background-color: #ffffff;
+}
+
+.card.people .card-top.green {
+    background-color: #53a93f;
+}
+
+.card.people .card-top.blue {
+    background-color: #427fed;
+}
+
+.card.people .card-info {
+    position: absolute;
+    top: 150px;
+    display: inline-block;
+    width: 100%;
+    height: 101px;
+    overflow: hidden;
+    background: #ffffff;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.card.people .card-info .title {
+    display: block;
+    margin: 8px 14px 0 14px;
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 18px;
+    color: #404040;
+}
+
+.card.people .card-info .desc {
+    display: block;
+    margin: 8px 14px 0 14px;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 16px;
+    color: #737373;
+    text-overflow: ellipsis;
+}
+
+.card.people .card-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    padding: 10px 20px;
+    line-height: 29px;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.card.hovercard {
+    position: relative;
+    padding-top: 0;
+    padding-bottom: 10px;
+    overflow: hidden;
+    text-align: center;
+    background-color: #fff;//rgba(255, 255, 255, 1);
+    box-shadow: 2px 2px 5px rgba(black, .1);
+}
+
+.card.hovercard .cardheader {
+    background: #4285f4 ; //url("http://lorempixel.com/850/280/nature/4/");
+    background-size: cover;
+    height: 65px;
+}
+
+.card.hovercard .avatar {
+    position: relative;
+    top: -50px;
+    margin-bottom: -50px;
+}
+
+.card.hovercard .avatar img {
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    // border: 5px solid rgba(255,255,255,0.5);
+}
+
+.card.hovercard .info {
+    padding: 4px 10px;
+    margin: 10px 0;
+}
+
+.card.hovercard .info .title {
+    margin-bottom: 4px;
+    font-size: 24px;
+    line-height: 1;
+    color: #262626;
+    vertical-align: middle;
+}
+
+.card.hovercard .info .desc {
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 5px;
+    color: #737373;
+    text-overflow: ellipsis;
+}
+
+.card.hovercard .info .desc p {
+    line-height: 1em;
+}
+
+
+.card.hovercard .info .desc.desc-normal {
+    border-right-style: solid;
+    border-width: 1px;
+}
+
+.card.hovercard .info .desc.desc-last {
+    border-right-style: none;
+}
+
+.card.hovercard .bottom {
+    padding: 0 20px;
+    margin-bottom: 17px;
+}
+
+
+// right sidebar
+.hot-bg{
+  background-color: #fff;//rgba(255, 255, 255, 1);
+  box-shadow: 2px 2px 5px rgba(black, .1);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-top: 5px solid #4285f4;
+  border-radius: 3px;
+  tbody tr td {
+  	// padding: 10px;
+  	vertical-align: middle;
+  	border-color: transparent;
+  }
+
+}
+
+.hot-title-font{
+  font-size: 14px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  color: #4285f4;
+  a {color: #4285f4;}
+}
+
+.hot-list-font{
+  font-size: 12px;
+  a {color: #737373;}
+}
+
+.index-profix-button{
+  margin: 5px 10px 10px 10px;
+  padding: 2px 5px;
+}
+
+.number_strong{
+  padding: 2px 2px;
+  color: red;
+  font-weight: bold;
+}
+
+// 回答列表tab的css
+
+/* Tabs panel */
+// .tabbable-panel {
+//   border:1px solid #eee;
+//   padding: 10px;
+// }
+
+/* Default mode */
+.tabbable-line > .nav-tabs {
+  border: none;
+  margin: 0px;
+}
+.tabbable-line > .nav-tabs > li {
+  margin-right: 2px;
+}
+.tabbable-line > .nav-tabs > li > a {
+  border: 0;
+  margin-right: 0;
+  color: #737373;
+}
+.tabbable-line > .nav-tabs > li > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+  border-bottom: 4px solid #A7D5F4;
+}
+.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+  border: 0;
+  background: none !important;
+  color: #333333;
+}
+.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+  margin-top: 0px;
+}
+.tabbable-line > .nav-tabs > li.active {
+  border-bottom: 4px solid #4285f4;
+  position: relative;
+}
+.tabbable-line > .nav-tabs > li.active > a {
+  border: 0;
+  color: #4285f4;
+}
+.tabbable-line > .nav-tabs > li.active > a > i {
+  color: #404040;
+}
+.tabbable-line > .tab-content {
+  margin-top: -3px;
+  border: 0;
+  border-top: 1px solid #eee;
+  padding: 15px 0;
+}
+.portlet .tabbable-line > .tab-content {
+  padding-bottom: 0;
+}
+.tabbable-line >.nav.nav-tabs > li.active > a {
+  // color: #555555;
+  background-color: #f3f3f3;
+  // border: 1px solid #ddd;
+  // border-bottom-color: transparent;
+  cursor: default;
 }

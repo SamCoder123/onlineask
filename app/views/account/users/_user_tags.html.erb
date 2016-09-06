@@ -1,0 +1,7 @@
+<div class="" style="margin-bottom:25px">
+  <h2 class="user-tag-title">我的标签</h2>
+  <hr/>
+  <% current_user.tags.each do |tag| %>
+      <span class="user-tag-bg"><%= tag.name %></span>
+  <% end %>
+</div>

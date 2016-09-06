@@ -1,0 +1,22 @@
+<div class="hot-bg">
+      <div class="hot-title-font">
+          <strong><span>热门问题</span></strong>
+          <div class="pull-right">
+            <%= link_to("更多问题>>",account_questions_path)  %>
+          </div>
+      </div>
+
+      <table class="table">
+        <% hot_questions.each do |question| %>
+        <tr>
+          <td>
+            <div class="hot-list-font">
+              <p><%= link_to((question.title).truncate(15),account_question_path(question)) %>
+              <span class=" media-meta pull-right"><%= question.watches %></span>
+              </p>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+</div>

@@ -1,0 +1,28 @@
+<div class="hot-bg">
+    <div class="hot-title-font">
+        <strong><span>热门学霸</span></strong>
+        <div class="pull-right">
+          <%= link_to("更多学霸>>",replyers_account_users_path)  %>
+        </div>
+    </div>
+
+    <table class="table table-filter">
+      <% hot_replyers.each do |replyer| %>
+      <tr>
+        <td style="width:20px">
+          <%= render_head_image_30(replyer) %>
+        </td>
+        <td>
+          <div class="hot-list-font">
+            <%= link_to(exhibition_profile_account_user_path(replyer)) do %>
+              <span><%= replyer.name %></span><br />
+              <span class="pull-left" style="padding-right:10px"><%= replyer.country %></span>
+              <span><%= replyer.school %></span>
+              <span class="pull-right media-meta"><%= replyer.fans_num %></span>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+</div>

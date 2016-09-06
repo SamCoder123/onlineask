@@ -3,7 +3,7 @@ class Account::QuestionsController < AccountController
   layout "user_center"
 
   def index
-    drop_breadcrumb("首页", account_questions_path)
+    drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("问题")
 
     # 所有问题questions进行排序
@@ -22,7 +22,7 @@ class Account::QuestionsController < AccountController
   def show
     @answers = @question.answers.order("answer_status")
     @invitated_users = @question.invitated_users
-    drop_breadcrumb("首页", account_questions_path)
+    drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
     @users = User.all - @invitated_users
@@ -43,13 +43,13 @@ class Account::QuestionsController < AccountController
       render :show
     end
 
-    drop_breadcrumb("首页", account_questions_path)
+    drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
   end
 
   def new
-    @users = User.all
+    @users = User.where.not(id:current_user)
     #binding.pry
     @tags = Tag.all
     @question = Question.new
@@ -91,7 +91,7 @@ class Account::QuestionsController < AccountController
       @filters_arry << user.id
     end
     @filters = @filters_arry.map(&:inspect).join(",")
-    @users = User.all - @invitated_users
+    @users = User.where.not(id:current_user)
     @tags = Tag.all - @question.tags
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb("编辑问题")
@@ -164,7 +164,7 @@ class Account::QuestionsController < AccountController
 
   def invitated_questions
     @invitated_questions = current_user.invitated_questions
-    drop_breadcrumb("首页", account_questions_path)
+    drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("被邀请的问题")
     render layout: "user_center"
   end
@@ -189,6 +189,7 @@ class Account::QuestionsController < AccountController
     redirect_to :back
   end
 
+  
   private
 
   # Use callbacks to share common setup or constraints between actions.
