@@ -1,9 +1,7 @@
 class RewardDepositService
-  def initialize(user, invitated_users, question, current_user)
+  def initialize(user, question)
     @user = user
     @question = question
-    @invitated_users = invitated_users
-    @current_user = current_user
   end
 
   def perform!
@@ -11,12 +9,6 @@ class RewardDepositService
     amount = @question.downpayment
     @user.deposit_money!(amount)
     @user.super_admin_bill!(amount)
-    # 被邀请的人存入关系
-    @question.invitation!(@invitated_users)
-    @invitated_users.each do |user|
-      NotificationService.new(user, @current_user, @question).send_notification!
-      OrderMailer.notify_invited_question(@question, user).deliver!
-    end
 
     Bill.create!(amount: amount, question: @question, user: @user, flow: "in", detail: "提问押金")
   end

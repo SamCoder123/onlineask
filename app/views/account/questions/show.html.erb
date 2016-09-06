@@ -1,95 +1,96 @@
-<script type="text/javascript">
-$(function(){
-  $('.ui.dropdown').dropdown({
-    allowAdditions: false
-  });
-});
-</script>
-
-  <div class="total clearfix btn-right-bottom">
-    <span class="pull-right">
-      <%= link_to '返回', account_questions_path,class:"btn btn-primary btn-xs" %>
-    </span>
+<div class="total clearfix btn-right-bottom">
+  <span class="pull-right">
+    <%= link_to '返回', account_questions_path,class:"btn btn-primary btn-xs" %>
+  </span>
+</div>
+<div class="panel panel-default ">
+  <div class="panel-heading">
+    <h3 class="panel-title">问题主题：<%= @question.title %></h3>
   </div>
-  <div class="panel panel-default ">
+
+  <div class="panel-body">
+    <p>问题描述：<%= sanitize(@question.description) %></p>
+  </div>
+</div>
+
+<% if @question.status == "open" %>
+  <div class="addtional-info-border">
+    <p>
+      您可以调整悬赏和邀请，让您更快得到回答：
+    </p>
+    <%= simple_form_for @question, url: refine_reward_account_question_path(@question) do |form| %>
+      <%#= form.input :downpayment, label:"调整悬赏", class:"radio-inline"%>
+      <%#= form.collection_radio_buttons :downpayment, [[@question.downpayment + 20, '+20'] ,[@question.downpayment + 50, '+50'],[@question.downpayment + 100, '+100']], :first, :last, label:"hah" %>
+      <!-- <br> -->
+      <%= render "multiple_dropdown_bar" %>
+      <br>
+      <%= form.submit "调整一下", disable_with:"调整中…", class:"btn btn-danger btn-sm pull-right  clearfix" %>
+    <% end %>
+  </div>
+<% end %>
+
+<div>
+<% @invitated_users.each do |user| %>
+<% answers = user.answers.where(question_id:@question.id) %>
+  <div class="panel panel-info " style="margin-top:20px">
     <div class="panel-heading">
-      <h3 class="panel-title">问题主题：<%= @question.title %></h3>
+      <h3 class="panel-title">邀请人：<%= user.name %>
+        <% if answers.size.positive? %>
+          <small class="small-tips pull-right">
+           <i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"></i>Ta暂时没有回答</small>
+         <% end %>
+      </h3>
     </div>
-
-    <div class="panel-body">
-      <p>问题描述：<%= sanitize(@question.description) %></p>
-    </div>
-  </div>
-
-  <% if @question.status == "open" %>
-    <div class="addtional-info-border">
-      <p>
-        您可以调整悬赏和邀请，让您更快得到回答：
-      </p>
-      <%= simple_form_for @question, url: refine_reward_account_question_path(@question) do |form| %>
-        <%= form.input :downpayment, label:"调整悬赏", class:"radio-inline"%>
-        <%#= form.collection_radio_buttons :downpayment, [[@question.downpayment + 20, '+20'] ,[@question.downpayment + 50, '+50'],[@question.downpayment + 100, '+100']], :first, :last, label:"hah" %>
-        <br>
-        <%= render "multiple_dropdown_bar" %>
-        <br>
-        <%= form.submit "调整一下", disable_with:"调整中…", class:"btn btn-danger btn-sm pull-right  clearfix" %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <div>
-    <% @invitated_users.each do |user| %>
-    <% answers = user.answers.where(question_id:@question.id) %>
-      <div class="panel panel-info " style="margin-top:20px">
-        <div class="panel-heading">
-          <h3 class="panel-title">邀请人：<%= user.name %>
-            <% if answers.size.positive? %>
-              <small class="small-tips pull-right">
-               <i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"></i>Ta暂时没有回答</small>
-             <% end %>
-          </h3>
-        </div>
-            <% answers.each do |answer| %>
-            <div class="panel-body invitated_users_answer">
-              <%= answer.content %>
-              <div class="total clearfix">
-                <span class="pull-right">
-                  <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
-                </span>
-              </div>
-            </div>
-          <% end %>
-      </div>
-    <% end %>
-    <% if @answers.empty? %>
-      <hr>
-      <small class="small-tips">还没有回答，可以看看其他热门问题</small>
-      <%= render "account/answers/hot_question" %>
-    <% end %>
-    <% @answers.each do |answer| %>
-      <% if !@question.invitated_users.include?(answer.user)  %>
-        <div class="panel panel-info ">
-          <div class="panel-heading">
-            <h3 class="panel-title">回答人：<%= answer.user.name %>
-              <% if answer.answer_status == "best_answer" %>
-                <div class="btn btn-xs btn-danger" style="margin-left:30px;font">
-                  <small><span class="glyphicon glyphicon-star"></span>最佳答案</small>
-                </div>
-              <% end %>
-              <%= link_to(answer.unlike_answers.count, unlike_vote_vote_answer_path(answer), method: :post, class:"fa fa-thumbs-o-down pull-right") %>
-              <%= link_to(answer.like_answers.count, like_vote_vote_answer_path(answer), method: :post, class:"fa fa-thumbs-o-up pull-right", style:"margin-right:10px") %>
-            </h3>
-          </div>
-
-          <div class="panel-body">
-            <%= answer.content %>
-          </div>
-          <div class="total clearfix btn-right-bottom">
+        <% answers.each do |answer| %>
+        <div class="panel-body invitated_users_answer">
+          <%= answer.content %>
+          <div class="total clearfix">
             <span class="pull-right">
               <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
             </span>
           </div>
-       </div>
+        </div>
       <% end %>
-    <% end %>
   </div>
+<% end %>
+<% if @answers.empty? %>
+  <hr>
+  <small class="small-tips">还没有回答，可以看看其他热门问题</small>
+  <%= render "account/answers/hot_question" %>
+<% end %>
+<% @answers.each do |answer| %>
+  <% if !@question.invitated_users.include?(answer.user)  %>
+    <div class="panel panel-info ">
+      <div class="panel-heading">
+        <h3 class="panel-title">回答人：<%= answer.user.name %>
+          <% if answer.answer_status == "best_answer" %>
+            <div class="btn btn-xs btn-danger" style="margin-left:30px;font">
+              <small><span class="glyphicon glyphicon-star"></span>最佳答案</small>
+            </div>
+          <% end %>
+          <%= link_to(answer.unlike_answers.count, unlike_vote_vote_answer_path(answer), method: :post, class:"fa fa-thumbs-o-down pull-right") %>
+          <%= link_to(answer.like_answers.count, like_vote_vote_answer_path(answer), method: :post, class:"fa fa-thumbs-o-up pull-right", style:"margin-right:10px") %>
+        </h3>
+      </div>
+
+      <div class="panel-body">
+        <%= answer.content %>
+      </div>
+      <div class="total clearfix btn-right-bottom">
+        <span class="pull-right">
+          <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
+        </span>
+      </div>
+   </div>
+  <% end %>
+<% end %>
+</div>
+
+<%= javascript_include_tag 'account/questions', 'data-turbolinks-track': 'reload' %>
+
+<script type="text/javascript">
+
+$(function(){
+  initUIDropdown();
+});
+</script>
