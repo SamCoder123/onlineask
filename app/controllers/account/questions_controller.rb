@@ -10,6 +10,8 @@ class Account::QuestionsController < AccountController
     questions = case params[:order]
       when "by_question_created_at"
         Question.published.recent
+      when "by_downpayment"
+        Question.published.where(status: "open").order("downpayment DESC")
       when "by_question_like_count"
         Question.published.sort_by{|question| question.question_likes.count}.reverse
       else
@@ -202,7 +204,7 @@ class Account::QuestionsController < AccountController
     unless params[:question][:tag_list].nil?
       params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
     end
-    params.require(:question).permit(:title, :description, :tag_list, :downpayment)
+    params.require(:question).permit(:title, :description, :tag_list, :downpayment, :payment_method)
   end
 
   def update_invitated_users_and_notify

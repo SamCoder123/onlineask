@@ -11,5 +11,7 @@ class RewardDepositService
     @user.super_admin_bill!(amount)
 
     Bill.create!(amount: amount, question: @question, user: @user, flow: "in", detail: "提问押金")
+
+    @question.pay!
   end
 end
