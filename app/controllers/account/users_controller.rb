@@ -193,7 +193,7 @@ class Account::UsersController < AccountController
   private
 
   def params_user
-    params.require(:user).permit(:role, :description, :gender, :school, :major, :image, :name)
+    params.require(:user).permit(:role, :description, :gender, :country, :school, :major, :image, :name, :outside_page_link)
   end
 
 end

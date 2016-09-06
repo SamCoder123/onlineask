@@ -10,13 +10,7 @@
       <% hot_replyers.each do |replyer| %>
       <tr>
         <td style="width:20px">
-
-          <% if replyer.image.nil? || replyer.image.url.nil?  %>
-            <%= gravatar_tag replyer.email, :size => 30, :default => avatar_url %>
-            <%#= gravatar_tag(current_user.email,class:"img-circle profile_image_30" )  %>
-          <% else %>
-            <%= image_tag(replyer.image.url, class:"img-circle profile_image_30")%>
-          <% end %>
+          <%= render_head_image_30(replyer) %>
         </td>
         <td>
           <div class="hot-list-font">
