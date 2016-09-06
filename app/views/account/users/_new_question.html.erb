@@ -5,8 +5,12 @@
     .simple_form input { border: 1px solid #e5e5e5;}
     .simple_form textarea { border: 1px solid #e5e5e5;}
     .simple_form label { color: #373a3c;font-size: 12px;}
-
 </style>
+
+
+
+<!-- Button trigger modal -->
+
 <div class="panel panel-default">
     <%= simple_form_for [:account,@question] do |f| %>
     <div class="form-inputs">
@@ -30,10 +34,17 @@
           <%= f.input :downpayment,label:false, input_html: { min: '0', step: 'any',class: "special-size"}%>
         </div>
 
+        <%= render "account/users/payment_modal" %>
+
         <div class="special">
-          <%= f.button :submit,value:"提 问",class: "btn btn-primary" %>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            提问
+          </button>
+          <%#= f.button :submit,value:"提 问",class: "btn btn-primary" %>
         </div>
     </div>
+
+
 
     <% end %>
 </div>
