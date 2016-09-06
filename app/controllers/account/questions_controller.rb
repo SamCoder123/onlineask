@@ -10,6 +10,8 @@ class Account::QuestionsController < AccountController
     questions = case params[:order]
       when "by_question_created_at"
         Question.published.recent
+      when "by_downpayment"
+        Question.published.where(status: "open").order("downpayment DESC")
       when "by_question_like_count"
         Question.published.sort_by{|question| question.question_likes.count}.reverse
       else
@@ -189,7 +191,7 @@ class Account::QuestionsController < AccountController
     redirect_to :back
   end
 
-  
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

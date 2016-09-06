@@ -2,7 +2,6 @@
   <div class="panel panel-default" style="background:transparent;">
     <div class="panel-body">
       问题列表
-
       <div class="dropdown clearfix pull-right">
          <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
            排序
@@ -14,6 +13,9 @@
              </li>
              <li>
                 <%= link_to("按想听人数", account_questions_path(:order => "by_question_like_count")) %>
+             </li>
+             <li>
+               <%= link_to("按悬赏金额", account_questions_path(:order => "by_downpayment")) %>
              </li>
          </ul>
       </div>
