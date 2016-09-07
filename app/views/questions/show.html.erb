@@ -24,8 +24,8 @@ $(function() {
       <div class="panel-body">
         <%if @question.answers.size > 0 %>
           <% @question.answers.each do |answer| %>
-
-              <%= gravatar_tag answer.user.email, :size => 40, :default => avatar_url %>
+              <%= render_head_image_30(answer.user) %>
+              <!-- <%= gravatar_tag answer.user.email, :size => 40, :default => avatar_url %> -->
 
               <%= link_to(answer.user.name, exhibition_profile_account_user_path(id: answer.user.id)) %>
               回答了这个问题

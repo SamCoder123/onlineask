@@ -17,7 +17,8 @@
                 <%= answer.question.title %><b class="caret"></b>
                 </a>
                 <span class="pull-right">
-                  提问人：<%= gravatar_tag answer.question.user.email, :size => 30, :default => avatar_url %><%= link_to answer.question.user.name, exhibition_profile_account_user_path(answer.question.user) %>
+                  提问人：<%= render_head_image_30(answer.question.user) %>
+                  <%= link_to answer.question.user.name, exhibition_profile_account_user_path(answer.question.user) %>
                 </span>
                 <% if collapse_num == 1 %>
                   <small class="small-tips"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>最近偷听</small>
