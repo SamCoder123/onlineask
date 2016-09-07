@@ -76,7 +76,7 @@ class Account::UsersController < AccountController
       when "by_question_created_at"
         Question.published.recent.includes(:answers)
       when "by_question_like_count"
-        Question.published.includes(:answers).sort_by{|question| question.question_likes.count}.reverse
+        Question.published.includes(:answers)
       else
         Question.published.includes(:answers)
       end
@@ -85,6 +85,7 @@ class Account::UsersController < AccountController
     @questions = questions.paginate(:page => params[:page], :per_page => 6)
 
     @refer_questions = questions.where(status: 'open')
+
     flag = true
     filters = params[:tag_name]
     unless filters.nil?
@@ -95,6 +96,10 @@ class Account::UsersController < AccountController
     if flag && current_user.tags.size.positive?
       tags = current_user.tag_list
       @refer_questions = @refer_questions.tagged_with(tags, :any => true)
+    end
+
+    if params[:order] == "by_question_like_count"
+      @refer_questions = @refer_questions.sort_by{|question| question.question_likes.count}.reverse
     end
 
     # 为你推荐
