@@ -2,6 +2,11 @@
 <li class="list-group-item">
   <div class="media">
     <div class="pull-left">
+      <%= render_head_image_30(invitated_question.user) %>
+    </div>
+    <div class="media-body">
+
+    </div>
       <div class="panel-heading">
         <h3 class="panel-title">问题主题：<%= invitated_question.title %> 提问人：<%= invitated_question.user.name %></h3>
       </div>
@@ -42,6 +47,5 @@
 
     <%# end %>
 
-    </div>
   </div>
 </li>
