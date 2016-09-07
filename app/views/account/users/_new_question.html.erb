@@ -34,7 +34,7 @@ $(function(){
     <li>标题具体（写明地区、学校等）</li>
     <li>得到理想答案后尽快确认赞赏</li>
     <li>在描述中介绍自己的情况</li>
-  </ol> 
+  </ol>
 </div>
 
 <div class="panel panel-default">
@@ -43,8 +43,8 @@ $(function(){
 
       <label style="margin-bottom:15px;color:#4285f4;font-size:14px;">快速提问，有什么问题想问学霸？</label>
 
-        <a tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-placement="left"
-          title='提问指南' > ？</a>
+        <a tabindex="0" class="pull-right" role="button" data-toggle="popover" data-placement="left"
+          title='提问指南' > <i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></a>
 
         <%= f.input :title,label: false,placeholder:"问题主题",style:"margin-top:15px"  %>
         <%= f.input :description,label: false,placeholder:"问题说明"%>
