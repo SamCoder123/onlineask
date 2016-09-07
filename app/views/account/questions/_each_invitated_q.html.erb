@@ -1,51 +1,45 @@
-<%# @invitated_questions.each do |question| %>
 <li class="list-group-item">
+
   <div class="media">
     <div class="pull-left">
       <%= render_head_image_30(invitated_question.user) %>
     </div>
+
     <div class="media-body">
+      <span class="media-meta pull-right">阅读数：<%= invitated_question.watches %></span>
+      <p>
+        <%= invitated_question.user.name %>
+      </p>
+      <p>
+        <%= link_to invitated_question.title, account_question_path(invitated_question) %>
+      </p>
+      <p>
+        <%= sanitize(invitated_question.description) %>
+      </p>
 
-    </div>
-      <div class="panel-heading">
-        <h3 class="panel-title">问题主题：<%= invitated_question.title %> 提问人：<%= invitated_question.user.name %></h3>
-      </div>
-
-      <div class="panel-body">
-        <p>问题描述：<%= sanitize(invitated_question.description) %></p>
-      </div>
-
-      <!-- <% answers = current_user.answers.where(question_id:invitated_question.id) %>
-      <% answers.each do |answer| %>
-        <div class="panel panel-info ">
-          <div class="panel-heading">
-            <h3 class="panel-title">我的回答</ h3>
-          </div>
-            <div class="panel-body invitated_users_answer">
-              <%= answer.content %>
-
-              <div class="total clearfix">
-                <span class="pull-right">
-                  <%= link_to("编辑答案", edit_account_answer_path(answer), class:"btn btn-danger btn-xs") %>
-                  <%#= render :partial => "account/questions/show_button_base_status", :locals => { :question => question, :answer => answer } %>
-                </span>
-              </div>
-            </div>
-       </div>
-      <% end %> -->
-
-
-      <div class="total clearfix btn-right-bottom">
-        <span class="pull-right">
+      <p class="summary">
+        <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= invitated_question.answers.count %></span>
+        <%= render_question_closed?(invitated_question) %>
+        <span class="media-meta pull-left" style="padding-right:20px">标签：
+          <%= render partial: "/account/tags/tag_list", collection: invitated_question.tags, as: :tag %>
+        </span>
+        <span class="media-meta pull-left"><%= invitated_question.created_on %></span>
+        <span class="pull-right"><%= link_to("查 看", invitated_question, class:"btn btn-default btn-xs") %></span>
+        <span class="pull-right" style="margin-right:10px;">
           <% if invitated_question.status=='open' %>
-            <%= link_to '回答' ,new_question_answer_path(invitated_question),class:"btn btn-xs btn-danger" %>
+            <%= link_to '回答' ,new_question_answer_path(invitated_question),class:"btn btn-xs btn-primary" %>
           <% else %>
             <%= link_to('问题已关闭', 'javascript:void(0)',class:"btn btn-xs btn-default",disabled:true)%>
           <% end %>
         </span>
+      </p>
+
+    </div>
+
+      <div class="total clearfix btn-right-bottom">
+
       </div>
 
-    <%# end %>
 
   </div>
 </li>

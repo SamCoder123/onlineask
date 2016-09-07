@@ -3,18 +3,18 @@
     <div class="media">
       <div class="pull-left">
         <%= render_head_image_30(question.user) %>
-        <!-- <%= gravatar_tag question.user.email, :size => 30, :default => avatar_url %> -->
       </div>
         <div class="media-body">
           <span class="media-meta pull-right">阅读数：<%= question.watches %></span>
           <p><%= question.user.name %></p>
           <p class=""><%= link_to(question.title,account_question_path(question))  %></p>
+          <p>
             <%= sanitize(question.description) %>
           </p>
 
           <p class="summary">
             <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= question.answers.count %></span>
-            <%= render_question_closed?(question) %> 
+            <%= render_question_closed?(question) %>
             <span class="media-meta pull-left" style="padding-right:20px">标签：
               <%= render :partial => "/account/tags/tag_list", :collection => question.tags, :as => :tag %>
             </span>
