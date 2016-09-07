@@ -12,14 +12,39 @@ $(function(){
   $('.ui.dropdown').dropdown({
     allowAdditions: false
   });
+
+  $('[data-toggle="popover"]').popover({
+    html : true,
+    content: function() {
+      return $("#popover_div").html();
+    }
+  });
 });
 </script>
+
+<div id="popover_div" style="display:none"> 如何提问能获得更好的答案？
+  <ol>
+    <li>增加悬赏</li>
+    <li>邀请别人</li>
+    <li>在描述中介绍自己的情况</li>
+  </ol>
+
+  如何获得更多偷听？
+  <ol>
+    <li>标题具体（写明地区、学校等）</li>
+    <li>得到理想答案后尽快确认赞赏</li>
+    <li>在描述中介绍自己的情况</li>
+  </ol> 
+</div>
 
 <div class="panel panel-default">
     <%= simple_form_for [:account,@question] do |f| %>
     <div class="form-inputs">
 
       <label style="margin-bottom:15px;color:#4285f4;font-size:14px;">快速提问，有什么问题想问学霸？</label>
+
+        <a tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-placement="left"
+          title='提问指南' > ？</a>
 
         <%= f.input :title,label: false,placeholder:"问题主题",style:"margin-top:15px"  %>
         <%= f.input :description,label: false,placeholder:"问题说明"%>
@@ -69,9 +94,6 @@ $(function(){
           <%#= f.button :submit,value:"提 问",class: "btn btn-primary" %>
         </div>
     </div>
-
-
-
   </div>
     <% end %>
 </div>
