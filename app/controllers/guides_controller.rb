@@ -1,5 +1,5 @@
 class GuidesController < ApplicationController
-  layout "guide", except: [:faq]
+  layout "guide", except: [:faq, :about, :contact]
 
   def tags_guide
     @tags = Tag.all
@@ -10,6 +10,14 @@ class GuidesController < ApplicationController
   end
 
   def faq
+
+  end
+
+  def contact
+
+  end
+
+  def about
 
   end
 
