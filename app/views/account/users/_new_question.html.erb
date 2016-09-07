@@ -5,8 +5,16 @@
     .simple_form input { border: 1px solid #e5e5e5;}
     .simple_form textarea { border: 1px solid #e5e5e5;}
     .simple_form label { color: #373a3c;font-size: 12px;}
-
 </style>
+
+<script type="text/javascript">
+$(function(){
+  $('.ui.dropdown').dropdown({
+    allowAdditions: false
+  });
+});
+</script>
+
 <div class="panel panel-default">
     <%= simple_form_for [:account,@question] do |f| %>
     <div class="form-inputs">
@@ -16,24 +24,54 @@
         <%= f.input :title,label: false,placeholder:"问题主题",style:"margin-top:15px"  %>
         <%= f.input :description,label: false,placeholder:"问题说明"%>
 
-        <div class="special">
-            <%= render "account/questions/multiple_dropdown_bar" %>
-        </div>
-        <div class="special">
-            <label class="float required control-label" for="question_tag_list">问题标签</label>
-            <%= select_tag 'question[tag_list][]', options_for_select(@tags.collect{ |t| [t.name, t.name] }),multiple: true, class: 'ui search dropdown dp-btn-style'%>
-        </div>
-        <div class="special">
-          <label class="float required control-label" for="question_downpayment" style="margin-top:9px">悬赏金额</label>
-        </div>
-        <div class="special">
-          <%= f.input :downpayment,label:false, input_html: { min: '0', step: 'any',class: "special-size"}%>
+        <!-- <div class="special">
+            <%#= render "account/questions/multiple_dropdown_bar" %>
+        </div> -->
+        <div class="pull-right">
+          <div class="special">
+              <label class="float required control-label" for="question_tag_list">问题标签</label>
+              <%= select_tag 'question[tag_list][]', options_for_select(@tags.collect{ |t| [t.name, t.name] }),multiple: true, class: 'ui search dropdown'%>
+          </div>
+          <div class="special">
+            <label class="float required control-label" for="question_downpayment" style="margin-top:9px">悬赏金额</label>
+          </div>
+          <div class="special">
+            <%= f.input :downpayment,label:false, input_html: { min: '0', step: 'any',class: "special-size"}%>
+          </div>
+        <%#= render "account/users/payment_modal", locals: {f: f}%>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">请选择支付方式</h4>
+              </div>
+              <div class="modal-body">
+                <%= f.input :payment_method, collection: [["支付宝", "<i class='fa fa-credit-card-alt' aria-hidden='true'></i> &nbsp 支付宝".html_safe], ["微信支付", "<i class='fa fa-weixin' aria-hidden='true'></i> &nbsp 微信".html_safe]], value_method: :first, label_method: :last, as: :radio_buttons, label: false, checked: "支付宝", item_wrapper_class: "radio-inline set-margin-top-10px" %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <span class="special">
+                  <%= f.button :submit,value:"确认支付",class: "btn btn-primary btn-sm" %>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
+        <!-- Button trigger modal -->
         <div class="special">
-          <%= f.button :submit,value:"提 问",class: "btn btn-primary" %>
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+            提问
+          </button>
+          <%#= f.button :submit,value:"提 问",class: "btn btn-primary" %>
         </div>
     </div>
 
+
+
+  </div>
     <% end %>
 </div>

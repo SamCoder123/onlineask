@@ -25,3 +25,7 @@ Rails.application.config.assets.precompile += %w(simplemde.min.scss)
 Rails.application.config.assets.precompile += %w(simplemde.min.js)
 
 Rails.application.config.assets.precompile += %w(welcome_v1.css)
+
+Rails.application.config.assets.precompile += %w(guides.css)
+
+Rails.application.config.assets.precompile += %w( account/questions.js )

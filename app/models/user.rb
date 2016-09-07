@@ -2,7 +2,6 @@ class User < ApplicationRecord
   has_many :questions
   has_many :answers
   has_many :follow_relationships
-  # followees 是我关注的人，如xdite
   has_many :followees, through: :follow_relationships, source: :follow_relationship
   has_many :like_answers
   has_many :a_likes, through: :like_answers, source: :answer
@@ -20,6 +19,11 @@ class User < ApplicationRecord
   has_many :subscribing_answers, through: :answer_subscriptions, source: :answer
 
   has_many :tags
+
+  # validates :name, presence: true
+  # validates :role, presence: true
+  # validates :gender, presence: true
+  # validates :school, presence: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -108,14 +112,10 @@ class User < ApplicationRecord
 
   def follow!(followee)
     followees << followee
-    followee.fans_num += 1
-    followee.save
   end
 
   def stop_follow!(followee)
     followees.delete(followee)
-    followee.fans_num -= 1
-    followee.save
   end
 
   def invitation!(question)
@@ -173,6 +173,7 @@ class User < ApplicationRecord
     q_unlikes.delete(question)
   end
 end
+
 # == Schema Information
 #
 # Table name: users
@@ -202,17 +203,6 @@ end
 #  phone_number           :string
 #  introduction           :string
 #  aasm_state             :string           default("unapplied")
-#  fans_num               :integer          default(0)
-#  country                :string
-#  outside_page_link      :string
-#
-# Indexes
-#
-#  index_users_on_aasm_state            (aasm_state)
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#
-
 #  fans_num               :integer          default(0)
 #  country                :string
 #  outside_page_link      :string
