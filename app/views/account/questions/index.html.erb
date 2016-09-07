@@ -27,7 +27,8 @@
       <td>
         <div class="media">
           <div class="pull-left">
-            <%= gravatar_tag question.user.email, :size => 30, :default => avatar_url %>
+            <%= render_head_image_30(question.user) %>
+            <!-- <%= gravatar_tag question.user.email, :size => 30, :default => avatar_url %> -->
           </div>
             <div class="media-body">
               <span class="media-meta pull-right">阅读数：<%= question.watches %></span>
