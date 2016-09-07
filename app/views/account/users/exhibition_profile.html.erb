@@ -4,8 +4,9 @@
   这是你自己的个人主页，资料完善度80% <%= link_to("去完善", index_profile_account_user_path(current_user), class:"btn btn-danger btn-sm") %>
 </div>
 <% end %> -->
-<%= render "profile_exhibition" %>
-<hr/>
+<%#= render "profile_exhibition" %>
+<%= render "exhibition_q_a" %>
+<!-- <hr/>
 <h3>Ta的热门回答</h3>
 <% @answers.each do |answer| %>
 <div class="panel panel-default ">
@@ -28,4 +29,4 @@
 
 <div class="text-center">
  <%= will_paginate @answers, renderer: BootstrapPagination::Rails %>
-</div>
+</div> -->

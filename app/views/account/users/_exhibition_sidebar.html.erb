@@ -1,0 +1,33 @@
+<%= render "exhibition_personal_card" %>
+
+<div class="hot-bg">
+    <%= link_to("申请成为学霸",submit_application_account_user_path(@user) , method: :post,class:"btn btn-sm btn-primary") %>
+    <div class="exhibition-title-font">
+      <span>基本信息</span>
+    </div>
+    <div class="exhibition-list-font">
+        <span>姓名：<%= @user.name %></span><br />
+        <span>角色：<%= @user.role %></span><br />
+        <span>性别：<%= @user.gender %></span>
+      <hr />
+    </div>
+    <div class="exhibition-title-font">
+      <span>留学信息</span>
+    </div>
+    <div class="exhibition-list-font">
+        <span>留学国家：<%= @user.country %></span><br />
+        <span>留学学校：<%= @user.school %></span><br />
+        <span>专业：<%= @user.major %></span>
+      <hr />
+    </div><div class="exhibition-title-font">
+      <span>联系信息</span>
+    </div>
+    <div class="exhibition-list-font">
+        <span>email：<%= @user.email %></span><br />
+        <span>个人主页：<%= @user.outside_page_link %></span>
+    </div>
+    <br /><br />
+    <div class="exhibition-link-font" >
+      <%= link_to("编辑个人资料",edit_profile_account_user_path(@user)) %>
+    </div>
+</div>
