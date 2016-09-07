@@ -23,7 +23,7 @@ class Account::QuestionsController < AccountController
 
   def show
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("问题", account_questions_path(@question))
+    drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb(@question.title)
 
     @answers = @question.answers.order("answer_status")
@@ -37,7 +37,7 @@ class Account::QuestionsController < AccountController
 
   def refine_reward
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("问题", account_questions_path(@question))
+    drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb(@question.title)
 
     update_invitated_users_and_notify
