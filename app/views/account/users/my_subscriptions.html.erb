@@ -3,7 +3,7 @@
     <h2>我偷听的答案</h2>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <% collapse_num = 0 %>
-      <% @answer_subscriptions.each do |subscription| %>
+      <% @answer_subscriptions.each do |answer| %>
         <% collapse_num += 1 %>
         <% collapse_num_to_id = collapse_num.to_words.split.map(&:capitalize).join() %>
         <div class="panel panel-default">
@@ -14,12 +14,11 @@
               <% else %>
                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= collapse_num_to_id %>" aria-expanded="false" aria-controls="collapse<%= collapse_num_to_id %>">
               <% end %>
-                <%= subscription.answer.question.title %><b class="caret"></b>
+                <%= answer.question.title %><b class="caret"></b>
                 </a>
                 <span class="pull-right">
-                  提问人：<%= render_head_image_30(subscription.answer.question.user) %>
-                <!-- <%= gravatar_tag subscription.answer.question.user.email, :size => 30, :default => avatar_url %> -->
-                <%= link_to subscription.answer.question.user.name, exhibition_profile_account_user_path(subscription.answer.question.user) %>
+                  提问人：<%= render_head_image_30(answer.question.user) %>
+                  <%= link_to answer.question.user.name, exhibition_profile_account_user_path(answer.question.user) %>
                 </span>
                 <% if collapse_num == 1 %>
                   <small class="small-tips"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>最近偷听</small>
@@ -29,11 +28,11 @@
           </div>
           <div id="collapse<%= collapse_num_to_id %>" class="panel-collapse collapse <%= "in" if collapse_num == 1 %>" role="tabpanel" aria-labelledby="heading<%= collapse_num_to_id %>">
             <div class="panel-body">
-              <%= subscription.answer.content %>
+              <%= answer.content %>
               <br>
 
               <span class="answer-like-stats pull-right">
-                <%= render partial: "judge_subscription", locals: {answer: subscription.answer} %>
+                <%= render partial: "judge_subscription", locals: {answer: answer} %>
               </span>
             </div>
           </div>

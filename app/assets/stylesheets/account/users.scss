@@ -525,6 +525,7 @@ a.active {
 }
 
 
+
 // exhibition page
 .exhibition-navbar-bg{
   background-color: #4285f4;
@@ -564,7 +565,6 @@ a.active {
   text-align: center;
   a {color: #4285f4;}
 }
-
 // 回答列表tab的css
 
 /* Tabs panel */
@@ -629,6 +629,56 @@ a.active {
   // border: 1px solid #ddd;
   // border-bottom-color: transparent;
   cursor: default;
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #4285f4;
+  border-radius: 5px;
+  color: white;
+
+  span {color: white; }
+}
+// exhibition page
+.exhibition-navbar-bg{
+  background-color: #4285f4;
+  border-radius: 2px;
+  height: 280px;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  p {
+    font-size: 16px;
+    color: #FFF;
+    padding-top: 20px;
+  }
+}
+
+.exhibition-title-font{
+  font-size: 18px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  color: black;
+}
+
+
+.exhibition-list-font{
+  font-size: 14px;
+  padding-left: 10px;
+  color: black;
+  span{
+  line-height: 1.7;
+  }
+}
+
+.exhibition-link-font{
+  font-size: 14px;
+  text-align: center;
+  a {color: #4285f4;}
 }
 
 .set-margin-top-10px{

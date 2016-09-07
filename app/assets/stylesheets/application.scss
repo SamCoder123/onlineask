@@ -111,8 +111,14 @@ html,body{
   width: 30px;
 }
 
-.vertical-center{
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+
+.btn-primary {
+    background-color: #4285f4;
+    border-color: transparent;
+    border-radius: 4px;
+}
+
+.btn-default {
+  border-color: #4285f4;
+  border-radius: 4px;
 }
