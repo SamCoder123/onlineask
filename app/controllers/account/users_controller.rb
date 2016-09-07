@@ -81,7 +81,7 @@ class Account::UsersController < AccountController
         Question.published.includes(:answers)
       end
 
-      # 问题广场
+    # 问题广场
     @questions = questions.paginate(:page => params[:page], :per_page => 6)
 
     @refer_questions = questions.where(status: 'open')
