@@ -87,7 +87,7 @@ class Account::UsersController < AccountController
     @users = User.where.not(id:current_user)
     @tags = Tag.all
     @question = Question.new
-    @invitated_questions = current_user.invitated_questions
+    @invitated_questions = current_user.invitated_questions.paginate(:page => params[:page], :per_page => 6)
   end
 
   def withdraw_edit
