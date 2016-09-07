@@ -40,13 +40,14 @@ class Account::UsersController < AccountController
 
   def show_profile
     drop_breadcrumb("首页")
-
     # 所有问题questions进行排序
     questions = case params[:order]
       when "by_question_created_at"
         Question.published.recent.includes(:answers)
+      when "by_downpayment"
+        Question.published.where(status: "open").order("downpayment DESC")
       when "by_question_like_count"
-        Question.published.includes(:answers).sort_by{|question| question.question_likes.count}.reverse
+        Question.published.includes(:answers)
       else
         Question.published.includes(:answers)
       end
@@ -54,6 +55,9 @@ class Account::UsersController < AccountController
     if current_user.tags.size.positive?
       tags = current_user.tag_list
       questions = questions.tagged_with(tags, :any => true)
+      if params[:order] == "by_question_like_count"
+        questions = questions.sort_by{|question| question.question_likes.count}.reverse
+      end
     end
 
     @questions = questions.paginate(:page => params[:page], :per_page => 6)
