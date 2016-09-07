@@ -40,13 +40,14 @@ class Account::UsersController < AccountController
 
   def show_profile
     drop_breadcrumb("首页")
-
     # 所有问题questions进行排序
     questions = case params[:order]
       when "by_question_created_at"
         Question.published.recent.includes(:answers)
+      when "by_downpayment"
+        Question.published.where(status: "open").order("downpayment DESC")
       when "by_question_like_count"
-        Question.published.includes(:answers).sort_by{|question| question.question_likes.count}.reverse
+        Question.published.includes(:answers)
       else
         Question.published.includes(:answers)
       end
@@ -54,9 +55,12 @@ class Account::UsersController < AccountController
     if current_user.tags.size.positive?
       tags = current_user.tag_list
       questions = questions.tagged_with(tags, :any => true)
+      if params[:order] == "by_question_like_count"
+        questions = questions.sort_by{|question| question.question_likes.count}.reverse
+      end
     end
 
-    @questions = questions.paginate(:page => params[:page], :per_page => 6)
+    @refer_questions = questions.paginate(:page => params[:page], :per_page => 6)
 
     @users = User.where.not(id:current_user)
     @tags = Tag.all
@@ -80,20 +84,21 @@ class Account::UsersController < AccountController
     # 问题广场
     @questions = questions.paginate(:page => params[:page], :per_page => 6)
 
+    @refer_questions = questions.where(status: 'open')
     flag = true
     filters = params[:tag_name]
     unless filters.nil?
-      questions = questions.tagged_with(filters, :any => true)
+      @refer_questions = @refer_questions.tagged_with(filters, :any => true)
       flag = false
     end
 
     if flag && current_user.tags.size.positive?
       tags = current_user.tag_list
-      questions = questions.tagged_with(tags, :any => true)
+      @refer_questions = @refer_questions.tagged_with(tags, :any => true)
     end
 
     # 为你推荐
-    @refer_questions = questions.paginate(:page => params[:page], :per_page => 6)
+    @refer_questions = @refer_questions.paginate(:page => params[:page], :per_page => 6)
     @invitated_questions = current_user.invitated_questions
   end
 

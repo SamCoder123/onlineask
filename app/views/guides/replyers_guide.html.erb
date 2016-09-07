@@ -4,11 +4,7 @@
 </div>
 <% @replyers.each do |replyer| %>
 		<label for="default<%= replyer.id %>" class="btn btn-default img-size">
-      <% if replyer.image.present? %>
-        <%= link_to(image_tag(replyer.image.thumb.url)) %>
-      <% else %>
-        <%= gravatar_tag replyer.email, :size => 60, :default => avatar_url %>
-      <% end %>
+        <%= render_head_image_100(replyer) %>
       <h5><%= link_to(exhibition_profile_account_user_path(replyer)) do%>
         <%= replyer.name %></h5>
         <p>留学学校：<%= replyer.school %><br />
