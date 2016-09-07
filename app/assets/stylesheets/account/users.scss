@@ -589,6 +589,7 @@ a.active {
   // border-bottom-color: transparent;
   cursor: default;
 }
+
 .modal-header {
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
@@ -636,4 +637,8 @@ a.active {
   font-size: 14px;
   text-align: center;
   a {color: #4285f4;}
+}
+
+.set-margin-top-10px{
+  margin-top: 10px !important;
 }

@@ -90,7 +90,7 @@ i = 0
   u = User.find(4)
   u.fans_num += 1
   u.save
-  LikeAnswer.crearte(answer_id: 1, user_id: i, like_answer: i)
+  LikeAnswer.create(answer_id: 1, user_id: i, like_answer: i)
   LikeAnswer.create(answer_id: 11+i, user_id: 18+i, like_answer: i)
   QuestionLike.create(question_id: 1, user_id: i+18)
   QuestionLike.create(question_id:i+4, user_id: i+18)
