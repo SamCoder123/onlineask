@@ -8,7 +8,8 @@
           <% if f.image.present? %>
             <%= link_to(image_tag(f.image.thumb.url)) %>
           <% else %>
-            <%= gravatar_tag f.email, :size => 200, :default => avatar_url %>
+          <%= render_head_image_130(f) %>
+<!-- <%= gravatar_tag f.email, :size => 200, :default => avatar_url %> -->
           <% end %>
         </div>
         <div class="caption">
