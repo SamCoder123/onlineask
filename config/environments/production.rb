@@ -90,7 +90,7 @@ Rails.application.configure do
     config.auth_token = ENV["TWILIO_TOKEN"]
   end
 
-config.action_mailer.default_url_options = { :host => 'sheltered-wildwood-83104.herokuapp.com'}
+config.action_mailer.default_url_options = { :host => 'online-ask.herokuapp.com'}
 # ActionMailer Config
 # Setup for production - deliveries, no errors raised
 config.action_mailer.delivery_method = :smtp
