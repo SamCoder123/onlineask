@@ -1,5 +1,6 @@
 class Account::UsersController < AccountController
-  before_action :find_current_user, only: [:index_profile, :new_profile, :edit_profile, :update_profile, :show_profile, :withdraw_edit, :deposit_edit, :my_subscriptions, :my_questions_answers, :wallet, :follow_show, :reply]
+  before_action :find_current_user, only: [:index_profile, :new_profile, :edit_profile, :update_profile, :show_profile, :withdraw_edit, :deposit_edit, :my_questions_answers, :wallet, :follow_show, :reply]
+  before_action :find_page_user, only: [:withdraw_change, :deposit_change, :exhibition_profile, :my_subscriptions]
   layout "user_center"
 
   def index_profile
@@ -96,7 +97,6 @@ class Account::UsersController < AccountController
 
   # withdraw_change显示取现后余额
   def withdraw_change
-    @user = User.find(params[:id])
     cost = params[:user][:balance]
 
     if @user.balance >= cost.to_f
@@ -117,7 +117,6 @@ class Account::UsersController < AccountController
 
   # deposit_change用户账户充值功能
   def deposit_change
-    @user = User.find(params[:id])
     cost = params[:user][:balance]
     @user.balance = @user.balance + cost.to_f
     @user.save
@@ -131,21 +130,23 @@ class Account::UsersController < AccountController
 
   # 链接到user展示页
   def exhibition_profile
-    @user = User.find(params[:id])
-    @blogs = @user.blogs
+    # @blogs = @user.blogs
     @followers = FollowRelationship.where(follower_id: @user)
     @followings = @user.followees
     # @same_followees = current_user.followees.where(follower_id: @followings)
     @answers = @user.answers.paginate(page: params[:page], per_page: 5)
+    @questions = @user.questions.paginate(page: params[:page], per_page: 5)
     @best_answers = @answers.where(answer_status: "best_answer")
-    @answer_subscriptions = AnswerSubscription.where(answer_id: @answers)
+    @answer_subscriptions = @user.subscribing_answers.order("id DESC").paginate(page: params[:page], per_page: 5)
+    @invitated_questions = @user.invitated_questions
+
     render layout: "profile"
   end
 
   def my_subscriptions
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我偷听的答案")
-    @answer_subscriptions = AnswerSubscription.where(user_id: current_user).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+    @answer_subscriptions = @user.subscribing_answers.order("id DESC").paginate(page: params[:page], per_page: 5) #AnswerSubscription.where(user_id: current_user).order("created_at DESC").paginate(page: params[:page], per_page: 5)
   end
 
   def my_questions_answers
@@ -210,6 +211,10 @@ class Account::UsersController < AccountController
 
   def find_current_user
     @user = current_user
+  end
+
+  def find_page_user
+    @user = User.find(params[:id])
   end
 
 end

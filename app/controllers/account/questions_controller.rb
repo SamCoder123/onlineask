@@ -10,6 +10,8 @@ class Account::QuestionsController < AccountController
     questions = case params[:order]
       when "by_question_created_at"
         Question.published.recent
+      when "by_downpayment"
+        Question.published.where(status: "open").order("downpayment DESC")
       when "by_question_like_count"
         Question.published.sort_by{|question| question.question_likes.count}.reverse
       else
@@ -20,24 +22,21 @@ class Account::QuestionsController < AccountController
   end
 
   def show
-    @answers = @question.answers.order("answer_status")
-    @invitated_users = @question.invitated_users
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("问题", account_questions_path(@question))
     drop_breadcrumb(@question.title)
-    @users = User.all - @invitated_users
+
+    @answers = @question.answers.order("answer_status")
     @refer_questions = Question.published.where(status: "open").order("watches DESC").limit(3)
+    @invitated_users = @question.invitated_users
+    @filters_arry = @invitated_users.collect(&:id)
+    @filters = @filters_arry.map(&:inspect).join(",")
+    @users = User.where.not(id:current_user)
+
   end
 
   def refine_reward
-    @answers = @question.answers.order("answer_status")
-    @invitated_users = @question.invitated_users
-    @users = User.all - @invitated_users
-
-    if @question.update(question_params)
-
-      update_invitated_users_and_notify
-
+    if update_invitated_users_and_notify
       redirect_to account_question_path(@question), notice: "调整成功，学霸正在赶来！"
     else
       render :show
@@ -69,11 +68,16 @@ class Account::QuestionsController < AccountController
     @question.status = "open"
 
     if @question.save
-      # 保存用户 从平台扣钱150转给回答者
-      # 把邀请人和问题存入关系表
-      @invitated_users = User.where(id: params[:filters].split(","))
 
-      RewardDepositService.new(current_user, @invitated_users, @question, current_user).perform!
+      # 保存用户 从平台扣钱150转给回答者
+      RewardDepositService.new(current_user, @question).perform!
+
+      # 把邀请人和问题存入关系表
+      unless @invitated_users.nil?
+        @invitated_users = User.where(id: params[:filters].split(","))
+
+        InvitateAnswerService.new(current_user, @invitated_users, @question).perform!
+      end
 
       flash[:notice] = "提问成功！"
       redirect_to account_question_path (@question)
@@ -86,10 +90,7 @@ class Account::QuestionsController < AccountController
 
   def edit
     @invitated_users = @question.invitated_users
-    @filters_arry = []
-    for user in @invitated_users
-      @filters_arry << user.id
-    end
+    @filters_arry = @invitated_users.collect(&:id)
     @filters = @filters_arry.map(&:inspect).join(",")
     @users = User.where.not(id:current_user)
     @tags = Tag.all - @question.tags
@@ -189,7 +190,7 @@ class Account::QuestionsController < AccountController
     redirect_to :back
   end
 
-  
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -200,10 +201,10 @@ class Account::QuestionsController < AccountController
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
     # tag_list 这个gem接收name1,name2,name3这种字符串形式，所以在permit之前要解析成字符串
-    if params[:question][:tag_list]
+    unless params[:question][:tag_list].nil?
       params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
     end
-    params.require(:question).permit(:title, :description, :tag_list, :downpayment)
+    params.require(:question).permit(:title, :description, :tag_list, :downpayment, :payment_method)
   end
 
   def update_invitated_users_and_notify

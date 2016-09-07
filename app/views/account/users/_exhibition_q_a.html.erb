@@ -1,0 +1,50 @@
+<!-- <div class="tab-content">
+  <div class="tab-pane fade in active" id="tab1"><%= render template: "account/users/deposit_edit" %></div>
+  <div class="tab-pane fade" id="tab2"><%= render template: "account/users/withdraw_edit" %></div>
+</div> -->
+
+<div class="tabbable-panel">
+  <div class="tabbable-line">
+    <ul class="nav nav-tabs ">
+      <li class="active">
+        <a href="#tab_default_1" data-toggle="tab">
+          提出的问题
+        </a>
+      </li>
+      <li>
+        <a href="#tab_default_2" data-toggle="tab">
+          写过的答案
+        </a>
+      </li>
+      <li>
+        <a href="#tab_default_3" data-toggle="tab">
+          被邀请的回答
+        </a>
+      </li>
+      <li>
+        <a href="#tab_default_4" data-toggle="tab">
+          <%= render_whose_sub(@user, current_user) %>
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab_default_1">
+        <!-- 用来render第一个tab内容 -->
+        <%= render "my_questions" %>
+      </div>
+      <div class="tab-pane" id="tab_default_2">
+        <!-- 用来render第二个tab -->
+        <%= render "my_answers" %>
+      </div>
+      <div class="tab-pane" id="tab_default_3">
+        <!-- 用来render第三个tab -->
+        <%#= render "" %>
+        <%= render template: "account/questions/invitated_questions" %>
+      </div>
+      <div class="tab-pane" id="tab_default_4">
+        <!-- 用来render第4个tab -->
+        <%= render template: "account/users/my_subscriptions" %>
+      </div>
+    </div>
+  </div>
+</div>

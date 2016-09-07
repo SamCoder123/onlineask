@@ -25,6 +25,8 @@ Rails.application.routes.draw do
       get :tags_guide
       get :replyers_guide
       get :faq
+      get :about
+      get :contact
     end
   end
 

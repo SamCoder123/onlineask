@@ -5,7 +5,6 @@
     .simple_form input { border: 1px solid #e5e5e5;}
     .simple_form textarea { border: 1px solid #e5e5e5;}
     .simple_form label { color: #373a3c;font-size: 12px;}
-
 </style>
 
 <script type="text/javascript">
@@ -13,14 +12,39 @@ $(function(){
   $('.ui.dropdown').dropdown({
     allowAdditions: false
   });
+
+  $('[data-toggle="popover"]').popover({
+    html : true,
+    content: function() {
+      return $("#popover_div").html();
+    }
+  });
 });
 </script>
+
+<div id="popover_div" style="display:none"> 如何提问能获得更好的答案？
+  <ol>
+    <li>增加悬赏</li>
+    <li>邀请别人</li>
+    <li>在描述中介绍自己的情况</li>
+  </ol>
+
+  如何获得更多偷听？
+  <ol>
+    <li>标题具体（写明地区、学校等）</li>
+    <li>得到理想答案后尽快确认赞赏</li>
+    <li>在描述中介绍自己的情况</li>
+  </ol>
+</div>
 
 <div class="panel panel-default">
     <%= simple_form_for [:account,@question] do |f| %>
     <div class="form-inputs">
 
       <label style="margin-bottom:15px;color:#4285f4;font-size:14px;">快速提问，有什么问题想问学霸？</label>
+
+        <a tabindex="0" class="pull-right" role="button" data-toggle="popover" data-placement="left"
+          title='提问指南' > <i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></a>
 
         <%= f.input :title,label: false,placeholder:"问题主题",style:"margin-top:15px"  %>
         <%= f.input :description,label: false,placeholder:"问题说明"%>
@@ -39,12 +63,37 @@ $(function(){
           <div class="special">
             <%= f.input :downpayment,label:false, input_html: { min: '0', step: 'any',class: "special-size"}%>
           </div>
+        <%#= render "account/users/payment_modal", locals: {f: f}%>
 
-          <div class="special">
-            <%= f.button :submit,value:"提 问",class: "btn btn-primary" %>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">请选择支付方式</h4>
+              </div>
+              <div class="modal-body">
+
+                <%= f.input :payment_method, collection: [["支付宝", "<i class='fa fa-credit-card-alt' aria-hidden='true'></i> &nbsp 支付宝".html_safe], ["微信支付", "<i class='fa fa-weixin' aria-hidden='true'></i> &nbsp 微信".html_safe]], value_method: :first, label_method: :last, as: :radio_buttons, label: false, checked: "支付宝", item_wrapper_class: "radio-inline set-margin-top-10px" %>
+              </div>
+              <div class="modal-footer">
+                <span class="special pull-right">
+                  <%= f.button :submit,value:"确认支付",class: "btn btn-primary btn-sm" %>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-    </div>
 
+        <!-- Button trigger modal -->
+        <div class="special">
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+            提问
+          </button>
+          <%#= f.button :submit,value:"提 问",class: "btn btn-primary" %>
+        </div>
+    </div>
+  </div>
     <% end %>
 </div>
