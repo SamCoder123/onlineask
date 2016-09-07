@@ -90,11 +90,11 @@ Rails.application.configure do
     config.auth_token = ENV["TWILIO_TOKEN"]
   end
 
-  config.action_mailer.default_url_options = { :host => 'sheltered-wildwood-83104.herokuapp.com'}
+# config.action_mailer.default_url_options = { :host => 'sheltered-wildwood-83104.herokuapp.com'}
 
-config.action_mailer.delivery_method = :smtp
+# config.action_mailer.delivery_method = :smtp
 
-config.action_mailer.smtp_settings = {
+ActionMailer::Base.smtp_settings = {
 address: "smtp.sendgrid.net",
 port: 25,
 domain: "heroku.com",
