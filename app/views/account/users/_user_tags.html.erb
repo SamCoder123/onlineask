@@ -1,7 +1,6 @@
-<div class="" style="margin-bottom:25px">
-  <h2 class="user-tag-title">我的标签</h2>
-  <hr/>
+<div class="" style="margin-bottom:25px;">
   <% current_user.tags.each do |tag| %>
-      <span class="user-tag-bg"><%= tag.name %></span>
+      <label style="margin-right:15px">我的标签:</label>
+      <%= link_to(tag.name,reply_account_user_path(current_user,tag_name: tag.name),class: "btn btn-default btn-sm") %>
   <% end %>
 </div>
