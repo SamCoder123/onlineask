@@ -1,6 +1,5 @@
 <div class="index-line">
-  <span class="pull-left">热门问题</span>
-
+  <!-- <span class="pull-left">热门问题</span> -->
   <div class="dropdown clearfix pull-right">
 
      <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -17,14 +16,16 @@
 
      </ul>
   </div>
+
+  <%= render "account/users/user_tags" %>
 </div>
 
 <div>
   <ul class="list-group index-ul">
-    <%= render :partial => "/account/questions/each_question", :collection => @questions, :as => :question %>
+    <%= render :partial => "/account/questions/each_question", :collection => @refer_questions, :as => :question %>
   </ul>
 
   <div class="text-center">
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @refer_questions, renderer: BootstrapPagination::Rails %>
   </div>
 </div>
