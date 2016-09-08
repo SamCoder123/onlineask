@@ -14,3 +14,8 @@ end
 #  updated_at  :datetime         not null
 #  like_answer :integer
 #
+# Indexes
+#
+#  index_like_answers_on_answer_id  (answer_id)
+#  index_like_answers_on_user_id    (user_id)
+#

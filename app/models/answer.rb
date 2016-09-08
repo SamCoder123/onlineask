@@ -56,3 +56,8 @@ end
 #  created_on    :date
 #  updated_on    :date
 #
+# Indexes
+#
+#  index_answers_on_question_id  (question_id)
+#  index_answers_on_user_id      (user_id)
+#
