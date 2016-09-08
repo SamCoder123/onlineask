@@ -1,53 +1,20 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-default ">
+
 
     <% if @invitated_questions.size==0 %>
       <div class="panel-body">
         <span class="label label-default">暂时没有邀请</span>
       </div>
     <% else %>
-    <% @invitated_questions.each do |question| %>
 
-      <div class="panel-heading">
-        <h3 class="panel-title">问题主题：<%= question.title %> 提问人：<%= question.user.name %></h3>
+    <div>
+      <ul class="list-group index-ul">
+        <%= render :partial => "/account/questions/each_invitated_q", :collection => @invitated_questions, :as => :invitated_question %>
+      </ul>
+
+      <div class="text-center">
+        <%= will_paginate @invitated_questions, renderer: BootstrapPagination::Rails %>
       </div>
-
-      <div class="panel-body">
-        <p>问题描述：<%= sanitize(question.description) %></p>
-      </div>
-
-      <% answers = current_user.answers.where(question_id:question.id) %>
-      <% answers.each do |answer| %>
-        <div class="panel panel-info ">
-          <div class="panel-heading">
-            <h3 class="panel-title">我的回答</ h3>
-          </div>
-            <div class="panel-body invitated_users_answer">
-              <%= answer.content %>
-
-              <div class="total clearfix">
-                <span class="pull-right">
-                  <%= link_to("编辑答案", edit_account_answer_path(answer), class:"btn btn-danger btn-xs") %>
-                  <%#= render :partial => "account/questions/show_button_base_status", :locals => { :question => question, :answer => answer } %>
-                </span>
-              </div>
-            </div>
-       </div>
-      <% end %>
-
-      <div class="total clearfix btn-right-bottom">
-        <span class="pull-right">
-          <% if question.status=='open' %>
-            <%= link_to '回答' ,new_question_answer_path(question),class:"btn btn-xs btn-danger" %>
-          <% else %>
-            <%= link_to('问题已关闭', 'javascript:void(0)',class:"btn btn-xs btn-default",disabled:true)%>
-          <% end %>
-        </span>
-      </div>
-
-    <% end %>
-    <% end %>
     </div>
-  </div>
-</div>
+
+
+    <% end %>
