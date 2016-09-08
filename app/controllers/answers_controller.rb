@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!, only: %i(create new edit update destroy)
   before_action :check_question_and_require_not_self_reply, only: %i(new edit create update)
   before_action :set_answer, only: %i(show edit update destroy)
-
+  layout 'user_center', only: %i(new)
   def new
     @answer = Answer.new
     @question = Question.find(params[:question_id])

@@ -7,7 +7,7 @@
     <div class="media-body">
       <span class="media-meta pull-right">阅读数：<%= question.watches %></span>
       <p><%= question.user.name %></p>
-      <p class=""><%= link_to(question.title,account_question_path(question))  %></p>
+      <p class=""><%= link_to(question.title, question_path(question))  %></p>
       <p>
         <%= sanitize(question.description) %>
       </p>
