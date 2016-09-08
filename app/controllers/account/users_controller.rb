@@ -104,7 +104,9 @@ class Account::UsersController < AccountController
 
     # 为你推荐
     @refer_questions = @refer_questions.paginate(:page => params[:page], :per_page => 6)
-    @invitated_questions = current_user.invitated_questions
+
+    # 被邀请回答的问题
+    @invitated_questions = current_user.invitated_questions.paginate(:page => params[:page], :per_page => 6)
   end
 
   def withdraw_edit
