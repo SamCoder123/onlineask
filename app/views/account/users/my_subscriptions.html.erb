@@ -1,7 +1,13 @@
-<div class="row">
+<div>
+  <ul class="list-group index-ul">
+    <%= render partial: 'account/users/each_answer_subs', collection: @answer_subscriptions, as: :answer %>
+  </ul>
+  <div class="text-center">
+    <%= will_paginate @answer_subscriptions, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>
 
-    <h2>我偷听的答案</h2>
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <% collapse_num = 0 %>
       <% @answer_subscriptions.each do |answer| %>
         <% collapse_num += 1 %>
@@ -38,9 +44,4 @@
           </div>
         </div>
       <% end %>
-    </div>
-    <div class="text-center">
-     <%= will_paginate @answer_subscriptions, class:"paginate"%>
-    </div>
-
-</div>
+    </div> -->

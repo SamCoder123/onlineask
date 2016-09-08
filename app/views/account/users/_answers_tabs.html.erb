@@ -38,9 +38,12 @@
     </div>
   </div>
 <!-- </div> -->
+<%= content_for :handwrite_javascript do %>
+
 <script type="text/javascript">
 $(function(){
   var tab_id = "<%= @tab_id %>";
   $("#"+tab_id).click();
 });
 </script>
+<% end %>
