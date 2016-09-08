@@ -2,7 +2,10 @@
   <div class="panel-heading">
     <h3 class="panel-title">主题：<%= @question.title %>
       <span class="pull-right">
-        提问人：<%= gravatar_tag @question.user.email, :size => 30, :default => avatar_url %><%= link_to @question.user.name, exhibition_profile_account_user_path(@question.user) %>
+        提问人：
+      <!-- <%= gravatar_tag @question.user.email, :size => 30, :default => avatar_url %> -->
+      <%= render_head_image_30(@question.user) %>
+      <%= link_to @question.user.name, exhibition_profile_account_user_path(@question.user) %>
       </span>
     </h3>
   </div>
