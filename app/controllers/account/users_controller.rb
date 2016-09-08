@@ -109,6 +109,8 @@ class Account::UsersController < AccountController
 
     # 被邀请回答的问题
     @invitated_questions = current_user.invitated_questions.opening.paginate(:page => params[:page], :per_page => 6)
+
+    @tab_id = params[:tab_id]
   end
 
   def withdraw_edit

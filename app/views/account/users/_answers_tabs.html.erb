@@ -6,18 +6,18 @@
 <!-- <div class="tabbable-panel"> -->
   <div class="tabbable-line">
     <ul class="nav nav-tabs ">
-      <li class="active"  id="nav_1">
-        <a href="#tab_default_1" data-toggle="tab">
+      <li class="active" >
+        <a href="#tab_default_1" data-toggle="tab"  id="nav_1">
           为你推荐
         </a>
       </li>
-      <li id="nav_2">
-        <a href="#tab_default_2" data-toggle="tab" >
+      <li>
+        <a href="#tab_default_2" data-toggle="tab"  id="nav_2">
           问题广场
         </a>
       </li>
-      <li id="nav_3">
-        <a href="#tab_default_3" data-toggle="tab" >
+      <li>
+        <a href="#tab_default_3" data-toggle="tab"  id="nav_3" >
           被邀请回答
         </a>
       </li>
@@ -38,3 +38,9 @@
     </div>
   </div>
 <!-- </div> -->
+<script type="text/javascript">
+$(function(){
+  var tab_id = "<%= @tab_id %>";
+  $("#"+tab_id).click();
+});
+</script>
