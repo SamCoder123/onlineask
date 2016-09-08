@@ -40,13 +40,14 @@ class Account::UsersController < AccountController
 
   def show_profile
     drop_breadcrumb("首页")
-
     # 所有问题questions进行排序
     questions = case params[:order]
       when "by_question_created_at"
         Question.published.recent.includes(:answers)
+      when "by_downpayment"
+        Question.published.where(status: "open").order("downpayment DESC")
       when "by_question_like_count"
-        Question.published.includes(:answers).sort_by{|question| question.question_likes.count}.reverse
+        Question.published.includes(:answers)
       else
         Question.published.includes(:answers)
       end
@@ -54,9 +55,12 @@ class Account::UsersController < AccountController
     if current_user.tags.size.positive?
       tags = current_user.tag_list
       questions = questions.tagged_with(tags, :any => true)
+      if params[:order] == "by_question_like_count"
+        questions = questions.sort_by{|question| question.question_likes.count}.reverse
+      end
     end
 
-    @questions = questions.paginate(:page => params[:page], :per_page => 6)
+    @refer_questions = questions.paginate(:page => params[:page], :per_page => 6)
 
     @users = User.where.not(id:current_user)
     @tags = Tag.all
@@ -70,24 +74,43 @@ class Account::UsersController < AccountController
     # 所有问题questions进行排序
     questions = case params[:order]
       when "by_question_created_at"
-        Question.published.recent.includes(:answers)
+        Question.published.recent.includes(:answers).opening
       when "by_question_like_count"
-        Question.published.includes(:answers).sort_by{|question| question.question_likes.count}.reverse
+        Question.published.includes(:answers).opening
+      when "by_downpayment"
+        Question.published.opening.order("downpayment DESC")
       else
-        Question.published.includes(:answers)
+        Question.published.includes(:answers).opening
       end
 
-    if current_user.tags.size.positive?
-      tags = current_user.tag_list
-      questions = questions.tagged_with(tags, :any => true)
-    end
-
+    # 问题广场
     @questions = questions.paginate(:page => params[:page], :per_page => 6)
 
-    @users = User.where.not(id:current_user)
-    @tags = Tag.all
-    @question = Question.new
-    @invitated_questions = current_user.invitated_questions
+    @refer_questions = questions.opening
+
+    flag = true
+    filters = params[:tag_name]
+    unless filters.nil?
+      @refer_questions = @refer_questions.tagged_with(filters, :any => true)
+      flag = false
+    end
+
+    if flag && current_user.tags.size.positive?
+      tags = current_user.tag_list
+      @refer_questions = @refer_questions.tagged_with(tags, :any => true)
+    end
+
+    if params[:order] == "by_question_like_count"
+      @refer_questions = @refer_questions.sort_by{|question| question.question_likes.count}.reverse
+    end
+
+    # 为你推荐
+    @refer_questions = @refer_questions.paginate(:page => params[:page], :per_page => 6)
+
+    # 被邀请回答的问题
+    @invitated_questions = current_user.invitated_questions.opening.paginate(:page => params[:page], :per_page => 6)
+
+    @tab_id = params[:tab_id]
   end
 
   def withdraw_edit
@@ -138,7 +161,7 @@ class Account::UsersController < AccountController
     @questions = @user.questions.paginate(page: params[:page], per_page: 5)
     @best_answers = @answers.where(answer_status: "best_answer")
     @answer_subscriptions = @user.subscribing_answers.order("id DESC").paginate(page: params[:page], per_page: 5)
-    @invitated_questions = @user.invitated_questions
+    @invitated_questions = @user.invitated_questions.paginate(page: params[:page], per_page: 5)
 
     render layout: "profile"
   end
@@ -174,7 +197,7 @@ class Account::UsersController < AccountController
       else
         User.where(role: "replyer")
       end
-    @replyers = replyers.paginate(:page => params[:page], :per_page => 9)
+    @replyers = replyers.paginate(:page => params[:page], :per_page => 6)
   end
 
   def follow_show

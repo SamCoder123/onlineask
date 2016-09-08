@@ -2,7 +2,7 @@
   <table>
     <tr>
       <td>
-          <%= gravatar_tag current_user.email, :size => 25, :default => avatar_url %>
+          <%= render_head_image_30(current_user) %>
       </td>
       <td>
         <%= active_link_to("提问",show_profile_account_user_path(current_user)) %>

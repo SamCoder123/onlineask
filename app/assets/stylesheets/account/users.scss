@@ -192,16 +192,25 @@ a.active {
     width: 260px;
     height: 320px;
     padding: 2px;
-    margin: 0 40px 50px 0px;
+    margin: 0 20px 50px 0px;
+    // border: solid 1px #4285f4;
+    background-color: #FFF;
+    border-radius: 4px;
+    text-align: center;
 }
 
-.replyer-image{
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
+.replyer-image-bg{
+  background-color: #427fed;
+  height: 150px;
   text-align: center;
-  display: block;
-  margin: auto;
+  padding-top: 10px;
+}
+
+.replyer-text{
+  padding-top: 20px;
+  p{
+    line-height: 25px;
+  }
 }
 
 .index-profix-button{
@@ -524,6 +533,47 @@ a.active {
   font-weight: bold;
 }
 
+
+
+// exhibition page
+.exhibition-navbar-bg{
+  background-color: #4285f4;
+  border-radius: 2px;
+  height: 280px;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  p {
+    font-size: 16px;
+    color: #FFF;
+    padding-top: 20px;
+  }
+}
+
+.exhibition-title-font{
+  font-size: 18px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  color: black;
+}
+
+.exhibition-list-font{
+  font-size: 14px;
+  padding-left: 10px;
+  color: black;
+  span{
+  line-height: 1.7;
+  }
+}
+
+.exhibition-link-font{
+  font-size: 14px;
+  text-align: center;
+  a {color: #4285f4;}
+}
 // 回答列表tab的css
 
 /* Tabs panel */
@@ -623,6 +673,7 @@ a.active {
   padding-left: 10px;
   color: black;
 }
+
 
 .exhibition-list-font{
   font-size: 14px;
