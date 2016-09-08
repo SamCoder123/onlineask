@@ -11,7 +11,7 @@ class Account::QuestionsController < AccountController
       when "by_question_created_at"
         Question.published.recent
       when "by_downpayment"
-        Question.published.where(status: "open").order("downpayment DESC")
+        Question.published.opening.order("downpayment DESC")
       when "by_question_like_count"
         Question.published.sort_by{|question| question.question_likes.count}.reverse
       else
