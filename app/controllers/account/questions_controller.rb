@@ -191,6 +191,16 @@ class Account::QuestionsController < AccountController
     redirect_to :back
   end
 
+  def filter_by_tag
+    @refer_questions = Question.published.includes(:answers).opening
+    filters = params[:tag_name]
+    unless filters.nil?
+      @refer_questions = @refer_questions.tagged_with(filters, :any => true)
+    end
+    @refer_questions = @refer_questions.paginate(:page => params[:page], :per_page => 6)
+    render json: @refer_questions
+  end
+
 
   private
 

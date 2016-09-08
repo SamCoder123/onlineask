@@ -1,41 +1,42 @@
 <div class="" style="margin-bottom:25px;">
   <% current_user.tags.each do |tag| %>
-      <% path = reply_account_user_path(current_user,tag_name: tag.name) %>
-      <label style="margin-right:15px" id="myTags" onclick="getList('<%=path%>','nav_1')">我的标签: <%= tag.name %></label>
+      <% path = filter_by_tag_account_questions_path(tag_name: tag.name) %>
+      我的标签:
+      <label class="label label-success" style="margin-right:15px" id="myTags" onclick="getList('<%=path%>')"><%= tag.name %></label>
       <%#= link_to(tag.name,reply_account_user_path(current_user,tag_name: tag.name),class: "btn btn-default btn-sm") %>
   <% end %>
 </div>
 
 
 <script type="text/javascript">
-  function getList(path,id){
-    var content = "";
+  function getList(path){
     $.ajax({
       url: path,
       method: "get",
-      data: {query_type: id},
       dataType: "json",
       success: function(data){
-        $(".index-ul").html();
-        showTabContent(id, data)
+        if (data.length>0) {
+          showTabContent(data);
+        }
       }
     });
   }
 
-  function showTabContent(){ (id, data) {
-    content = "<table class='table table-stripe'> <thead><th>#</th><th>项目名称</th><th>项目合计募得金额</th><th>项目待支付金额</th><th>账单生成时间</th><th>操作</th></thead><tbody>"
+  function showTabContent(data){
+    // 这里我想套用 app/views/account/questions/_each_question.html.erb 这个partial中的html代码
+    // 应该怎样引用这个partial
+    var content = "";
+    $(".index-ul").html();
+    content = "<table class='table table-stripe'> <thead><th>#</th><th>问题主题</th><th>问题描述</th></thead><tbody>"
     $.each(data, function(index, item) {
       content += "<tr>" +
         "<td>" + (index + 1) + "</td>" +
-        "<td>"  + item.project_name +
-        render_bill_state(item) +  "</td>" +
-        "<td> ¥" + item.amount + "</td>" +
-        "<td>" + render_fund_rate(item.amount) + "</td>" +
-        "<td>" + item.created_at  + "</td>" +
-        "<td>" + render_payment_button(item.bill_status, item.project_id)
-      "</td></tr>";
-    })
-      content += "</tbody></table>"
+        "<td>"  + item.title +  "</td>" +
+        "<td>" + item.discription + "</td>"
+      "</tr>";
+    });
+    content += "</tbody></table>"
 
-    $("#" + id).append(content); }
+    $(".index-ul").html(content);
+  }
 </script>

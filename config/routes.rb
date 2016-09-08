@@ -66,6 +66,7 @@ Rails.application.routes.draw do
       end
       collection do
         get :invitated_questions
+        get :filter_by_tag
       end
     end
 
