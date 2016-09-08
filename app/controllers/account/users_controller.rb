@@ -193,7 +193,7 @@ class Account::UsersController < AccountController
       else
         User.where(role: "replyer")
       end
-    @replyers = replyers.paginate(:page => params[:page], :per_page => 9)
+    @replyers = replyers.paginate(:page => params[:page], :per_page => 6)
   end
 
   def follow_show
