@@ -13,20 +13,16 @@
         <%= blog.title %>
           <div class="pull-right">
             <%= blog.created_at_formate %>
+            <%= link_to '编辑', edit_account_blog_path(blog),class: "btn btn-xs btn-primary" %>
+            <%= link_to '删除', account_blog_path(blog),method: :delete,class: "btn btn-xs btn-primary" %>
           </div>
       </div>
     </div>
-  </div>
-
-  <div class="panel-body">
-    <p><%= sanitize(blog.description) %></p>
-    <div class="total clearfix">
-      <span class="pull-right">
-        <%= link_to '编辑', edit_account_blog_path(blog),class: "btn btn-sm btn-primary" %>
-        <%= link_to '删除', account_blog_path(blog),method: :delete,class: "btn btn-sm btn-primary" %>
-      </span>
+    <div class="panel-body">
+      <p><%= sanitize(blog.description) %></p>
     </div>
   </div>
+
 <% end %>
 <div class="text-center">
   <%= will_paginate @blogss, renderer: BootstrapPagination::Rails %>
