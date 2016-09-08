@@ -53,6 +53,8 @@ end
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  answer_status :string           default("pending")
+#  created_on    :date
+#  updated_on    :date
 #
 # Indexes
 #
