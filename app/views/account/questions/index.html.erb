@@ -1,50 +1,45 @@
-<div style="padding-left:0">
-  <div class="panel panel-default" style="background:transparent;">
-    <div class="panel-body">
-      问题列表
-      <div class="dropdown clearfix pull-right">
-         <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-           排序
-          <span class="caret"></span>
-         </button>
-          <%= render "account/questions/sort_questions" %>
-      </div>
 
-  <table class="table table-filter">
-    <% @questions.each do |question| %>
-    <tr>
-      <td>
-        <div class="media">
-          <div class="pull-left">
-            <%= render_head_image_30(question.user) %>
-            <!-- <%= gravatar_tag question.user.email, :size => 30, :default => avatar_url %> -->
-          </div>
-            <div class="media-body">
-              <span class="media-meta pull-right">阅读数：<%= question.watches %></span>
-              <p><%= question.user.name %></p>
-              <p class=""><%= link_to(question.title,account_question_path(question))  %></p>
-                <%= sanitize(question.description) %>
-              </p>
-
-              <p class="summary">
-                <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= question.answers.count %></span>
-                <span class="media-meta pull-left" style="padding-right:20px">悬赏金额 ¥ <%= question.downpayment %></span>
-                <span class="media-meta pull-left"><%= question.created_at_formate %></span>
-                <span class="pull-right"><%= link_to("我要偷听",question,class:"btn btn-default btn-xs") %></span>
-                <span class="pull-right"><%= link_to("我要回答",new_question_answer_path(question),class:"btn btn-default btn-xs") %></span>
-              </p>
-
-            </div>
-          </div>
-        </td>
-    </tr>
-    <% end %>
-  </table>
-
-    <div class="text-center">
-      <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+<div class="index-line">
+  <span class="pull-left">问题列表</span>
+    <div class="dropdown clearfix pull-right">
+       <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+         排序
+        <span class="caret"></span>
+       </button>
+        <%= render "account/questions/sort_replyer_questions" %>
     </div>
-    </div>
-  </div>
+</div>
 
+<ul class="list-group index-ul">
+  <% @questions.each do |question| %>
+  <li class="list-group-item">
+      <div class="media">
+        <div class="pull-left">
+          <%= render_head_image_30(question.user) %>
+          <!-- <%= gravatar_tag question.user.email, :size => 30, :default => avatar_url %> -->
+        </div>
+          <div class="media-body">
+            <span class="media-meta pull-right">阅读数：<%= question.watches %></span>
+            <p><%= question.user.name %></p>
+            <p class=""><%= link_to(question.title,account_question_path(question))  %></p>
+              <%= sanitize(question.description) %>
+            </p>
+
+            <p class="summary">
+              <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= question.answers.count %></span>
+              <span class="media-meta pull-left" style="padding-right:20px">悬赏金额 ¥ <%= question.downpayment %></span>
+              <span class="media-meta pull-left"><%= question.created_at_formate %></span>
+              <span class="pull-right"><%= link_to("我要偷听",question,class:"btn btn-default btn-xs") %></span>
+              <span class="pull-right"><%= link_to("我要回答",new_question_answer_path(question),class:"btn btn-default btn-xs") %></span>
+            </p>
+
+          </div>
+        </div>
+
+  </li>
+  <% end %>
+</ul>
+
+<div class="text-center">
+  <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
 </div>

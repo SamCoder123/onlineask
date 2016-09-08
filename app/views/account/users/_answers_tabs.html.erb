@@ -24,15 +24,15 @@
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="tab_default_1">
-        <!-- 用来render第一个tab内容 -->
+        <!-- 用来render第一个tab：为你推荐的内容 -->
         <%= render "account/users/index_questions" %>
       </div>
       <div class="tab-pane" id="tab_default_2">
-        <!-- 用来render第二个tab -->
+        <!-- 用来render第二个tab：问题广场 -->
         <%= render template: "account/questions/index" %>
       </div>
       <div class="tab-pane" id="tab_default_3">
-        <!-- 用来render第三个tab -->
+        <!-- 用来render第三个tab：被邀请的回答 -->
         <%= render template: "account/questions/invitated_questions" %>
       </div>
     </div>
