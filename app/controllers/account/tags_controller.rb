@@ -6,6 +6,8 @@ class Account::TagsController < AccountController
   def index
     drop_breadcrumb("首页")
     drop_breadcrumb("兴趣标签")
+    set_page_title_and_description("#{current_user.name}的兴趣标签","首页 我的兴趣标签")
+
     @tags = current_user.tags
     @hot_tags = Tag.where.not(id:@tags)
   end
