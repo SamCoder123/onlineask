@@ -86,6 +86,6 @@ end
 #  watches        :integer          default(0)
 #  payment_method :string
 #  is_paid        :boolean          default(FALSE)
-#  created_on     :datetime
-#  updated_on     :datetime
+#  created_on     :date
+#  updated_on     :date
 #
