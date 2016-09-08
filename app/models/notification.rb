@@ -21,3 +21,9 @@ end
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
+# Indexes
+#
+#  index_notifications_on_actor_id       (actor_id)
+#  index_notifications_on_notifiable_id  (notifiable_id)
+#  index_notifications_on_recipient_id   (recipient_id)
+#

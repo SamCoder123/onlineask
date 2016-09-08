@@ -89,3 +89,7 @@ end
 #  created_on     :date
 #  updated_on     :date
 #
+# Indexes
+#
+#  index_questions_on_user_id  (user_id)
+#

@@ -54,3 +54,8 @@ end
 #  updated_at    :datetime         not null
 #  answer_status :string           default("pending")
 #
+# Indexes
+#
+#  index_answers_on_question_id  (question_id)
+#  index_answers_on_user_id      (user_id)
+#
