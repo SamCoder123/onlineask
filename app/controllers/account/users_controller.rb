@@ -27,13 +27,12 @@ class Account::UsersController < AccountController
 
   def edit_profile
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("个人资料", index_profile_account_user_path(current_user))
     drop_breadcrumb("修改个人资料")
   end
 
   def update_profile
     if @user.update(params_user)
-      redirect_to index_profile_account_user_path
+      redirect_to exhibition_profile_account_user_path
     else
       render :edit_profile
     end

@@ -1,17 +1,13 @@
+<li class="list-group-item">
 
-  <ul class="list-group index-ul">
-      <% @answers.each do |answer| %>
-
-        <li class="list-group-item">
-
-          <div class="media">
-            <div class="pull-left">
-              <%= render_head_image_30(answer.user) %>
-            </div>
+        <div class="media">
+          <div class="pull-left">
+            <%= render_head_image_30(answer.user) %>
+          </div>
             <div class="media-body">
-              <span class="media-meta pull-right">赞数：<%= answer.like_answers.size %></span>
+              <span class="media-meta pull-right">偷听数：<%= answer.answer_subscriptions.size %></span>
               <p><%= answer.user.name %></p>
-              <p class=""><%= link_to(answer.question.title,account_question_path(answer.question))  %></p>
+              <p><%= link_to(answer.question.title, account_question_path(answer.question))  %></p>
               <p>
                 <%= sanitize(answer.question.description) %>
               </p>
@@ -28,10 +24,5 @@
               </p>
             </div>
           </div>
-        </li>
 
-      <% end %>
-    </ul>
-    <div class="text-center">
-     <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
-    </div>
+    </li>
