@@ -54,4 +54,5 @@ end
 #  updated_at                 :datetime         not null
 #  answer_status              :string           default("pending")
 #  answer_subscriptions_count :integer
+#  like_answers_count         :integer
 #
