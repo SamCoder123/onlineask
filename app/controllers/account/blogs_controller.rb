@@ -4,7 +4,7 @@ class Account::BlogsController < AccountController
   def index
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的动态")
-    @blogs = Blog.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 6)
+    @blogs = Blog.all.order("id DESC").paginate(:page => params[:page], :per_page => 6)
   end
 
   def new
