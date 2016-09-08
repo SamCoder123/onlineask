@@ -192,16 +192,25 @@ a.active {
     width: 260px;
     height: 320px;
     padding: 2px;
-    margin: 0 40px 50px 0px;
+    margin: 0 20px 50px 0px;
+    // border: solid 1px #4285f4;
+    background-color: #FFF;
+    border-radius: 4px;
+    text-align: center;
 }
 
-.replyer-image{
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
+.replyer-image-bg{
+  background-color: #427fed;
+  height: 150px;
   text-align: center;
-  display: block;
-  margin: auto;
+  padding-top: 10px;
+}
+
+.replyer-text{
+  padding-top: 20px;
+  p{
+    line-height: 25px;
+  }
 }
 
 .index-profix-button{

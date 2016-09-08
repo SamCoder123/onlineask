@@ -17,15 +17,20 @@
   <div class="row">
   <% @replyers.each do |replyer| %>
     <div class="col-md-3 col-sm-3 col-xs-2 replyer">
-      <div class="thumbnail replyer">
-        <div class="replyer-image">
+    <%= link_to(exhibition_profile_account_user_path(replyer)) do%>
+      <div class="replyer-image-bg">
           <%= render_head_image_130(replyer) %>
-        </div>
-        <div class="caption">
-          <h5><%= link_to(exhibition_profile_account_user_path(replyer)) do%>
-            <%= replyer.name %></h5>
-            <p>留学学校：<%= replyer.school %><br />
-            被关注：<%= replyer.fans_num %> | 回答：<%= replyer.answers.count %></p>
+      </div>
+        <div class="replyer-text">
+          <p>
+            <strong><%= replyer.name %></strong> <br />
+            <span><%= replyer.country %></span>
+            <span style="padding:0 10px">|</span>
+            <span><%= replyer.school %></span> <br />
+            <span>被关注：<%= replyer.fans_num %></span>
+            <span style="padding:0 10px">|</span>
+            <span>回答：<%= replyer.answers.count %></span>
+          </p>
             <% end %>
           <p>
             <span><%= link_to("向Ta提问", new_account_question_path, class:"btn btn-success btn-xs") %></span>
@@ -36,7 +41,6 @@
             <% end %>
           </p>
         </div>
-      </div>
     </div>
   <% end %>
   </div>
