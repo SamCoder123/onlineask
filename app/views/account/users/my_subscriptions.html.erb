@@ -1,37 +1,13 @@
+<div>
+  <ul class="list-group index-ul">
+    <%= render partial: 'account/users/each_answer_subs', collection: @answer_subscriptions, as: :answer %>
+  </ul>
+  <div class="text-center">
+    <%= will_paginate @answer_subscriptions, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>
 
-    <h2>我偷听的答案</h2>
-
-    <li class="list-group-item">
-      <% @answer_subscriptions.each do |answer| %>
-        <div class="media">
-          <div class="pull-left">
-            <%= render_head_image_30(answer.user) %>
-          </div>
-            <div class="media-body">
-              <span class="media-meta pull-right">偷听数：<%= answer.counter_cache %></span>
-              <p><%= answer.user.name %></p>
-              <p><%= link_to(answer.question.title, account_question_path(answer.question))  %></p>
-              <p>
-                <%= sanitize(answer.question.description) %>
-              </p>
-
-              <p class="summary">
-                <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= answer.question.answers.count %></span>
-                <%= render_question_closed?(answer.question) %>
-                <span class="media-meta pull-left" style="padding-right:20px">标签：
-                  <%= render :partial => "/account/tags/tag_list", :collection => answer.question.tags, :as => :tag %>
-                </span>
-                <span class="media-meta pull-left"><%= answer.question.created_on %></span>
-                <span class="pull-right"><%= link_to("回 答",new_question_answer_path(answer.question),class:"btn btn-primary btn-xs") %></span>
-                <span class="pull-right"><%= link_to("偷 听",answer.question,class:"btn btn-default btn-xs") %></span>
-              </p>
-            </div>
-          </div>
-        <% end %>
-    </li>
-
-
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <% collapse_num = 0 %>
       <% @answer_subscriptions.each do |answer| %>
         <% collapse_num += 1 %>
@@ -68,8 +44,4 @@
           </div>
         </div>
       <% end %>
-    </div>
-
-    <div class="text-center">
-     <%= will_paginate @answer_subscriptions, class:"paginate"%>
-    </div>
+    </div> -->

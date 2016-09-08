@@ -35,11 +35,11 @@ module Account::UsersHelper
     user.follow_relationships.where(follower_id: current_user).size
   end
 
-  def render_whose_sub(user, current_user)
+  def render_who(user, current_user)
     if user == current_user
-      "我的偷听"
+      "我"
     else
-      "Ta的偷听"
+      "Ta"
     end
   end
 end
