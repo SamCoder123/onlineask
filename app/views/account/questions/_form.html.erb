@@ -19,6 +19,7 @@
 <% end %>
 
 <%= javascript_include_tag 'account/questions', 'data-turbolinks-track': 'reload' %>
+<%= content_for :handwrite_javascript do %>
 <script type="text/javascript">
 $(function(){
   initUIDropdown();
@@ -26,3 +27,4 @@ $(function(){
   initEditor();
 });
 </script>
+<% end %>

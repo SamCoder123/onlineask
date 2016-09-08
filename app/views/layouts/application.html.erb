@@ -6,8 +6,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'simplemde.min' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'simplemde.min' %>
   </head>
 
   <body>
@@ -20,5 +18,9 @@
         <%= render "common/footer" %>
       </div>
     </div>
+
+    <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'simplemde.min' %>
+    <%= yield :handwrite_javascript %>
   </body>
 </html>
