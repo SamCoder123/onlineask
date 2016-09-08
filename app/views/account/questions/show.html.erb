@@ -16,7 +16,7 @@
 <% if @question.status == "open" %>
   <div class="addtional-info-border">
     <p>
-      您可以调整悬赏和邀请，让您更快得到回答：
+      您可以调整悬赏金额和邀请学霸，让您更快得到回答：
     </p>
     <%= simple_form_for @question, url: refine_reward_account_question_path(@question) do |form| %>
       <%#= form.input :downpayment, label:"调整悬赏", class:"radio-inline"%>

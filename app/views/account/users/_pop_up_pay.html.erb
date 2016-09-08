@@ -11,6 +11,8 @@
         <%= f.input :payment_method, collection: [["支付宝", "<i class='fa fa-credit-card-alt' aria-hidden='true'></i> &nbsp 支付宝".html_safe], ["微信支付", "<i class='fa fa-weixin' aria-hidden='true'></i> &nbsp 微信".html_safe]], value_method: :first, label_method: :last, as: :radio_buttons, label: false, checked: "支付宝", item_wrapper_class: "radio-inline set-margin-top-10px" %>
       </div>
       <div class="modal-footer">
+
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
         <span class="special">
           <%= f.button :submit,value:"确认支付",class: "btn btn-primary btn-sm" %>
         </span>
