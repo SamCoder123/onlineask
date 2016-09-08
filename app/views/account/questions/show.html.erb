@@ -49,7 +49,16 @@
               <%= render :partial => "account/questions/show_button_base_status", :locals => { :question => @question, :answer => answer } %>
             </span>
             <span class="pull-right">
-            <div class="bshare-custom"><div class="bsPromo bsPromo2"></div><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到微信" class="bshare-weixin"></a><a title="分享到豆瓣" class="bshare-douban"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+            <div class="bshare-custom">
+               <div class="bsPromo bsPromo2"></div>
+                <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+                <a title="分享到微信" class="bshare-weixin"></a>
+                <a title="分享到豆瓣" class="bshare-douban"></a>
+                <a title="分享到QQ空间" class="bshare-qzone"></a>
+                <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+               </div>
+                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script>
+                <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
           </span>
           </div>
         </div>
@@ -90,10 +99,10 @@
 </div>
 
 <%= javascript_include_tag 'account/questions', 'data-turbolinks-track': 'reload' %>
-
+<%= content_for :handwrite_javascript do %>
 <script type="text/javascript">
-
-$(function(){
-  initUIDropdown();
-});
+  $(function(){
+    initUIDropdown();
+  });
 </script>
+<% end %>

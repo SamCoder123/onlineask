@@ -1,3 +1,4 @@
+<%= content_for :handwrite_javascript do %>
 <script type="text/javascript">
 $(function() {
   $('[data-toggle="popover"]').popover({
@@ -8,11 +9,9 @@ $(function() {
   });
 });
 </script>
-
+<% end %>
 <div class="col-md-12">
   <%= render "questions/question_info_panel" %>
-
-
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">回答者列表

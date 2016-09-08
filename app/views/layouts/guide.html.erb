@@ -7,8 +7,6 @@
     <%= stylesheet_link_tag    'guides', media:'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'simplemde.min' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'simplemde.min' %>
   </head>
   <body>
     <div class="container-fluid" id="wrap">
@@ -16,5 +14,11 @@
         <%= yield %>
       </div>
     </div>
+
+    <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'simplemde.min' %>
+
+    <%= yield :handwrite_javascript %>
+
   </body>
 </html>
