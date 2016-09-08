@@ -8,7 +8,7 @@ class Account::QuestionsController < AccountController
 
     # 所有问题questions进行排序
     questions = case params[:order]
-      when "by_question_created_at"
+      when "by_question_created_on"
         Question.published.recent
       when "by_downpayment"
         Question.published.opening.order("downpayment DESC")
