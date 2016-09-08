@@ -2,7 +2,9 @@
 <div class="card hovercard">
   <div class="cardheader"></div>
   <div class="avatar">
-    <%= render_head_image_100(current_user) %>
+    <%= link_to(exhibition_profile_account_user_path(current_user)) do %>
+      <%= render_head_image_100(current_user) %>
+    <% end %>
   </div>
   <div class="info">
     <div class="col-md-3 col-xs-3 col-sm-3 desc desc-normal">
