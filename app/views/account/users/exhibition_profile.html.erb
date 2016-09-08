@@ -25,15 +25,27 @@
     <div class="tab-content">
       <div class="tab-pane active" id="tab_default_1">
         <!-- 用来render第一个tab内容 -->
-        <%= render "my_questions" %>
+        <% if @questions.count.zero? %>
+          <small class="small-tips"><%= render_who(@user, current_user) %>还没有提出问题</small>
+        <% else %>
+          <%= render "my_questions" %>
+        <% end %>
       </div>
       <div class="tab-pane" id="tab_default_2">
         <!-- 用来render第二个tab -->
-        <%= render "my_answers" %>
+        <% if @answers.count.zero? %>
+          <small class="small-tips"><%= render_who(@user, current_user) %>还没有回答过问题</small>
+        <% else %>
+          <%= render "my_answers" %>
+        <% end %>
       </div>
       <div class="tab-pane" id="tab_default_3">
         <!-- 用来render第三个tab -->
-        <%= render template: "account/questions/invitated_questions" %>
+        <% if @invitated_questions.count.zero? %>
+          <small class="small-tips"><%= render_who(@user, current_user) %></small>
+        <% else %>
+          <%= render template: "account/questions/invitated_questions" %>
+        <% end %>
       </div>
       <div class="tab-pane" id="tab_default_4">
         <!-- 用来render第4个tab -->
