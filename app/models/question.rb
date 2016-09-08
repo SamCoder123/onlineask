@@ -17,7 +17,7 @@ class Question < ApplicationRecord
 
   scope :published, -> { where(is_hidden: false) }
   scope :recent, -> { order("id DESC") }
-
+  scope :opening, -> { where(status: "open") }
   acts_as_taggable_on :tags
 
   def updated_at_formate
