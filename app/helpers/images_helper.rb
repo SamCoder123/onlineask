@@ -25,9 +25,9 @@ module ImagesHelper
 
     def render_head_image_20(user)
       if user.image.present?
-        image_tag user.image, class:"img-circle profile_image_20"
+        image_tag(user.image, class:"img-circle profile_image_20",:style => "height:20px !important;")
       else
-        image_tag("/default_image.png", class: "img-circle profile_image_20")
+        image_tag("/default_image.png", class: "img-circle profile_image_20",:style => "height:20px !important;")
       end
     end
 end
