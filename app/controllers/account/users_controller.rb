@@ -55,8 +55,10 @@ class Account::UsersController < AccountController
     filters = params[:tag_name]
     # 如果按标签筛选，则只筛选这个标签下的问题，否则过滤用户关注标签下的问题
     if filters.nil?
-      tags = current_user.tag_list
-      questions = questions.tagged_with(tags, any: true)
+      if current_user.tags.size.positive?
+        tags = current_user.tag_list
+        questions = questions.tagged_with(tags, any: true)
+      end
     else
       questions = questions.tagged_with(filters, any: true)
     end
@@ -97,8 +99,10 @@ class Account::UsersController < AccountController
 
     filters = params[:tag_name]
     if filters.nil?
-      tags = current_user.tag_list
-      @refer_questions = @refer_questions.tagged_with(tags, any: true)
+      if current_user.tags.size.positive?
+        tags = current_user.tag_list
+        @refer_questions = @refer_questions.tagged_with(tags, any: true)
+      end
     else
       @refer_questions = @refer_questions.tagged_with(filters, any: true)
     end
