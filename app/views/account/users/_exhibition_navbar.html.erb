@@ -2,8 +2,14 @@
   <div class="">
     <%= render_head_image_130(@user) %>
     <p>
-      <%= @user.name %>
+      <%= @user.name %><br />
+      <% if !current_user.already_follower?(@user)  %>
+        <%= link_to("关注", like_account_follow_path(@user),method: :post, class:"btn btn-success btn-sm") %>
+      <% else %>
+        <%= link_to("取消关注", like_account_follow_path(@user),method: :post, class:"btn btn-default btn-sm") %>
+      <% end %>
     </p>
+
   </div>
 
 </div>
