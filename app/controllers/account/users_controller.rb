@@ -52,20 +52,32 @@ class Account::UsersController < AccountController
         Question.published.includes(:answers)
       end
 
-    if current_user.tags.size.positive?
+    flag = true
+    filters = params[:tag_name]
+
+    # 如果按标签筛选，则只筛选这个标签下的问题，否则过滤用户关注标签下的问题
+    if filters.nil?
       tags = current_user.tag_list
       questions = questions.tagged_with(tags, :any => true)
-      if params[:order] == "by_question_like_count"
-        questions = questions.sort_by{|question| question.question_likes.count}.reverse
-      end
+      order_by_question_like_count?
+    else
+      questions = questions.tagged_with(filters, :any => true)
+      order_by_question_like_count?
     end
 
+    # 给用户优先展示的问题列表
     @refer_questions = questions.paginate(:page => params[:page], :per_page => 6)
 
-    @users = User.where.not(id:current_user)
+    # 提问框需要的东西
     @tags = Tag.all
     @question = Question.new
 
+  end
+
+  def order_by_question_like_count?
+    if params[:order] == "by_question_like_count"
+      questions = questions.sort_by{|question| question.question_likes.count}.reverse
+    end
   end
 
   def reply
