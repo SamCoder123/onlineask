@@ -42,4 +42,8 @@ module Account::UsersHelper
       "Ta"
     end
   end
+
+  def render_question_best_answer(question)
+    answer = question.answers.find_by(answer_status: "best_answer")
+  end
 end

@@ -73,6 +73,8 @@ class Account::UsersController < AccountController
     # 提问框需要的东西
     @tags = Tag.all
     @question = Question.new
+
+    @answer_subscription = AnswerSubscription.new
   end
 
   def reply
