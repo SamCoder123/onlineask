@@ -6,7 +6,7 @@ class WelcomeV1Controller < ApplicationController
   def index
     # @questions = Question.all
 
-    @questions = Question.published.where(status:"closed").order("watches DESC").limit(4)
+    @questions = Question.published.where(status:"closed").order("watches DESC").limit(4).includes(:answers)
 
     if current_user
       if current_user.admin?

@@ -1,3 +1,4 @@
+<%= content_for :handwrite_javascript do %>
 <script type="text/javascript">
 $(function() {
   $('[data-toggle="popover"]').popover({
@@ -8,16 +9,14 @@ $(function() {
   });
 });
 </script>
-
+<% end %>
 <div class="col-md-12">
   <%= render "questions/question_info_panel" %>
-
-
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">回答者列表
           <% if @question.status == "closed" %>
-            <small class="small-tips"><i class="glyphicon glyphicon-ok"></i>已选出最佳答案</small></h3>
+            <small class="small-tips pull-right"><i class="glyphicon glyphicon-ok"></i>已选出最佳答案</small></h3>
           <% end %>
       </div>
 

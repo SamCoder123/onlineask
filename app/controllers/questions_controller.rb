@@ -32,8 +32,13 @@ class QuestionsController < ApplicationController
 
   def question_like_up
     @question_like = Question.find(params[:id])
-    @question_like.question_likes.create
-    @user = current_user
+
+    if !current_user.question_already_like?(@question_like)
+      current_user.question_like!(@question_like)
+      flash[:notice] = "想听该问题? 试试偷听功能～"
+    else
+      current_user.question_like_cancle!(@question_like)
+    end
     redirect_to :back
   end
 

@@ -65,6 +65,7 @@ class Question < ApplicationRecord
     self.is_paid = true
     save
   end
+
 end
 
 # == Schema Information

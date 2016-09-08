@@ -16,7 +16,6 @@
 //= require bootstrap/dropdown
 //= require bootstrap/collapse
 //= require semantic-ui
-//= require trix
 //= require notifications
 //= require bootstrap/tab
 //= require bootstrap/tooltip
