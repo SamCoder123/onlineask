@@ -1,6 +1,6 @@
 <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
     <li>
-      <%= link_to("按创建时间", reply_account_user_path(current_user,:order => "by_question_created_at", tab_id: "nav_2")) %>
+      <%= link_to("按创建时间", reply_account_user_path(current_user,:order => "by_question_created_on", tab_id: "nav_2")) %>
     </li>
     <li>
        <%= link_to("按想听人数", reply_account_user_path(current_user,:order => "by_question_like_count", tab_id: "nav_2")) %>
