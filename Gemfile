@@ -60,6 +60,9 @@ gem "aasm"
 # 分页套用bootstrap
 gem 'will_paginate-bootstrap'
 
+gem "seo_helper"
+
+
 group :production do
   gem "pg"
 end

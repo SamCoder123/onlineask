@@ -39,6 +39,15 @@ class ApplicationController < ActionController::Base
     @hot_replyers = User.order("fans_num DESC").limit(6)
   end
 
+  def set_page_title_and_description(title, description)
+    unless title.blank?
+      set_page_title title
+    end
+    unless description.blank?
+      set_page_description description
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
