@@ -6,6 +6,9 @@
       </div>
         <div class="media-body">
           <span class="media-meta pull-right">阅读数：<%= question.watches %></span>
+          <span class="media-meta pull-right" style="padding:0 5px;">|</span>
+          <span class="media-meta pull-right"><%= link_to("想听:#{question.question_likes.count}", question_like_up_question_path(question), method: :post) %></span>
+
           <p><%= question.user.name %></p>
           <p class=""><%= link_to(question.title,account_question_path(question))  %></p>
           <p>
