@@ -1,27 +1,27 @@
 <li class="list-group-item">
 
-    <div class="media">
-      <div class="pull-left">
-        <%= render_head_image_30(question.user) %>
-      </div>
-        <div class="media-body">
-          <span class="media-meta pull-right">阅读数：<%= question.watches %></span>
-          <p><%= question.user.name %></p>
-          <p class=""><%= link_to(question.title,account_question_path(question))  %></p>
-          <p>
-            <%= sanitize(question.description) %>
-          </p>
+  <div class="media">
+    <div class="pull-left">
+      <%= render_head_image_30(question.user) %>
+    </div>
+    <div class="media-body">
+      <span class="media-meta pull-right">阅读数：<%= question.watches %></span>
+      <p><%= question.user.name %></p>
+      <p class=""><%= link_to(question.title,account_question_path(question))  %></p>
+      <p>
+        <%= sanitize(question.description) %>
+      </p>
 
-          <p class="summary">
-            <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= question.answers.count %></span>
-            <%= render_question_closed?(question) %>
-            <span class="media-meta pull-left" style="padding-right:20px">标签：
-              <%= render :partial => "/account/tags/tag_list", :collection => question.tags, :as => :tag %>
-            </span>
-            <span class="media-meta pull-left"><%= question.created_on %></span>
-            <span class="pull-right"><%= link_to("回 答",new_question_answer_path(question),class:"btn btn-primary btn-xs") %></span>
-            <span class="pull-right"><%= link_to("偷 听",question,class:"btn btn-default btn-xs") %></span>
-          </p>
-        </div>
-      </div>
+      <p class="summary">
+        <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= question.answers.count %></span>
+        <%= render_question_closed?(question) %>
+        <span class="media-meta pull-left" style="padding-right:20px">标签：
+          <%= render :partial => "/account/tags/tag_list", :collection => question.tags, :as => :tag %>
+        </span>
+        <span class="media-meta pull-left"><%= question.created_on %></span>
+        <span class="pull-right"><%= link_to("回 答",new_question_answer_path(question),class:"btn btn-primary btn-xs") %></span>
+        <span class="pull-right"><%= link_to("偷 听",question,class:"btn btn-default btn-xs") %></span>
+      </p>
+    </div>
+  </div>
 </li>
