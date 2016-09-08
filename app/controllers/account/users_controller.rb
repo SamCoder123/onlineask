@@ -74,17 +74,19 @@ class Account::UsersController < AccountController
     # 所有问题questions进行排序
     questions = case params[:order]
       when "by_question_created_at"
-        Question.published.recent.includes(:answers)
+        Question.published.recent.includes(:answers).opening
       when "by_question_like_count"
-        Question.published.includes(:answers)
+        Question.published.includes(:answers).opening
+      when "by_downpayment"
+        Question.published.opening.order("downpayment DESC")
       else
-        Question.published.includes(:answers)
+        Question.published.includes(:answers).opening
       end
 
     # 问题广场
     @questions = questions.paginate(:page => params[:page], :per_page => 6)
 
-    @refer_questions = questions.where(status: 'open')
+    @refer_questions = questions.opening
 
     flag = true
     filters = params[:tag_name]
@@ -106,7 +108,9 @@ class Account::UsersController < AccountController
     @refer_questions = @refer_questions.paginate(:page => params[:page], :per_page => 6)
 
     # 被邀请回答的问题
-    @invitated_questions = current_user.invitated_questions.paginate(:page => params[:page], :per_page => 6)
+    @invitated_questions = current_user.invitated_questions.opening.paginate(:page => params[:page], :per_page => 6)
+
+    @tab_id = params[:tab_id]
   end
 
   def withdraw_edit
