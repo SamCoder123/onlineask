@@ -8,7 +8,7 @@ class Account::QuestionsController < AccountController
 
     # 所有问题questions进行排序
     questions = case params[:order]
-      when "by_question_created_at"
+      when "by_question_created_on"
         Question.published.recent
       when "by_downpayment"
         Question.published.opening.order("downpayment DESC")
@@ -165,9 +165,11 @@ class Account::QuestionsController < AccountController
   end
 
   def invitated_questions
-    @invitated_questions = current_user.invitated_questions
+    @invitated_questions = current_user.invitated_questions.paginate(:page => params[:page], :per_page => 6)
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("被邀请的问题")
+    set_page_title_and_description("#{current_user.name}被邀请的问题","首页 被邀请的问题")
+
     render layout: "user_center"
   end
 

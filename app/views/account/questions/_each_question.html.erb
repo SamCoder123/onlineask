@@ -11,9 +11,16 @@
 
           <p><%= question.user.name %></p>
           <p class=""><%= link_to(question.title,account_question_path(question))  %></p>
-          <p>
-            <%= sanitize(question.description) %>
-          </p>
+          <hr/>
+            <!-- <%= sanitize(question.description) %> -->
+            <% question.answers.each do |a| %>
+              <% if a.answer_status.include?("best_answer") %>
+                <p>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                  Best answer:<%= a.content.truncate(100) %>
+                </p>
+              <% end %>
+            <% end %>
 
       <p class="summary">
         <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= question.answers.count %></span>
@@ -30,13 +37,16 @@
 
         <% answer = render_question_best_answer(question) %>
         <% unless answer.nil? %>
-        <% if !current_user.subscribed_answer?(answer) %>
-        <%= render partial: 'account/questions/subscription_pop_up_pay', locals:{answer: answer} %>
-
-          <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#mySubModal" >
-            偷听
-          </button>
+          <% if !current_user.subscribed_answer?(answer) %>
+            <%= render partial: 'account/questions/subscription_pop_up_pay', locals:{answer: answer} %>
+            <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#mySubModal" >
+              偷听
+            </button>
+          <% else %>
+            <small class="small-tips">已偷听</small>
           <% end %>
+        <% else %>
+          <span class="pull-right"><%= link_to("查 看",question,class:"btn btn-default btn-xs") %></span>
           <!-- <span class="pull-right"><%#= link_to("偷 听",subscribe_answers_account_answer_path(answer), method: :post,class:"btn btn-default btn-xs") %></span> -->
         <% end %>
       </p>

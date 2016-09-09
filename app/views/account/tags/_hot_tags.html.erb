@@ -1,7 +1,7 @@
 <li class="list-group-item" style="padding:1em">
   <%= link_to tag.name, account_tag_path(tag) %>
 
-  <span class="label label-success" style="padding: .2em .3em .2em;margin-left:1em;"><%= tag.taggings_count %></span>
+  <span class="label label-success" style="padding: .2em .3em .2em;margin-left:1em;">已有<%= tag.taggings_count %>人关注</span>
   <div class="pull-right">
     <%= link_to "添加",add_tag_account_tag_path(tag),method: :post,class:"btn btn-success btn-xs"%>
   </div>

@@ -16,7 +16,6 @@ class Account::UsersController < AccountController
     @bills = Bill.where(user_id: @user)
 
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("个人资料")
   end
 
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
@@ -25,13 +24,12 @@ class Account::UsersController < AccountController
 
   def edit_profile
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("个人资料", index_profile_account_user_path(current_user))
     drop_breadcrumb("修改个人资料")
   end
 
   def update_profile
     if @user.update(params_user)
-      redirect_to index_profile_account_user_path
+      redirect_to exhibition_profile_account_user_path
     else
       render :edit_profile
     end
@@ -39,10 +37,13 @@ class Account::UsersController < AccountController
 
   def show_profile
     drop_breadcrumb("首页")
+
+    set_page_title_and_description("#{current_user.name}的首页","首页 快速提问")
+
     # 所有问题questions进行排序
     questions =
       case params[:order]
-      when "by_question_created_at"
+      when "by_question_created_on"
         Question.published.recent.includes(:answers)
       when "by_downpayment"
         Question.published.where(status: "open").order("downpayment DESC")
@@ -79,11 +80,12 @@ class Account::UsersController < AccountController
 
   def reply
     drop_breadcrumb("首页")
+    set_page_title_and_description("#{current_user.name}的首页","首页 发现悬赏问题")
 
     # 所有问题questions进行排序
     questions =
       case params[:order]
-      when "by_question_created_at"
+      when "by_question_created_on"
         Question.published.recent.includes(:answers).opening
       when "by_question_like_count"
         Question.published.includes(:answers).opening
@@ -178,12 +180,16 @@ class Account::UsersController < AccountController
   def my_subscriptions
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我偷听的答案")
+    set_page_title_and_description("#{current_user.name}的偷听","首页 我偷听的答案")
+
     @answer_subscriptions = @user.subscribing_answers.order("id DESC").paginate(page: params[:page], per_page: 5) # AnswerSubscription.where(user_id: current_user).order("created_at DESC").paginate(page: params[:page], per_page: 5)
   end
 
   def my_questions_answers
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的问题和回答")
+    set_page_title_and_description("#{current_user.name}的问题和回答","首页 我的问题和回答")
+
     @questions = @user.questions.published.paginate(page: params[:page], per_page: 10)
     @answers = @user.answers.published.paginate(page: params[:page], per_page: 10)
   end
@@ -191,6 +197,7 @@ class Account::UsersController < AccountController
   def wallet
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的钱包")
+    set_page_title_and_description("#{current_user.name}的钱包","首页 我的钱包")
   end
 
   def replyers
@@ -212,6 +219,8 @@ class Account::UsersController < AccountController
   def follow_show
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的关注")
+    set_page_title_and_description("#{current_user.name}的关注","首页 我的关注")
+
     # followers 是关注我的人，followees 是我关注的人
     @followers = FollowRelationship.where(follower_id: @user).paginate(page: params[:page], per_page: 10)
     @followees = FollowRelationship.where(user_id: @user).paginate(page: params[:page], per_page: 10)

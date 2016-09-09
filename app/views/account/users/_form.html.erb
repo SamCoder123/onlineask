@@ -1,17 +1,17 @@
 <div class="" style="margin:30px">
   <%= simple_form_for [:account, @user], url: update_profile_account_user_path, method: :put do |f| %>
   <div class="form-group">
-     <%= f.input :name, required: true, autofocus: true, label:"昵称" %>
-     <%= f.input :role, label:"角色" %>
-     <%= f.input :gender, label:"性别", :collection => [["male", 'male'], ["female", 'female']], :as => :radio_buttons, :item_wrapper_class => 'inline'  %>
-     <%= f.input :description, label:"个人介绍"%>
-      <%= f.input :country, required: true, autofocus: true, label:"留学国家" %>
-     <%= f.input :school, required: true, autofocus: true, label:"留学学校" %>
-     <%= f.input :major, required: true, autofocus: true, label:"专业",input_html: { class: "form-control"} %>
+    上传头像
+    <%= f.file_field :image, label:"上传头像", input_html: { class: "form-control"} %>
+    <%= f.input :name, required: true, autofocus: true, label:"昵称" %>
+    <%= f.input :role, label:"角色" %>
+    <%= f.input :gender, label:"性别", :collection => [["male", 'male'], ["female", 'female']], :as => :radio_buttons  %>
+    <%= f.input :country, required: true, autofocus: true, label:"留学国家" %>
+    <%= f.input :school, required: true, autofocus: true, label:"留学学校" %>
+    <%= f.input :major, required: true, autofocus: true, label:"专业",input_html: { class: "form-control"} %>
     <%= f.input :outside_page_link, autofocus: true, label:"微博／主页" %>
-     上传头像
-     <%= f.file_field :image, label:"上传头像", input_html: { class: "form-control"} %>
-   </div>
+    <%= f.input :description, label:"个人介绍",:input_html => {:rows => 10},placeholder:"写的越详细，越容易被人关注哦～"%>
+  </div>
 
    <div class="form-actions">
      <%= f.submit "Submit", disable_with: "Submiting...", class: "btn btn-primary"%>
