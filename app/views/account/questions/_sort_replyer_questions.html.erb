@@ -1,12 +1,19 @@
 <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
     <li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1adcf77714f7a75ddcac74dbb3eaa0ec631f34b9
       <%= link_to("按创建时间", reply_account_user_path(current_user,:order => "by_question_created_at", tab_id: "nav_2")) %>
     </li>
     <li>
        <%= link_to("按想听人数", reply_account_user_path(current_user,:order => "by_question_like_count", tab_id: "nav_2")) %>
     </li>
     <li>
+<<<<<<< HEAD
        <%= link_to("按悬赏金额(未悬赏问题)", reply_account_user_path(current_user,:order => "by_downpayment", tab_id: "nav_2")) %>
+=======
+       <%= link_to("按悬赏金额", reply_account_user_path(current_user,:order => "by_downpayment", tab_id: "nav_2")) %>
+>>>>>>> 1adcf77714f7a75ddcac74dbb3eaa0ec631f34b9
     </li>
 </ul>
