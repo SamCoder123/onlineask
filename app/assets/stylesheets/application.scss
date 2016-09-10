@@ -35,7 +35,7 @@ html,body{
   min-height: 100%;
 
   position:relative;
-  // padding-bottom 是footer的高度，当footer变化时需要相应改变
+  // margin-bottom 是footer的高度，当footer变化时需要相应改变
   margin-bottom:-153px;
 }
 
