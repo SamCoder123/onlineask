@@ -21,7 +21,6 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "semantic-ui";
-@import "trix";
 
 mark{ background:yellow }
 
@@ -45,6 +44,12 @@ html,body{
 .navbar-bg{
   margin: 0px;
   border-color: transparent;
+}
+
+.navbar-font-index{
+  color: #FFF;
+  font-size: 15px;
+  margin-top: 5px;
 }
 
 .footer-bg{

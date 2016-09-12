@@ -2,11 +2,7 @@
   <div class="container">
     <!-- Brand and toggle get grouped fro better mobile display -->
     <div class="navbar-header">
-<<<<<<< HEAD
-      <a class="navbar-brand" href="<%= show_profile_account_user_path(current_user) %>" style="color:#FFF;letter-spacing: 3px;">Online<span style="color:#4285f4;";>Ask</span></a>
-=======
-      <a class="navbar-brand" href="<%= show_profile_account_user_path(current_user) unless current_user.nil?%>" style="color:#FFF;letter-spacing: 3px;">Online<span style="color:#4285f4;";>Ask</span></a>
->>>>>>> 1adcf77714f7a75ddcac74dbb3eaa0ec631f34b9
+      <a class="navbar-brand" href="<%= show_profile_account_user_path(current_user) unless current_user.nil?%>" style="color:#FFF;letter-spacing: 3px;">约<span style="color:#4285f4;";>霸</span></a>
     </div>
     <!-- Collect the nav links,forms,and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -16,9 +12,9 @@
            <li><%= link_to("注册", new_user_registration_path) %> </li>
            <li><%= link_to("登入", new_user_session_path) %></li>
         <% else %>
-
+          <li> <%= link_to(" 首页", show_profile_account_user_path(current_user), class:"navbar-font-index") %></li>
           <li class="nav-item btn-group" data-behavior="notifications" data-notifications='<%= render template: "notifications/index", formats: [:json] %>'>
-            <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="dropdown-toggle nav-link navbar-font-index" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= fa_icon "bell" %> <span data-behavior="unread-count"></span>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
@@ -29,7 +25,7 @@
            <li class="dropdown">
              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                <%= render_head_image_30(current_user) %>
-               Hi!, <%= current_user.name %>
+               Hi, <%= current_user.name %>
                <b class="caret"></b>
              </a>
 
@@ -37,8 +33,6 @@
                  <% if current_user.admin? %>
                    <li><%= link_to("管理者后台",admin_admins_path)%></li>
                  <% else %>
-                   <li> <%= link_to(" 首页", show_profile_account_user_path(current_user), class: "fa fa-file-o") %></li>
-                    <hr />
                     <li><%= active_link_to " 我的关注", follow_show_account_user_path(current_user),class: "fa fa-heart-o" %></li>
                     <li><%= active_link_to " 我的文章", account_blogs_path, class: "fa fa-pencil-square-o" %></li>
                     <li><%= active_link_to " 我的兴趣标签", account_tags_path, class: "fa fa-tag" %></li>
@@ -47,7 +41,7 @@
                     <li><%= active_link_to " 我的问题与答案", my_questions_answers_account_user_path(current_user), class: "fa fa-comments-o" %></li>
                     <li><%= active_link_to " 被邀请回答的问题", invitated_questions_account_questions_path, class: "fa fa-diamond" %></li>
                     <hr />
-                    <li><%= active_link_to " 个人资料", index_profile_account_user_path(current_user),class: "fa fa-user" %></li>
+                    <li><%= active_link_to " 个人资料", exhibition_profile_account_user_path(current_user),class: "fa fa-user" %></li>
                     <li><%= active_link_to " 我的钱包", wallet_account_user_path(current_user), class: "fa fa-money" %></li>
                  <%end %>
 

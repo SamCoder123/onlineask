@@ -14,3 +14,8 @@ end
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_question_likes_on_question_id  (question_id)
+#  index_question_likes_on_user_id      (user_id)
+#

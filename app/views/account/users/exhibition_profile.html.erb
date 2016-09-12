@@ -42,14 +42,18 @@
       <div class="tab-pane" id="tab_default_3">
         <!-- 用来render第三个tab -->
         <% if @invitated_questions.count.zero? %>
-          <small class="small-tips"><%= render_who(@user, current_user) %></small>
+          <small class="small-tips"><%= render_who(@user, current_user) %>还没有被邀请</small>
         <% else %>
           <%= render template: "account/questions/invitated_questions" %>
         <% end %>
       </div>
       <div class="tab-pane" id="tab_default_4">
         <!-- 用来render第4个tab -->
-        <%= render template: "account/users/my_subscriptions" %>
+        <% if @answer_subscriptions.count.zero? %>
+          <small class="small-tips"><%= render_who(@user, current_user) %>还没有偷听</small>
+        <% else %>
+          <%= render template: "account/users/my_subscriptions" %>
+        <% end %>
       </div>
     </div>
   </div>

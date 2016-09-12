@@ -53,5 +53,22 @@ end
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  answer_status              :string           default("pending")
+<<<<<<< HEAD
 #  answer_subscriptions_count :integer
+=======
+#  created_on                 :date
+#  updated_on                 :date
+#  answer_subscriptions_count :integer
+#  like_answers_count         :integer
+#
+# Indexes
+#
+#  index_answers_on_question_id  (question_id)
+#  index_answers_on_user_id      (user_id)
+#
+# Indexes
+#
+#  index_answers_on_question_id  (question_id)
+#  index_answers_on_user_id      (user_id)
+>>>>>>> 55ac32b474bb2f214a098f58f2dd58472d5e79b5
 #

@@ -1,23 +1,35 @@
 
-  <ul class="list-group">
+  <ul class="list-group index-ul">
       <% @answers.each do |answer| %>
-        <li class="list-group-item" style="padding:1em">
-          <% if answer.answer_subscriptions.count > 0 %>
-            <%= link_to("#{answer.answer_subscriptions.count}人回答过",account_answer_path(answer),class:"btn btn-primary btn-sm") %>
-          <% else %>
-            <span class="label label-default" style="padding:1em;margin-right:16px"><%= answer.answer_subscriptions.count %>人偷听过</span>
-          <% end %>
-          <%= link_to truncate(answer.content, :limit => 10 ),account_answer_path(answer) %>
 
-          <div class="pull-right">
-            <%#= link_to '详情', account_answer_path(answer), class: "btn btn-primary btn-xs" %>
-            <%= link_to '编辑', edit_account_answer_path(answer), class: "btn btn-primary btn-xs" %>
-            <%= link_to '删除', publish_hidden_account_answer_path(answer),method: :post, class: "btn btn-primary btn-xs" %>
-            <%#= link_to(publish_hidden_account_answer_path(answer), method: :post, data: { confirm: 'Are you sure?' } ) do%>
-                  <!-- <i class="fa fa-trash fa-lg" aria-hidden="true"></i> -->
-            <%# end %>
+        <li class="list-group-item">
+
+          <div class="media">
+            <div class="pull-left">
+              <%= render_head_image_30(answer.user) %>
+            </div>
+            <div class="media-body">
+              <span class="media-meta pull-right">赞数：<%= answer.like_answers.size %></span>
+              <p><%= answer.user.name %></p>
+              <p class=""><%= link_to(answer.question.title,account_question_path(answer.question))  %></p>
+              <p>
+                <%= sanitize(answer.question.description) %>
+              </p>
+
+              <p class="summary">
+                <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= answer.question.answers.count %></span>
+                <%= render_question_closed?(answer.question) %>
+                <span class="media-meta pull-left" style="padding-right:20px">标签：
+                  <%= render :partial => "/account/tags/tag_list", :collection => answer.question.tags, :as => :tag %>
+                </span>
+                <span class="media-meta pull-left"><%= answer.question.created_on %></span>
+                <span class="pull-right"><%= link_to("回 答",new_question_answer_path(answer.question),class:"btn btn-primary btn-xs") %></span>
+                <span class="pull-right"><%= link_to("偷 听",answer.question,class:"btn btn-default btn-xs") %></span>
+              </p>
+            </div>
           </div>
         </li>
+
       <% end %>
     </ul>
     <div class="text-center">

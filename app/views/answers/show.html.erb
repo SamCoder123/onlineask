@@ -6,9 +6,9 @@
 
     <div class="panel-body">
       <p>
-        回答内容：<%= @answer.content %>
+        <%= sanitize(@answer.content) %>
       </p>
-      
+
     </div>
 
     <div class="total clearfix">

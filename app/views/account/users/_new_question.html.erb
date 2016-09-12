@@ -6,7 +6,7 @@
     .simple_form textarea { border: 1px solid #e5e5e5;}
     .simple_form label { color: #373a3c;font-size: 12px;}
 </style>
-
+<%= content_for :handwrite_javascript do %>
 <script type="text/javascript">
 $(function(){
   $('.ui.dropdown').dropdown({
@@ -21,7 +21,7 @@ $(function(){
   });
 });
 </script>
-
+<% end %>
 <div id="popover_div" style="display:none"> 如何提问能获得更好的答案？
   <ol>
     <li>增加悬赏</li>

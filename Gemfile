@@ -51,7 +51,6 @@ gem "gravatarify"
 gem "acts-as-taggable-on", "~> 4.0"
 gem "to_words"
 gem "semantic-ui-sass", github: "doabit/semantic-ui-sass"
-gem "trix"
 gem "twilio-ruby", "~> 4.11.1"
 gem "phonelib"
 gem "active_link_to"
@@ -60,6 +59,9 @@ gem "simditor"
 gem "aasm"
 # 分页套用bootstrap
 gem 'will_paginate-bootstrap'
+
+gem "seo_helper"
+
 
 group :production do
   gem "pg"

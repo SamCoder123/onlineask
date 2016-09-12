@@ -1,6 +1,6 @@
 class Account::UsersController < AccountController
-  before_action :find_current_user, only: [:index_profile, :new_profile, :edit_profile, :update_profile, :show_profile, :withdraw_edit, :deposit_edit, :my_questions_answers, :wallet, :follow_show, :reply]
-  before_action :find_page_user, only: [:withdraw_change, :deposit_change, :exhibition_profile, :my_subscriptions]
+  before_action :find_current_user, only: %i(index_profile new_profile edit_profile update_profile show_profile withdraw_edit deposit_edit my_questions_answers wallet follow_show reply)
+  before_action :find_page_user, only: %i(withdraw_change deposit_change exhibition_profile my_subscriptions)
   layout "user_center"
 
   def index_profile
@@ -16,7 +16,6 @@ class Account::UsersController < AccountController
     @bills = Bill.where(user_id: @user)
 
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("个人资料")
   end
 
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
@@ -25,14 +24,12 @@ class Account::UsersController < AccountController
 
   def edit_profile
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("个人资料", index_profile_account_user_path(current_user))
     drop_breadcrumb("修改个人资料")
-
   end
 
   def update_profile
     if @user.update(params_user)
-      redirect_to index_profile_account_user_path
+      redirect_to exhibition_profile_account_user_path
     else
       render :edit_profile
     end
@@ -40,9 +37,13 @@ class Account::UsersController < AccountController
 
   def show_profile
     drop_breadcrumb("首页")
+
+    set_page_title_and_description("#{current_user.name}的首页","首页 快速提问")
+
     # 所有问题questions进行排序
-    questions = case params[:order]
-      when "by_question_created_at"
+    questions =
+      case params[:order]
+      when "by_question_created_on"
         Question.published.recent.includes(:answers)
       when "by_downpayment"
         Question.published.where(status: "open").order("downpayment DESC")
@@ -50,30 +51,39 @@ class Account::UsersController < AccountController
         Question.published.includes(:answers)
       else
         Question.published.includes(:answers)
-      end
+           end
 
-    if current_user.tags.size.positive?
-      tags = current_user.tag_list
-      questions = questions.tagged_with(tags, :any => true)
-      if params[:order] == "by_question_like_count"
-        questions = questions.sort_by{|question| question.question_likes.count}.reverse
+    filters = params[:tag_name]
+    # 如果按标签筛选，则只筛选这个标签下的问题，否则过滤用户关注标签下的问题
+    if filters.nil?
+      if current_user.tags.size.positive?
+        tags = current_user.tag_list
+        questions = questions.tagged_with(tags, any: true)
       end
+    else
+      questions = questions.tagged_with(filters, any: true)
     end
 
-    @refer_questions = questions.paginate(:page => params[:page], :per_page => 6)
+    if params[:order] == "by_question_like_count"
+      questions = questions.sort_by { |question| question.question_likes.count }.reverse
+    end
 
-    @users = User.where.not(id:current_user)
+    # 给用户优先展示的问题列表
+    @refer_questions = questions.paginate(page: params[:page], per_page: 6)
+
+    # 提问框需要的东西
     @tags = Tag.all
     @question = Question.new
-
   end
 
   def reply
     drop_breadcrumb("首页")
+    set_page_title_and_description("#{current_user.name}的首页","首页 发现悬赏问题")
 
     # 所有问题questions进行排序
-    questions = case params[:order]
-      when "by_question_created_at"
+    questions =
+      case params[:order]
+      when "by_question_created_on"
         Question.published.recent.includes(:answers).opening
       when "by_question_like_count"
         Question.published.includes(:answers).opening
@@ -81,34 +91,33 @@ class Account::UsersController < AccountController
         Question.published.opening.order("downpayment DESC")
       else
         Question.published.includes(:answers).opening
-      end
+           end
 
     # 问题广场
-    @questions = questions.paginate(:page => params[:page], :per_page => 6)
+    @questions = questions.paginate(page: params[:page], per_page: 6)
 
-    @refer_questions = questions.opening
+    # 推荐的问题
+    @refer_questions = questions
 
-    flag = true
     filters = params[:tag_name]
-    unless filters.nil?
-      @refer_questions = @refer_questions.tagged_with(filters, :any => true)
-      flag = false
-    end
-
-    if flag && current_user.tags.size.positive?
-      tags = current_user.tag_list
-      @refer_questions = @refer_questions.tagged_with(tags, :any => true)
+    if filters.nil?
+      if current_user.tags.size.positive?
+        tags = current_user.tag_list
+        @refer_questions = @refer_questions.tagged_with(tags, any: true)
+      end
+    else
+      @refer_questions = @refer_questions.tagged_with(filters, any: true)
     end
 
     if params[:order] == "by_question_like_count"
-      @refer_questions = @refer_questions.sort_by{|question| question.question_likes.count}.reverse
+      @refer_questions = @refer_questions.sort_by { |question| question.question_likes.count }.reverse
     end
 
     # 为你推荐
-    @refer_questions = @refer_questions.paginate(:page => params[:page], :per_page => 6)
+    @refer_questions = @refer_questions.paginate(page: params[:page], per_page: 6)
 
     # 被邀请回答的问题
-    @invitated_questions = current_user.invitated_questions.opening.paginate(:page => params[:page], :per_page => 6)
+    @invitated_questions = current_user.invitated_questions.opening.paginate(page: params[:page], per_page: 6)
 
     @tab_id = params[:tab_id]
   end
@@ -169,12 +178,16 @@ class Account::UsersController < AccountController
   def my_subscriptions
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我偷听的答案")
-    @answer_subscriptions = @user.subscribing_answers.order("id DESC").paginate(page: params[:page], per_page: 5) #AnswerSubscription.where(user_id: current_user).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+    set_page_title_and_description("#{current_user.name}的偷听","首页 我偷听的答案")
+
+    @answer_subscriptions = @user.subscribing_answers.order("id DESC").paginate(page: params[:page], per_page: 5) # AnswerSubscription.where(user_id: current_user).order("created_at DESC").paginate(page: params[:page], per_page: 5)
   end
 
   def my_questions_answers
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的问题和回答")
+    set_page_title_and_description("#{current_user.name}的问题和回答","首页 我的问题和回答")
+
     @questions = @user.questions.published.paginate(page: params[:page], per_page: 10)
     @answers = @user.answers.published.paginate(page: params[:page], per_page: 10)
   end
@@ -182,27 +195,30 @@ class Account::UsersController < AccountController
   def wallet
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的钱包")
+    set_page_title_and_description("#{current_user.name}的钱包","首页 我的钱包")
   end
 
   def replyers
-
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("学霸广场")
 
-    replyers = case params[:order]
+    replyers =
+      case params[:order]
       when "by_like_count"
-        User.where(role: "replyer").sort_by{|replyer| FollowRelationship.where(follower_id: replyer).count }.reverse
+        User.where(role: "replyer").sort_by { |replyer| FollowRelationship.where(follower_id: replyer).count }.reverse
       when "by_school"
         User.where(role: "replyer").order("school DESC")
       else
         User.where(role: "replyer")
-      end
-    @replyers = replyers.paginate(:page => params[:page], :per_page => 6)
+           end
+    @replyers = replyers.paginate(page: params[:page], per_page: 6)
   end
 
   def follow_show
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的关注")
+    set_page_title_and_description("#{current_user.name}的关注","首页 我的关注")
+
     # followers 是关注我的人，followees 是我关注的人
     @followers = FollowRelationship.where(follower_id: @user).paginate(page: params[:page], per_page: 10)
     @followees = FollowRelationship.where(user_id: @user).paginate(page: params[:page], per_page: 10)
@@ -217,13 +233,13 @@ class Account::UsersController < AccountController
   def add_tags
     tag_list = params[:tag_list]
     if tag_list
-      tag_list = tag_list.map{|k,v| "#{k}#{v}"}.join(',')
+      tag_list = tag_list.map { |k, v| "#{k}#{v}" }.join(",")
       current_user.tag_list = tag_list
       current_user.save
     end
 
     redirect_to replyers_guide_guides_path
-    #redirect_to show_profile_account_user_path(current_user)
+    # redirect_to show_profile_account_user_path(current_user)
   end
 
   private
@@ -239,5 +255,4 @@ class Account::UsersController < AccountController
   def find_page_user
     @user = User.find(params[:id])
   end
-
 end
