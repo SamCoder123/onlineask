@@ -10,7 +10,6 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'account/users', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 
   </head>
@@ -32,7 +31,10 @@
       <div class="push"></div>
     </div>
 
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <%= yield :handwrite_javascript %>
+
     <div class="row footer">
       <%= render "common/footer" %>
     </div>

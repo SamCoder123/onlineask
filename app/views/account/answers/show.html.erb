@@ -17,8 +17,9 @@
     </div>
     <div class="total clearfix btn-right-bottom">
         <span class="pull-right">
-  
-          <%= link_to '编辑', edit_account_answer_path(@answer), class: "btn btn-primary btn-xs" %>
+          <% if render_user_auth?(current_user,@answer.user) %>
+            <%= link_to '编辑', edit_account_answer_path(@answer), class: "btn btn-primary btn-xs" %>
+          <% end %>
         </span>
     </div>
   </div>
