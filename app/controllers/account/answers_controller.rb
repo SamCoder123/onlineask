@@ -79,6 +79,9 @@ class Account::AnswersController < AccountController
       return
     end
     if current_user.subscribe!(@answer)
+      @answer_subscription = @answer.answer_subscriptions.where(user_id: current_user).first
+      @answer_subscription.payment_method = params[:answer_subscription][:payment_method]
+      @answer_subscription.save
       RewardAnswerSubscription.new(current_user, @answer.user, @answer.question.user, @answer).perform!
       flash[:notice] = "可以偷听答案了！"
     else
@@ -98,4 +101,8 @@ class Account::AnswersController < AccountController
   def answer_params
     params.require(:answer).permit(:content)
   end
+
+  # def answer_subscription_params
+  #   params.require(:answer_subscription).permit(:payment_method)
+  # end
 end

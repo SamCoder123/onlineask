@@ -1,6 +1,6 @@
 class LikeAnswer < ApplicationRecord
   belongs_to :user
-  belongs_to :answer, counter_cache: true
+  belongs_to :answer #, counter_cache: true
 end
 
 # == Schema Information
