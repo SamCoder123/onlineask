@@ -1,56 +1,27 @@
-<div class="row">
-  <div class="col-md-10">
 
-    <div class="panel panel-default">
-      <div class="panel-heading">我的回答</div>
+<div class="panel panel-default">
+  <div class="panel-heading">我的回答</div>
 
-      <ul class="list-group">
-        <% @answers.each do |answer| %>
+  <ul class="list-group">
+    <% @answers.each do |answer| %>
 
-          <li class="list-group-item" style="padding:1em">
-            <span class="label label-default" style="padding:1em;margin-right:16px"><%= answer.answer_subscriptions.count %>人偷听过</span>
+      <li class="list-group-item" style="padding:1em">
+        <span class="label label-default" style="padding:1em;margin-right:16px"><%= answer.answer_subscriptions.count %>人偷听过</span>
 
-            <%= link_to truncate(answer.content, :limit => 10 ),account_answer_path(answer) %>
+        <%= link_to truncate(answer.content, :limit => 10 ),account_answer_path(answer) %>
 
-            <div class="pull-right">
-              <%#= link_to '详情', account_answer_path(answer), class: "btn btn-primary btn-xs" %>
-              <%= link_to '编辑', edit_account_answer_path(answer), class: "btn btn-primary btn-xs" %>
-              <%= link_to '删除', publish_hidden_account_answer_path(answer),method: :post, class: "btn btn-primary btn-xs" %>
-              <%#= link_to(publish_hidden_account_answer_path(answer), method: :post, data: { confirm: 'Are you sure?' } ) do%>
-                    <!-- <i class="fa fa-trash fa-lg" aria-hidden="true"></i> -->
-              <%# end %>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-      <div class="text-center">
-       <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
-      </div>
-    </div>
-
-    <!-- <h4>我的回答</h4>
-    <table class="table table-stripped">
-      <thead>
-        <tr>
-          <th width="60%">回答内容</th>
-          <th class="text-center" colspan="3" width="20%">操作</th>
-          <th class="text-center">有多少人偷听</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @answers.each do |answer| %>
-          <tr>
-            <td><%= truncate(answer.content, :limit => 10 ) %></td>
-            <td><%= link_to '详情', account_answer_path(answer), class: "btn btn-primary btn-xs" %></td>
-            <td><%= link_to '编辑', edit_account_answer_path(answer), class: "btn btn-primary btn-xs" %></td>
-            <td><%= link_to(publish_hidden_account_answer_path(answer), method: :post, data: { confirm: 'Are you sure?' } ) do%>
-                  <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                <% end %>
-            </td>
-            <td class="text-center"><%= answer.answer_subscriptions.count %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table> -->
+        <div class="pull-right">
+          <%#= link_to '详情', account_answer_path(answer), class: "btn btn-primary btn-xs" %>
+          <%= link_to '编辑', edit_account_answer_path(answer), class: "btn btn-primary btn-xs" %>
+          <%= link_to '删除', publish_hidden_account_answer_path(answer),method: :post, class: "btn btn-primary btn-xs" %>
+          <%#= link_to(publish_hidden_account_answer_path(answer), method: :post, data: { confirm: 'Are you sure?' } ) do%>
+                <!-- <i class="fa fa-trash fa-lg" aria-hidden="true"></i> -->
+          <%# end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <div class="text-center">
+   <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
   </div>
 </div>

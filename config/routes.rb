@@ -98,6 +98,7 @@ Rails.application.routes.draw do
 
       collection do
         get :replyers
+        get :show_profile
       end
     end
 

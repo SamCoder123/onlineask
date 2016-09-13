@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_breadcrumbs
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :store_current_location, :unless => :devise_controller?
 
   def require_is_admin
     unless current_user.admin?
@@ -67,7 +68,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
-  def after_sign_in_path_for(resource_or_scope)
-    show_profile_account_user_path(current_user)
+  private
+
+  def store_current_location
+    if request.url == root_url
+      store_location_for(:user, show_profile_account_users_url)
+    end
   end
+
 end
