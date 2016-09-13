@@ -1,5 +1,5 @@
 module Account::AnswersHelper
-  def render_user_auth?(current_user,user)
+  def render_user_auth?(user)
     current_user && current_user == user
   end
 

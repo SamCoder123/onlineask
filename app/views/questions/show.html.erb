@@ -66,9 +66,11 @@ $(function() {
                     </div>
                   <% end %>
                 <% else %>
-                  <%= link_to('我要偷听',  subscribe_answers_account_answer_path(answer), method: :post, class: "btn btn-sm btn-default pull-right") %>
+                  <%= link_to('偷听最佳答案',  subscribe_answers_account_answer_path(answer), method: :post, class: "btn btn-sm btn-default pull-right") %>
                 <% end %>
                 <br>
+              <% else %>
+                <%= link_to('偷听',  subscribe_answers_account_answer_path(answer), method: :post, class: "btn btn-sm btn-default pull-right") %>
               <% end %>
             <hr>
             <% end %>
