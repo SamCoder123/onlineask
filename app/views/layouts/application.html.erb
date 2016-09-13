@@ -15,10 +15,12 @@
         <%= render "common/flashes" %>
         <%= render_breadcrumb %>
         <%= yield %>
-        <%= render "common/footer" %>
-      </div>
+        <div class="push"></div>
+      </div>  
     </div>
-
+    <div class="footer">
+      <%= render "common/footer" %>
+    </div>
     <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'simplemde.min' %>
     <%= yield :handwrite_javascript %>
