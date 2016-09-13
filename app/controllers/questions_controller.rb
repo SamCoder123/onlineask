@@ -57,6 +57,11 @@ class QuestionsController < ApplicationController
     @replyers = replyers.paginate(page: params[:page], per_page: 6)
   end
 
+  def show_replyer
+    set_page_title_and_description("学霸广场", "学霸广场 美国、欧洲、日本名校生解答申请问题")
+    @user = User.find(params[:id])
+  end
+
   def question_like_up
     @question_like = Question.find(params[:id])
 
