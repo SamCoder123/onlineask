@@ -44,10 +44,8 @@
             </button>
           <% else %>
             <small class="small-tips">已偷听</small>
+            <%= link_to("查 看",account_answer_path(answer),class:"btn btn-default btn-xs pull-right") %>
           <% end %>
-        <% else %>
-          <span class="pull-right"><%= link_to("查 看",question,class:"btn btn-default btn-xs") %></span>
-          <!-- <span class="pull-right"><%#= link_to("偷 听",subscribe_answers_account_answer_path(answer), method: :post,class:"btn btn-default btn-xs") %></span> -->
         <% end %>
       </p>
     </div>
