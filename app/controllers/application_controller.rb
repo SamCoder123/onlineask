@@ -48,6 +48,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def exhibition_profile_data
+    @followers = FollowRelationship.where(follower_id: @user)
+    @followings = @user.followees
+    # @same_followees = current_user.followees.where(follower_id: @followings)
+    @answers = @user.answers.paginate(page: params[:page], per_page: 5)
+    @questions = @user.questions.paginate(page: params[:page], per_page: 5)
+    @best_answers = @answers.where(answer_status: "best_answer")
+    @answer_subscriptions = @user.subscribing_answers.order("id DESC").paginate(page: params[:page], per_page: 5)
+    @invitated_questions = @user.invitated_questions.paginate(page: params[:page], per_page: 5)
+
+    render layout: "profile"
+  end
+
   protected
 
   def configure_permitted_parameters
