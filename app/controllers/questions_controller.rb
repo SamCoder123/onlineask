@@ -58,10 +58,9 @@ class QuestionsController < ApplicationController
   end
 
   def show_replyer
-    set_page_title_and_description("学霸广场", "学霸广场 美国、欧洲、日本名校生解答申请问题")
-
     @user = User.find(params[:user_id])
     exhibition_profile_data
+    set_page_title_and_description("#{@user.name}的主页", "#{@user.description}")
   end
 
   def question_like_up
