@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
     collection do
       get :search
+      get :public_replyers
     end
 
     resources :answers
