@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    drop_breadcrumb("Home", root_path)
+    drop_breadcrumb("首页", show_profile_account_users_path(current_user))
     drop_breadcrumb(@question.title)
     @question.watches_counter!
   end
