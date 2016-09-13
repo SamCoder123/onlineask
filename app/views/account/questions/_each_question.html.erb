@@ -22,7 +22,6 @@
               <% end %>
             <% end %>
 
-
       <p class="summary">
         <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= question.answers.count %></span>
         <%= render_question_closed?(question) %>
@@ -31,7 +30,25 @@
         </span>
         <span class="media-meta pull-left"><%= question.created_on %></span>
         <span class="pull-right"><%= link_to("回 答",new_question_answer_path(question),class:"btn btn-primary btn-xs") %></span>
-        <span class="pull-right"><%= link_to("偷 听",question,class:"btn btn-default btn-xs") %></span>
+
+        <!-- 偷听支付 -->
+        <%#= render "account/users/pop_up_pay" locals: {}%>
+
+
+        <% answer = render_question_best_answer(question) %>
+        <% unless answer.nil? %>
+          <% if !current_user.subscribed_answer?(answer) %>
+            <%= render partial: 'account/questions/subscription_pop_up_pay', locals:{answer: answer} %>
+            <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#mySubModal" >
+              偷听
+            </button>
+          <% else %>
+            <small class="small-tips">已偷听</small>
+          <% end %>
+        <% else %>
+          <span class="pull-right"><%= link_to("查 看",question,class:"btn btn-default btn-xs") %></span>
+          <!-- <span class="pull-right"><%#= link_to("偷 听",subscribe_answers_account_answer_path(answer), method: :post,class:"btn btn-default btn-xs") %></span> -->
+        <% end %>
       </p>
     </div>
   </div>
