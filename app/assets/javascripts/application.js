@@ -15,14 +15,16 @@
 //= require bootstrap/alert
 //= require bootstrap/dropdown
 //= require bootstrap/collapse
-//= require semantic-ui
-//= require notifications
 //= require bootstrap/tab
 //= require bootstrap/tooltip
 //= require bootstrap/popover
-//= require simditor
 //= require bootstrap-sprockets
-//= require questions
+//= require semantic-ui
+//= require notifications
+
+//= require simditor
+
+//= require account/questions
 
 $(function() {
     $('a[disabled=disabled]').click(function(event){

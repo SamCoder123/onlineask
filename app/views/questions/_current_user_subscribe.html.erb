@@ -2,13 +2,5 @@
   <%= link_to('偷听',  subscribe_answers_account_answer_path(answer), method: :post, class: "btn btn-sm btn-default pull-right") %>
   <% # TODO : 需處理未登入的顯示 %>
 <% else %>
-  <span class="pull-right">
-    
-    <a tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-placement="left"
-        title='回答者-<%= answer.user.name %>:' >查看已付费偷听</a>
-  </span>
-  <div id="popover_content_wrapper" style="display: none">
-    <p><%= truncate(answer.content, limit: 20) %></p>
-    <%= link_to("查看完整答案", my_subscriptions_account_user_path(current_user)) %>
-  </div>
+  <%= link_to("查看已付费偷听",account_answer_path(answer),class:"btn btn-primary btn-sm pull-right") %>
 <% end %>
