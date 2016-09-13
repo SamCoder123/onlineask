@@ -40,6 +40,23 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def public_replyers
+    drop_breadcrumb("Landing Page", root_path)
+    drop_breadcrumb("学霸广场")
+    set_page_title_and_description("学霸广场", "学霸广场 美国、欧洲、日本名校生解答申请问题")
+
+    replyers =
+      case params[:order]
+      when "by_like_count"
+        User.where(role: "replyer").sort_by { |replyer| FollowRelationship.where(follower_id: replyer).count }.reverse
+      when "by_school"
+        User.where(role: "replyer").order("school DESC")
+      else
+        User.where(role: "replyer")
+           end
+    @replyers = replyers.paginate(page: params[:page], per_page: 6)
+  end
+
   def question_like_up
     @question_like = Question.find(params[:id])
 
