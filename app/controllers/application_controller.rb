@@ -58,10 +58,8 @@ class ApplicationController < ActionController::Base
   private
 
   def store_current_location
-    if request.url.to_s == root_url.to_s
+    if request.url == root_url
       store_location_for(:user, show_profile_account_users_url)
-    else
-      store_location_for(:user, request.url)
     end
   end
 
