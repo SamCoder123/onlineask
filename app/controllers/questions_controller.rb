@@ -5,9 +5,8 @@ class QuestionsController < ApplicationController
   layout "public_pages",except: [:search]
 
   def index
-    drop_breadcrumb("所有问题")
-    # @questions = Question.published
-    # @questions = Question.published.last(3)
+    drop_breadcrumb("问题广场")
+    set_page_title_and_description("问题广场", "问题列表 美国、欧洲、日本等众多留学问题")
     questions = case params[:order]
       when "by_question_created_on"
         Question.published.recent
@@ -25,6 +24,7 @@ class QuestionsController < ApplicationController
   def show
     drop_breadcrumb("Home", root_path)
     drop_breadcrumb(@question.title)
+    set_page_title_and_description("留学问题: #{@question.title}", "#{@question.description}")
     @question.watches_counter!
   end
 
