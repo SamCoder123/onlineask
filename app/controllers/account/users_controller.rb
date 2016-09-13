@@ -16,9 +16,6 @@ class Account::UsersController < AccountController
     @bills = Bill.where(user_id: @user)
 
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("个人资料")
-    set_page_title_and_description("#{current_user.name}的个人资料","首页 我的资料")
-
   end
 
   # edit_profile，用来完善user的具体信息，user必须已经完成user_registration和new_user_session
@@ -46,7 +43,7 @@ class Account::UsersController < AccountController
     # 所有问题questions进行排序
     questions =
       case params[:order]
-      when "by_question_created_at"
+      when "by_question_created_on"
         Question.published.recent.includes(:answers)
       when "by_downpayment"
         Question.published.where(status: "open").order("downpayment DESC")
@@ -86,7 +83,7 @@ class Account::UsersController < AccountController
     # 所有问题questions进行排序
     questions =
       case params[:order]
-      when "by_question_created_at"
+      when "by_question_created_on"
         Question.published.recent.includes(:answers).opening
       when "by_question_like_count"
         Question.published.includes(:answers).opening

@@ -28,11 +28,12 @@
           <%= render "account/users/user_center_right_sidebar" %>
         </div>
       </div>
-      <div class="row">
-        <%= render "common/footer" %>
-      </div>
+      <div class="push"></div>
     </div>
 
     <%= yield :handwrite_javascript %>
+    <div class="row footer">
+      <%= render "common/footer" %>
+    </div>
   </body>
 </html>
