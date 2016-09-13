@@ -35,8 +35,8 @@ module Account::UsersHelper
     user.follow_relationships.where(follower_id: current_user).size
   end
 
-  def render_who(user, current_user)
-    if user == current_user
+  def render_who(user)
+    if current_user && user == current_user
       "我"
     else
       "Ta"
