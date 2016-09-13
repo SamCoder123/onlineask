@@ -2,6 +2,10 @@
 <html>
   <head>
     <title>Onlineask</title>
+    <%= render_page_title_tag %>
+    <%= render_page_description_meta_tag %>
+    <%= render_page_keywords_meta_tag %>
+    <link rel="shortcut icon" href="/default_image.png">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'simplemde.min' %>
@@ -16,7 +20,7 @@
         <%= render_breadcrumb %>
         <%= yield %>
         <div class="push"></div>
-      </div>  
+      </div>
     </div>
     <div class="footer">
       <%= render "common/footer" %>
