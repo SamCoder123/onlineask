@@ -1,15 +1,25 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i(show edit update destroy)
-  before_action :authenticate_user!, only: %i(create new edit update destroy question_like_up show)
+  # before_action :authenticate_user!, only: %i(create new edit update destroy question_like_up show)
   before_action :validate_search_key, only: [:search]
-  layout "user_center",except: [:search]
+  layout "public_pages",except: [:search]
 
   def index
-    @questions = Question.all
     drop_breadcrumb("所有问题")
-    @questions = Question.published
-    @questions = Question.published.last(3)
+    # @questions = Question.published
+    # @questions = Question.published.last(3)
+    questions = case params[:order]
+      when "by_question_created_on"
+        Question.published.recent
+      when "by_downpayment"
+        Question.published.opening.order("downpayment DESC")
+      when "by_question_like_count"
+        Question.published.sort_by{|question| question.question_likes.count}.reverse
+      else
+        Question.published
+      end
 
+    @questions = questions.paginate(:page => params[:page], :per_page => 6)
   end
 
   def show

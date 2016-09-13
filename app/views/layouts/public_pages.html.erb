@@ -10,8 +10,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'account/users', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-
   </head>
 
   <body>
@@ -21,11 +19,13 @@
         <%= render "common/flashes" %>
         <%= render_breadcrumb %>
         <div class="col-md-9 col-sm-8 col-xs-12">
-          <%= render "account/users/user_center_navbar" %>
+
           <%= yield %>
         </div>
         <div class="col-md-3 col-sm-4 hidden-xs">
-          <%= render "account/users/user_center_right_sidebar" %>
+
+          <%= render "account/users/hot_questions" %>
+          <%= render "account/users/hot_replyers" %>
         </div>
       </div>
       <div class="push"></div>

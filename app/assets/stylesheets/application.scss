@@ -35,8 +35,12 @@ html,body{
   min-height: 100%;
 
   position:relative;
-  // padding-bottom 是footer的高度，当footer变化时需要相应改变
-  padding-bottom:153px;
+  // margin-bottom 是footer的高度，当footer变化时需要相应改变
+  margin-bottom:-153px;
+}
+
+.footer, .push{
+  height: 153px;
 }
 
 .invitated_users_answer{ border-bottom: 1px solid #999;}
@@ -55,7 +59,7 @@ html,body{
 .footer-bg{
   padding: 35px 0 20px 0;
   background-color: #333333;
-  position:absolute;
+  position: relevant;
   bottom:0px;
   width: 100%;
   margin: 0;
@@ -128,4 +132,8 @@ html,body{
 .btn-default {
   border-color: #4285f4;
   border-radius: 4px;
+}
+
+.logo{
+  margin-top:10px;
 }
