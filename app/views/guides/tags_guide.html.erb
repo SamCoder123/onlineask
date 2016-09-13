@@ -1,16 +1,11 @@
 <%= form_for [:account, current_user], url: add_tags_account_user_path(current_user), method: :post do |f| %>
   <% @tags.each do |tag| %>
-		<label for="default<%= tag.id %>" class="btn btn-default img-size">
+    <!-- <label for="default<%= tag.id %>" class="btn btn-default img-size">  -->
+		<label for="default<%= tag.id %>" class="btn btn-default">
       <%= tag.name %>
-      <% case when tag.name=='美国' %>
-      <img class="img-responsive" src="/tags/america.png">
-      <% when tag.name=='新加坡' %>
-      <img class="img-responsive" src="/tags/singapore.png">
-      <% when tag.name=='日本' %>
-      <img class="img-responsive" src="/tags/japan.png">
-      <% else %>
-        <img class="img-responsive" src="/tags/singapore.png">
-      <%end %>
+
+      <!-- <img class="img-responsive" src="/tags/america.png"> -->
+
       <input name="tag_list[]" value="<%= tag.name %>" type="checkbox" id="default<%= tag.id %>" class="badgebox">
       <span class="badge"><i class="fa fa-check fa-lg" aria-hidden="true"></i></span>
     </label>
