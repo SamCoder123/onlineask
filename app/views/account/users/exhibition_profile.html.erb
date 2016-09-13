@@ -28,7 +28,7 @@
         <% if @questions.count.zero? %>
           <small class="small-tips"><%= render_who(@user) %>还没有提出问题</small>
         <% else %>
-          <%= render "my_questions" %>
+          <%= render "account/users/my_questions" %>
         <% end %>
       </div>
       <div class="tab-pane" id="tab_default_2">
@@ -36,7 +36,7 @@
         <% if @answers.count.zero? %>
           <small class="small-tips"><%= render_who(@user) %>还没有回答过问题</small>
         <% else %>
-          <%= render "my_answers" %>
+          <%= render "account/users/my_answers" %>
         <% end %>
       </div>
       <div class="tab-pane" id="tab_default_3">

@@ -8,7 +8,7 @@ class AccountController < ApplicationController
 
     # 跳转外层show_replyer页面
     if flag
-      redirect_to show_replyer_questions_path(@user)
+      redirect_to show_replyer_questions_path(user_id:@user)
       return
     end
   end
