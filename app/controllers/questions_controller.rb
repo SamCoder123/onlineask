@@ -59,8 +59,9 @@ class QuestionsController < ApplicationController
 
   def show_replyer
     @user = User.find(params[:user_id])
-    exhibition_profile_data
     set_page_title_and_description("#{@user.name}的主页", "#{@user.description}")
+    exhibition_profile_data
+
   end
 
   def question_like_up
