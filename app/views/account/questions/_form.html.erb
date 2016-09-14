@@ -19,7 +19,17 @@
       </ul>
     </div>
 
-    <%= render "multiple_dropdown_bar" %>
+    <div class="dropdown">
+      <a id="dLabel-users" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        邀请回答
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dLabel-users">
+        <%= f.association :invitated_users, :as => :check_boxes, label: false,selected: @question.invitated_users %>
+      </ul>
+    </div>
+
+    <%#= render "multiple_dropdown_bar" %>
 
   </div>
 

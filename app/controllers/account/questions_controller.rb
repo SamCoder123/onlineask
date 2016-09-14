@@ -40,11 +40,14 @@ class Account::QuestionsController < AccountController
     drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb(@question.title)
 
-    update_invitated_users_and_notify
-
-    flash[:notice] = "调整成功，学霸正在赶来！"
-
-    redirect_to account_question_path(@question)
+    #update_invitated_users_and_notify
+    if @question.update(refine_question_params)
+      flash[:notice] = "邀请成功，学霸正在赶来～"
+      redirect_to account_question_path(@question)
+    else
+      flash[:alert] = "邀请失败，重试一下哦～"
+      render :back
+    end
   end
 
   def new
@@ -72,13 +75,6 @@ class Account::QuestionsController < AccountController
       # 保存用户 从平台扣钱150转给回答者
       RewardDepositService.new(current_user, @question).perform!
 
-      # 把邀请人和问题存入关系表
-      unless @invitated_users.nil?
-        @invitated_users = User.where(id: params[:filters].split(","))
-
-        InvitateAnswerService.new(current_user, @invitated_users, @question).perform!
-      end
-
       flash[:notice] = "提问成功！"
       redirect_to account_question_path (@question)
     else
@@ -89,11 +85,6 @@ class Account::QuestionsController < AccountController
   end
 
   def edit
-    @invitated_users = @question.invitated_users
-    @filters_arry = @invitated_users.collect(&:id)
-    @filters = @filters_arry.map(&:inspect).join(",")
-    @users = User.where.not(id:current_user)
-    @tags = Tag.all - @question.tags
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb("编辑问题")
@@ -106,9 +97,6 @@ class Account::QuestionsController < AccountController
       return
     end
     if @question.update(question_params)
-
-      update_invitated_users_and_notify
-
       redirect_to account_question_path(@question), notice: "提问修改成功！"
     else
       render :edit
@@ -207,13 +195,16 @@ class Account::QuestionsController < AccountController
     unless params[:question][:tag_ids].nil?
       params[:question][:tag_list] = params[:question][:tag_ids].map{|k,v| "#{k}#{v}"}.join(',')
     end
-    params.require(:question).permit(:title, :description, :tag_list, :downpayment, :payment_method)
+    params.require(:question).permit(:title, :description, :tag_list, :downpayment, :payment_method,:invitated_user_ids=>[] )
+  end
+
+  def refine_question_params
+    params.require(:question).permit(:invitated_user_ids=>[] )
   end
 
   def update_invitated_users_and_notify
     # 新的
-    @new_invitated_users = User.where(id: params[:filters].split(","))
-
+    @new_invitated_users = User.where(id: params[:question][:invitated_user_ids].split(","))
     # 旧的
     @old_invitated_users = @question.invitated_users
 
@@ -228,7 +219,7 @@ class Account::QuestionsController < AccountController
 
     # 新增邀请
     unless add_users.empty?
-      @question.invitation!(add_users)
+      #@question.invitation!(add_users)
       # 如何一下给多个用户发送？循环新增是不是不好？
       for user in add_users
         NotificationService.new(user, current_user, @question).send_notification!

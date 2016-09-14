@@ -1,6 +1,13 @@
 class QuestionInvitation < ApplicationRecord
   belongs_to :user
   belongs_to :question
+
+  after_create :send_notification
+
+  def send_notification
+    NotificationService.new(user, question.user, question).send_notification!
+    OrderMailer.notify_invited_question(question, user).deliver!
+  end
 end
 
 # == Schema Information
