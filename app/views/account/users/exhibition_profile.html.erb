@@ -1,1 +1,60 @@
-<%= render "exhibition_q_a" %>
+<div class="tabbable-panel">
+  <div class="tabbable-line">
+    <ul class="nav nav-tabs ">
+      <li class="active">
+        <a href="#tab_default_1" data-toggle="tab">
+          提出的问题
+        </a>
+      </li>
+      <li>
+        <a href="#tab_default_2" data-toggle="tab">
+          写过的答案
+        </a>
+      </li>
+      <li>
+        <a href="#tab_default_3" data-toggle="tab">
+          被邀请的回答
+        </a>
+      </li>
+      <li>
+        <a href="#tab_default_4" data-toggle="tab">
+          <%= render_who(@user) %>的偷听
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab_default_1">
+        <!-- 用来render第一个tab内容 -->
+        <% if @questions.count.zero? %>
+          <small class="small-tips"><%= render_who(@user) %>还没有提出问题</small>
+        <% else %>
+          <%= render "account/users/my_questions" %>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="tab_default_2">
+        <!-- 用来render第二个tab -->
+        <% if @answers.count.zero? %>
+          <small class="small-tips"><%= render_who(@user) %>还没有回答过问题</small>
+        <% else %>
+          <%= render "account/users/my_answers" %>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="tab_default_3">
+        <!-- 用来render第三个tab -->
+        <% if @invitated_questions.count.zero? %>
+          <small class="small-tips"><%= render_who(@user) %>还没有被邀请</small>
+        <% else %>
+          <%= render template: "account/questions/invitated_questions" %>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="tab_default_4">
+        <!-- 用来render第4个tab -->
+        <% if @answer_subscriptions.count.zero? %>
+          <small class="small-tips"><%= render_who(@user) %>还没有偷听</small>
+        <% else %>
+          <%= render template: "account/users/my_subscriptions" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

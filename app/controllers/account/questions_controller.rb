@@ -8,10 +8,10 @@ class Account::QuestionsController < AccountController
 
     # 所有问题questions进行排序
     questions = case params[:order]
-      when "by_question_created_at"
+      when "by_question_created_on"
         Question.published.recent
       when "by_downpayment"
-        Question.published.where(status: "open").order("downpayment DESC")
+        Question.published.opening.order("downpayment DESC")
       when "by_question_like_count"
         Question.published.sort_by{|question| question.question_likes.count}.reverse
       else
@@ -23,7 +23,7 @@ class Account::QuestionsController < AccountController
 
   def show
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("问题", account_questions_path(@question))
+    drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb(@question.title)
 
     @answers = @question.answers.order("answer_status")
@@ -36,15 +36,15 @@ class Account::QuestionsController < AccountController
   end
 
   def refine_reward
-    if update_invitated_users_and_notify
-      redirect_to account_question_path(@question), notice: "调整成功，学霸正在赶来！"
-    else
-      render :show
-    end
-
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
-    drop_breadcrumb("问题", account_questions_path(@question))
+    drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb(@question.title)
+
+    update_invitated_users_and_notify
+
+    flash[:notice] = "调整成功，学霸正在赶来！"
+
+    redirect_to account_question_path(@question)
   end
 
   def new
@@ -94,7 +94,8 @@ class Account::QuestionsController < AccountController
     @filters = @filters_arry.map(&:inspect).join(",")
     @users = User.where.not(id:current_user)
     @tags = Tag.all - @question.tags
-    drop_breadcrumb("问题", account_questions_path(@question))
+    drop_breadcrumb("首页", show_profile_account_user_path(current_user))
+    drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb("编辑问题")
   end
 
@@ -164,9 +165,11 @@ class Account::QuestionsController < AccountController
   end
 
   def invitated_questions
-    @invitated_questions = current_user.invitated_questions
+    @invitated_questions = current_user.invitated_questions.paginate(:page => params[:page], :per_page => 6)
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("被邀请的问题")
+    set_page_title_and_description("#{current_user.name}被邀请的问题","首页 被邀请的问题")
+
     render layout: "user_center"
   end
 

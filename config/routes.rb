@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     end
     collection do
       get :search
+      get :public_replyers
+      get :show_replyer
     end
 
     resources :answers
@@ -96,6 +98,7 @@ Rails.application.routes.draw do
 
       collection do
         get :replyers
+        get :show_profile
       end
     end
 

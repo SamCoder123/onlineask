@@ -1,28 +1,23 @@
-<div class="col-md-12">
+<%= render "account/answers/question_info_panel" %>
+
+<div class="panel panel-default ">
+  <div class="panel-heading">
+    <h3 class="panel-title">我的回答</h3>
+  </div>
+  <div class="panel-body">
+    <p>
+      <%= sanitize(@answer.content) %>
+    </p>
+  </div>
   <div class="total clearfix btn-right-bottom">
       <span class="pull-right">
-        <%= link_to '返回', account_answers_path, class: "btn btn-primary btn-xs"%>
+        <% if render_user_auth?(@answer.user) %>
+          <%= link_to '编辑', edit_account_answer_path(@answer), class: "btn btn-primary btn-xs" %>
+        <% end %>
       </span>
   </div>
-    <%= render "account/answers/question_info_panel" %>
-
-  <div class="panel panel-default ">
-    <div class="panel-heading">
-      <h3 class="panel-title">我的回答</h3>
-    </div>
-    <div class="panel-body">
-      <p>
-        回答内容：<%= @answer.content %>
-      </p>
-    </div>
-    <div class="total clearfix btn-right-bottom">
-        <span class="pull-right">
-          <%= link_to '编辑', edit_account_answer_path(@answer), class: "btn btn-primary btn-xs" %>
-        </span>
-    </div>
-  </div>
-
-  <h3>更多热门问题:</h3>
-
-  <%= render "hot_question" %>
 </div>
+
+<h3>更多热门问题:</h3>
+
+<%= render "hot_question" %>

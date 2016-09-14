@@ -4,7 +4,7 @@ class Notification < ApplicationRecord
   belongs_to :notifiable, polymorphic: true
 
   scope :unread, -> { where(read_at: nil) }
-  scope :recent, -> { order(created_at: :desc).limit(5) }
+  scope :recent, -> { order(id: :desc).limit(5) }
 end
 
 # == Schema Information
@@ -20,4 +20,10 @@ end
 #  notifiable_type :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_notifications_on_actor_id       (actor_id)
+#  index_notifications_on_notifiable_id  (notifiable_id)
+#  index_notifications_on_recipient_id   (recipient_id)
 #

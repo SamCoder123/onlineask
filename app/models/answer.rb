@@ -45,12 +45,21 @@ end
 #
 # Table name: answers
 #
-#  id            :integer          not null, primary key
-#  content       :text
-#  is_hidden     :boolean          default(FALSE)
-#  user_id       :integer
-#  question_id   :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  answer_status :string           default("pending")
+#  id                         :integer          not null, primary key
+#  content                    :text
+#  is_hidden                  :boolean          default(FALSE)
+#  user_id                    :integer
+#  question_id                :integer
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  answer_status              :string           default("pending")
+#  answer_subscriptions_count :integer
+#  created_on                 :date
+#  updated_on                 :date
+#  like_answers_count         :integer
+#
+# Indexes
+#
+#  index_answers_on_question_id  (question_id)
+#  index_answers_on_user_id      (user_id)
 #

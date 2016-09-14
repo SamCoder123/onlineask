@@ -6,7 +6,7 @@
     .simple_form textarea { border: 1px solid #e5e5e5;}
     .simple_form label { color: #373a3c;font-size: 12px;}
 </style>
-
+<%= content_for :handwrite_javascript do %>
 <script type="text/javascript">
 $(function(){
   $('.ui.dropdown').dropdown({
@@ -21,7 +21,7 @@ $(function(){
   });
 });
 </script>
-
+<% end %>
 <div id="popover_div" style="display:none"> 如何提问能获得更好的答案？
   <ol>
     <li>增加悬赏</li>
@@ -63,7 +63,6 @@ $(function(){
           <div class="special">
             <%= f.input :downpayment,label:false, input_html: { min: '0', step: 'any',class: "special-size"}%>
           </div>
-        <%#= render "account/users/payment_modal", locals: {f: f}%>
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -80,17 +79,16 @@ $(function(){
                 <span class="special pull-right">
                   <%= f.button :submit,value:"确认支付",class: "btn btn-primary btn-sm" %>
                 </span>
+
               </div>
             </div>
           </div>
-        </div>
 
         <!-- Button trigger modal -->
         <div class="special">
-          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" style="height:35px">
             提问
           </button>
-          <%#= f.button :submit,value:"提 问",class: "btn btn-primary" %>
         </div>
     </div>
   </div>

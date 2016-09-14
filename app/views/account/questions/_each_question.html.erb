@@ -2,23 +2,60 @@
 
     <div class="media">
       <div class="pull-left">
-        <%= gravatar_tag question.user.email, :size => 30, :default => avatar_url %>
+        <%= render_head_image_30(question.user) %>
       </div>
         <div class="media-body">
           <span class="media-meta pull-right">阅读数：<%= question.watches %></span>
+          <span class="media-meta pull-right" style="padding:0 5px;">|</span>
+          <span class="media-meta pull-right"><%= link_to("想听:#{question.question_likes.count}", question_like_up_question_path(question), method: :post) %></span>
+
           <p><%= question.user.name %></p>
-          <p class=""><%= link_to(question.title,account_question_path(question))  %></p>
-            <%= sanitize(question.description) %>
+          <p>
+          <% if render_user_auth?(question.user) %>
+            <%= link_to(question.title,account_question_path(question)) %>
+          <% else %>
+              <%= link_to(question.title,question) %>
+          <% end %>
           </p>
+          <hr/>
+            <!-- <%= sanitize(question.description) %> -->
+            <% question.answers.each do |a| %>
+              <% if a.answer_status.include?("best_answer") %>
+                <p>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                  Best answer:<%= a.content.truncate(100) %>
+                </p>
+              <% end %>
+            <% end %>
 
-          <p class="summary">
-            <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= question.answers.count %></span>
-            <span class="media-meta pull-left" style="padding-right:20px">悬赏金额 ¥ <%= question.downpayment %></span>
-            <span class="media-meta pull-left"><%= question.created_at_formate %></span>
-            <span class="pull-right"><%= link_to("回 答",new_question_answer_path(question),class:"btn btn-primary btn-xs") %></span>
-            <span class="pull-right"><%= link_to("偷 听",question,class:"btn btn-default btn-xs") %></span>
-          </p>
+      <p class="summary">
+        <span class="media-meta pull-left" style="padding-right:20px">回答人数：<%= question.answers.count %></span>
+        <%= render_question_closed?(question) %>
+        <span class="media-meta pull-left" style="padding-right:20px">标签：
+          <%= render :partial => "/account/tags/tag_list", :collection => question.tags, :as => :tag %>
+        </span>
+        <span class="media-meta pull-left"><%= question.created_on %></span>
+        <span class="pull-right"><%= link_to("回 答",new_question_answer_path(question),class:"btn btn-primary btn-xs") %></span>
 
-        </div>
-      </div>
+        <!-- 偷听支付 -->
+        <%#= render "account/users/pop_up_pay" locals: {}%>
+
+
+        <% answer = render_question_best_answer(question) %>
+        <% unless answer.nil? %>
+          <% if !current_user.subscribed_answer?(answer) %>
+            <%= render partial: 'account/questions/subscription_pop_up_pay', locals:{answer: answer} %>
+            <button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#mySubModal" >
+              偷听最佳答案
+            </button>
+          <% else %>
+            <small class="small-tips">已偷听</small>
+            <%= link_to("查 看",account_answer_path(answer),class:"btn btn-default btn-xs pull-right") %>
+          <% end %>
+        <% else %>
+            <%= link_to("所有答案", question, class:"btn btn-default btn-xs pull-right") %>
+        <% end %>
+      </p>
+    </div>
+  </div>
 </li>

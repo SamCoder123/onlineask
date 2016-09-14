@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Onlineask</title>
+    <%= render_page_title_tag %>
+    <%= render_page_description_meta_tag %>
+    <%= render_page_keywords_meta_tag %>
+    <link rel="shortcut icon" href="/default_image.png">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'account/users', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body style="background-image: url(/crossword.png);">
@@ -25,9 +27,13 @@
         </div>
 
       </div>
-      <div class="row">
-        <%= render "common/footer" %>
-      </div>
+      <div class="push"></div>
+    </div>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :handwrite_javascript %>
+    <div class="row footer">
+      <%= render "common/footer" %>
     </div>
   </body>
 </html>

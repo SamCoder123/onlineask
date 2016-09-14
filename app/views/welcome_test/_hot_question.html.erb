@@ -15,7 +15,8 @@
           <div class="panel-body">
             <p><%= sanitize(question.description).truncate(30) %></p>
             <div class="pull-right">
-            <%= gravatar_tag question.user.email, :size => 40, :default => avatar_url %>
+              <%= render_head_image_30(question.user) %>
+              <!-- <%= gravatar_tag question.user.email, :size => 40, :default => avatar_url %> -->
             </div>
             <br>
             <p>回答人数：<%= question.answers.count %></p>

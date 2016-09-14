@@ -1,12 +1,12 @@
 <div class="ui multiple dropdown" id="dropdown">
   <input type="hidden" name="filters" value="<%=@filters%>">
-  <!-- <i class="fa fa-users" aria-hidden="true"></i> -->
-  <i class="student icon" aria-hidden="true"></i>
-  <label class="text" id="invite">邀请回答</label>
+    <i class="fa fa-graduation-cap fa-lg" aria-hidden="true"></i>
+    <label class="text" id="invite" style="color:#4285f4">邀请学霸回答</label>
   <% unless @invitated_users.nil? %>
     <% @invitated_users.each do |user| %>
      <a class="ui label transition visible" data-value="<%= user.id %>" style="display: inline-block !important;">
-        <%= gravatar_tag user.email, :size => 50, :default => avatar_url %>
+        <%= render_head_image_20(user) %>
+<!-- <%= gravatar_tag user.email, :size => 50, :default => avatar_url %> -->
         <%= user.name %>
         回答数量：<%= user.answers.count %>
         <i class="delete icon"></i>
@@ -26,7 +26,8 @@
     <div class="scrolling menu">
       <% @users.each do |user| %>
         <div class="item" data-value="<%= user.id %>">
-          <%= gravatar_tag user.email, :size => 50, :default => avatar_url %>
+          <%= render_head_image_20(user) %>
+<!-- <%= gravatar_tag user.email, :size => 50, :default => avatar_url %> -->
           <%= user.name %>
           回答数量：<%= user.answers.count %>
         </div>

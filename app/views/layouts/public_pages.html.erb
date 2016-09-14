@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render_page_title_tag %>
+    <%= render_page_description_meta_tag %>
+    <%= render_page_keywords_meta_tag %>
+    <%= render_page_image_link_tag %>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'account/users', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container-fluid" id="wrap">
+      <%= render "common/navbar" %>
+      <div class="container">
+        <%= render "common/flashes" %>
+        <%= render_breadcrumb %>
+        <div class="col-md-9 col-sm-8 col-xs-12">
+
+          <%= yield %>
+        </div>
+        <div class="col-md-3 col-sm-4 hidden-xs">
+
+          <%= render "account/users/hot_questions" %>
+          <%= render "account/users/hot_replyers" %>
+        </div>
+      </div>
+      <div class="push"></div>
+    </div>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= yield :handwrite_javascript %>
+    <div class="row footer">
+      <%= render "common/footer" %>
+    </div>
+  </body>
+</html>

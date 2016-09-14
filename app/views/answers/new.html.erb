@@ -1,8 +1,27 @@
-<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-    <h3>我要回答</h3>
-    <h4><%= @question.title %></h4>
-    <span><%= sanitize(@question.description) %></span>
-    <hr>
-    <%= render "form" %>
-</div>
-<%= render 'question_info_sidebar' %>
+<ul class="list-group index-ul">
+  <li class="list-group-item">
+    <div class="media">
+        <div class="media-body">
+          <span class="media-meta pull-right"><%= @question.liking_users.count %>人也想听</span>
+          <span class="media-meta pull-right" style="padding:0 5px;">|</span>
+          <span class="media-meta pull-right" style="padding:0 5px;">悬赏: <%= @question.downpayment %></span>
+          <p class="answers-new-font">
+            提问者: <%= link_to @question.user.name, exhibition_profile_account_user_path(@question.user) %><br />
+            <%= link_to(@question.title,account_question_path(@question)) %><br />
+            <%= @question.description %>
+          </p>
+
+          <hr/>
+        <p class="summary">
+          <span class="media-meta pull-left" style="padding-right:20px">阅读数：<%= @question.watches %></span>
+          <span class="media-meta pull-left" style="padding-right:20px">标签：<%= render @question.tags %></span>
+          <!-- <span class="media-meta pull-left" style="padding-right:20px">已有回答<%= @question.answers.count %>个</span> -->
+          <%= link_to("已有回答#{@question.answers.count}个",account_question_path(@question), class:"media-meta pull-left", style:"padding-right:20px") %>
+          <span class="media-meta pull-left"><%= @question.created_on %></span>
+        </p>
+      </div>
+    </div>
+  </li>
+</ul>
+<h3>我要回答</h3>
+<%= render "form" %>

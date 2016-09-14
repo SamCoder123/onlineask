@@ -17,7 +17,7 @@ class Question < ApplicationRecord
 
   scope :published, -> { where(is_hidden: false) }
   scope :recent, -> { order("id DESC") }
-
+  scope :opening, -> { where(status: "open") }
   acts_as_taggable_on :tags
 
   def updated_at_formate
@@ -65,6 +65,7 @@ class Question < ApplicationRecord
     self.is_paid = true
     save
   end
+
 end
 
 # == Schema Information
@@ -86,4 +87,10 @@ end
 #  watches        :integer          default(0)
 #  payment_method :string
 #  is_paid        :boolean          default(FALSE)
+#  created_on     :date
+#  updated_on     :date
+#
+# Indexes
+#
+#  index_questions_on_user_id  (user_id)
 #

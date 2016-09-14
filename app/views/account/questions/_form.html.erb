@@ -13,12 +13,13 @@
 
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit,value:"提交问题" %>
+  <div class="form-actions pull-right">
+    <%= f.button :submit,value:"提交问题",class: "btn btn-primary btn-md" %>
   </div>
 <% end %>
 
 <%= javascript_include_tag 'account/questions', 'data-turbolinks-track': 'reload' %>
+<%= content_for :handwrite_javascript do %>
 <script type="text/javascript">
 $(function(){
   initUIDropdown();
@@ -26,3 +27,4 @@ $(function(){
   initEditor();
 });
 </script>
+<% end %>

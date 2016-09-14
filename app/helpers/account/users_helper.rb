@@ -35,11 +35,15 @@ module Account::UsersHelper
     user.follow_relationships.where(follower_id: current_user).size
   end
 
-  def render_whose_sub(user, current_user)
-    if user == current_user
-      "我的偷听"
+  def render_who(user)
+    if current_user && user == current_user
+      "我"
     else
-      "Ta的偷听"
+      "Ta"
     end
+  end
+
+  def render_question_best_answer(question)
+    answer = question.answers.find_by(answer_status: "best_answer")
   end
 end

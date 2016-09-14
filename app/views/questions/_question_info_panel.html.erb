@@ -2,7 +2,7 @@
   <div class="panel-heading">
     <h3 class="panel-title">主题：<%= @question.title %>
       <span class="pull-right">
-        提问人：<%= gravatar_tag @question.user.email, :size => 30, :default => avatar_url %><%= link_to @question.user.name, exhibition_profile_account_user_path(@question.user) %>
+        提问人：<%= render_head_image_30(@question.user) %><%= link_to @question.user.name, exhibition_profile_account_user_path(@question.user) %>
       </span>
     </h3>
   </div>
@@ -10,9 +10,9 @@
   <div class="panel-body">
     <p>描述：<%= sanitize(@question.description) %></p>
     <br>
-    <div class="pull-left">
-      标签：<%= render @question.tags %>
-    </div>
+    <!-- <div class="pull-left">
+      标签：<%#= render @question.tags %>
+    </div> -->
 
     <div class="total clearfix">
       <span class="pull-right">
@@ -26,12 +26,8 @@
         <% else %>
           <% if @question.status == "open" %>
             <small class="small-tips">问题开放，悬赏<i class="glyphicon glyphicon-yen"></i><%= @question.downpayment %></small></h3>
-            <%= link_to(new_question_answer_path(@question), class: "btn btn-danger btn-sm") do %>
-              <i class="glyphicon glyphicon-pencil"></i>回答问题
-            <% end %>
           <% end %>
         <% end %>
-        <%= link_to '返回', account_questions_path,class: "btn btn-sm btn-info" %>
       </span>
     </div>
   </div>

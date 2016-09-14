@@ -21,7 +21,6 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "semantic-ui";
-@import "trix";
 
 mark{ background:yellow }
 
@@ -36,8 +35,12 @@ html,body{
   min-height: 100%;
 
   position:relative;
-  // padding-bottom 是footer的高度，当footer变化时需要相应改变
-  padding-bottom:153px;
+  // margin-bottom 是footer的高度，当footer变化时需要相应改变
+  margin-bottom:-153px;
+}
+
+.footer, .push{
+  height: 153px;
 }
 
 .invitated_users_answer{ border-bottom: 1px solid #999;}
@@ -47,10 +50,16 @@ html,body{
   border-color: transparent;
 }
 
+.navbar-font-index{
+  color: #FFF;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
 .footer-bg{
   padding: 35px 0 20px 0;
   background-color: #333333;
-  position:absolute;
+  position: relevant;
   bottom:0px;
   width: 100%;
   margin: 0;
@@ -66,12 +75,14 @@ html,body{
   color:#00eaef;
   font-size: 14px;
   margin: 10px 30px;
+  font-family: 'Lato', 'sans-serif';
 }
 
 .footer-font-copyright{
   text-align: center;
   color:#6f6f6f;
   font-size: 12px;
+  font-family: 'Lato', 'sans-serif';
 }
 
 .footer-index-bg{
@@ -110,5 +121,26 @@ html,body{
   height: 30px;
   width: 30px;
 }
+.profile_image_20{
+  height: 20px;
+  width: 20px;
+}
+.btn-primary {
+    background-color: #4285f4;
+    border-color: transparent;
+    border-radius: 4px;
+}
 
-a{ color:#4285f4; }
+.btn-default {
+  border-color: #4285f4;
+  border-radius: 4px;
+}
+
+.public-logo{
+  margin-top: -5px;
+}
+
+.media-meta {
+	font-size: 11px;
+	color: #999;
+}

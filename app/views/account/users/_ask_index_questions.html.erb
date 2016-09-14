@@ -1,0 +1,26 @@
+<div class="index-line">
+  <div class="dropdown clearfix pull-right">
+
+     <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+       排序
+      <span class="caret"></span>
+     </button>
+      <%= render "account/questions/sort_tag_questions" %>
+  </div>
+
+  <div class="" style="margin-bottom:25px;">
+    <% current_user.tags.each do |tag| %>
+        <label style="margin-right:15px">我的标签:</label>
+        <%= link_to(tag.name,show_profile_account_user_path(current_user,tag_name: tag.name),class: "btn btn-default btn-sm") %>
+    <% end %>
+  </div>
+</div>
+
+<div>
+  <ul class="list-group index-ul">
+    <%= render :partial => "/account/questions/each_question", :collection => @refer_questions, :as => :question %>
+  </ul>
+  <div class="text-center">
+    <%= will_paginate @refer_questions, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>
