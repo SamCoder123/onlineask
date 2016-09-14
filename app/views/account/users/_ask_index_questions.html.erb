@@ -9,10 +9,10 @@
   </div>
 
   <div class="" style="margin-bottom:25px;">
-    <% current_user.tags.each do |tag| %>
-        <label style="margin-right:15px">我的标签:</label>
+    <label style="margin-right:15px">我的标签:</label>
+      <% current_user.tags.each do |tag| %>  
         <%= link_to(tag.name,show_profile_account_user_path(current_user,tag_name: tag.name),class: "btn btn-default btn-sm") %>
-    <% end %>
+      <% end %>
   </div>
 </div>
 
