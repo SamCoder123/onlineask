@@ -1,9 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
   before_action :set_breadcrumbs
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :store_current_location, :unless => :devise_controller?
+
+  helper_method :guest_user?, :current_or_guest_user
+  # 定义全局变量@hot_questions
+  helper_method :hot_questions
+  # 定义全局变量@hot_replyers
+  helper_method :hot_replyers
 
   def require_is_admin
     unless current_user.admin?
@@ -26,15 +31,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # 定义全局变量@hot_questions
-  helper_method :hot_questions
-
   def hot_questions
     @hot_questions = Question.order("watches DESC").limit(6)
   end
-
-  # 定义全局变量@hot_replyers
-  helper_method :hot_replyers
 
   def hot_replyers
     @hot_replyers = User.order("fans_num DESC").limit(6)
@@ -62,11 +61,11 @@ class ApplicationController < ActionController::Base
     render layout: "profile"
   end
 
-  protect_from_forgery
+  protected
 
   def current_or_guest_user
     if current_user
-      if session[:guest_user_id] && session[:guest_user_id] != current_user.id
+      if session[:guest_user_id] && (session[:guest_user_id] != current_user.id)
         logging_in
         # reload guest_user to prevent caching problems before destruction
         guest_user(with_retry = false).reload.try(:destroy)
@@ -89,10 +88,18 @@ class ApplicationController < ActionController::Base
      guest_user if with_retry
   end
 
-  protected
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    # devise_parameter_sanitizer.for(:sign_in) << :name
+    # devise_parameter_sanitizer.for(:account_update) << :name
+  end
+
+  def guest_user?
+    current_user && current_user.guest?
+  end
+
+  def authenticate_no_user_or_guest!
+      redirect_to root_url if current_user.nil? && guest_user?
   end
 
   private
@@ -112,10 +119,11 @@ class ApplicationController < ActionController::Base
       # comment.user_id = current_user.id
       # comment.save!
     # end
+    # guest_user.move_to(current_user)
   end
 
   def create_guest_user
-    u = User.create(:name => "guest", :email => "guest_#{Time.now.to_i}#{rand(100)}@example.com")
+    u = User.create(:name => "guest", :email => "guest_#{Time.now.to_i}#{rand(100)}@example.com", :is_guest => true)
     u.save!(:validate => false)
     session[:guest_user_id] = u.id
     u

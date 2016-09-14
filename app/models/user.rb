@@ -172,6 +172,10 @@ class User < ApplicationRecord
   def question_unlike_cancle!(question)
     q_unlikes.delete(question)
   end
+
+  def guest?
+    is_guest
+  end
 end
 
 # == Schema Information
@@ -206,6 +210,7 @@ end
 #  fans_num               :integer          default(0)
 #  country                :string
 #  outside_page_link      :string
+#  is_guest               :boolean          default(FALSE)
 #
 # Indexes
 #

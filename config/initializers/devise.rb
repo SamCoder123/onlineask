@@ -271,4 +271,9 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  # ==> Warden configuration
+  config.warden do |manager|
+    manager.default_strategies(scope: :user).unshift :guest_user
+  end
 end
