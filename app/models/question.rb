@@ -1,5 +1,5 @@
 class Question < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :tags
   has_many :answers
   has_many :question_invitations
@@ -89,6 +89,7 @@ end
 #  is_paid        :boolean          default(FALSE)
 #  created_on     :date
 #  updated_on     :date
+#  answers_count  :integer          default(0)
 #
 # Indexes
 #
