@@ -2,8 +2,9 @@
   <div class="container">
     <!-- Brand and toggle get grouped fro better mobile display -->
     <div class="navbar-header">
-      <!-- <a class="navbar-brand" href="<%= show_profile_account_user_path(current_user) unless current_user.nil?%>" style="color:#FFF;letter-spacing: 3px;">约<span style="color:#4285f4;";>霸</span></a> -->
-      <%= image_tag("/Site_Logo.png", width: '90px', alt:"m.com", class:"logo") %>
+      <a class="navbar-brand" href="<%= show_profile_account_user_path(current_user) unless current_user.nil?%>" >
+        <%= image_tag("/Site_Logo.png", width: '90px', alt:"m.com", class:"public-logo") %>
+      </a>
     </div>
     <!-- Collect the nav links,forms,and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

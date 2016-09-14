@@ -4,7 +4,6 @@ class WelcomeV1Controller < ApplicationController
   layout:false,only: [:register_guide]
 
   def index
-    # @questions = Question.all
 
     @questions = Question.published.where(status:"closed").order("watches DESC").limit(4).includes(:answers)
 
@@ -14,4 +13,6 @@ class WelcomeV1Controller < ApplicationController
       end
     end
   end
+
+
 end

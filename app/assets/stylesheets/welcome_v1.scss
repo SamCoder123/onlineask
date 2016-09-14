@@ -129,11 +129,27 @@
   z-index: 2;
   min-width: 100%;
   background: rgba(255,255,255,1);
-  position: relative;;
+  position: relative;
   font-family: "PingFang-Regular";
-  font-size: 3em;
-  letter-spacing: 8px;
+  a {
+    color: black;
+  }
+
+  h1 {
+    font-family: "PingFang-Regular";
+    font-weight: normal;
+    font-size: 3em;
+    letter-spacing: 8px;
+  }
+  h2{
+    font-family: "PingFang-Regular";
+    font-weight: lighter;
+    color: #4299f4;
+    font-size: 18px;
+    margin-top: 30px;
+  }
 }
+
 
 .text-section p{
   color: #4299f4;
@@ -175,6 +191,10 @@
   background-color:#FFF;
   box-shadow: 2px 2px 5px rgba(black, .1);
   height: 300px;
+  font-family: "PingFang-Regular";
+  h3{
+  font-family: "PingFang-Regular";
+  }
 }
 
 .question-list-inner-box .btn-primary{

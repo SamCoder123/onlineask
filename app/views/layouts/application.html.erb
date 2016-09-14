@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Onlineask</title>
     <%= render_page_title_tag %>
     <%= render_page_description_meta_tag %>
     <%= render_page_keywords_meta_tag %>
@@ -9,7 +8,6 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'simplemde.min' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -25,6 +23,8 @@
     <div class="footer">
       <%= render "common/footer" %>
     </div>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'simplemde.min' %>
     <%= yield :handwrite_javascript %>

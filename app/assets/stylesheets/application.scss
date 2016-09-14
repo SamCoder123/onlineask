@@ -75,12 +75,14 @@ html,body{
   color:#00eaef;
   font-size: 14px;
   margin: 10px 30px;
+
 }
 
 .footer-font-copyright{
   text-align: center;
   color:#6f6f6f;
   font-size: 12px;
+
 }
 
 .footer-index-bg{
@@ -134,6 +136,11 @@ html,body{
   border-radius: 4px;
 }
 
-.logo{
-  margin-top:10px;
+.public-logo{
+  margin-top: -5px;
+}
+
+.media-meta {
+	font-size: 11px;
+	color: #999;
 }
