@@ -46,8 +46,6 @@
 <%= content_for :handwrite_javascript do %>
 <script type="text/javascript">
 $(function(){
-  initUIDropdown();
-  initTags('<%= @question.tags.to_json.to_s.html_safe %>' );
   initEditor();
 });
 </script>

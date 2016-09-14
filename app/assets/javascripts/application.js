@@ -26,7 +26,6 @@
 
 //= require account/questions
 
-//= require semantic-ui
 
 $(function() {
     $('a[disabled=disabled]').click(function(event){

@@ -29,10 +29,6 @@ class Account::QuestionsController < AccountController
     @answers = @question.answers.order("answer_status")
     @refer_questions = Question.published.where(status: "open").order("watches DESC").limit(3)
     @invitated_users = @question.invitated_users
-    @filters_arry = @invitated_users.collect(&:id)
-    @filters = @filters_arry.map(&:inspect).join(",")
-    @users = User.where.not(id:current_user)
-
   end
 
   def refine_reward
@@ -40,7 +36,6 @@ class Account::QuestionsController < AccountController
     drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb(@question.title)
 
-    #update_invitated_users_and_notify
     if @question.update(refine_question_params)
       flash[:notice] = "邀请成功，学霸正在赶来～"
       redirect_to account_question_path(@question)
@@ -60,23 +55,17 @@ class Account::QuestionsController < AccountController
   end
 
   def create
-    unless params[:question][:tag_ids]
-      flash[:alert] = "标签不能为空"
-      redirect_to :back
-      return
-    end
 
     @question = Question.new(question_params)
     @question.user = current_user
     @question.status = "open"
 
     if @question.save
-
       # 保存用户 从平台扣钱150转给回答者
       RewardDepositService.new(current_user, @question).perform!
 
       flash[:notice] = "提问成功！"
-      redirect_to account_question_path (@question)
+      redirect_to account_question_path(@question)
     else
       @users = User.all
       @tags = Tag.all

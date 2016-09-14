@@ -12,21 +12,3 @@ function initEditor() {
   });
   //editor.value();
 }
-
-function initUIDropdown(){
-  $('.ui.dropdown').dropdown({
-    allowAdditions: false
-  });
-}
-
-
-function initTags(data){
-  data = $.parseJSON(data)
-  var array = new Array();
-  $.each(data, function(index, tag) {
-    var name = tag.name;
-    array[index] = name;
-  });
-
-  $('.ui.fluid.dropdown').dropdown('set selected',array);
-}

@@ -55,13 +55,17 @@ $(function(){
         <div class="pull-right">
           <div class="special my-form">
 
-            <div class="dropdown">
+            <div class="dropdown tag-dropdown">
               <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 问题标签
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" aria-labelledby="dLabel">
-                <%= f.association :tags, :as => :check_boxes, label: false, value_method: :name %>
+
+                <div class="form-group check_boxes">
+                  <%= f.collection_check_boxes :tag_list, Tag.all, :name,:name, :item_wrapper_class => 'checkbox' %>
+                </div>
+                <%#= f.association :tags, :as => :check_boxes, label: false, value_method: :name,checked: @question.tags %>
               </ul>
             </div>
           </div>
