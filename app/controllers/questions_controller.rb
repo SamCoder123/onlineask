@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    drop_breadcrumb("Home", root_path)
+    drop_breadcrumb("首页", show_profile_account_users_path(current_user))
     drop_breadcrumb(@question.title)
     set_page_title_and_description("留学问题: #{@question.title}", "#{@question.description}")
     @question.watches_counter!
