@@ -91,11 +91,6 @@ class Account::QuestionsController < AccountController
   end
 
   def update
-    unless params[:question][:tag_ids]
-      flash[:alert] = "标签不能为空"
-      redirect_to :back
-      return
-    end
     if @question.update(question_params)
       redirect_to account_question_path(@question), notice: "提问修改成功！"
     else
@@ -191,45 +186,10 @@ class Account::QuestionsController < AccountController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
-    # tag_list 这个gem接收name1,name2,name3这种字符串形式，所以在permit之前要解析成字符串
-    unless params[:question][:tag_ids].nil?
-      params[:question][:tag_list] = params[:question][:tag_ids].map{|k,v| "#{k}#{v}"}.join(',')
-    end
-    params.require(:question).permit(:title, :description, :tag_list, :downpayment, :payment_method,:invitated_user_ids=>[] )
+    params.require(:question).permit(:title, :description, :downpayment, :payment_method,:invitated_user_ids=>[],:tag_list=>[] )
   end
 
   def refine_question_params
     params.require(:question).permit(:invitated_user_ids=>[] )
-  end
-
-  def update_invitated_users_and_notify
-    # 新的
-    @new_invitated_users = User.where(id: params[:question][:invitated_user_ids].split(","))
-    # 旧的
-    @old_invitated_users = @question.invitated_users
-
-    # 并集
-    union_users = @new_invitated_users | @old_invitated_users
-
-    # 并集－旧的 ＝ 新增
-    add_users = union_users - @old_invitated_users
-
-    # 并集－新的 ＝ 删除的
-    delete_users = union_users - @new_invitated_users
-
-    # 新增邀请
-    unless add_users.empty?
-      #@question.invitation!(add_users)
-      # 如何一下给多个用户发送？循环新增是不是不好？
-      for user in add_users
-        NotificationService.new(user, current_user, @question).send_notification!
-        OrderMailer.notify_invited_question(@question, user).deliver!
-      end
-    end
-
-    # 取消邀请
-    unless delete_users.empty?
-      @question.cancel_invitation!(delete_users)
-    end
   end
 end
