@@ -4,7 +4,7 @@
     <%= render_page_title_tag %>
     <%= render_page_description_meta_tag %>
     <%= render_page_keywords_meta_tag %>
-    <%= render_page_image_link_tag %>
+    <link rel="shortcut icon" href="/default_image.png">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -22,7 +22,9 @@
           <%= yield %>
         </div>
         <div class="col-md-3 col-sm-4 hidden-xs">
-
+          <% if current_user %>
+            <%= render "account/users/personal_card" %>
+          <% end %>
           <%= render "account/users/hot_questions" %>
           <%= render "account/users/hot_replyers" %>
         </div>
@@ -30,7 +32,7 @@
       <div class="push"></div>
     </div>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application'%>
 
     <%= yield :handwrite_javascript %>
     <div class="row footer">
