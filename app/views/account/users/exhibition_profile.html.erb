@@ -18,7 +18,7 @@
       </li>
       <li>
         <a href="#tab_default_4" data-toggle="tab">
-          <%= render_who(@user, current_user) %>的偷听
+          <%= render_who(@user) %>的偷听
         </a>
       </li>
     </ul>
@@ -26,23 +26,23 @@
       <div class="tab-pane active" id="tab_default_1">
         <!-- 用来render第一个tab内容 -->
         <% if @questions.count.zero? %>
-          <small class="small-tips"><%= render_who(@user, current_user) %>还没有提出问题</small>
+          <small class="small-tips"><%= render_who(@user) %>还没有提出问题</small>
         <% else %>
-          <%= render "my_questions" %>
+          <%= render "account/users/my_questions" %>
         <% end %>
       </div>
       <div class="tab-pane" id="tab_default_2">
         <!-- 用来render第二个tab -->
         <% if @answers.count.zero? %>
-          <small class="small-tips"><%= render_who(@user, current_user) %>还没有回答过问题</small>
+          <small class="small-tips"><%= render_who(@user) %>还没有回答过问题</small>
         <% else %>
-          <%= render "my_answers" %>
+          <%= render "account/users/my_answers" %>
         <% end %>
       </div>
       <div class="tab-pane" id="tab_default_3">
         <!-- 用来render第三个tab -->
         <% if @invitated_questions.count.zero? %>
-          <small class="small-tips"><%= render_who(@user, current_user) %>还没有被邀请</small>
+          <small class="small-tips"><%= render_who(@user) %>还没有被邀请</small>
         <% else %>
           <%= render template: "account/questions/invitated_questions" %>
         <% end %>
@@ -50,7 +50,7 @@
       <div class="tab-pane" id="tab_default_4">
         <!-- 用来render第4个tab -->
         <% if @answer_subscriptions.count.zero? %>
-          <small class="small-tips"><%= render_who(@user, current_user) %>还没有偷听</small>
+          <small class="small-tips"><%= render_who(@user) %>还没有偷听</small>
         <% else %>
           <%= render template: "account/users/my_subscriptions" %>
         <% end %>

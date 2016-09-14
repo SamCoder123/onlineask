@@ -61,6 +61,7 @@ gem "aasm"
 gem 'will_paginate-bootstrap'
 
 gem "seo_helper"
+gem "browser"
 
 
 group :production do
