@@ -57,7 +57,7 @@ class Account::QuestionsController < AccountController
   end
 
   def create
-    unless params[:question][:tag_list]
+    unless params[:question][:tag_ids]
       flash[:alert] = "标签不能为空"
       redirect_to :back
       return
@@ -100,7 +100,7 @@ class Account::QuestionsController < AccountController
   end
 
   def update
-    unless params[:question][:tag_list]
+    unless params[:question][:tag_ids]
       flash[:alert] = "标签不能为空"
       redirect_to :back
       return
@@ -204,8 +204,8 @@ class Account::QuestionsController < AccountController
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
     # tag_list 这个gem接收name1,name2,name3这种字符串形式，所以在permit之前要解析成字符串
-    unless params[:question][:tag_list].nil?
-      params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
+    unless params[:question][:tag_ids].nil?
+      params[:question][:tag_list] = params[:question][:tag_ids].map{|k,v| "#{k}#{v}"}.join(',')
     end
     params.require(:question).permit(:title, :description, :tag_list, :downpayment, :payment_method)
   end

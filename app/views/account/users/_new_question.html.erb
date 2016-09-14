@@ -9,9 +9,9 @@
 <%= content_for :handwrite_javascript do %>
 <script type="text/javascript">
 $(function(){
-  $('.ui.dropdown').dropdown({
-    allowAdditions: false
-  });
+  // $('.ui.dropdown').dropdown({
+  //   allowAdditions: false
+  // });
 
   $('[data-toggle="popover"]').popover({
     html : true,
@@ -53,9 +53,17 @@ $(function(){
             <%#= render "account/questions/multiple_dropdown_bar" %>
         </div> -->
         <div class="pull-right">
-          <div class="special">
-              <label class="float required control-label" for="question_tag_list">问题标签</label>
-              <%= select_tag 'question[tag_list][]', options_for_select(@tags.collect{ |t| [t.name, t.name] }),multiple: true, class: 'ui search dropdown'%>
+          <div class="special my-form">
+
+            <div class="dropdown">
+              <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                问题标签
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dLabel">
+                <%= f.association :tags, :as => :check_boxes, label: false, value_method: :name %>
+              </ul>
+            </div>
           </div>
           <div class="special">
             <label class="float required control-label" for="question_downpayment" style="margin-top:9px">悬赏金额</label>

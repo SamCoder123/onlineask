@@ -19,12 +19,14 @@
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 //= require bootstrap-sprockets
-//= require semantic-ui
+
 //= require notifications
 
 //= require simditor
 
 //= require account/questions
+
+//= require semantic-ui
 
 $(function() {
     $('a[disabled=disabled]').click(function(event){
