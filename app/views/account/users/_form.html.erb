@@ -4,8 +4,8 @@
     上传头像
     <%= f.file_field :image, label:"上传头像", input_html: { class: "form-control"} %>
     <%= f.input :name, required: true, autofocus: true, label:"昵称" %>
-    <%= f.input :role, label:"角色" %>
-    <%= f.input :gender, label:"性别", :collection => [["male", 'male'], ["female", 'female']], :as => :radio_buttons  %>
+    <%= f.input :role, label:"角色", :collection => [['replyer',"学霸"], ['asker',"提问者"]], value_method: :first, label_method: :last  %>
+    <%= f.input :gender, label:"性别", :collection => [["male", 'male'], ["female", 'female']], :as => :radio_buttons, value_method: :first, label_method: :last  %>
     <%= f.input :country, required: true, autofocus: true, label:"留学国家" %>
     <%= f.input :school, required: true, autofocus: true, label:"留学学校" %>
     <%= f.input :major, required: true, autofocus: true, label:"专业",input_html: { class: "form-control"} %>

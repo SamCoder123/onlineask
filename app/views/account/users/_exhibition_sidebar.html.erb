@@ -2,7 +2,7 @@
 
 <div class="hot-bg">
     <% if @user == current_user %>
-      <%= link_to("申请成为学霸",submit_application_account_user_path(@user) , method: :post,class:"btn btn-sm btn-primary") %>
+      <%= link_to("申请学霸认证",submit_application_account_user_path(@user) , method: :post,class:"btn btn-sm btn-primary") %>
     <% end %>
     <div class="exhibition-title-font">
       <span>基本信息</span>
