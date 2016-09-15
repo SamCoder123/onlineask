@@ -1,6 +1,6 @@
 class Answer < ApplicationRecord
-  belongs_to :user, counter_cache: :count_of_user_answers
-  belongs_to :question, counter_cache: :count_of_question_answers
+  belongs_to :user, counter_cache: true
+  belongs_to :question, counter_cache: true
 
   has_many :answer_subscriptions
   has_many :subscribed_users, through: :answer_subscriptions, source: :user
