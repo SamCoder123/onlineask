@@ -104,6 +104,7 @@ html,body{
 .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
     color: #fff;
     background-color: #4285f4;
+    text-decoration: none;
 }
 
 .pagination > li > a, .pagination > li > span {
