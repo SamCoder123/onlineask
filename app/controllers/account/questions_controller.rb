@@ -29,10 +29,6 @@ class Account::QuestionsController < AccountController
     @answers = @question.answers.order("answer_status")
     @refer_questions = Question.published.where(status: "open").order("watches DESC").limit(3)
     @invitated_users = @question.invitated_users
-    @filters_arry = @invitated_users.collect(&:id)
-    @filters = @filters_arry.map(&:inspect).join(",")
-    @users = User.where.not(id:current_user)
-
   end
 
   def refine_reward
@@ -40,11 +36,13 @@ class Account::QuestionsController < AccountController
     drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb(@question.title)
 
-    update_invitated_users_and_notify
-
-    flash[:notice] = "调整成功，学霸正在赶来！"
-
-    redirect_to account_question_path(@question)
+    if @question.update(refine_question_params)
+      flash[:notice] = "邀请成功，学霸正在赶来～"
+      redirect_to account_question_path(@question)
+    else
+      flash[:alert] = "邀请失败，重试一下哦～"
+      render :back
+    end
   end
 
   def new
@@ -57,30 +55,17 @@ class Account::QuestionsController < AccountController
   end
 
   def create
-    unless params[:question][:tag_list]
-      flash[:alert] = "标签不能为空"
-      redirect_to :back
-      return
-    end
 
     @question = Question.new(question_params)
     @question.user = current_user
     @question.status = "open"
 
     if @question.save
-
       # 保存用户 从平台扣钱150转给回答者
       RewardDepositService.new(current_user, @question).perform!
 
-      # 把邀请人和问题存入关系表
-      unless @invitated_users.nil?
-        @invitated_users = User.where(id: params[:filters].split(","))
-
-        InvitateAnswerService.new(current_user, @invitated_users, @question).perform!
-      end
-
       flash[:notice] = "提问成功！"
-      redirect_to account_question_path (@question)
+      redirect_to account_question_path(@question)
     else
       @users = User.all
       @tags = Tag.all
@@ -89,26 +74,13 @@ class Account::QuestionsController < AccountController
   end
 
   def edit
-    @invitated_users = @question.invitated_users
-    @filters_arry = @invitated_users.collect(&:id)
-    @filters = @filters_arry.map(&:inspect).join(",")
-    @users = User.where.not(id:current_user)
-    @tags = Tag.all - @question.tags
     drop_breadcrumb("首页", show_profile_account_user_path(current_user))
     drop_breadcrumb("我的问题和回答",my_questions_answers_account_user_path)
     drop_breadcrumb("编辑问题")
   end
 
   def update
-    unless params[:question][:tag_list]
-      flash[:alert] = "标签不能为空"
-      redirect_to :back
-      return
-    end
     if @question.update(question_params)
-
-      update_invitated_users_and_notify
-
       redirect_to account_question_path(@question), notice: "提问修改成功！"
     else
       render :edit
@@ -203,42 +175,10 @@ class Account::QuestionsController < AccountController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
-    # tag_list 这个gem接收name1,name2,name3这种字符串形式，所以在permit之前要解析成字符串
-    unless params[:question][:tag_list].nil?
-      params[:question][:tag_list] = params[:question][:tag_list].map{|k,v| "#{k}#{v}"}.join(',')
-    end
-    params.require(:question).permit(:title, :description, :tag_list, :downpayment, :payment_method)
+    params.require(:question).permit(:title, :description, :downpayment, :payment_method,:invitated_user_ids=>[],:tag_list=>[] )
   end
 
-  def update_invitated_users_and_notify
-    # 新的
-    @new_invitated_users = User.where(id: params[:filters].split(","))
-
-    # 旧的
-    @old_invitated_users = @question.invitated_users
-
-    # 并集
-    union_users = @new_invitated_users | @old_invitated_users
-
-    # 并集－旧的 ＝ 新增
-    add_users = union_users - @old_invitated_users
-
-    # 并集－新的 ＝ 删除的
-    delete_users = union_users - @new_invitated_users
-
-    # 新增邀请
-    unless add_users.empty?
-      @question.invitation!(add_users)
-      # 如何一下给多个用户发送？循环新增是不是不好？
-      for user in add_users
-        NotificationService.new(user, current_user, @question).send_notification!
-        OrderMailer.notify_invited_question(@question, user).deliver!
-      end
-    end
-
-    # 取消邀请
-    unless delete_users.empty?
-      @question.cancel_invitation!(delete_users)
-    end
+  def refine_question_params
+    params.require(:question).permit(:invitated_user_ids=>[] )
   end
 end

@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/doabit/semantic-ui-sass.git
-  revision: 94b14c605c16fe433a0fe9e1fa5907f9a9604f4e
-  specs:
-    semantic-ui-sass (2.2.3.0)
-      sass (>= 3.2)
-
 GEM
   remote: https://gems.ruby-china.org/
   specs:
@@ -463,7 +456,6 @@ DEPENDENCIES
   rmagick
   rubocop
   sass-rails (~> 5.0)
-  semantic-ui-sass!
   seo_helper
   simditor
   simple_form
