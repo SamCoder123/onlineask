@@ -26,7 +26,7 @@ class Admin::TagsController < AdminController
       flash[:notice] = "标签新增成功！"
       redirect_to admin_tags_path
     else
-      render :back
+      redirect_to :back
     end
   end
 
