@@ -43,6 +43,7 @@ $(function(){
     question_tag_list.each(function(){
       if ($(this).prop("checked")) {
         checkedSize += 1;
+        return false; //只要勾选了一个，便符合必填，跳出循环，可提升效率
       }
     });
 
