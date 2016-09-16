@@ -19,6 +19,39 @@ $(function(){
       return $("#popover_div").html();
     }
   });
+
+  $("#ask_question").click(function(){
+
+    var question_title = $("#question_title").val();
+
+    if(""==question_title) {
+      //$("#question_title").after('<span class="has-error help-block" style="color:red;margin-left:10px;">给问题添加标题哦～</span>');
+      $("#errorMsg").html('<span class="has-error help-block" style="color:red;margin-left:10px;">请给问题添加主题哦～</span>');
+      return;
+    }
+
+    var question_description = $("#question_description").val();
+
+    if(""==question_description) {
+      //$("#question_description").after('<span class="has-error help-block" style="color:red;margin-left:10px;">请给问题添加描述哦～</span>');
+      $("#errorMsg").html('<span class="has-error help-block" style="color:red;margin-left:10px;">请给问题添加描述哦～</span>');
+      return;
+    }
+
+    var question_tag_list = $("input[type='checkbox']").prop("checked");
+    if(false==question_tag_list) {
+      $("#errorMsg").html('<span class="has-error help-block" style="color:red;margin-left:10px;">请给问题添加标签哦～</span>');
+      return;
+    }
+
+    var question_downpayment = $("#question_downpayment").val();
+    if (question_downpayment<=0) {
+      $("#errorMsg").html('<span class="has-error help-block" style="color:red;margin-left:10px;">悬赏金额必须要大于0元～</span>');
+      return;
+    }
+
+    $('#myModal').modal('show');
+  });
 });
 </script>
 <% end %>
@@ -46,12 +79,14 @@ $(function(){
         <a tabindex="0" class="pull-right" role="button" data-toggle="popover" data-placement="left"
           title='提问指南' > <i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></a>
 
-        <%= f.input :title,label: false,placeholder:"问题主题",style:"margin-top:15px"  %>
-        <%= f.input :description,label: false,placeholder:"问题说明"%>
+        <%= f.input :title,label: false,required: true, placeholder:"问题主题",style:"margin-top:15px" %>
+        <%= f.input :description,label: false,required: true,placeholder:"问题说明"%>
 
         <!-- <div class="special">
             <%#= render "account/questions/multiple_dropdown_bar" %>
         </div> -->
+        <div id="errorMsg" class="">
+        </div>
         <div class="pull-right">
           <div class="special my-form">
 
@@ -63,7 +98,7 @@ $(function(){
               <ul class="dropdown-menu" aria-labelledby="dLabel">
 
                 <div class="form-group check_boxes">
-                  <%= f.collection_check_boxes :tag_list, Tag.all, :name,:name, :item_wrapper_class => 'checkbox' %>
+                  <%= f.collection_check_boxes :tag_list, Tag.all, :name,:name, :item_wrapper_class => 'checkbox',required: true, input_html: { class: "tagsinput"} %>
                 </div>
                 <%#= f.association :tags, :as => :check_boxes, label: false, value_method: :name,checked: @question.tags %>
               </ul>
@@ -97,9 +132,12 @@ $(function(){
         </div>
         <!-- Button trigger modal -->
         <div class="special">
-          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" style="height:35px">
+          <button type="button" id="ask_question" class="btn btn-primary btn-sm" style="height:35px">
             提问
           </button>
+          <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" style="height:35px">
+            提问
+          </button> -->
         </div>
     </div>
   </div>
