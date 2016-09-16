@@ -38,8 +38,15 @@ $(function(){
       return;
     }
 
-    var question_tag_list = $("input[type='checkbox']").prop("checked");
-    if(false==question_tag_list) {
+    var question_tag_list = $("input[type='checkbox']");
+    var checkedSize = 0;
+    question_tag_list.each(function(){
+      if ($(this).prop("checked")) {
+        checkedSize += 1;
+      }
+    });
+
+    if(checkedSize==0) {
       $("#errorMsg").html('<span class="has-error help-block" style="color:red;margin-left:10px;">请给问题添加标签哦～</span>');
       return;
     }
